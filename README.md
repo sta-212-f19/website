@@ -1,7 +1,7 @@
 # website
 Course website for Sta 212 - Statistical Models, Fall 19 at Wake Forest University
 
-Course website is live at .
+Course website is live at sta-112-f19.netlify.com.
 
 # Attribution
 
