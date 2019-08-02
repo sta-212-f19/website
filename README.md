@@ -12,6 +12,7 @@ Course website is live at https://sta-212-f19.netlify.com.
   - [Brown's Harriet W. Sheridan Center for Teaching and Learning Diversity & Inclusion Syllabus Statements](https://www.brown.edu/sheridan/teaching-learning-resources/inclusive-teaching/statements)
   - [Bios311 by Robert Greevy](http://biostat.mc.vanderbilt.edu/wiki/Main/Bios311ClassDetails)
   - [MST256 by Nicole Dalzell](https://sites.google.com/view/mst256/schedule?authuser=0)
+  - MST256 by Rob Erhardt
 
 # Notes for building the website:
 
