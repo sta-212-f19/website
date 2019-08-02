@@ -24,12 +24,12 @@ Students with disabilities who believe that they may need accommodations in the 
 
 ### How to get help
 
-All course discussion will be via GitHub on the [Sta-112-f19/community](https://github.com/sta-112-f19/community) repository. This is a public discussion forum, which means others outside of the course can stumble upon it and help you as well.
+All course discussion will be via GitHub on the [Sta-212-f19/community](https://github.com/sta-212-f19/community) repository. This is a public discussion forum, which means others outside of the course can stumble upon it and help you as well.
 
 Guidelines for posting questions:
 
 * Before posting a question, be sure to search the previously posted issues in the search bar above. Note that questions that have been answered will be in _closed issues_, do not forget to search these before posting. If you do not think a question has been answered well, feel free to re-open the issue.
-* To start a new discussion or post a new question, create a [new issue](https://github.com/sta-112-f19/community/issues/new).
+* To start a new discussion or post a new question, create a [new issue](https://github.com/sta-212-f19/community/issues/new).
 * First time submitting something? Check out [Writing a proper GitHub issue](https://medium.com/nyc-planning-digital/writing-a-proper-github-issue-97427d62a20f). It is written broadly for GitHub issues, but many of the main points apply here. Here are a few of the key take aways to keep in mind:
   * Give it a good and informative title! 
   * Format it nicely using markdown including links and screenshots
