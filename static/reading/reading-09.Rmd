@@ -1,0 +1,15 @@
+---
+title: "Reading 09"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+## Due
+
+Tuesday, Oct 22
+
+## Required:
+
+- Stat2:
+  + Section 3.3: Comparing Two Regression Lines

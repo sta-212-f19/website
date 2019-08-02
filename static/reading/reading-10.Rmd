@@ -1,0 +1,16 @@
+---
+title: "Reading 10"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+## Due
+
+Thursday, Oct 24
+
+## Required:
+
+- Stat2:
+  + Section 3.5: Correlated Predictors
+  + Section 3.6: Testing Subsets of Predictors

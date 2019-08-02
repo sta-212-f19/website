@@ -1,0 +1,15 @@
+---
+title: "Reading 12"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+## Due
+
+Thursday, Nov 7
+
+## Required:
+
+- Stat2:
+  + Section 9.2: Logistic Regression and Odds Ratios

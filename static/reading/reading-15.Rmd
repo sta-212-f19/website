@@ -1,0 +1,18 @@
+---
+title: "Reading 15"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+## Due
+
+Tuesday, Nov 19
+
+## Required:
+
+- Stat2:
+  + Section 10.1: Overview
+  + Section 10.2: Choosing, Fitting, and Interpreting Models
+  + Section 10.3: Checking Conditions
+  + Section 10.4: Formal Inference: Tests and Intervals

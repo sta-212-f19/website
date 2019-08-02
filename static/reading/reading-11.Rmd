@@ -1,0 +1,15 @@
+---
+title: "Reading 11"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+## Due
+
+Tuesday, Nov 5
+
+## Required:
+
+- Stat2:
+  + Section 9.1: Choosing a Logistic Regression Model

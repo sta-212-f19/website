@@ -1,0 +1,15 @@
+---
+title: "Reading 14"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+## Due
+
+Thursday, Nov 14
+
+## Required:
+
+- Stat2:
+  + Section 9.4: Formal Inference: Tests and Intervals

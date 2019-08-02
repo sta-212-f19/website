@@ -1,0 +1,20 @@
+---
+title: "Reading 06"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Due
+
+Wednesday, Mar 28
+
+## Required:
+
+- Stat 2:
+    + Section 2.1: Inference for Regression Slope 
+    - Section 2.2: Partitioning Variability—ANOVA

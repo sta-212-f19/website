@@ -1,0 +1,20 @@
+---
+title: "Reading 05"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Due
+
+Tuesday, Sept 24
+
+## Required:
+
+- Stat2:
+    + Section 1.4: Transformations
+    + Section 1.5: Outliers and Influential Points

@@ -1,0 +1,21 @@
+---
+title: "Reading 02"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Due
+
+Tuesday, Sep 10
+
+## Required:
+
+- Stat2:
+    + Section 1.1 - The Simple Linear Regression Model
+    + Section 1.2 - Conditions for a Simple Linear Model
+  

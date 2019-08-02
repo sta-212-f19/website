@@ -1,0 +1,16 @@
+---
+title: "Reading 08"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+## Due
+
+Tuesday, Oct 15
+
+## Required:
+
+- Stat2:
+  + Section 3.1: Multiple Linear Regression Model 
+  + Section 3.2: Assessing a Multiple Regression Model

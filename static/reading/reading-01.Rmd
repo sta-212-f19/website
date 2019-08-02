@@ -1,0 +1,18 @@
+---
+title: "Reading 01"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Due
+
+Tuesday, August 27
+
+## Required:
+
+- [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf)

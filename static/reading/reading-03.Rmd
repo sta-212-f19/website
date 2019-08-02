@@ -1,0 +1,19 @@
+---
+title: "Reading 03"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Due
+
+Tuesday, Sep 17
+
+## Required:
+
+- Stat2:
+    + Section 1.3: Assessing Conditions

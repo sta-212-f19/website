@@ -1,0 +1,15 @@
+---
+title: "Reading 13"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+## Due
+
+Tuesday, Nov 12
+
+## Required:
+
+- Stat2:
+  + Section 9.3: Assessing the Logistic Regression Model
