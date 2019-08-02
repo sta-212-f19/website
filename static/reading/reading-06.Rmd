@@ -11,10 +11,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Due
 
-Wednesday, Mar 28
+Tuesday, Sept 24
 
 ## Required:
 
-- Stat 2:
-    + Section 2.1: Inference for Regression Slope 
-    - Section 2.2: Partitioning Variability—ANOVA
+- Stat2:
+    + Section 1.4: Transformations
+    + Section 1.5: Outliers and Influential Points

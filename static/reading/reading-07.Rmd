@@ -5,14 +5,16 @@ output:
     theme: yeti
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 ## Due
 
-Monday, Apr 2
+Wednesday, Mar 28
 
 ## Required:
 
-- [Hidden Figures: How Donald Trump Is Rigging the Census](https://www.motherjones.com/politics/2018/03/donald-trump-rigging-2020-census-undercounting-minorities-1/)
-
-- [NY Times: If Census Asks About Citizenship, Some Already Have an Answer: No Comment](https://www.nytimes.com/2018/03/27/us/census-undocumented-immigrants.html)
-
-- [NY Times: Here’s Why an Accurate Census Count Is So Important](https://www.nytimes.com/2018/03/27/us/politics/census-citizenship-question.html)
+- Stat 2:
+    + Section 2.1: Inference for Regression Slope 
+    - Section 2.2: Partitioning Variability—ANOVA
