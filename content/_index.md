@@ -34,6 +34,8 @@ The main text book is:
 -----------|---------------------------------|----------------------------------
 [Stat 2: Building Models for a World of Data](https://www.amazon.com/STAT2-Premium-Ann-R-Cannon/dp/1464148260/) | Cannon, Cobb, Hartlaub, Legler, Lock, Moore, Rossman, Witmer | 
 
+Please feel free to purchase a used copy of this book.
+
 We will supplement this with text freely available online:
 
 {.table .table-condensed .table-striped .text-left}
