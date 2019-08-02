@@ -112,7 +112,7 @@ Cumulative numerical averages of 90 - 100 are guaranteed at least an A-, 80 - 89
 ### Late / missed work
 
 - Late work policy for homework assignments and labs:
-    - late, but within 24 hours of due date/time: -20%
+    - late, but within 24 hours of due date/time: -50%
     - any later: no credit
     
 - Late work will not be accepted for exams or projects.
