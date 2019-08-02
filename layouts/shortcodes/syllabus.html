@@ -1,4 +1,4 @@
-<b>Note:</b> Due dates of exams and project will not move, however the timeline of topics and smaller assignments might be updated throughout the semester.
+<b>Note:</b> Due dates of the exams and project will not move, however the timeline of topics and smaller assignments might be updated throughout the semester.
 
 <br><br>
 
@@ -9,6 +9,7 @@
     <th style="width:5%;text-align:center">Slides</th>
     <th style="width:5%;text-align:center">Reading</th>
     <th style="width:5%;text-align:center">Lab</th>
+    <th style="width:5%;text-align:center">AE</th>
     <th style="width:5%;text-align:center">HW</th>
     <th style="width:5%;text-align:center">EC</th>
     <th style="width:5%;text-align:center">Exam</th>
@@ -43,6 +44,14 @@
       {{ else }}
         <td align="center"><font color="f1f1f1">
           <i class="fa fa-code fa-lg"></i></font></td>
+      {{ end }}
+      
+      {{ if .appex }}
+      <td align="center"><a href="{{ .Site.baseurl }}/appex/{{ .appex }}">
+          <i class="fa fa-users fa-lg"></i></a></td>
+      {{ else }}
+        <td align="center"><font color="f1f1f1">
+          <i class="fa fa-users fa-lg"></i></font></td>
       {{ end }}
       
       {{ if .hw }}
