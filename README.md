@@ -14,6 +14,8 @@ Course website is live at https://sta-212-f19.netlify.com.
   - [MST256 by Nicole Dalzell](https://sites.google.com/view/mst256/schedule?authuser=0)
   - MST256 by Rob Erhardt
 
+- The header image is a compilation of an image from [rawpixel](rawpixel.com) and a hex designed by Lucy D'Agostino McGowan
+
 # Notes for building the website:
 
 - Colors: Pantone Fall 2019 - Orange Tiger - #F96714
