@@ -38,7 +38,7 @@ Guidelines for posting questions:
 
 Please also make use of our office hours - we are here to help you learn! 
 
-### Honor code:
+### Honor code
 
 Academic dishonesty will not be tolerated. For other information on these matters, please consult the [Code of Conduct](https://studentconduct.wfu.edu/undergraduate-student-handbook/). For Academic issues please see the [College Judicial System](https://studentconduct.wfu.edu/the-judicial-council/).
 
@@ -48,7 +48,7 @@ Academic dishonesty will not be tolerated. For other information on these matter
 * You **may** discuss the content of assignments with others in this class. If you do so, please acknowledge your collaborator(s) at the top of your assignment, for example: "Collaborators: Gertrude Cox, Florence Nightingale David". Failure to acknowledge collaborators will result in a grade of 0. You **may not** copy code and/or answers **directly** from another student. If you copy someone else's work, both parties will receive a grade of 0.
 * Rather than copying someone else's work, ask for help. You are not alone in this course!
 
-### Course components:
+### Course components
 
 #### Application exercises
 
