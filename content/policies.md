@@ -50,27 +50,19 @@ Academic dishonesty will not be tolerated. For other information on these matter
 
 ### Course components:
 
-#### Teams
-
-To construct functional and diverse teams, you will be asked to complete a short survey to gauge your previous exposure to statistical and programming topics. After completing the survey, you will be assigned to teams of 3-4 students - these teams will stay consistent throughout the semester. You will work in these teams during class, on application exercises, and on labs.
-
 #### Application exercises
 
-These will usually start in class and can be assigned to be finished by the next class meeting. They will generally be shorter than your homework assignments, and they will be completed in teams.
+These will usually start in class and can be assigned to be finished by the next class meeting. 
 
 #### Homework
 
-Beyond the in class activities, you will be assigned homework throughout the semester. These assignments will be completed individually. 
+Problem sets from the textbook will be assigned periodically, potentially along with additional questions. You are welcome to work on these with other members of this class. If you do so, please acknowledge your collaborator(s) at the top of your assignment, for example: "Collaborators: Gertrude Cox, Florence Nightingale David". Failure to acknowledge collaborators will result in a grade of 0. You **may not** copy answers **directly** from another student. If you copy someone else's work, both parties will receive a grade of 0.
 
 Homework with the lowest score for each student will be dropped.
 
 #### Labs
 
 The objective of the labs is to give you hands on experience with data analysis using modern statistical software. The labs will also provide you with tools that you will need to complete the project successfully.
-
-All team members are expected to contribute equally to the completion of each assignment and you will be asked to evaluate your team members after a few assignments are due.
-
-Students are expected to make use of their team's GitHub repository on the course's GitHub page as their central collaborative platform. Commits to this repository will be used as a metric of each team member's relative contribution for each lab.
 
 The lab with the lowest score for each student will be dropped.
 
@@ -84,7 +76,7 @@ There will be two midterm exams. They will both consist of 3 stages.
 
 #### Final Project
 
-For the Final project, you will be responsible for the completion of an open ended project - you can choose the data and the question. You may work with one classmate on the final project, if you choose. Additional details on the projects will be provided as the course progresses.
+For the Final project, you will be responsible for the completion of an open ended project - you can choose the data and the question. You may work with one or two classmates on the final project, if you choose. Additional details on the projects will be provided as the course progresses.
 
 #### Interactive tutorials
 
@@ -98,16 +90,13 @@ Your final grade will be comprised of the following:
  <span></span>        | <span></span>
 ----------------------|----------------
 Participation & application exercises       | 10%
-Peer evaluation       | 5%
 Homework              | 20%
 Labs                  | 15%
-Midterm exam 1          | 15%
-Midterm exam 2         | 15%
+Midterm exam 1          | 17.5%
+Midterm exam 2         | 17.5%
 Final project         | 20%
 
 Class attendance in lecture and lab is a firm expectation; frequent absences or tardiness will be considered a legitimate cause for grade reduction.
-
-Cumulative numerical averages of 90 - 100 are guaranteed at least an A-, 80 - 89 at least a B-, and 70 - 79 at least a C-, however the exact ranges for letter grades will be determined after the final exam.
 
 ### Late / missed work
 
@@ -117,7 +106,7 @@ Cumulative numerical averages of 90 - 100 are guaranteed at least an A-, 80 - 89
     
 - Late work will not be accepted for exams or projects.
 
-- Exam dates cannot be changed and no make-up exams will be given. If the midterm exam must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the other exam score. This policy only applies to the midterms.
+- Exam dates cannot be changed and no make-up exams will be given. If the midterm exam (part 1) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the other (part 1) exam score and a scaling factor. If the midterm exam (part 3) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the take home portion of the exam (part 2) score. This policy only applies to the midterms.
 
 - You must complete the final project and be in class to present it in order to pass this course.
 
