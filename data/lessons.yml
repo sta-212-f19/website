@@ -3,7 +3,7 @@ lessons:
   - date: "Tues, Aug 20"
     title: "Welcome to Statistical Models"
     slides: "lec-slides/00-welcome.html"
-    appex: "https://rstudio.cloud/spaces/22368/project/435851"
+    appex: "https://rstudio.cloud/spaces/22368/project/435824"
   - date: "Thur, Aug 22"
     title: "Lab 00: Welcome to lab!"
     slides: "lab-slides/00-lab-deck.html"
