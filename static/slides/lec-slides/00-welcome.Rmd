@@ -21,7 +21,7 @@ layout: true
   
 <div class="my-footer">
 <span>
-Slides adpated from <a href="https://github.com/Sta199-S18/website" target="_blank">Dr. Mine Çetinkaya-Rundel</a> by Dr. Lucy D'Agostino McGowan
+Slides adapted from <a href="https://github.com/Sta199-S18/website" target="_blank">Dr. Mine Çetinkaya-Rundel</a> by Dr. Lucy D'Agostino McGowan
 </span>
 </div> 
 
@@ -42,64 +42,68 @@ Lucy D'Agostino McGowan
 
 ---
 
-# What is this course?
+class: center
 
 Everything you want to know about the course, and everything you will need for the course will be posted at
 
-[bit.ly/sta-212-f19](http://bit.ly/sta-212-f19)
+# [bit.ly/sta-212-f19](http://bit.ly/sta-212-f19)
 
---
+---
+class: center, middle
 
-- Will we be doing computing? Yes.
+### "truth … is much too complicated to allow anything but approximations" - John von Neumann
 
---
-
-- We expect that you have taken at least 1 Stat course (either at Wake Forest or AP Statistics)
-
---
-
-- What computing language will we learn? R.
-
---
-
-- Why not language X? We can discuss that over `r emo::ji("coffee")`.
-
+<img src = "https://farkasdilemma.files.wordpress.com/2013/01/vonneumann.png" height = "350"> </img>
+<font size = "2">
+John von Neumann, wearer of funny hats via <a href = "https://farkasdilemma.wordpress.com/2013/01/04/john-von-neumannm-wearer-of-funny-hats/"> farkasdilemma.wordpress.com</a> </font>
 
 ---
 
 class: center, middle
 
-# Data in the wild
+### "Statistics is using data and knowledge about randomness to condense, communicate, and contextualize information and provide insight into the setting from which the data came." - Jo Hardin
+
+<img src = "https://research.pomona.edu/johardin/files/2012/08/jo_headshot3-3.png" height = "270"> </img>
+
+<font size = "2">
+Jo Hardin <a href = "https://research.pomona.edu/johardin/files/2012/08/jo_headshot3-3.png"> https://research.pomona.edu/johardin/</a> </font>
+
+---
+class: center, middle
+
+### "All models are wrong, but some are useful" - George Box
+
+<img height="400" alt="GeorgeEPBox" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/GeorgeEPBox.jpg/256px-GeorgeEPBox.jpg"></img>
+<font size = "2">
+DavidMCEddy at en.wikipedia <a href = "https://creativecommons.org/licenses/by-sa/3.0"> CC BY-SA 3.0 </a>, via Wikimedia Commons </font>
 
 ---
 
-# A year as told by fitbit
+# Plan
 
-by Nick Strayer
+- Thinking about, visualizing, and wrangling data
 
-http://livefreeordichotomize.com/2017/12/27/a-year-as-told-by-fitbit/
+--
 
----
+- Simple Regression
 
-# R-Ladies global tour
+--
 
-by Maelle Salmon
+- Multiple Regression
 
-http://www.masalmon.eu/2017/10/06/globalrladiestour/
+--
 
----
+- Categorical data analysis
 
-# Text analysis of Trump's tweets confirms he writes only the (angrier) Android half
+--
 
-by David Robinson (Stack Overflow)
-
-http://varianceexplained.org/r/trump-tweets/
+- Data Science-ing
 
 ---
 
 class: center, middle
 
-# Your turn!
+# Let's go!
 
 ---
 
@@ -107,12 +111,11 @@ class: center, middle
 
 Go to https://github.com/, and create an account (unless you already have one). Tips for selecting a username:<sup>1</sup>
 
-- Incorporate your actual name! People like to know who they’re dealing with. Also makes your username easier for people to guess or remember.
-- Reuse your username from other contexts if you can, e.g., Twitter or Slack.
+- Incorporate your actual name! People like to know who they’re dealing with + makes it easier for people to guess or remember.
+- Reuse your username from other contexts if you can, e.g., Twitter
 - Pick a username you will be comfortable revealing to your future boss.
 - Shorter is better than longer.
-- Be as unique as possible in as few characters as possible. In some settings GitHub auto-completes or suggests usernames.
-- Make it timeless. Don’t highlight your current university, employer, or place of residence.
+- Make it timeless. Don’t highlight your current university, etc.
 - Avoid words laden with special meaning in programming, like `NA`.
 
 .footnote[ [1] Source: [Happy git with R](http://happygitwithr.com/github-acct.html#username-advice) by Jenny Bryan.]
@@ -134,11 +137,11 @@ Once done, place a green sticky on your laptop. If you have questions, place a p
 
 ## Create your first data visualization
 
-- Once you log on to RStudio Cloud, click on this course's workspace "STA 199 - Spring 18"
-- You should see a project called UN Votes, fork it by clicking on the <i class="fa fa-fork"></i> icon. This will create your copy of the project and launch it.
-- In the Files pane in the bottom right corner, spot the file called `unvotes.Rmd`. Open it, and then click on the "Knit" button.
+- Once you log on to RStudio Cloud, click on this course's workspace "STA 212 - Fall 19" then click "Projects"
+- You should see a project called Day 1 Survey, click it.
+- In the Files pane in the bottom right corner, spot the file called `day-1-survey.Rmd`. Open it, and then click on the "Knit" button. *You will likely see an pop-up error, click "Try Again"*
 - Go back to the file and change your name on top (in the `yaml` -- we'll talk about what this means later) and knit again.
-- Then change the country names to those you're interested in. Your spelling and capitalization should match the data so take a peek at the Appendix to see how the country names are spelled. Knit again. And voila, your first data visualization!
+- Change `TV` in the plot to a different `quantitative` variable. Be sure to look at the **quantitative variables** section to see the exact way the variables are named in the dataset. Knit again. And voila, your first data visualization!
 
 <font color="#E34132">
 Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
@@ -166,6 +169,10 @@ class: center, middle
 - Intent: Students from all diverse backgrounds and perspectives be well-served by this course, that students' learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength and benefit. It is my intent to present materials and activities that are respectful of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture. Let me know ways to improve the effectiveness of the course for you personally, or for other students or student groups.
 
 - If you have a name and/or set of pronouns that differ from those that appear in your official Wake Forest records, please let me know!
+
+---
+
+## Diversity & Inclusiveness: 
 
 - If you feel like your performance in the class is being impacted by your experiences outside of class, please don't hesitate to come and talk with me. I want to be a resource for you. If you prefer to speak with someone outside of the course, your academic dean is an excellent resource. 
 
@@ -198,10 +205,9 @@ Adhere to the Wake Forest Honor Code. Academic dishonesty will not be tolerated.
 
 ## Course components:
 
-- Teams: 3-4 person teams, based on survey and pretest results, consistent throughout the semester
 - Application exercises: Usually start in class and finish in teams by the next class period, check/no check
-- Homework: Individual, lowest score dropped
-- Lab: Team, lowest score dropped
+- Homework: lowest score dropped
+- Lab: start in class, lowest score dropped
 - Pyramid Exams: 3 parts, in class, take home, whole class 
 - Final project: Presentations during the last week of class, you must participate in the project and be in class to present to pass this class
 - Self paced tutorials: Individual, check/no check, extra credit
@@ -212,12 +218,11 @@ Adhere to the Wake Forest Honor Code. Academic dishonesty will not be tolerated.
 
 Component             | Weight
 ----------------------|----------------
-Participation & application exercises       | 10%
-Peer evaluation       | 5%
-Homework              | 20%
-Labs                  | 15%
-Midterm exam 1          | 15%
-Midterm exam 2         | 15%
+Participation & application exercises       | 5%
+Homework              | 15%
+Labs                  | 10%
+Midterm exam 1          | 25%
+Midterm exam 2         | 25%
 Final project         | 20%
 
 - Class attendance is a firm expectation; frequent absences or tardiness 
@@ -233,7 +238,7 @@ will be considered a legitimate cause for grade reduction.
     
 - Late work will not be accepted for take home midterms and the final project.
 
-- Exam dates cannot be changed and no make-up exams will be given. If a midterm exam must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the other exam score. This policy only applies to the midterms.
+- Exam dates cannot be changed and no make-up exams will be given. If the midterm exam (part 1) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the other (part 1) exam score and a scaling factor. If the midterm exam (part 3) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the take home portion of the exam (part 2) score. This policy only applies to the midterms.
 
 - You must complete the final project and be in class to present it in order to pass this course.
 

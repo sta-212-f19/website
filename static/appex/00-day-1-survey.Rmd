@@ -1,0 +1,80 @@
+---
+title: "Day 1 Survey Visualization"
+author: "Lucy D'Agostino McGowan"
+date: "2019-08-20"
+output: html_document
+---
+
+An instructor at a small liberal arts college distributed a data collection card to students on the first day of class. The data for two different sections of the course are shown in the dataset called `Day1Survey`.
+
+Let's first load the packages, tidyverse and Stat2Data as well as the `Day1Survey` dataset.
+
+```{r load-packages, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(Stat2Data)
+data("Day1Survey")
+```
+
+This dataset is comprised of `observations` (rows) and `variables` (columns). There are two types of variables, `quantitative` variables and `categorical` variables.
+
+## Quantitative variables
+
+A `quantitative` variable is numeric, that is it records a number about the observation. These numbers must be able to have arithmetic sensibly performed on them. For example, a zip code, while numeric, is not `quantitative` since it wouldn't make sense to add two zip codes together. 
+
+In the `Day1Survey` dataset, there are the following `quantitative` variables:
+
+* `Distance` Distance (in miles) to get to campus
+* `Height` Height (in inches)
+* `Coins`	Value of coins student has (in class)
+* `WhiteString`	Estimated length of a white string (in inches)
+* `BlackString`	Estimated length of a black string (in inches)
+* `Reading`	Expected amount of reading during the semester (pages/week)
+* `TV`	Hours of TV watched per week
+* `Pulse`	Resting pulse rate (beats per minute)
+* `Texting`	Number of text messages in past 24 hours
+
+## Categorical variables
+
+A `categorical` variable is a variable that records a category about an observation. If there are only two categories, this is known as a `binary` variable.
+
+In the `Day1Survey` dataset, there are the following `categorical` variables:
+
+* `Section`	Section: 1 or 2
+* `Class`	Year in school: Freshman, Sophomore, Junior, or Senior
+* `Sex`	F=female or M=male
+* `Handedness`	Left, Right, or Ambidextrous
+
+Section and Sex are examples of `binary` variables. Since section is saved as a numeric variable, `R` thinks that it is quantitative. We can teach it that it is categorical by saving it as a `factor`. Let's create a new dataset called `data` that does this.
+
+```{r recode-section}
+data <- Day1Survey %>%
+  mutate(Section = factor(Section))
+```
+
+## Data cleaning
+
+There is some missing data in this dataset. The variable `Class` has one record with `"N/A"` and one record with `*`. In `R`, there is a special designation for missingness `<NA>`. Let's update these codes and update the factor levels.
+
+```{r recode-class}
+data <- data %>%
+  mutate(Class = na_if(Class, "N/A"),
+         Class = na_if(Class, "*"),
+         Class = factor(Class,
+                        levels = c("Freshman", "Sophomore", "Junior", "Senior")) 
+  )
+```
+
+
+## Visualize it!
+
+Let's look at the distribution of `TV` by `Class` using boxplots with the observed data points jittered on top. 
+
+```{r plot-by-class}
+data %>%
+  filter(!is.na(Class)) %>%
+ggplot(mapping = aes(Class, TV)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(width = 0.15, aes(color = Class))
+```
+
+

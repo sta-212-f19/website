@@ -89,11 +89,11 @@ Your final grade will be comprised of the following:
 {.table .table-condensed .table-striped .text-left}
  <span></span>        | <span></span>
 ----------------------|----------------
-Participation & application exercises       | 10%
-Homework              | 20%
-Labs                  | 15%
-Midterm exam 1          | 17.5%
-Midterm exam 2         | 17.5%
+Participation & application exercises       | 5%
+Homework              | 15%
+Labs                  | 10%
+Midterm exam 1          | 25%
+Midterm exam 2         | 25%
 Final project         | 20%
 
 Class attendance in lecture and lab is a firm expectation; frequent absences or tardiness will be considered a legitimate cause for grade reduction.
