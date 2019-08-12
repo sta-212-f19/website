@@ -56,16 +56,10 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   url = "https://rstudio.cloud"
 [[menu.main]]
   weight = 5
-  identifier = "github"
-  name = "GitHub"
-  pre = "<i class='fab fa-github fa-lg'></i>"
-  url = "https://github.com/sta-212-f19"
-[[menu.main]]
-  weight = 6
   identifier = "help"
   name = "Help"
   pre = "<i class=\"material-icons\">help</i>"
-  url = "https://github.com/sta-212-f19/community/issues"
+  url = "https://bit.ly/sta-212-f19-help"
 
 
 [[menu.footer]]
@@ -79,12 +73,6 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   name = "RStudio"
   pre = "<i class=\"icon-rlogo\" style=\"font-size:150%\"></i>"
   url = "https://rstudio.cloud/"
-[[menu.footer]]
-  weight = 3
-  identifier = "GitHub"
-  name = "GitHub"
-  pre = "<i class=\"button-icon fa fa-2x fa-github\"></i>"
-  url = "https://github.com/sta-212-f19/"
 [[menu.footer]]
 
 

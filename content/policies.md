@@ -24,18 +24,18 @@ Students with disabilities who believe that they may need accommodations in the 
 
 ### How to get help
 
-All course discussion will be via GitHub on the [Sta-212-f19/community](https://github.com/sta-212-f19/community) repository. This is a public discussion forum, which means others outside of the course can stumble upon it and help you as well.
+All course discussion will be via Campuswire: [bit.ly/sta-212-f19-help](https://bit.ly/sta-212-f19-help). There are two ways to get help:
+
+1. Post a question
+2. Participate in a discussion room
 
 Guidelines for posting questions:
 
-* Before posting a question, be sure to search the previously posted issues in the search bar above. Note that questions that have been answered will be in _closed issues_, do not forget to search these before posting. If you do not think a question has been answered well, feel free to re-open the issue.
-* To start a new discussion or post a new question, create a [new issue](https://github.com/sta-212-f19/community/issues/new).
-* First time submitting something? Check out [Writing a proper GitHub issue](https://medium.com/nyc-planning-digital/writing-a-proper-github-issue-97427d62a20f). It is written broadly for GitHub issues, but many of the main points apply here. Here are a few of the key take aways to keep in mind:
-  * Give it a good and informative title! 
+* Before posting a question, be sure to search the previously posted questions in
+* First time submitting something? Here are a few tips to keep in mind:
+  * Give it a good and informative title!
   * Format it nicely using markdown including links and screenshots
-  * Be sure to tag relevant participants using their GitHub handles, for example if you want to tag Dr. D'Agostino McGowan, use `@LucyMcGowan`
-* Be sure to click "Submit a new issue" when you're ready to post your question
-
+  
 Please also make use of our office hours - we are here to help you learn! 
 
 ### Honor code
@@ -66,6 +66,12 @@ The objective of the labs is to give you hands on experience with data analysis 
 
 The lab with the lowest score for each student will be dropped.
 
+#### Unannounced Quizzes
+
+Classes will periodically end with an unannounced quiz on the topics previously covered. These will be short (~10 minute) quizzes designed to ensure that you are doing the reading / following the material covered. 
+
+Quizzes cannot be made up. It is expected that you may miss a quiz due to missing class a time or two; to account for this, two quizzes for each student will be dropped.
+
 #### Pyramid Exams
 
 There will be two midterm exams. They will both consist of 3 stages.
@@ -90,10 +96,11 @@ Your final grade will be comprised of the following:
  <span></span>        | <span></span>
 ----------------------|----------------
 Participation & application exercises       | 5%
+Quizzes               | 10%
 Homework              | 15%
 Labs                  | 10%
-Midterm exam 1          | 25%
-Midterm exam 2         | 25%
+Midterm exam 1        | 20%
+Midterm exam 2        | 20%
 Final project         | 20%
 
 Class attendance in lecture and lab is a firm expectation; frequent absences or tardiness will be considered a legitimate cause for grade reduction.
@@ -105,6 +112,8 @@ Class attendance in lecture and lab is a firm expectation; frequent absences or 
     - any later: no credit
     
 - Late work will not be accepted for exams or projects.
+
+- No make-up quizzes will be given.
 
 - Exam dates cannot be changed and no make-up exams will be given. If the midterm exam (part 1) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the other (part 1) exam score and a scaling factor. If the midterm exam (part 3) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the take home portion of the exam (part 2) score. This policy only applies to the midterms.
 
