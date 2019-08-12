@@ -59,7 +59,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   identifier = "help"
   name = "Help"
   pre = "<i class=\"material-icons\">help</i>"
-  url = "https://bit.ly/sta-212-f19-help"
+  url = "https://bit.ly/sta-212-f19-discuss"
 
 
 [[menu.footer]]

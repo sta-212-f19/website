@@ -24,7 +24,7 @@ Students with disabilities who believe that they may need accommodations in the 
 
 ### How to get help
 
-All course discussion will be via Campuswire: [bit.ly/sta-212-f19-help](https://bit.ly/sta-212-f19-help). There are two ways to get help:
+All course discussion will be via Campuswire: [bit.ly/sta-212-f19-help](https://bit.ly/sta-212-f19-discuss) ([Sign up](https://bit.ly/sta-212-f19-discuss-join)). There are two ways to get help:
 
 1. Post a question
 2. Participate in a discussion room
