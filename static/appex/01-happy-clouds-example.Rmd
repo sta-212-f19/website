@@ -1,0 +1,112 @@
+---
+title: "Lab 01: Happy Little Clouds Example"
+author: "Lucy D'Agostino McGowan"
+date: "2019-08-29"
+output: html_document
+---
+
+In this little example we use data from the FiveThirtyEight article [A Statistical Analysis of the Work of Bob Ross](https://fivethirtyeight.com/features/a-statistical-analysis-of-the-work-of-bob-ross/). 
+
+## Load data and packages
+
+```{r load-packages, message = FALSE}
+library(fivethirtyeight)
+library(tidyverse)
+```
+
+This dataset contains information about `r nrow(bob_ross)` paintings from Bob Ross's television series painted over `r bob_ross %>% summarise(max = max(season)) %>% pull()` seasons.
+
+Let's see how many episodes there were in each season.
+
+```{r}
+bob_ross %>%
+  count(season)
+```
+
+There are --- episodes in each season.
+
+The variables we are going to focus on are:
+
+- `cloud`: whether the painting contained a happy little cloud
+- `ocean`: whether the painting was of the ocean
+- `season`: the season the painting was created.
+
+## Analysis
+
+Let's sum up the number of cloud paintings in each season.
+
+```{r}
+bob_ross %>%
+  group_by(season) %>%
+  summarise(n_clouds = sum(clouds))
+```
+
+Now let's tally the number of the ocean paintings by season.
+
+```{r}
+bob_ross %>%
+  group_by(season) #%>%
+ # summarise(---)
+```
+
+
+How often were there ocean paintings with clouds?
+
+Let's create a new variable called `ocean_and_clouds`.
+
+```{r}
+bob_ross <- bob_ross %>%
+  mutate(ocean_and_clouds = case_when(
+    ocean == 1 & clouds == 1 ~ TRUE,
+    TRUE ~ FALSE)
+  )
+```
+
+```{r}
+bob_ross %>%
+  group_by(season) %>%
+  summarise(n_ocean_and_clouds = sum(ocean_and_clouds))
+```
+
+What percent of ocean paintings have clouds?
+
+```{r}
+bob_ross %>%
+  summarise(n_ocean_and_clouds = sum(ocean_and_clouds),
+            n_ocean = sum(ocean),
+            pct = n_ocean_and_clouds / n_ocean)
+```
+
+What percent of cloud paintings have an ocean?
+
+```{r}
+# bob_ross %>%
+  # summarise(---)
+```
+
+Let's visualize the number of paintings with happy little clouds over time.
+
+```{r}
+summarise_bob_ross <- bob_ross %>%
+  group_by(season) %>%
+  summarise(clouds = sum(clouds))
+```
+
+```{r}
+ggplot(data = summarise_bob_ross, mapping = aes(season, clouds)) + 
+  geom_point() + 
+  labs(title = "Happy little cloud paintings by season",
+       x = "Season",
+       y = "---")
+```
+
+```{r}
+ggplot(data = summarise_bob_ross, mapping = aes(season, clouds)) + 
+  geom_point() + 
+  labs(title = "Happy little cloud paintings by season",
+       subtitle = "---",
+       x = "Season",
+       y = "# of cloud paintings") + 
+  geom_smooth(method = "loess")
+```
+
