@@ -32,3 +32,13 @@ color_palette <- list(gray = "#999999",
 # for funsies
 library(emo)
 ```
+
+layout: true
+
+<div class="my-footer">
+  <span>
+  Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
