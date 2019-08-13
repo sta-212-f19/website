@@ -28,7 +28,7 @@ Each of your assignments will begin with the following steps.
 - Find the lab instructions under the course syllabus on our website [bit.ly/sta-212-f19](https://bit.ly/sta-212-f19)  
 - Go to our RStudio Cloud workspace and find the corresponding assignment template
 
-For this assignment, go to RStudio Cloud and open `Lab 01: R You Ready?`. 
+For this assignment, go to RStudio Cloud and open `Lab 01 - R You Ready?`. 
 
 # Packages
 
@@ -46,6 +46,10 @@ Note that the packages are also loaded with the same commands in your R Markdown
 # Warm up
 
 Before we introduce the data, let's warm up with some simple exercises. 
+
+## Filename:
+
+Currently, the .Rmd file is called `r-you-ready.Rmd`. Change this to `your-last-name-r-you-ready.Rmd` replacing `your-last-name` with your last name.
 
 ```{marginfigure}
 The top portion of your R Markdown file (between the three dashed lines) is called YAML. It stands for "YAML Ain't Markup Language". It is a human friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.

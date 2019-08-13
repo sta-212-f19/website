@@ -1,5 +1,5 @@
 ---
-title: "Lab 01: Happy Little Clouds Example"
+title: "Happy Little Clouds Example"
 author: "Lucy D'Agostino McGowan"
 date: "2019-08-29"
 output: html_document
