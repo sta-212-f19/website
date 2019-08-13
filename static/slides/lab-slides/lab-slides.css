@@ -111,3 +111,25 @@ thead, tfoot, tr:nth-child(even) { background: #eee }
     background-size: contain;
     background-image: url("img/icon.png");
 }
+
+/* Footer */
+div.my-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #A7D5E8;
+    position: absolute;
+    bottom: 0px;
+    left: 80px;
+    height: 35px;
+    width: 100%;
+}
+div.my-footer span {
+    font-size: 12pt;
+    position: absolute;
+    color: #333333;
+    left: 20px;
+    bottom: 10px;
+}
+div.my-footer a {
+    font-size: 12pt;
+    color: #333333;
+}

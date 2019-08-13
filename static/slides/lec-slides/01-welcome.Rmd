@@ -162,13 +162,12 @@ class: center, middle
 ]
 .pull-right[
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.height = 6}
-bob <- read_csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/bob-ross/elements-by-episode.csv")
+library(fivethirtyeight)
 
-bob %>%
-  mutate(season = as.numeric(substr(EPISODE, 2, 3))) %>%
+bob_ross %>%
   filter(season < 15) %>%
   group_by(season) %>%
-  summarise(clouds = sum(CLOUDS)) %>%
+  summarise(clouds = sum(clouds)) %>%
   ggplot(mapping = aes(season, clouds)) + 
   geom_point() + 
   scale_y_continuous("# of paintings with clouds", limits = c(4, 12)) + 
@@ -186,11 +185,10 @@ bob %>%
 ]
 .pull-right[
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.height = 6}
-bob %>%
-  mutate(season = as.numeric(substr(EPISODE, 2, 3))) %>%
+bob_ross %>%
   filter(season < 15) %>%
   group_by(season) %>%
-  summarise(clouds = sum(CLOUDS)) %>%
+  summarise(clouds = sum(clouds)) %>%
   ggplot(mapping = aes(season, clouds)) + 
   geom_point() + 
   scale_y_continuous("# of paintings with clouds", limits = c(4, 12)) + 
@@ -206,11 +204,10 @@ bob %>%
 ]
 .pull-right[
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.height = 6}
-bob %>%
-  mutate(season = as.numeric(substr(EPISODE, 2, 3))) %>%
+bob_ross %>%
   filter(season < 15) %>%
   group_by(season) %>%
-  summarise(clouds = sum(CLOUDS)) %>%
+  summarise(clouds = sum(clouds)) %>%
   ggplot(mapping = aes(season, clouds)) + 
   geom_point() + 
   scale_y_continuous("# of paintings with clouds", limits = c(4, 12)) + 
@@ -234,11 +231,10 @@ bob %>%
 ]
 .pull-right[
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.height = 6}
-bob %>%
-  mutate(season = as.numeric(substr(EPISODE, 2, 3))) %>%
+bob_ross %>%
   filter(season < 15) %>%
   group_by(season) %>%
-  summarise(clouds = sum(CLOUDS)) %>%
+  summarise(clouds = sum(clouds)) %>%
   ggplot(mapping = aes(season, clouds)) + 
   geom_point() + 
   scale_y_continuous("# of paintings with clouds", limits = c(4, 12)) + 
@@ -261,10 +257,9 @@ bob %>%
 ]
 .pull-right[
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.height = 6}
-bob %>%
-  mutate(season = as.numeric(substr(EPISODE, 2, 3))) %>%
+bob_ross %>%
   group_by(season) %>%
-  summarise(clouds = sum(CLOUDS)) %>%
+  summarise(clouds = sum(clouds)) %>%
   ggplot(mapping = aes(season, clouds)) + 
   geom_point() + 
   scale_y_continuous("# of paintings with clouds", limits = c(2, 12)) + 
@@ -286,10 +281,9 @@ bob %>%
 ]
 .pull-right[
 ```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.height = 6}
-bob %>%
-  mutate(season = as.numeric(substr(EPISODE, 2, 3))) %>%
+bob_ross %>%
   group_by(season) %>%
-  summarise(clouds = sum(CLOUDS)) %>%
+  summarise(clouds = sum(clouds)) %>%
   ggplot(mapping = aes(season, clouds)) + 
   geom_point() + 
   scale_y_continuous("# of paintings with clouds", limits = c(2, 12)) + 
