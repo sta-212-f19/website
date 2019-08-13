@@ -55,7 +55,7 @@ class: center, middle
     - RStudio is like a car’s dashboard
 
 ```{r fig.align="center", echo=FALSE}
-knitr::include_graphics("img/00/engine-dashboard.png")
+knitr::include_graphics("img/01/engine-dashboard.png")
 ```
 
 .footnote[
@@ -114,7 +114,7 @@ library(package_name)
 ## tidyverse
 
 .pull-left[
-![](img/00/tidyverse.png)
+![](img/01/tidyverse.png)
 ]
 
 .pull-right[
@@ -175,14 +175,14 @@ Concepts introduced:
 .center[
 [R Markdown cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
 ]
-![](img/00/rmd-cheatsheet.png)
+![](img/01/rmd-cheatsheet.png)
 ]
 .pull-right[
 .center[
 Markdown Quick Reference  
 `Help -> Markdown Quick Reference`
 ]
-![](img/00/md-cheatsheet.png)
+![](img/01/md-cheatsheet.png)
 ]
 
 ---
