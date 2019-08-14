@@ -163,7 +163,7 @@ class: center, middle
 
 ![](https://upload.wikimedia.org/wikipedia/en/7/70/Bob_at_Easel.jpg)
 
-<font size = "2"> Bob at Easle from  <a href = "https://en.wikipedia.org/wiki/File:Bob_at_Easel.jpg">Wikipedia</a></font>
+<font size = "2"> Bob at Easel from  <a href = "https://en.wikipedia.org/wiki/File:Bob_at_Easel.jpg">Wikipedia</a></font>
 ---
 
 .pull-left[
@@ -408,7 +408,7 @@ Once done, place a green sticky on your laptop. If you have questions, place a p
 - Click on "Class feed" on the top left. You should see a post from me titled `Hello!` 
 - Practice responding to this post, up-voting it, etc.
 - Click on "Rooms" then `#general`
-- Pratice posting here - post a fun fact about your self, respond with an emoji `r emo::ji("+1")`, etc
+- Practice posting here - post a fun fact about your self, respond with an emoji `r emo::ji("+1")`, etc
 
 <font color="#E34132">
 Once done, place a green sticky on your laptop. If you have questions, place a pink sticky.
@@ -432,9 +432,15 @@ Once done, place a green sticky on your laptop. If you have questions, place a p
   - How to find policies
 ---
 
-class: center, middle
-
 # Course structure and policies
+
+- Diversity & Inclusiveness
+- Disability Policy
+- How to get help
+- Academic integrity & Sharing and reusing code
+- Course components
+- Grading
+- Late / missing work
 
 ---
 
@@ -447,6 +453,8 @@ class: center, middle
 ---
 
 ## Diversity & Inclusiveness:
+
+--
 
 - Intent: Students from all diverse backgrounds and perspectives be well-served by this course, that students' learning needs be addressed both in and out of class, and that the diversity that the students bring to this class be viewed as a resource, strength and benefit. It is my intent to present materials and activities that are respectful of diversity: gender identity, sexuality, disability, age, socioeconomic status, ethnicity, race, nationality, religion, and culture. Let me know ways to improve the effectiveness of the course for you personally, or for other students or student groups.
 - If you have a name and/or set of pronouns that differ from those that appear in your official Wake Forest records, please let me know!
@@ -462,11 +470,15 @@ class: center, middle
 
 ## Disability Policy
 
+--
+
 Students with disabilities who believe that they may need accommodations in the class are encouraged to contact Learning Assistance Center & Disability Services at 336-758-5929 or [lacds@wfu.edu](mailto:lacds@wfu.edu) as soon as possible to better ensure that such accommodations are implemented in a timely fashion. 
 
 ---
 
 ## How to get help
+
+--
 
 All course discussion will be via Campuswire: [bit.ly/sta-212-f19-help](https://bit.ly/sta-212-f19-discuss) ([Sign up](https://bit.ly/sta-212-f19-discuss-join)). 
     
@@ -477,11 +489,15 @@ All course discussion will be via Campuswire: [bit.ly/sta-212-f19-help](https://
 
 ## Academic integrity
 
+--
+
 Adhere to the Wake Forest Honor Code. Academic dishonesty will not be tolerated.
 
 ---
 
 ## Sharing/reusing code
+
+--
 
 * There are many online resources for sharing code (for example, StackOverflow) - you **may** use these resources but **must explicitly cite** where you have obtained code (both code you used directly and "paraphrased" code / code used as inspiration). Any reused code that is not explicitly cited will be treated as plagiarism.
 * You **may** discuss the content of assignments with others in this class. If you do so, please acknowledge your collaborator(s) at the top of your assignment, for example: "Collaborators: Gertrude Cox, Florence Nightingale David". Failure to acknowledge collaborators will result in a grade of 0. You **may not** copy code and/or answers **directly** from another student. If you copy someone else's work, both parties will receive a grade of 0.
@@ -490,6 +506,8 @@ Adhere to the Wake Forest Honor Code. Academic dishonesty will not be tolerated.
 ---
 
 ## Course components:
+
+--
 
 - Application exercises: Usually start in class and finish in teams by the next class period, check/no check
 - In class quizzes: unannounced, ~10 minutes, no make-ups, lowest two will be dropped
@@ -502,6 +520,8 @@ Adhere to the Wake Forest Honor Code. Academic dishonesty will not be tolerated.
 ---
 
 ## Grading
+
+--
 
 Component             | Weight
 ----------------------|----------------
@@ -519,6 +539,8 @@ will be considered a legitimate cause for grade reduction.
 ---
 
 ## Late/missed work policy
+
+--
 
 - Late work policy for homework assignments:
     - late, but within 24 hours of due date/time: -50%
