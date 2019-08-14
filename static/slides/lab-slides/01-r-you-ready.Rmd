@@ -33,9 +33,9 @@ class: center, middle
 
 # Agenda
 
-1. Meet the toolkit
-2. Demos
-3. Lab 01 on your own
+- Meet the toolkit
+- Demos
+- Lab 01 on your own
 
 ---
 

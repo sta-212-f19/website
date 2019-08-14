@@ -460,6 +460,12 @@ class: center, middle
 
 ---
 
+## Disability Policy
+
+Students with disabilities who believe that they may need accommodations in the class are encouraged to contact Learning Assistance Center & Disability Services at 336-758-5929 or [lacds@wfu.edu](mailto:lacds@wfu.edu) as soon as possible to better ensure that such accommodations are implemented in a timely fashion. 
+
+---
+
 ## How to get help
 
 All course discussion will be via Campuswire: [bit.ly/sta-212-f19-help](https://bit.ly/sta-212-f19-discuss) ([Sign up](https://bit.ly/sta-212-f19-discuss-join)). 
