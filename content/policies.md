@@ -68,7 +68,7 @@ The lab with the lowest score for each student will be dropped.
 
 #### Unannounced Quizzes
 
-Classes will periodically end with an unannounced quiz on the topics previously covered. These will be short (~10 minute) quizzes designed to ensure that you are doing the reading / following the material covered. 
+Classes will periodically have an unannounced quiz on the topics previously covered. These will be short (~10 minute) quizzes designed to ensure that you are doing the reading / following the material covered. 
 
 Quizzes cannot be made up. It is expected that you may miss a quiz due to missing class a time or two; to account for this, two quizzes for each student will be dropped.
 
