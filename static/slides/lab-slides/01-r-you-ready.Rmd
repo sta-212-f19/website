@@ -31,6 +31,14 @@ class: center, middle
 
 ---
 
+# Agenda
+
+1. Meet the toolkit
+2. Demos
+3. Lab 01 on your own
+
+---
+
 ## Toolkit
 
 ![toolkit](img/01/toolkit.png)
@@ -227,3 +235,12 @@ What happens? Why the error?
 - You will turn in the .html file on Sakai
 
 ---
+
+## Lab 01
+
+- Lab instructions are posted on the course website under `</>`
+  + Let's go find today's!
+
+.center[  
+# [bit.ly/sta-212-f19](https://bit.ly/sta-212-f19)
+]

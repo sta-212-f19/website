@@ -1,5 +1,5 @@
 ---
-title: "Reading 02"
+title: "Reading Week 02"
 output: 
   html_document: 
     theme: yeti
@@ -15,4 +15,8 @@ Tuesday, Sep 3
 
 ## Required:
 
-  
+- [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf)
+
+## Optional:
+
+- [ggplot2 in 2](https://leanpub.com/ggplot2in2/c/sta-212-f19)

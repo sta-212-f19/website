@@ -72,26 +72,71 @@ a, a > code {
 .pull-right ~ * {
   clear: both;
 }
+/* Custom boxes */
 .question {
-  background-color: #E1ECF8;
-  padding: 0.25px;
+  border-left: solid 5px #1E5C65;
+  background-color: #1E5C6530;
+  padding: 1px 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
-ul {
-  list-style-type: square;
+.alert {
+  border-right: solid 5px #A7D5E8;
+  background-color: #A7D5E830;
+  padding: 1px 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
-li{
-  margin: 10px 0;
+.instructions {
+  border-left: solid 5px #FFD748;
+  background-color: #FFD74850;
+  font-size: 90%;
+  padding: 1px 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
-.large { font-size: 130% }
-.midi { font-size: 90% }
-.small { font-size: 70% }
-img, video, iframe {
-  max-width: 100%;
+.instructions li::before {
+  content: ">"; 
+  color: #FFD748;
+  display: inline-block; 
+  margin-left: -1.5em
 }
+
+
+/* Quotes */
 blockquote {
   border-left: solid 5px lightgray;
   padding-left: 1em;
 }
+
+
+/* Lists */
+ul {
+  list-style: none;
+}
+li::before {
+  content: "✚"; 
+  color: #A7D5E8; 
+  display: inline-block; 
+  width: 1.5em;
+  margin-left: -1.5em
+}
+li{
+  margin: 10px 0;
+}
+
+
+/* Font sizes */
+.large { font-size: 130% }
+.midi { font-size: 85% }
+.small { font-size: 70% }
+
+
+/* Embedded images */
+img, video, iframe {
+  max-width: 100%;
+}
+
 table {
   margin: auto;
   border-top: 1px solid #666;

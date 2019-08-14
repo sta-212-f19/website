@@ -28,7 +28,7 @@ a, a > code {
 .remark-code-line-highlighted     { background-color: #ffff88; }
 
 .inverse {
-  background-color: #0E3A53;
+  background-color: #F96714;
   color: #ffffff;
   /* text-shadow: 0 0 20px #333; */
 }
@@ -61,25 +61,72 @@ a, a > code {
 .pull-right ~ * {
   clear: both;
 }
-ul {
-  list-style-type: square;
-}
-li{
-  margin: 10px 0;
-}
+
+/* Custom boxes */
 .question {
-    background-color: #AFB1B4;
-    padding: 10px;
+  border-left: solid 5px #1E5C65;
+  background-color: #1E5C6530;
+  padding: 1px 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
-.large { font-size: 130% }
-.small { font-size: 70% }
-img, video, iframe {
-  max-width: 100%;
+.alert {
+  border-right: solid 5px #A7D5E8;
+  background-color: #A7D5E830;
+  padding: 1px 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
+.instructions {
+  border-left: solid 5px #FFD748;
+  background-color: #FFD74850;
+  font-size: 90%;
+  padding: 1px 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.instructions li::before {
+  content: ">"; 
+  color: #FFD748;
+  display: inline-block; 
+  margin-left: -1.5em
+}
+
+
+/* Quotes */
 blockquote {
   border-left: solid 5px lightgray;
   padding-left: 1em;
 }
+
+
+/* Lists */
+ul {
+  list-style: none;
+}
+li::before {
+  content: "✚"; 
+  color: #A7D5E8; 
+  display: inline-block; 
+  width: 1.5em;
+  margin-left: -1.5em
+}
+li{
+  margin: 10px 0;
+}
+
+
+/* Font sizes */
+.large { font-size: 130% }
+.midi { font-size: 85% }
+.small { font-size: 70% }
+
+
+/* Embedded images */
+img, video, iframe {
+  max-width: 100%;
+}
+
 table {
   margin: auto;
   border-top: 1px solid #666;

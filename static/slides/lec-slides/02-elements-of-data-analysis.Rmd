@@ -1,0 +1,90 @@
+---
+title: "Elements of data analysis"
+author: "Dr. Lucy D'Agostino McGowan"
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+
+```{r child = "setup.Rmd"}
+```
+
+layout: true
+
+---
+
+![](img/02/data-matching.png)
+
+---
+
+![](img/02/exhaustive.png)
+
+---
+
+![](img/02/skeptical.png)
+
+---
+
+![](img/02/second-order.png)
+
+---
+
+![](img/02/transparency.png)
+
+---
+
+![](img/02/reproducible.png)
+
+---
+
+## Assignment reflections
+
+**data matching**: |-----*-----|
+
+**exhaustive**: |-----*-----|
+
+**skeptical**: |-----*-----|
+
+**second order**: |-----*-----|
+
+**transparency**: |-----*-----|
+
+**reproducible**: |-----*-----|
+
+---
+
+## Assignment reflections
+
+**data matching**: |----------*|
+
+**exhaustive**: |-*---------|
+
+**skeptical**: |--*--------|
+
+**second order**: |-*---------|
+
+**transparency**: |---------*-|
+
+**reproducible**: |----------*|
+
+---
+
+## Assignment reflections
+
+**data matching**: |--------*--|
+
+**exhaustive**: |--------*--|
+
+**skeptical**: |--------*--|
+
+**second order**: |---------*-|
+
+**transparency**: |---------*-|
+
+**reproducible**: |----------*|
