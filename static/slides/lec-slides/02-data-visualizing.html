@@ -125,6 +125,17 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Hello ggplot2!
 
+![](img/02/ggplot2_masterpiece.png)
+
+.my-footer[
+&lt;font size="2"&gt;
+Artwork by @allison_horst
+&lt;/font&gt;
+]
+---
+
+## Hello ggplot2!
+
 - `ggplot()` is the main function in ggplot2 and plots are constructed in layers
 - The structure of the code for plots can often be summarized as
 
@@ -168,38 +179,6 @@ class: center, middle
 
 # Visualizing Star Wars
 
----
-
-## Dataset terminology
-
-.question[
-What does each row represent? What does each column represent?
-]
-
-.small[
-
-```r
-starwars
-```
-
-```
-## # A tibble: 87 x 13
-##    name  height  mass hair_color skin_color eye_color birth_year gender
-##    &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt; 
-##  1 Luke…    172    77 blond      fair       blue            19   male  
-##  2 C-3PO    167    75 &lt;NA&gt;       gold       yellow         112   &lt;NA&gt;  
-##  3 R2-D2     96    32 &lt;NA&gt;       white, bl… red             33   &lt;NA&gt;  
-##  4 Dart…    202   136 none       white      yellow          41.9 male  
-##  5 Leia…    150    49 brown      light      brown           19   female
-##  6 Owen…    178   120 brown, gr… light      blue            52   male  
-##  7 Beru…    165    75 brown      light      blue            47   female
-##  8 R5-D4     97    32 &lt;NA&gt;       white, red red             NA   &lt;NA&gt;  
-##  9 Bigg…    183    84 black      light      brown           24   male  
-## 10 Obi-…    182    77 auburn, w… fair       blue-gray       57   male  
-## # … with 77 more rows, and 5 more variables: homeworld &lt;chr&gt;,
-## #   species &lt;chr&gt;, films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
-```
-]
 ---
 
 ## Dataset terminology
@@ -295,7 +274,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ## Warning: Removed 28 rows containing missing values (geom_point).
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -326,7 +305,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 *      x = "Height (cm)", y = "Weight (kg)")
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -334,6 +313,14 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ## Jabba!
 
 &lt;img src="img/02/jabbaplot.png" width="768" /&gt;
+
+---
+
+## ggplot components
+
+- **data**
+- **aes**thetic mapping
+- layer(s)
 
 ---
 
@@ -377,7 +364,7 @@ ggplot(data = starwars,
   geom_point()
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -394,7 +381,7 @@ ggplot(data = starwars,
   geom_point()
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -409,7 +396,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
 * geom_point(size = 2)
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -451,7 +438,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
        x = "Height (cm)", y = "Weight (kg)")
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -482,7 +469,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_grid(gender ~ .)
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -493,7 +480,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_grid(. ~ gender)
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -504,7 +491,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   facet_wrap(~ eye_color)
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -518,7 +505,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ---
 
-## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `AE 03 - Starwars`
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Starwars`
 
 - Go to RStudio Cloud and make a copy of the application exercise project and launch it.
 - Open and knit the R Markdown document
@@ -541,7 +528,7 @@ class: center, middle
 
 ## Types of variables
 
-- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively. 
+- **Numerical variables** (quantitative variables) can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively. 
 - If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
 
 ---
@@ -576,7 +563,7 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 ## Warning: Removed 6 rows containing non-finite values (stat_bin).
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -594,7 +581,7 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 ## Warning: Removed 6 rows containing non-finite values (stat_density).
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -612,7 +599,7 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
 ## Warning: Removed 6 rows containing non-finite values (stat_boxplot).
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -632,7 +619,7 @@ ggplot(data = starwars, mapping = aes(x = gender)) +
   geom_bar()
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -647,7 +634,7 @@ ggplot(data = starwars,
   geom_bar()
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -663,7 +650,7 @@ ggplot(data = starwars,
   labs(y = "proportion")
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -683,7 +670,7 @@ starwars &lt;- starwars %&gt;%
 ```
 
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;![](02-data-visualizing_files/figure-html/unnamed-chunk-30-2.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;![](02-data-visualizing_files/figure-html/unnamed-chunk-29-2.png)&lt;!-- --&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

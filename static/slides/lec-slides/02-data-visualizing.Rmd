@@ -113,6 +113,17 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ## Hello ggplot2!
 
+![](img/02/ggplot2_masterpiece.png)
+
+.my-footer[
+<font size="2">
+Artwork by @allison_horst
+</font>
+]
+---
+
+## Hello ggplot2!
+
 - `ggplot()` is the main function in ggplot2 and plots are constructed in layers
 - The structure of the code for plots can often be summarized as
 ```{r eval = FALSE}
@@ -153,19 +164,6 @@ class: center, middle
 
 # Visualizing Star Wars
 
----
-
-## Dataset terminology
-
-.question[
-What does each row represent? What does each column represent?
-]
-
-.small[
-```{r message=FALSE}
-starwars
-```
-]
 ---
 
 ## Dataset terminology
@@ -276,6 +274,14 @@ out <- fig %>% image_composite(jabba, offset = "+1000+30")
 image_write(out, "img/02/jabbaplot.png", format = "png")
 knitr::include_graphics("img/02/jabbaplot.png")
 ```
+
+---
+
+## ggplot components
+
+- **data**
+- **aes**thetic mapping
+- layer(s)
 
 ---
 
@@ -439,7 +445,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ---
 
-## <i class="fas fa-laptop"></i> `AE 03 - Starwars`
+## <i class="fas fa-laptop"></i> `Starwars`
 
 - Go to RStudio Cloud and make a copy of the application exercise project and launch it.
 - Open and knit the R Markdown document
@@ -462,7 +468,7 @@ class: center, middle
 
 ## Types of variables
 
-- **Numerical variables** can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively. 
+- **Numerical variables** (quantitative variables) can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively. 
 - If the variable is **categorical**, we can determine if it is **ordinal** based on whether or not the levels have a natural ordering.
 
 ---
@@ -487,7 +493,7 @@ class: center, middle
 ## Histograms
 
 .small[
-```{r fig.width = 7, fig.height=4}
+```{r fig.width = 7, fig.height = 4}
 ggplot(data = starwars, mapping = aes(x = height)) +
   geom_histogram(binwidth = 10)
 ```
@@ -498,7 +504,7 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 ## Density plots
 
 .small[
-```{r fig.width = 7, fig.height=4}
+```{r fig.width = 7, fig.height = 4}
 ggplot(data = starwars, mapping = aes(x = height)) +
   geom_density()
 ```
@@ -509,7 +515,7 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 ## Side-by-side box plots
 
 .small[
-```{r fig.width = 7, fig.height=4}
+```{r fig.width = 7, fig.height = 4}
 ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
   geom_boxplot()
 ```
@@ -526,7 +532,7 @@ class: center, middle
 ## Bar plots
 
 .small[
-```{r fig.width = 7, fig.height=4}
+```{r fig.width = 7, fig.height = 4}
 ggplot(data = starwars, mapping = aes(x = gender)) +
   geom_bar()
 ```
@@ -537,7 +543,7 @@ ggplot(data = starwars, mapping = aes(x = gender)) +
 ## Segmented bar plots, counts
 
 .small[
-```{r fig.width = 7, fig.height=4}
+```{r fig.width = 7, fig.height = 4}
 ggplot(data = starwars,
        mapping = aes(x = gender, fill = hair_color)) +
   geom_bar()
@@ -549,7 +555,7 @@ ggplot(data = starwars,
 ## Segmented bar plots, proportions
 
 .small[
-```{r fig.width = 7, fig.height=4}
+```{r fig.width = 7, fig.height = 4}
 ggplot(data = starwars, 
        mapping = aes(x = gender, fill = hair_color)) +
   geom_bar(position = "fill") +
