@@ -82,7 +82,7 @@ There will be two midterm exams. They will both consist of 3 stages.
 
 #### Final Project
 
-For the Final project, you will be responsible for the completion of an open ended project - you can choose the data and the question. You may work with one or two classmates on the final project, if you choose. Additional details on the projects will be provided as the course progresses.
+For the Final project, you will be responsible for the completion of an open ended project. You may work with one or two classmates on the final project, if you choose. Additional details on the projects will be provided as the course progresses.
 
 #### Interactive tutorials
 

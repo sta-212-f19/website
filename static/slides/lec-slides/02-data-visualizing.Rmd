@@ -41,7 +41,7 @@ class: center, middle
 
 ## What is EDA?
 
-- Exploratory data analysis (EDA) is an aproach to analyzing data sets to summarize its main characteristics.
+- Exploratory data analysis (EDA) is an approach to analyzing data sets to summarize its main characteristics.
 - Often, this is visual. That's what we're focusing on today.
 - But we might also calculate summary statistics and perform data wrangling/manipulation/transformation at (or before) this stage of the 
 analysis. That's what we'll focus on next.
@@ -83,8 +83,7 @@ class: center, middle
 ---
 
 .question[
-What function plots? What is the dataset being plotted? 
-Which variables are on the x-axis and y-axis? Warning?
+Which function creates the plot? 
 ]
 
 ```{r fig.width = 6, fig.height=2.5}
@@ -97,8 +96,45 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ---
 
 .question[
-What does `geom_smooth()` do? What else changed between the previous plot and 
-this one?
+What is the dataset being plotted? 
+]
+
+```{r fig.width = 6, fig.height=2.5}
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Starwars characters",
+       x = "Height (cm)", y = "Weight (kg)")
+```
+
+---
+.question[
+Which variables are on the x-axis and y-axis? 
+]
+
+```{r fig.width = 6, fig.height=2.5}
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Starwars characters",
+       x = "Height (cm)", y = "Weight (kg)")
+```
+
+---
+
+.question[
+What about that warning?
+]
+
+```{r fig.width = 6, fig.height=2.5}
+ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
+  geom_point() +
+  labs(title = "Mass vs. height of Starwars characters",
+       x = "Height (cm)", y = "Weight (kg)")
+```
+
+---
+
+.question[
+What does `geom_smooth()` do? What else changed between the previous plot and this one?
 ]
 
 ```{r fig.width = 6, fig.height=2.5, warning=FALSE, message=FALSE}
@@ -236,7 +272,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ## Warning: Removed 28 rows containing missing values (geom_point).
 ```
 
-- Going forward I'll supress the warning to save room on slides, but it's important to note it
+- Going forward I'll suppress the warning to save room on slides, but it's important to note it
 
 ---
 
@@ -363,8 +399,7 @@ color         | rainbow of colors        | gradient
 size          | discrete steps           | linear mapping between radius and value
 shape         | different shape for each | shouldn't (and doesn't) work
 
-- Use aesthetics for mapping features of a plot to a variable, define the 
-features in the geom for customization **not** mapped to a variable
+- Use aesthetics for mapping features of a plot to a variable, define the features in the geom for customization **not** mapped to a variable
 
 ---
 
@@ -395,8 +430,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ## Dive further...
 
 .question[
-In the next few slides describe what each plot displays. Think about
-how the code relates to the output.
+In the next few slides describe what each plot displays. Think about how the code relates to the output.
 ]
 
 --
@@ -404,9 +438,7 @@ how the code relates to the output.
 <br><br><br>
 
 .alert[
-The plots in the next few slides do not have proper titles, axis labels, etc. 
-because we want you to figure out what's happening in the plots. But you 
-should always label your plots!
+The plots in the next few slides do not have proper titles, axis labels, etc. because we want you to figure out what's happening in the plots. But you should always label your plots!
 ]
 
 ---
@@ -458,14 +490,6 @@ class: center, middle
 
 ---
 
-## Number of variables involved
-
-* Univariate data analysis - distribution of single variable
-* Bivariate data analysis - relationship between two variables
-* Multivariate data analysis - relationship between many variables at once, usually focusing on the relationship between two while conditioning for others
-
----
-
 ## Types of variables
 
 - **Numerical variables** (quantitative variables) can be classified as **continuous** or **discrete** based on whether or not the variable can take on an infinite number of values or only non-negative whole numbers, respectively. 
@@ -482,18 +506,18 @@ class: center, middle
 ## Describing shapes of numerical distributions
 
 * shape:
-* skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
-* modality: unimodal, bimodal, multimodal, uniform
+  * skewness: right-skewed, left-skewed, symmetric (skew is to the side of the longer tail)
+  * modality: unimodal, bimodal, multimodal, uniform
 * center: mean (`mean`), median (`median`), mode (not always useful)
 * spread: range (`range`), standard deviation (`sd`), inter-quartile range (`IQR`)
-* unusal observations
+* unusual observations
 
 ---
 
 ## Histograms
 
 .small[
-```{r fig.width = 7, fig.height = 4}
+```{r fig.width = 7, fig.height = 4, message = FALSE, warning = FALSE}
 ggplot(data = starwars, mapping = aes(x = height)) +
   geom_histogram(binwidth = 10)
 ```
@@ -504,7 +528,7 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 ## Density plots
 
 .small[
-```{r fig.width = 7, fig.height = 4}
+```{r fig.width = 7, fig.height = 4, message = FALSE, warning = FALSE}
 ggplot(data = starwars, mapping = aes(x = height)) +
   geom_density()
 ```
@@ -515,7 +539,7 @@ ggplot(data = starwars, mapping = aes(x = height)) +
 ## Side-by-side box plots
 
 .small[
-```{r fig.width = 7, fig.height = 4}
+```{r fig.width = 7, fig.height = 4, message = FALSE, warning = FALSE}
 ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
   geom_boxplot()
 ```
