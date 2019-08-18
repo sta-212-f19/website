@@ -515,7 +515,7 @@ Adhere to the Wake Forest Honor Code. Academic dishonesty will not be tolerated.
 - In class quizzes: unannounced, ~10 minutes, no make-ups, lowest two will be dropped
 - Homework: lowest score dropped
 - Lab: start in class, lowest score dropped
-- Pyramid Exams: 3 parts, in class, take home, whole class 
+- Pyramid Exams: 2 parts, in class & take home 
 - Final project: Presentations during the last week of class, you must participate in the project and be in class to present to pass this class
 - Self paced tutorials: Individual, check/no check, extra credit
 
@@ -553,7 +553,7 @@ will be considered a legitimate cause for grade reduction.
 
 ## Late/missed work policy
  
-- Exam dates cannot be changed and no make-up exams will be given. If the midterm exam (part 1) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the other (part 1) exam score and a scaling factor. If the midterm exam (part 3) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the take home portion of the exam (part 2) score. This policy only applies to the midterms.
+- Exam dates cannot be changed and no make-up exams will be given. If the midterm exam (part 1) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the other (part 1) exam score and a scaling factor. This policy only applies to the midterms.
 - You must complete the final project and be in class to present it in order to pass this course.
 
 ---

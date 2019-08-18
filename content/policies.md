@@ -74,11 +74,10 @@ Quizzes cannot be made up. It is expected that you may miss a quiz due to missin
 
 #### Pyramid Exams
 
-There will be two midterm exams. They will both consist of 3 stages.
+There will be two midterm exams. They will both consist of 2 stages.
 
 * Part 1 is individual, in-class, timed work.
 * Part 2 is individual, take-home, open everything and everyone **outside this class**. Seriously. Talk to people. Search the web. Figure it out and get it right. Just remember, you are academics; always cite your sources. It's always better to over-cite than to show-off.
-* Part 3 is large scale collaborative work, the whole class, one exam, figure out how to all work together to get it perfect.
 
 #### Final Project
 
@@ -115,7 +114,7 @@ Class attendance in lecture and lab is a firm expectation; frequent absences or 
 
 - No make-up quizzes will be given.
 
-- Exam dates cannot be changed and no make-up exams will be given. If the midterm exam (part 1) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the other (part 1) exam score and a scaling factor. If the midterm exam (part 3) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the take home portion of the exam (part 2) score. This policy only applies to the midterms.
+- Exam dates cannot be changed and no make-up exams will be given. If the midterm exam (part 1) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the other (part 1) exam score and a scaling factor. This policy only applies to the midterms.
 
 - You must complete the final project and be in class to present it in order to pass this course.
 
