@@ -24,6 +24,8 @@ Students with disabilities who believe that they may need accommodations in the 
 
 ### How to get help
 
+#### Discussion:
+
 All course discussion will be via Campuswire: [bit.ly/sta-212-f19-help](https://bit.ly/sta-212-f19-discuss) ([Sign up](https://bit.ly/sta-212-f19-discuss-join)). There are two ways to get help:
 
 1. Post a question
@@ -35,7 +37,14 @@ Guidelines for posting questions:
 * First time submitting something? Here are a few tips to keep in mind:
   * Give it a good and informative title!
   * Format it nicely using markdown including links and screenshots
-  
+ 
+####  Math & Stats Center:
+
+* Located in Kirby Hall 117
+* Study sessions: (beginning Sept 3) Monday, Tuesday, Wednesday, Thursday 7-9pm
+* Make an appointment: (beginning Sept 10) [https://mathandstatscenter.wfu.edu/](https://mathandstatscenter.wfu.edu/)
+
+
 Please also make use of our office hours - we are here to help you learn! 
 
 ### Honor code
