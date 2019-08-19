@@ -22,7 +22,8 @@ markup: "mmark"
 ------------------|-------------------|------------------|------------------|------------------ 
 Instructor        | [Lucy D'Agostino McGowan](http://lucymcgowan.com) | <a href="mailto:mcgowald@wfu.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/LucyMCGOWAN" title="GitHub"><i class="fa fa-github"></i></a> &nbsp; <a href="https://twitter.com/LucyStats" title="Twitter"><i class="fa fa-twitter"></i></a> | Wednesday 10:00 - 11:00 | Manchester 342
 TA               | [Name](https://www.example.com) | <a href="mailto:" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/" title="GitHub"><i class="fa fa-github"></i></a> | Date/time | Location
-                  | [Math & Stats Center](https://mathandstatscenter.wfu.edu/) | <a href="mailto:mathandstatscenter@wfu.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; | Study sessions M-Tr 7-9pm and by appointment | Kirby Hall 117
+                  | [Math & Stats Center](https://mathandstatscenter.wfu.edu/) | <a href="mailto:mathandstatscenter@wfu.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; | By appointment | Kirby Hall 117
+                  | [Math & Stats Center](https://mathandstatscenter.wfu.edu/) | <a href="mailto:mathandstatscenter@wfu.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; | Study sessions M-Tr 7-9pm | TBA
                   
 
 ### Texts
