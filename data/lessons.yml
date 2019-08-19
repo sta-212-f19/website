@@ -7,6 +7,7 @@ lessons:
   - date: "Thur, Aug 29"
     title: "Lab 01: R you ready?"
     slides: "lab-slides/01-r-you-ready.html"
+    reading: "reading-01.html"
     lab: "01-r-you-ready.html"
   - date: "PART 1:"
     title: "Thinking about, visualizing, and wrangling data"
