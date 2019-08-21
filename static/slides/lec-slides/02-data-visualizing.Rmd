@@ -26,6 +26,12 @@ layout: true
 
 ---
 
+## <i class="fas fa-laptop"></i> `Starwars`
+
+- Go to RStudio Cloud and launch the `Starwars` project.
+
+---
+
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(emo)
 library(tidyverse)
@@ -86,12 +92,14 @@ class: center, middle
 Which function creates the plot? 
 ]
 
+.small[
 ```{r fig.width = 6, fig.height=2.5}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point() +
   labs(title = "Mass vs. height of Starwars characters",
        x = "Height (cm)", y = "Weight (kg)")
 ```
+]
 
 ---
 
@@ -99,24 +107,28 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 What is the dataset being plotted? 
 ]
 
+.small[
 ```{r fig.width = 6, fig.height=2.5}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point() +
   labs(title = "Mass vs. height of Starwars characters",
        x = "Height (cm)", y = "Weight (kg)")
 ```
+]
 
 ---
 .question[
 Which variables are on the x-axis and y-axis? 
 ]
 
+.small[
 ```{r fig.width = 6, fig.height=2.5}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point() +
   labs(title = "Mass vs. height of Starwars characters",
        x = "Height (cm)", y = "Weight (kg)")
 ```
+]
 
 ---
 
@@ -124,12 +136,14 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 What about that warning?
 ]
 
+.small[
 ```{r fig.width = 6, fig.height=2.5}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point() +
   labs(title = "Mass vs. height of Starwars characters",
        x = "Height (cm)", y = "Weight (kg)")
 ```
+]
 
 ---
 
@@ -137,6 +151,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 What does `geom_smooth()` do? What else changed between the previous plot and this one?
 ]
 
+.small[
 ```{r fig.width = 6, fig.height=2.5, warning=FALSE, message=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point() +
@@ -144,6 +159,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   labs(title = "Mass vs. height of Starwars characters",
        x = "Height (cm)", y = "Weight (kg)")
 ```
+]
 
 ---
 
@@ -156,6 +172,51 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 Artwork by @allison_horst
 </font>
 ]
+
+---
+
+## ggplot2 components
+
+- **data**
+- **aes**thetic mapping
+- layer(s)
+
+---
+
+## ggplot2 premise
+
+![](img/02/ggplot-premise.png)
+
+---
+
+## Hello ggplot2!
+
+![](img/02/layer-1.png)
+
+---
+
+## Hello ggplot2!
+
+![](img/02/layer-2.png)
+
+---
+
+## Hello ggplot2!
+
+![](img/02/layer-3.png)
+
+---
+
+## Hello ggplot2!
+
+![](img/02/layer-4.png)
+
+---
+
+## Hello ggplot2!
+
+![](img/02/layer-5.png)
+
 ---
 
 ## Hello ggplot2!
@@ -173,8 +234,7 @@ or, more precisely
 
 .small[
 ```{r eval = FALSE}
-ggplot(data = [dataset],
-       mapping = aes(x = [x-variable], y = [y-variable])) +
+ggplot(data = [dataset], mapping = aes(x = [x-variable], y = [y-variable])) +
   geom_xxx() +
   other options
 ```
@@ -212,10 +272,13 @@ What does each row represent? What does each column represent?
 starwars
 ```
 
+.small[
 ```{r echo = FALSE, message=FALSE}
 starwars %>%
   head(5)
 ```
+]
+
 --
 
 - Each row is an **observation**
@@ -231,8 +294,9 @@ starwars %>%
 
 ## What's in the Star Wars data?
 
-Take a `glimpse` at the data: 
-```{r}
+Take a `glimpse` at the data:
+
+```{r, message = FALSE}
 glimpse(starwars)
 ```
 
@@ -257,10 +321,12 @@ knitr::include_graphics("img/02/starwars-help.png")
 
 ## Mass vs. height
 
+.small[
 ```{r fig.width = 6, fig.height=3}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point()
 ```
+]
 
 ---
 
@@ -268,9 +334,11 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 - Not all characters have height and mass information (hence 28 of them not plotted)
 
+.small[
 ```
 ## Warning: Removed 28 rows containing missing values (geom_point).
 ```
+]
 
 - Going forward I'll suppress the warning to save room on slides, but it's important to note it
 
@@ -313,23 +381,15 @@ knitr::include_graphics("img/02/jabbaplot.png")
 
 ---
 
-## ggplot components
-
-- **data**
-- **aes**thetic mapping
-- layer(s)
-
----
-
 ## Additional variables
 
 We can map additional variables to various features of the plot:
 
 - aesthetics
-- shape
-- colour
-- size
-- alpha (transparency)
+  - color
+  - size
+  - shape
+  - alpha (transparency)
 - faceting: small multiples displaying different subsets
 
 ---
@@ -354,18 +414,19 @@ in the data are
 
 ## Mass vs. height + gender
 
+.small[
 ```{r fig.width = 7, fig.height=3.5, warning=FALSE}
-ggplot(data = starwars,
-       mapping = aes(x = height, y = mass, color = gender)) +
+ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
   geom_point()
 ```
-
+]
 ---
 
 ## Mass vs. height + gender
 
 Let's map the size to birth_year:
 
+.small[
 ```{r fig.width = 7, fig.height=3, warning=FALSE}
 ggplot(data = starwars,
        mapping = aes(x = height, y = mass, color = gender, 
@@ -373,6 +434,7 @@ ggplot(data = starwars,
        )) +
   geom_point()
 ```
+]
 
 ---
 
@@ -381,10 +443,12 @@ ggplot(data = starwars,
 Let's now increase the size of all points **not** based on the values of a 
 variable in the data:
 
+.small[
 ```{r fig.width = 7, fig.height=3.5, warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
   geom_point(size = 2) #<<
 ```
+]
 
 ---
 
@@ -443,27 +507,33 @@ The plots in the next few slides do not have proper titles, axis labels, etc. be
 
 ---
 
+.small[
 ```{r fig.height=4, fig.width=6, warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point() +
   facet_grid(gender ~ .)
 ```
+]
 
 ---
 
+.small[
 ```{r fig.width=7, warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point() +
   facet_grid(. ~ gender)
 ```
+]
 
 ---
 
+.small[
 ```{r fig.height=4.5, fig.width=7, warning=FALSE}
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
   geom_point() +
   facet_wrap(~ eye_color)
 ```
+]
 
 ---
 
@@ -477,9 +547,19 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ---
 
+class: center, middle
+
+## More ggplot2 info:
+
+## ggplot2 in 2
+
+### [https://leanpub.com/ggplot2in2/c/sta-212-f19](https://leanpub.com/ggplot2in2/c/sta-212-f19)
+
+---
+
 ## <i class="fas fa-laptop"></i> `Starwars`
 
-- Go to RStudio Cloud and make a copy of the application exercise project and launch it.
+- Go to RStudio Cloud and launch the `Starwars` project.
 - Open and knit the R Markdown document
 
 ---
@@ -547,6 +627,24 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
 
 ---
 
+## Side-by-side box plots
+
+.small[
+```{r fig.width = 7, fig.height = 4, message = FALSE, warning = FALSE}
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter()
+```
+]
+
+---
+
+class: center, middle
+
+## Show your data!
+
+---
+
 class: center, middle
 
 # Visualizing categorical data
@@ -589,24 +687,20 @@ ggplot(data = starwars,
 
 ---
 
-## Which bar plot is more appropriate?
+## Which plot is more appropriate?
 
 .question[
-Which bar plot is a more useful representation for visualizing the relationship between gender and hair color?
+Which plot is a more useful representation for visualizing the relationship between gender and height?
 ]
 
-```{r}
-starwars <- starwars %>%
-  mutate(hair_color2 = 
-           fct_other(hair_color, 
-                     keep = c("black", "brown", "brown", "blond")))
-```
 
-
-```{r echo=FALSE, fig.height=1, fig.width=6}
-ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color2)) +
-  geom_bar()
-ggplot(data = starwars, mapping = aes(x = gender, fill = hair_color2)) +
-  geom_bar(position = "fill") +
-  labs(y = "proportion")
+```{r echo=FALSE, fig.height=1.5, fig.width=6, message = FALSE, warning = FALSE}
+starwars %>%
+  group_by(gender) %>%
+  summarise(average_height = mean(height, na.rm = TRUE)) %>%
+ggplot(mapping = aes(x = gender, y = average_height)) +
+  geom_col()
+ggplot(data = starwars, mapping = aes(x = gender, y = height)) +
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter(alpha = 0.6)
 ```

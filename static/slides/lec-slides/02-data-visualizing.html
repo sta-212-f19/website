@@ -33,6 +33,12 @@ layout: true
 
 ---
 
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Starwars`
+
+- Go to RStudio Cloud and launch the `Starwars` project.
+
+---
+
 
 
 class: center, middle
@@ -88,6 +94,7 @@ class: center, middle
 Which function creates the plot? 
 ]
 
+.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -101,6 +108,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+]
 
 ---
 
@@ -108,6 +116,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 What is the dataset being plotted? 
 ]
 
+.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -121,12 +130,14 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+]
 
 ---
 .question[
 Which variables are on the x-axis and y-axis? 
 ]
 
+.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -140,6 +151,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+]
 
 ---
 
@@ -147,6 +159,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 What about that warning?
 ]
 
+.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -160,6 +173,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+]
 
 ---
 
@@ -167,6 +181,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 What does `geom_smooth()` do? What else changed between the previous plot and this one?
 ]
 
+.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -177,6 +192,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+]
 
 ---
 
@@ -189,6 +205,51 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 Artwork by @allison_horst
 &lt;/font&gt;
 ]
+
+---
+
+## ggplot2 components
+
+- **data**
+- **aes**thetic mapping
+- layer(s)
+
+---
+
+## ggplot2 premise
+
+![](img/02/ggplot-premise.png)
+
+---
+
+## Hello ggplot2!
+
+![](img/02/layer-1.png)
+
+---
+
+## Hello ggplot2!
+
+![](img/02/layer-2.png)
+
+---
+
+## Hello ggplot2!
+
+![](img/02/layer-3.png)
+
+---
+
+## Hello ggplot2!
+
+![](img/02/layer-4.png)
+
+---
+
+## Hello ggplot2!
+
+![](img/02/layer-5.png)
+
 ---
 
 ## Hello ggplot2!
@@ -208,8 +269,7 @@ or, more precisely
 .small[
 
 ```r
-ggplot(data = [dataset],
-       mapping = aes(x = [x-variable], y = [y-variable])) +
+ggplot(data = [dataset], mapping = aes(x = [x-variable], y = [y-variable])) +
   geom_xxx() +
   other options
 ```
@@ -249,6 +309,7 @@ What does each row represent? What does each column represent?
 starwars
 ```
 
+.small[
 
 ```
 ## # A tibble: 5 x 13
@@ -262,6 +323,8 @@ starwars
 ## # … with 5 more variables: homeworld &lt;chr&gt;, species &lt;chr&gt;, films &lt;list&gt;,
 ## #   vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
+]
+
 --
 
 - Each row is an **observation**
@@ -277,7 +340,8 @@ starwars
 
 ## What's in the Star Wars data?
 
-Take a `glimpse` at the data: 
+Take a `glimpse` at the data:
+
 
 ```r
 glimpse(starwars)
@@ -321,6 +385,7 @@ Run the following **in the Console** to view the help
 
 ## Mass vs. height
 
+.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -332,6 +397,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+]
 
 ---
 
@@ -339,9 +405,11 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 - Not all characters have height and mass information (hence 28 of them not plotted)
 
+.small[
 ```
 ## Warning: Removed 28 rows containing missing values (geom_point).
 ```
+]
 
 - Going forward I'll suppress the warning to save room on slides, but it's important to note it
 
@@ -373,23 +441,15 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ---
 
-## ggplot components
-
-- **data**
-- **aes**thetic mapping
-- layer(s)
-
----
-
 ## Additional variables
 
 We can map additional variables to various features of the plot:
 
 - aesthetics
-- shape
-- colour
-- size
-- alpha (transparency)
+  - color
+  - size
+  - shape
+  - alpha (transparency)
 - faceting: small multiples displaying different subsets
 
 ---
@@ -414,21 +474,22 @@ in the data are
 
 ## Mass vs. height + gender
 
+.small[
 
 ```r
-ggplot(data = starwars,
-       mapping = aes(x = height, y = mass, color = gender)) +
+ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
   geom_point()
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
-
+]
 ---
 
 ## Mass vs. height + gender
 
 Let's map the size to birth_year:
 
+.small[
 
 ```r
 ggplot(data = starwars,
@@ -439,6 +500,7 @@ ggplot(data = starwars,
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+]
 
 ---
 
@@ -447,6 +509,7 @@ ggplot(data = starwars,
 Let's now increase the size of all points **not** based on the values of a 
 variable in the data:
 
+.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
@@ -454,6 +517,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass, color = gender)) +
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+]
 
 ---
 
@@ -515,6 +579,7 @@ The plots in the next few slides do not have proper titles, axis labels, etc. be
 
 ---
 
+.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -523,9 +588,11 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+]
 
 ---
 
+.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -534,9 +601,11 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+]
 
 ---
 
+.small[
 
 ```r
 ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
@@ -545,6 +614,7 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 ```
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+]
 
 ---
 
@@ -558,9 +628,19 @@ ggplot(data = starwars, mapping = aes(x = height, y = mass)) +
 
 ---
 
+class: center, middle
+
+## More ggplot2 info:
+
+## ggplot2 in 2
+
+### [https://leanpub.com/ggplot2in2/c/sta-212-f19](https://leanpub.com/ggplot2in2/c/sta-212-f19)
+
+---
+
 ## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Starwars`
 
-- Go to RStudio Cloud and make a copy of the application exercise project and launch it.
+- Go to RStudio Cloud and launch the `Starwars` project.
 - Open and knit the R Markdown document
 
 ---
@@ -637,6 +717,27 @@ ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
 
 ---
 
+## Side-by-side box plots
+
+.small[
+
+```r
+ggplot(data = starwars, mapping = aes(y = height, x = gender)) +
+  geom_boxplot(outlier.shape = NA) + 
+  geom_jitter()
+```
+
+![](02-data-visualizing_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+]
+
+---
+
+class: center, middle
+
+## Show your data!
+
+---
+
 class: center, middle
 
 # Visualizing categorical data
@@ -652,7 +753,7 @@ ggplot(data = starwars, mapping = aes(x = gender)) +
   geom_bar()
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -667,7 +768,7 @@ ggplot(data = starwars,
   geom_bar()
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -683,24 +784,16 @@ ggplot(data = starwars,
   labs(y = "proportion")
 ```
 
-![](02-data-visualizing_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+![](02-data-visualizing_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
 ]
 
 ---
 
-## Which bar plot is more appropriate?
+## Which plot is more appropriate?
 
 .question[
-Which bar plot is a more useful representation for visualizing the relationship between gender and hair color?
+Which plot is a more useful representation for visualizing the relationship between gender and height?
 ]
-
-
-```r
-starwars &lt;- starwars %&gt;%
-  mutate(hair_color2 = 
-           fct_other(hair_color, 
-                     keep = c("black", "brown", "brown", "blond")))
-```
 
 
 ![](02-data-visualizing_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;![](02-data-visualizing_files/figure-html/unnamed-chunk-32-2.png)&lt;!-- --&gt;

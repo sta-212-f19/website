@@ -69,11 +69,6 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   pre = "<i class=\"button-icon fa fa-2x fa-map-marker\"></i>"
   url = "http://college.wfu.edu/math/"
 [[menu.footer]]
-  weight = 2
-  name = "RStudio"
-  pre = "<i class=\"icon-rlogo\" style=\"font-size:150%\"></i>"
-  url = "https://rstudio.cloud/"
-[[menu.footer]]
 
 
 [params]

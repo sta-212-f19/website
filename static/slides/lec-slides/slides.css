@@ -30,10 +30,6 @@ a, a > code {
   padding-right: 4em;
   font-size: 90%;
 }
-.remark-code, .remark-inline-code { 
-  font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; 
-}
-.remark-code-line-highlighted     { background-color: #ffff88; }
 
 .inverse {
   background-color: #6CA0DC;
@@ -43,6 +39,17 @@ a, a > code {
 .inverse h1, .inverse h2, .inverse h3 {
   color: #f3f3f3;
 }
+
+/* Code formatting */
+.remark-code-line-highlighted {
+  background-color: #A7D5E8;
+}
+.remark-code, .remark-inline-code { 
+  font-family: 'Inconsolata', 'Lucida Console', Monaco, monospace; 
+  font-size: 90%;
+}
+
+
 /* Two-column layout */
 .left-column {
   color: #777;
