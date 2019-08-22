@@ -148,7 +148,7 @@ college_recent_grads %>%
 - Change displayed number of digits without touching data: We can add an option to our R Markdown document to change the displayed number of digits in the output. To do so, add a new chunk, and set:
 
 ```{r}
-options(digits = 2)
+options(digits = 4)
 ```
 
 Note that the `digits` in `options` is scientific digits, and in `round` they are decimal places. If you're thinking "Wouldn't it be nice if they were 
@@ -179,7 +179,7 @@ the total number of people with major, and proportion of women. Show only the to
 ## How do the distributions of median income compare across major categories?
 
 ```{marginfigure}
-A percentile is a measure used in statistics indicating the value below which a given percentage of observations in a group of observations fall. For example, the 20th percentile is the value below which 20% of the observations may be found. (Source: [Wikipedia](https://en.wikipedia.org/wiki/Percentile)
+A percentile is a measure used in statistics indicating the value below which a given percentage of observations in a group of observations fall. For example, the 20th percentile is the value below which 20% of the observations may be found. (Source: [Wikipedia](https://en.wikipedia.org/wiki/Percentile))
 ```
 
 There are three types of incomes reported in this data frame: `p25th`, `median`, and `p75th`. These correspond to the 25th, 50th, and 75th percentiles of the income distribution of sampled individuals for a given major.
@@ -309,15 +309,26 @@ college_recent_grads %>%
   )
 ```
 
-9. Which STEM majors have median salaries equal to or less than the median for all majors's median earnings? Your output should only show 
-the major name and median, 25th percentile, and 75th percentile earning for 
-that major as and should be sorted such that the major with the highest 
-median earning is on top.
+9. Which STEM majors have median salaries less than the median for all majors's median earnings? Structure your output to only show the major name and median, 25th percentile, and 75th percentile earning for that major and sort it such that the major with the highest median earning is on top.
 
 ## What types of majors do women tend to major in?
 
 10. Create a scatterplot of median income vs. proportion of 
 women in that major, colored by whether the major is in a STEM field or not. Describe the association between these three variables.
+
+## Extra Credit (5 points)
+
+Discover how to change the _scale_ of the x-axis labels of the plot created in Exercise 10 to dollars. Re-plot with this new scale.
+
+## Grading
+
+Total                          | 100 pts
+-------------------------------|--------
+Filename your-name-r-you-ready.Rmd | 5 pts
+Changed `author` in YAML       | 5 pts
+All plots include title, labels | 10 pts
+Exercises 1-10                   | 80 pts
+
 
 
 <br><br><br>
