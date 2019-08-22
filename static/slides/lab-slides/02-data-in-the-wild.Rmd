@@ -1,0 +1,60 @@
+---
+title: "Lab 02: Data in the wild"
+author: ""
+date: "2019-08-29"
+output:
+  xaringan::moon_reader:
+    css: "lab-slides.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+
+layout: true
+  
+<div class="my-footer">
+<span>
+<img src = "img/dsbox-logo.png" width = "30"> </img> Slides adapted from <a href="https://datasciencebox.org" target="_blank">datasciencebox.org</a> by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+class: center, middle
+
+# Welcome to lab
+
+---
+
+# Agenda
+
+* **Lab introduction:** Review FiveThirtyEight article on college majors.
+* **Tips:** Review some common mistakes
+* **Lab 02:** on your own
+
+---
+
+## Lab introduction
+
+- Lab instructions posted on the course website under `</>`
+    + Let's go find today's lab!
+    + [bit.ly/sta-212-f19](https://bit.ly/sta-212-f19)
+- [The Economic Guide To Picking A College Major](https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/) by Ben Casselman
+
+---
+
+## Tips
+
+- Don't forget to change your name in the `yaml`
+- Be ready to troubleshoot your document, since it will likely fail to knit on multiple occasions throughout the process. Read the error message carefully and take note of which line is preventing a successful knit.
+- Make sure to keep track of your various chunks and to keep text and code in the right place.
+- Remember that your R Markdown file is not aware of your project's global environment and can only make use of variables, functions, etc. that you have loaded or defined in the document.
+- Remind yourself how the pipe operator (`%>%`) works.
+- If you're unsure how a function works or what its arguments are, simply type `?` in front of it and hit enter (`?read_csv` for instance). The "Help" tab will open and provide a summary of the function as well as some examples.
+- Make sure to label your plots!
+    
