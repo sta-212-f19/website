@@ -116,7 +116,7 @@ First, the pipe operator: `%>%`, takes what comes before it and sends it as the 
 
 Second, the assignment operator: `<-`, assigns the name `dino_data` to the filtered data frame.
 
-Next, we need to visualize these data. We will use the `ggplot` function for this. Its first argument is the data you're visualizing. Next we define the `aes`thetic mappings. In other words, the columns of the data that get mapped to certain aesthetic features of the plot, e.g. the `x` axis will represent the variable called `x` and the `y` axis will represent the variable called `y`. Then, we add another layer to this plot where we define which `geom`etric shapes we want to use to represent each observation in the data. In this case we want these to be points,m hence `geom_point`.
+Next, we need to visualize these data. We will use the `ggplot` function for this. Its first argument is the data you're visualizing. Next we define the `aes`thetic mappings. In other words, the columns of the data that get mapped to certain aesthetic features of the plot, e.g. the `x` axis will represent the variable called `x` and the `y` axis will represent the variable called `y`. Then, we add another layer to this plot where we define which `geom`etric shapes we want to use to represent each observation in the data. In this case we want these to be points, hence `geom_point`.
 
 ```{r fig.fullwidth=TRUE}
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
@@ -146,7 +146,7 @@ dino_data %>%
 Facet by the dataset variable, placing the plots in a 3 column grid, and don't add a legend.
 ```
 
-5. Finally, let's plot all datasets at once. In order to do this we will make use of facetting.
+5. Finally, let's look at all datasets at once. In order to plot this we will make use of facetting.
 
 ```{r all-viz, eval=FALSE, fig.fullwidth=TRUE}
 ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
@@ -163,6 +163,8 @@ datasaurus_dozen %>%
   summarize(r = cor(x, y)) %>%
   print(13)
 ```
+
+How do the plots compare to each other across all datasets? How do the correlation coefficients compare to each other across all datasets? What can we learn from this?
 
 You're done with the data analysis exercises, but we'd like you to do two more things:
 
@@ -187,6 +189,15 @@ knitr::include_graphics("img/01/theme-highlight.png")
 - **Change the look of your report:** 
 
 Once again click on the gear icon in on top of the R Markdown document, and select "Output Options..." in the dropdown menu. In the General tab of the pop up dialogue box try out different Syntax highlighting and theme options. Hit OK and knit your document to see how it looks. Play around with these until you're happy with the look.
+
+## Grading
+
+Total                          | 100 pts
+-------------------------------|--------
+Filename your-name-r-you-ready.Rmd | 10 pts
+Changed `author` in YAML       | 10 pts
+Exercises 1-4                  | 60 pts
+Exercise 5                     | 20 pts
 
 
 <br><br><br>
