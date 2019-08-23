@@ -1,7 +1,7 @@
 ---
 title: "Lab 02: Data in the wild"
 author: ""
-date: "2019-08-29"
+date: "2019-09-05"
 output:
   xaringan::moon_reader:
     css: "lab-slides.css"

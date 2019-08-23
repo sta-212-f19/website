@@ -1,0 +1,91 @@
+---
+title: "Simple linear regression"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(emo)
+library(dsbox)
+```
+
+class: center, middle
+
+# Data = Model + Error
+
+---
+
+class: center, middle
+
+$\Huge y = f(x) + \epsilon$
+
+---
+
+class: center, middle
+
+$\Huge y = f(x) + \epsilon$
+
+## Simple linear regression
+
+---
+class: center, middle
+
+$\Huge \color{blue}y = f(x) + \epsilon$
+
+* **y:** continuous (quantitative) variable
+
+<br><br><br>
+
+### properties of simple linear regression
+
+---
+
+class: center, middle
+
+$\Huge y = f(\color{blue}x) + \epsilon$
+
+* **x:** continuous (quantitative) variable
+
+<br><br><br>
+
+### properties of simple linear regression
+
+---
+
+class: center, middle
+
+$\Huge y = \color{blue}{f(x)} + \epsilon$
+
+* **f(x):** a function that gives the mean value of $y$ at any value of $x$
+
+<br><br><br>
+
+### properties of simple linear regression
+
+---
+
+.question[
+What function do you think we are using get the mean value of $y$ with **simple linear regression**?
+]
+]
+

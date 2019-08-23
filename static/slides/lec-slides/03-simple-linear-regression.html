@@ -1,75 +1,101 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
   <head>
-    <title>Lab 02: Data in the wild</title>
+    <title>Simple linear regression</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <meta name="date" content="2019-09-05" />
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
-    <link rel="stylesheet" href="lab-slides.css" type="text/css" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Lab 02: Data in the wild
-### 2019-09-05
+# Simple linear regression
 
 ---
-
 
 
 
 
 layout: true
-  
+
 &lt;div class="my-footer"&gt;
 &lt;span&gt;
-&lt;img src = "img/dsbox-logo.png" width = "30"&gt; &lt;/img&gt; Slides adapted from &lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt; by Dr. Lucy D'Agostino McGowan
+Dr. Lucy D'Agostino McGowan
 &lt;/span&gt;
 &lt;/div&gt; 
 
 ---
 
+
+
 class: center, middle
 
-# Welcome to lab
+# Data = Model + Error
 
 ---
 
-# Agenda
+class: center, middle
 
-* **Lab introduction:** Review FiveThirtyEight article on college majors.
-* **Tips:** Review some common mistakes
-* **Lab 02:** on your own
+`\(\Huge y = f(x) + \epsilon\)`
 
 ---
 
-## Lab introduction
+class: center, middle
 
-- Lab instructions posted on the course website under `&lt;/&gt;`
-    + Let's go find today's lab!
-    + [bit.ly/sta-212-f19](https://bit.ly/sta-212-f19)
-- [The Economic Guide To Picking A College Major](https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/) by Ben Casselman
+`\(\Huge y = f(x) + \epsilon\)`
+
+## Simple linear regression
+
+---
+class: center, middle
+
+`\(\Huge \color{blue}y = f(x) + \epsilon\)`
+
+* **y:** continuous (quantitative) variable
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+### properties of simple linear regression
 
 ---
 
-## Tips
+class: center, middle
 
-- Don't forget to change your name in the `yaml`
-- Be ready to troubleshoot your document, since it will likely fail to knit on multiple occasions throughout the process. Read the error message carefully and take note of which line is preventing a successful knit.
-- Make sure to keep track of your various chunks and to keep text and code in the right place.
-- Remember that your R Markdown file is not aware of your project's global environment and can only make use of variables, functions, etc. that you have loaded or defined in the document.
-- Remind yourself how the pipe operator (`%&gt;%`) works.
-- If you're unsure how a function works or what its arguments are, simply type `?` in front of it and hit enter (`?read_csv` for instance). The "Help" tab will open and provide a summary of the function as well as some examples.
-- Make sure to label your plots!
+`\(\Huge y = f(\color{blue}x) + \epsilon\)`
+
+* **x:** continuous (quantitative) variable
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+### properties of simple linear regression
+
+---
+
+class: center, middle
+
+`\(\Huge y = \color{blue}{f(x)} + \epsilon\)`
+
+* **f(x):** a function that gives the mean value of `\(y\)` at any value of `\(x\)`
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+### properties of simple linear regression
+
+---
+
+.question[
+What function do you think we are using get the mean value of `\(y\)` with **simple linear regression**?
+]
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
 "highlightLines": true,
+"highlightStyle": "github",
 "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {

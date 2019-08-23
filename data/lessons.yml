@@ -23,6 +23,7 @@ lessons:
   - date: "Thur, Sep 5"
     title: "Lab 02: Data in the wild"
     lab: "02-data-wrangle-visualize.html"
+    slides: "lab-slides/02-data-in-the-wild.html"
   - date: "PART 2:"
     title: "Simple Regression"
   - title: "Week 03"

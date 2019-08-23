@@ -37,7 +37,7 @@ library(tidyverse)
 
 <i class="fa fa-envelope"></i> &nbsp; [mcgowald@wfu.edu](mailto:mcgowald@wfu.edu) <br>
 <i class="fa fa-university"></i> &nbsp; Manchester 342 <br>
-<i class="fa fa-calendar"></i> &nbsp; Wed 10:00-11:00a
+<i class="fa fa-calendar"></i> &nbsp; Wed 10:00-11:00a, Thu 10:00-11:00a
 
 ---
 
@@ -573,6 +573,17 @@ will be considered a legitimate cause for grade reduction.
 - Please refrain from texting or using your computer for anything other than coursework during class.
 - You must be in class on a day when you're scheduled to present, there are no make ups for presentations.
 - Regrade requests must be made within 1 week of when the assignment is returned.
+
+---
+
+class: center, middle
+
+a quick survey
+
+
+# [bit.ly/sta-212-f19-form](https://bit.ly/sta-212-f19-form)
+
+
 
 ---
 

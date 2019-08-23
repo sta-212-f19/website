@@ -9,6 +9,9 @@ output:
 link-citations: yes
 ---
 
+
+**Due:** 2019-09-12 at noon
+
 ```{r include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
 ```
