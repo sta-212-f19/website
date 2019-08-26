@@ -25,9 +25,20 @@ Dr. Lucy D'Agostino McGowan
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(emo)
-library(dsbox)
+library(Stat2Data)
 ```
+
+# Steps for modeling
+
+![](img/03/flowchart.png)
+
+---
+
+# Steps for modeling
+
+![](img/03/flowchart-arrow.png)
+
+---
 
 class: center, middle
 
@@ -85,7 +96,16 @@ $\Huge y = \color{blue}{f(x)} + \epsilon$
 ---
 
 .question[
-What function do you think we are using get the mean value of $y$ with **simple linear regression**?
+What function do you think we are using get the mean value of $y$ with simple **linear** regression?
 ]
+
+---
+
+.question[
+What function do you think we are using get the mean value of $y$ with simple **linear** regression?
 ]
+
+```{r}
+
+```
 

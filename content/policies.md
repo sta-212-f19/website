@@ -81,13 +81,6 @@ Classes will periodically have an unannounced quiz on the topics previously cove
 
 Quizzes cannot be made up. It is expected that you may miss a quiz due to missing class a time or two; to account for this, two quizzes for each student will be dropped.
 
-#### Pyramid Exams
-
-There will be two midterm exams. They will both consist of 2 stages.
-
-* Part 1 is individual, in-class, timed work.
-* Part 2 is individual, take-home, open everything and everyone **outside this class**. Seriously. Talk to people. Search the web. Figure it out and get it right. Just remember, you are academics; always cite your sources. It's always better to over-cite than to show-off.
-
 #### Final Project
 
 For the Final project, you will be responsible for the completion of an open ended project. You may work with one or two classmates on the final project, if you choose. Additional details on the projects will be provided as the course progresses.
@@ -122,8 +115,6 @@ Class attendance in lecture and lab is a firm expectation; frequent absences or 
 - Late work will not be accepted for exams or projects.
 
 - No make-up quizzes will be given.
-
-- Exam dates cannot be changed and no make-up exams will be given. If the midterm exam (part 1) must be missed, absence must be officially excused in advance of the due date, in which case the missing exam score will be imputed using the other (part 1) exam score and a scaling factor. This policy only applies to the midterms.
 
 - You must complete the final project and be in class to present it in order to pass this course.
 
