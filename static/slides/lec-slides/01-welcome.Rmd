@@ -513,7 +513,6 @@ Adhere to the Wake Forest Honor Code. Academic dishonesty will not be tolerated.
 
 ## Grading
 
---
 
 Component             | Weight
 ----------------------|----------------
@@ -532,7 +531,6 @@ will be considered a legitimate cause for grade reduction.
 
 ## Late/missed work policy
 
---
 
 - Late work policy for homework assignments:
     - late, but within 24 hours of due date/time: -50%
