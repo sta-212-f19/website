@@ -10,6 +10,7 @@ link-citations: yes
 ---
 
 **Due:** 2019-09-05 at noon
+**Turn your .html file in on Sakai**
 
 # Introduction
 
