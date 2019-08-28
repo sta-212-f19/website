@@ -33,9 +33,24 @@ class: center, middle
 
 # Agenda
 
+- Follow up
 - Meet the toolkit
 - Demos
 - Lab 01 on your own
+
+---
+
+## Join campuswire
+Go to [bit.ly/sta-212-f19-discuss-join](http://bit.ly/sta-212-f19-discuss-join) and sign up.
+
+---
+
+## <i class="fas fa-laptop"></i> Practice answering a question or posting in a channel
+
+- Click on "Class feed" on the top left. You should see a post from me titled `Hello!` 
+- Practice responding to this post, up-voting it, etc.
+- Click on "Rooms" then `#general`
+- Practice posting here - post a fun fact about your self, respond with an emoji `r emo::ji("+1")`, etc
 
 ---
 

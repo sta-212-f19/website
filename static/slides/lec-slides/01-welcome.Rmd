@@ -559,6 +559,14 @@ a quick survey
 
 ---
 
+## Intros
+
+- name
+- major / intended major
+- what you hope to get out of this class OR fun fact
+
+---
+
 ## RStudio Cloud
 
 - If you had issues creating your RStudio Cloud account, opening the project, or running the analysis, stick around to try it again.
