@@ -20,3 +20,12 @@ Tuesday, Sep 3
 ## Optional:
 
 - [ggplot2 in 2](https://leanpub.com/ggplot2in2/c/sta-212-f19)
+- If you are looking for a little more practice with R, you can try out the **swirl** package. This is a package that allows you to learn R from within R. Open RStudio Cloud (https://rstudio.cloud) and click on the STA 212 - Fall 19 workspace. Open a new project and run the following in the console:
+
+```{r, eval = FALSE}
+library(swirl)
+install_course_github("swirldev", "R_Programming_E")
+swirl()
+```
+
+This will start a tutorial that you can follow along with. Keep in mind that this may cover more than you need for this course.
