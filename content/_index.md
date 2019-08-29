@@ -21,7 +21,7 @@ markup: "mmark"
 <span></span>     | <span></span>     | <span></span>    | <span></span>    |  <span></span>      
 ------------------|-------------------|------------------|------------------|------------------ 
 Instructor        | [Lucy D'Agostino McGowan](http://lucymcgowan.com) | <a href="mailto:mcgowald@wfu.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; <a href="https://github.com/LucyMcGowan" title="GitHub"><i class="fa fa-github"></i></a> &nbsp; <a href="https://twitter.com/LucyStats" title="Twitter"><i class="fa fa-twitter"></i></a> | Wednesday 10:00a - 11:00a <br> Thursday 10:00a - 11:00a| Manchester 342
-TA               | Brian White | <a href="mailto:whitbn18@wfu.edu" title="email"><i class="fa fa-envelope"></i></a> | Study session <br> Monday 7:00p - 9:00p| TBA
+TA               | Brian White | <a href="mailto:whitbn18@wfu.edu" title="email"><i class="fa fa-envelope"></i></a> | Study session <br> Monday and Wednesday 7:00p - 9:00p| TBA
                   | [Math & Stats Center](https://mathandstatscenter.wfu.edu/) | <a href="mailto:mathandstatscenter@wfu.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; | By appointment | Kirby Hall 117
                   
 
