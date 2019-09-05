@@ -98,6 +98,20 @@ class: center, middle
 
 ---
 
+class: middle 
+
+.definition[
+**function**: a function is the relationship between a set of inputs to a set of outputs
+]
+
+--
+
+- For example, `\(y = 1.5 + 0.5x\)` is a function where `\(x\)` is the input and `\(y\)` is the output
+--
+
+- If you plug in `\(2\)` for `\(x\)`: `\(y = 1.5 + 0.5 \times 2\rightarrow y = 1.5 + 1 \rightarrow y = 2.5\)` 
+---
+
 .question[
 What function do you think we are using get the mean value of `\(y\)` with simple **linear** regression?
 ]
@@ -107,6 +121,355 @@ What function do you think we are using get the mean value of `\(y\)` with simpl
 .question[
 What function do you think we are using get the mean value of `\(y\)` with simple **linear** regression?
 ]
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+
+class: center, middle
+
+## We express the mean weight of sparrows as a _linear function_ of wing length.
+
+---
+
+.question[ 
+What is the equation that represents this line?
+]
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+
+# y = mx + b
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+
+# `\(y = \beta_0 + \beta_1 x\)`
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+---
+# `\(y = \beta_0 + \beta_1 \times \textrm{Wing Length}\)`
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+---
+## `\(\textrm{Weight} = \beta_0 + \beta_1 \times \textrm{Wing Length}\)`
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+---
+
+.large[.question[
+What is `\(\beta_0\)`?
+]
+]
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+---
+.large[.question[
+What is `\(\beta_0\)`?
+]
+]
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+
+.large[
+.question[
+What is `\(\beta_1\)`?
+]
+]
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+.large[
+.question[
+What is `\(\beta_1\)`?
+]
+]
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+---
+class: center, middle
+
+## Do all of the data points actually fall exactly on the line?
+
+---
+class: center, middle
+
+## `\(y = \beta_0 + \beta_1x + \color{red}{\epsilon}\)`
+
+---
+## `\(y = \beta_0 + \beta_1x + \color{red}\epsilon\)`
+
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+## `\(y = \beta_0 + \beta_1x + \color{red}\epsilon\)`
+
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+---
+
+# Truth
+
+
+`\(\Huge y = \beta_0 + \beta_1x + \epsilon\)`
+
+![](https://media.giphy.com/media/s7uHDGT8SoJAQ/giphy.gif)
+
+---
+
+# Truth
+
+`\(\Huge y = \beta_0 + \beta_1x + \epsilon\)`
+
+.definition[
+If we had the **whole population** of sparrows we could quantify the exact relationship between `\(y\)` and `\(x\)`
+]
+---
+
+# Reality
+
+`\(\Huge \hat{y} = \hat{\beta_0} + \hat{\beta_1}x + \epsilon\)`
+
+![](https://media.giphy.com/media/3o6nURrfzsAC9zZaG4/giphy.gif)
+
+---
+
+# Reality
+
+`\(\Huge \hat{y} = \hat{\beta_0} + \hat{\beta_1}x + \epsilon\)`
+
+.definition[
+In reality, we have a **sample** of sparrows to **estimate** the relationship between `\(x\)` and `\(y\)`. The "hats" represent that these are estimated (fitted) values
+]
+
+---
+
+# Put a hat on it
+
+.question[
+How can you tell the difference between a **parameter** that is from the **whole population** versus a **sample**?
+]
+
+![](https://media.giphy.com/media/dZ0yRjxBulRjW/giphy.gif)
+---
+
+class: center, middle
+# Pause for definitions
+---
+
+# Definitions
+
+- **parameters**
+- `\(\beta_0\)`
+- `\(\beta_1\)`
+- **population** versus **sample**
+- **simple linear model**
+
+---
+
+# Definitions
+
+- **parameters**: `\(\beta_0\)`, `\(\beta_1\)`
+- `\(\beta_0\)`: intercept
+- `\(\beta_1\)`: slope
+- **population** versus **sample**
+- **simple linear model**: `\(y = \beta_0 + \beta_1x + \epsilon\)`
+
+---
+class: center, middle
+
+# Let's do this in R
+
+---
+
+
+```r
+library(Stat2Data)
+data(Sparrows)
+
+*lm(Weight ~ WingLength, data = Sparrows)
+```
+
+```
+## 
+## Call:
+## lm(formula = Weight ~ WingLength, data = Sparrows)
+## 
+## Coefficients:
+## (Intercept)   WingLength  
+##      1.3655       0.4674
+```
+
+---
+
+.question[
+What is `\(\beta_0\)`?
+]
+
+
+```r
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
+```
+## 
+## Call:
+## lm(formula = Weight ~ WingLength, data = Sparrows)
+## 
+## Coefficients:
+## (Intercept)   WingLength  
+##      1.3655       0.4674
+```
+
+---
+
+.question[
+What is `\(\beta_1\)`?
+]
+
+
+```r
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
+```
+## 
+## Call:
+## lm(formula = Weight ~ WingLength, data = Sparrows)
+## 
+## Coefficients:
+## (Intercept)   WingLength  
+##      1.3655       0.4674
+```
+
+---
+
+
+```r
+y_hat &lt;- lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+* predict()
+```
+
+---
+
+
+```r
+y_hat &lt;- lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  predict() 
+
+Sparrows %&gt;%
+* mutate(y_hat = y_hat) %&gt;%
+  select(WingLength, y_hat) %&gt;%
+  slice(1:5)
+```
+
+```
+##   WingLength    y_hat
+## 1         29 14.92020
+## 2         31 15.85501
+## 3         25 13.05059
+## 4         29 14.92020
+## 5         30 15.38761
+```
+
+---
+
+class: center, middle
+
+# Let's try to match these values using `\(\beta_0\)` and `\(\beta_1\)`
+
+---
+
+
+```r
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
+```
+## 
+## Call:
+## lm(formula = Weight ~ WingLength, data = Sparrows)
+## 
+## Coefficients:
+## (Intercept)   WingLength  
+##      1.3655       0.4674
+```
+
+# `\(1.365 + 0.4674 \times 29\)`
+
+---
+
+
+
+```r
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
+```
+## 
+## Call:
+## lm(formula = Weight ~ WingLength, data = Sparrows)
+## 
+## Coefficients:
+## (Intercept)   WingLength  
+##      1.3655       0.4674
+```
+
+# `\(1.365 + 0.4674 \times 29 = 14.92\)`
+
+---
+
+# How'd we do?
+
+
+```r
+y_hat &lt;- lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  predict() 
+
+Sparrows %&gt;%
+  mutate(y_hat = y_hat) %&gt;%
+  select(WingLength, y_hat) %&gt;%
+  slice(1:5)
+```
+
+```
+##   WingLength    y_hat
+## 1         29 14.92020
+## 2         31 15.85501
+## 3         25 13.05059
+## 4         29 14.92020
+## 5         30 15.38761
+```
+
+---
+
+.question[
+How did we decide on THIS line?
+]
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+
+---
+
+## Minimizing Least Squares
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+
+---
+
+
+![](img/03/least-squares-vis.gif)
+---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

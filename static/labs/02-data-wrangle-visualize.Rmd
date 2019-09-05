@@ -319,6 +319,17 @@ college_recent_grads %>%
 10. Create a scatterplot of median income vs. proportion of 
 women in that major, colored by whether the major is in a STEM field or not. Describe the association between these three variables.
 
+## Principles of Data Analysis
+
+11. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 (for example, for the first one, I would say that this data set matched the analysis requested, so the data matching was 10):
+
+- **data matching**: 10
+- **exhaustive**: 
+- **skeptical**:
+- **second order**:
+- **transparency**:
+- **reproducible**:
+
 ## Extra Credit (5 points)
 
 Discover how to change the _scale_ of the x-axis labels of the plot created in Exercise 10 to dollars. Re-plot with this new scale.
@@ -327,7 +338,7 @@ Discover how to change the _scale_ of the x-axis labels of the plot created in E
 
 Total                          | 100 pts
 -------------------------------|--------
-Filename your-name-r-you-ready.Rmd | 5 pts
+Filename your-name-data-wrangle-visualize.Rmd | 5 pts
 Changed `author` in YAML       | 5 pts
 All plots include title, labels | 10 pts
 Exercises 1-10                   | 80 pts

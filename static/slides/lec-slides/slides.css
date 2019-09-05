@@ -80,6 +80,13 @@ a, a > code {
   clear: both;
 }
 /* Custom boxes */
+.definition {
+  border-left: solid 5px #6CA0DC;
+  background-color: #6CA0DC50;
+  padding: 1px 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
 .question {
   border-left: solid 5px #1E5C65;
   background-color: #1E5C6530;
