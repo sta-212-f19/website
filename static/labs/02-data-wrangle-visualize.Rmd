@@ -321,9 +321,10 @@ women in that major, colored by whether the major is in a STEM field or not. Des
 
 ## Principles of Data Analysis
 
-11. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 (for example, for the first one, I would say that this data set matched the analysis requested, so the data matching was 10):
+11. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary (I have done the first one as an example.):
 
 - **data matching**: 10
+The data matched the analysis requested exactly, so there is high data matching.
 - **exhaustive**: 
 - **skeptical**:
 - **second order**:
