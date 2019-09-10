@@ -26,6 +26,8 @@ lessons:
     slides: "lab-slides/02-data-in-the-wild.html"
   - date: "PART 2:"
     title: "Simple Regression"
+    slides: "03-simple-linear-regression.html"
+    appex: "https://rstudio.cloud/spaces/22368/project/501793"
   - title: "Week 03"
   - date: "Tues, Sep 10"
     title: "Simple Linear Regression"

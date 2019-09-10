@@ -29,6 +29,12 @@ Dr. Lucy D'Agostino McGowan
 
 ---
 
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Porsche Price`
+
+- Go to RStudio Cloud and open `Porsche Price`
+
+---
+
 
 
 # Steps for modeling
@@ -405,6 +411,43 @@ lm(Weight ~ WingLength, data = Sparrows)
 ##      1.3655       0.4674
 ```
 
+
+```r
+y_hat &lt;- lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  predict() 
+
+Sparrows %&gt;%
+* mutate(y_hat = y_hat) %&gt;%
+  select(WingLength, y_hat) %&gt;%
+  slice(1:5)
+```
+
+```
+##   WingLength    y_hat
+*## 1         29 14.92020
+## 2         31 15.85501
+## 3         25 13.05059
+## 4         29 14.92020
+## 5         30 15.38761
+```
+
+---
+
+
+```r
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
+```
+## 
+## Call:
+## lm(formula = Weight ~ WingLength, data = Sparrows)
+## 
+## Coefficients:
+## (Intercept)   WingLength  
+*##      1.3655       0.4674
+```
+
 # `\(1.365 + 0.4674 \times 29\)`
 
 ---
@@ -444,7 +487,7 @@ Sparrows %&gt;%
 
 ```
 ##   WingLength    y_hat
-## 1         29 14.92020
+*## 1         29 14.92020
 ## 2         31 15.85501
 ## 3         25 13.05059
 ## 4         29 14.92020
@@ -457,19 +500,253 @@ Sparrows %&gt;%
 How did we decide on THIS line?
 ]
 
-![](03-simple-linear-regression_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
 
 ---
 
 ## Minimizing Least Squares
 
-![](03-simple-linear-regression_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
 
 ---
 
+## Minimizing Least Squares
 
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
+
+---
+
+## Minimizing Least Squares
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
+
+---
+
+## Minimizing Least Squares
+
+
+.center[
 ![](img/03/least-squares-vis.gif)
+]
 ---
+
+## "Squared Residuals"
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+
+---
+
+## "Residuals"
+
+![](03-simple-linear-regression_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+
+---
+
+## Definitions
+
+* **residual** `\((e)\)`
+* **squared residual** `\((e^2)\)`
+* **sum of squared residual (SSE)**
+* **standard deviation of the errors** `\((\sigma_\epsilon)\)`
+* **n**
+
+---
+
+## Definitions
+
+* **residual** `\((e)\)`: observed `\(y\)` - predicted `\(y\)` `\(\rightarrow\)` `\(y - \hat{y}\)`
+--
+* **squared residual** `\((e^2)\)`: `\((y - \hat{y})^2\)`
+--
+* **sum of squared residual (SSE)**: `\(\sum (y-\hat{y})^2\)`
+--
+* **standard deviation of the errors** `\((\sigma_\epsilon)\)`: estimated by `\(\hat{\sigma}_\epsilon = \frac{\sqrt{SSE}}{n-2}\)` (**regression standard error**)
+--
+* **n**: sample size
+
+---
+
+## ☝️ Note about notation
+
+- `\(\Huge\sum(y - \hat{y})^2\)`
+--
+
+- `\(\Huge\sum_{i=1}^n(y_i - \hat{y}_i)^2\)`
+
+
+---
+
+## ☝️ Note about notation
+
+.center[
+### the i indicates for a single individual
+
+`\(\Huge e_i = y_i - \hat{y}_i\)`
+]
+
+---
+
+## ☝️ Note about notation
+
+.center[
+### for the first observation, i = 1
+
+`\(\Huge e_1 = y_1 - \hat{y}_1\)`
+]
+---
+
+## ☝️ Note about notation
+
+.center[
+### for the first observation, i = 1
+
+
+`\(\Huge -0.02 = 14.9 -14.92\)`
+]
+
+---
+
+class: center, middle
+
+# Back to R!
+
+---
+
+## Calculate the residual
+
+
+```r
+y_hat &lt;- lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  predict() 
+
+Sparrows %&gt;%
+  mutate(y_hat = y_hat,
+*        residual = Weight - y_hat) %&gt;%
+  select(Weight, y_hat, residual) %&gt;%
+  slice(1:5)
+```
+
+```
+##   Weight    y_hat    residual
+## 1   14.9 14.92020 -0.02020496
+## 2   15.0 15.85501 -0.85501292
+## 3   14.3 13.05059  1.24941095
+## 4   17.0 14.92020  2.07979504
+## 5   16.0 15.38761  0.61239106
+```
+
+---
+
+## Calculate the squared residuals
+
+
+```r
+y_hat &lt;- lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  predict() 
+
+Sparrows %&gt;%
+  mutate(y_hat = y_hat,
+         residual = Weight - y_hat,
+*        residual_2 = residual^2) %&gt;%
+  select(Weight, y_hat, residual, residual_2) %&gt;%
+  slice(1:5)
+```
+
+```
+##   Weight    y_hat    residual   residual_2
+## 1   14.9 14.92020 -0.02020496 0.0004082405
+## 2   15.0 15.85501 -0.85501292 0.7310470869
+## 3   14.3 13.05059  1.24941095 1.5610277150
+## 4   17.0 14.92020  2.07979504 4.3255474012
+## 5   16.0 15.38761  0.61239106 0.3750228116
+```
+
+---
+
+## Calculate the SSE
+
+
+```r
+y_hat &lt;- lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  predict() 
+
+Sparrows %&gt;%
+  mutate(y_hat = y_hat,
+         residual = Weight - y_hat,
+         residual_2 = residual^2) %&gt;% 
+* summarise(sse = sum(residual_2))
+```
+
+```
+##        sse
+## 1 223.3107
+```
+
+---
+
+## Calculate the regression standard error
+
+
+```r
+y_hat &lt;- lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  predict() 
+
+Sparrows %&gt;%
+  mutate(y_hat = y_hat,
+         residual = Weight - y_hat,
+         residual_2 = residual^2) %&gt;% 
+  summarise(sse = sum(residual_2),
+            n = n(),
+*           rse = sqrt(sse / (n - 2)))
+```
+
+```
+##        sse   n      rse
+## 1 223.3107 116 1.399595
+```
+
+---
+
+## Calculate the regression standard error
+
+.small[
+
+```
+##        sse   n      rse
+## 1 223.3107 116 1.399595
+```
+
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  summary()
+```
+
+```
+## 
+## Call:
+## lm(formula = Weight ~ WingLength, data = Sparrows)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.5440 -0.9935  0.0809  1.0559  3.4168 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)  1.36549    0.95731   1.426    0.156
+## WingLength   0.46740    0.03472  13.463   &lt;2e-16
+## 
+*## Residual standard error: 1.4 on 114 degrees of freedom
+## Multiple R-squared:  0.6139,	Adjusted R-squared:  0.6105 
+## F-statistic: 181.3 on 1 and 114 DF,  p-value: &lt; 2.2e-16
+```
+]
+
+---
+
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Porsche Price`
+
+- Go to RStudio Cloud and open `Porsche Price`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

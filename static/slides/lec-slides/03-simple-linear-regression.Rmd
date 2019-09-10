@@ -23,6 +23,12 @@ Dr. Lucy D'Agostino McGowan
 
 ---
 
+## <i class="fas fa-laptop"></i> `Porsche Price`
+
+- Go to RStudio Cloud and open `Porsche Price`
+
+---
+
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(Stat2Data)
@@ -434,6 +440,22 @@ class: center, middle
 lm(Weight ~ WingLength, data = Sparrows)
 ```
 
+```{r, highlight.output = 2}
+y_hat <- lm(Weight ~ WingLength, data = Sparrows) %>%
+  predict() 
+
+Sparrows %>%
+  mutate(y_hat = y_hat) %>% #<<
+  select(WingLength, y_hat) %>%
+  slice(1:5)
+```
+
+---
+
+```{r, highlight.output = 7}
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
 # $1.365 + 0.4674 \times 29$
 
 ---
@@ -449,7 +471,7 @@ lm(Weight ~ WingLength, data = Sparrows)
 
 # How'd we do?
 
-```{r}
+```{r, highlight.output = 2}
 y_hat <- lm(Weight ~ WingLength, data = Sparrows) %>%
   predict() 
 
@@ -495,6 +517,39 @@ ggplot(Sparrows, aes(x = WingLength, y = Weight)) +
 
 ---
 
+## Minimizing Least Squares
+
+```{r, echo = FALSE}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) +
+  geom_rect(aes(xmin = WingLength, xmax = WingLength + Weight - fitted,
+                ymin = Weight, ymax = fitted), fill = "red", color = "red", alpha = 0.2) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length") 
+```
+
+---
+
+## Minimizing Least Squares
+
+```{r, echo = FALSE, fig.height = 5, fig.width = 10}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) +
+  geom_rect(aes(xmin = WingLength, xmax = WingLength + Weight - fitted,
+                ymin = Weight, ymax = fitted), fill = "red", color = "red", alpha = 0.2) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length") +
+  coord_fixed()
+```
+
+---
+
+## Minimizing Least Squares
+
 ```{r, eval = FALSE, echo = FALSE}
 library(gganimate)
 
@@ -506,28 +561,219 @@ sparrow_anim <- lapply(1:nrow(params), function(i) {
   record_anim <- Sparrows %>%
     mutate(weight_pred = b0 + b1 * WingLength,
            residual = Weight - weight_pred,
-           residual2 = residual ^ 2,
-           m_Weight = mean(Weight),
-           param_b0 = b0,
-           param_b1 = b1,
            state = i)
   return(record_anim)
 }) %>% bind_rows()
 
 
-ggplot(sparrow_anim) +
+ggplot(sparrow_anim, aes(x = WingLength, y = Weight)) +
   geom_rect(aes(xmin = WingLength, xmax = WingLength + residual,
                 ymin = Weight, ymax = weight_pred, fill = residual ^ 2), color = "grey", alpha = 0.2) +
-  geom_point(aes(x = WingLength, y = Weight)) +
+  geom_point() +
   geom_line(aes(x = WingLength, y = weight_pred), color = "black", size = 1) +
   scale_fill_viridis_c("Squared Residual") +
-  scale_x_continuous("Wing length") +
-  scale_y_continuous("Weight") +
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length") +
   coord_fixed() +
-  theme(legend.position = "bottom") +
+  theme(legend.position = "none") +
   transition_states(state, transition_length = 3, state_length = 1) +
-  labs(title = "Finding the least sum of squares") +
   ease_aes("sine-in-out")
 ```
+.center[
 ![](img/03/least-squares-vis.gif)
+]
 ---
+
+## "Squared Residuals"
+
+```{r, echo = FALSE, fig.height = 5, fig.width = 10}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) +
+  geom_rect(aes(xmin = WingLength, xmax = WingLength + Weight - fitted,
+                ymin = Weight, ymax = fitted), fill = "red", color = "red", alpha = 0.2) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length") +
+  coord_fixed()
+```
+
+---
+
+## "Residuals"
+
+```{r, echo = FALSE}
+Sparrows$fitted <- fitted(lm(Weight ~ WingLength, data = Sparrows))
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_segment(aes(x = WingLength, y = Weight, xend = WingLength, yend = fitted),
+               color = "red") +
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length")
+```
+
+---
+
+## Definitions
+
+* **residual** $(e)$
+* **squared residual** $(e^2)$
+* **sum of squared residual (SSE)**
+* **standard deviation of the errors** $(\sigma_\epsilon)$
+* **n**
+
+---
+
+## Definitions
+
+* **residual** $(e)$: observed $y$ - predicted $y$ $\rightarrow$ $y - \hat{y}$
+--
+* **squared residual** $(e^2)$: $(y - \hat{y})^2$
+--
+* **sum of squared residual (SSE)**: $\sum (y-\hat{y})^2$
+--
+* **standard deviation of the errors** $(\sigma_\epsilon)$: estimated by $\hat{\sigma}_\epsilon = \frac{\sqrt{SSE}}{n-2}$ (**regression standard error**)
+--
+* **n**: sample size
+
+---
+
+## `r emo::ji("point_up")` Note about notation
+
+- $\Huge\sum(y - \hat{y})^2$
+--
+
+- $\Huge\sum_{i=1}^n(y_i - \hat{y}_i)^2$
+
+
+---
+
+## `r emo::ji("point_up")` Note about notation
+
+.center[
+### the i indicates for a single individual
+
+$\Huge e_i = y_i - \hat{y}_i$
+]
+
+---
+
+## `r emo::ji("point_up")` Note about notation
+
+.center[
+### for the first observation, i = 1
+
+$\Huge e_1 = y_1 - \hat{y}_1$
+]
+---
+
+## `r emo::ji("point_up")` Note about notation
+
+.center[
+### for the first observation, i = 1
+
+
+$\Huge -0.02 = 14.9 -14.92$
+]
+
+---
+
+class: center, middle
+
+# Back to R!
+
+---
+
+## Calculate the residual
+
+```{r}
+y_hat <- lm(Weight ~ WingLength, data = Sparrows) %>%
+  predict() 
+
+Sparrows %>%
+  mutate(y_hat = y_hat,
+         residual = Weight - y_hat) %>% #<<
+  select(Weight, y_hat, residual) %>%
+  slice(1:5)
+```
+
+---
+
+## Calculate the squared residuals
+
+```{r}
+y_hat <- lm(Weight ~ WingLength, data = Sparrows) %>%
+  predict() 
+
+Sparrows %>%
+  mutate(y_hat = y_hat,
+         residual = Weight - y_hat,
+         residual_2 = residual^2) %>% #<<
+  select(Weight, y_hat, residual, residual_2) %>%
+  slice(1:5)
+```
+
+---
+
+## Calculate the SSE
+
+```{r}
+y_hat <- lm(Weight ~ WingLength, data = Sparrows) %>%
+  predict() 
+
+Sparrows %>%
+  mutate(y_hat = y_hat,
+         residual = Weight - y_hat,
+         residual_2 = residual^2) %>% 
+  summarise(sse = sum(residual_2)) #<<
+```
+
+---
+
+## Calculate the regression standard error
+
+```{r}
+y_hat <- lm(Weight ~ WingLength, data = Sparrows) %>%
+  predict() 
+
+Sparrows %>%
+  mutate(y_hat = y_hat,
+         residual = Weight - y_hat,
+         residual_2 = residual^2) %>% 
+  summarise(sse = sum(residual_2),
+            n = n(),
+            rse = sqrt(sse / (n - 2))) #<<
+```
+
+---
+
+## Calculate the regression standard error
+
+.small[
+```{r, echo = FALSE}
+y_hat <- lm(Weight ~ WingLength, data = Sparrows) %>%
+  predict() 
+
+Sparrows %>%
+  mutate(y_hat = y_hat,
+         residual = Weight - y_hat,
+         residual_2 = residual^2) %>% 
+  summarise(sse = sum(residual_2),
+            n = n(),
+            rse = sqrt(sse / (n - 2))) #<<
+```
+
+```{r, highlight.output = 14}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  summary()
+```
+]
+
+---
+
+## <i class="fas fa-laptop"></i> `Porsche Price`
+
+- Go to RStudio Cloud and open `Porsche Price`
