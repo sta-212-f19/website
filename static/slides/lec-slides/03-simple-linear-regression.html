@@ -791,7 +791,45 @@ the simple linear regression model is
 
 `\(y = \beta_0 + \beta_1 x + \epsilon\)`
 
-where `\(\epsilon\)` follows a normal distribution, that is, \epsilon ∼ N(0, \sigma_\epsilon), and the errors are independent from one another.
+where `\(\epsilon\)` follows a normal distribution, that is, `\(\epsilon ∼ N(0, \sigma_\epsilon)\)`, and the errors are independent from one another.
+
+---
+
+# broom
+
+.pull-left[
+![](img/03/tidyverse.png)
+
+![](img/03/broom.png)
+]
+.pull-right[
+	- You're familiar with the tidyverse:	
+	
+
+```r
+library(tidyverse)
+```
+
+- The broom package takes the messy output of built-in functions in R, such as `lm`, and turns them into tidy data frames.
+
+
+```r
+library(broom)
+```
+
+```
+## Warning: package 'broom' was built under R version 3.5.2
+```
+
+.my-footer[
+  &lt;font size="2"&gt; Slides adapted from &lt;a href="https://github.com/Sta199-S18/website" target="_blank"&gt;Dr. Mine Çetinkaya-Rundel&lt;/a&gt; by Dr. Lucy D'Agostino McGowan&lt;/font&gt;
+]
+
+---
+
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Porsche Price`
+
+- Go to RStudio Cloud and open `Porsche Price`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

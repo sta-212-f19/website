@@ -835,4 +835,36 @@ the simple linear regression model is
 
 $y = \beta_0 + \beta_1 x + \epsilon$
 
-where $\epsilon$ follows a normal distribution, that is, \epsilon ∼ N(0, \sigma_\epsilon), and the errors are independent from one another.
+where $\epsilon$ follows a normal distribution, that is, $\epsilon ∼ N(0, \sigma_\epsilon)$, and the errors are independent from one another.
+
+---
+
+# broom
+
+.pull-left[
+![](img/03/tidyverse.png)
+
+![](img/03/broom.png)
+]
+.pull-right[
+	- You're familiar with the tidyverse:	
+	
+```{r message=FALSE}
+library(tidyverse)
+```
+
+- The broom package takes the messy output of built-in functions in R, such as `lm`, and turns them into tidy data frames.
+
+```{r message=FALSE}
+library(broom)
+```
+
+.my-footer[
+  <font size="2"> Slides adapted from <a href="https://github.com/Sta199-S18/website" target="_blank">Dr. Mine Çetinkaya-Rundel</a> by Dr. Lucy D'Agostino McGowan</font>
+]
+
+---
+
+## <i class="fas fa-laptop"></i> `Porsche Price`
+
+- Go to RStudio Cloud and open `Porsche Price`
