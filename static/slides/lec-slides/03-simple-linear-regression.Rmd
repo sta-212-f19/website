@@ -436,16 +436,16 @@ class: center, middle
 
 ---
 
-```{r}
+```{r, echo = FALSE}
 lm(Weight ~ WingLength, data = Sparrows)
 ```
 
-```{r, highlight.output = 2}
+```{r, echo = FALSE, highlight.output = 2}
 y_hat <- lm(Weight ~ WingLength, data = Sparrows) %>%
   predict() 
 
 Sparrows %>%
-  mutate(y_hat = y_hat) %>% #<<
+  mutate(y_hat = y_hat) %>% 
   select(WingLength, y_hat) %>%
   slice(1:5)
 ```
@@ -631,12 +631,16 @@ ggplot(Sparrows, aes(x = WingLength, y = Weight)) +
 
 * **residual** $(e)$: observed $y$ - predicted $y$ $\rightarrow$ $y - \hat{y}$
 --
+
 * **squared residual** $(e^2)$: $(y - \hat{y})^2$
 --
+
 * **sum of squared residual (SSE)**: $\sum (y-\hat{y})^2$
 --
+
 * **standard deviation of the errors** $(\sigma_\epsilon)$: estimated by $\hat{\sigma}_\epsilon = \frac{\sqrt{SSE}}{n-2}$ (**regression standard error**)
 --
+
 * **n**: sample size
 
 ---
