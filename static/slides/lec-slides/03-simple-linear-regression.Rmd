@@ -373,7 +373,7 @@ class: center, middle
 - $\beta_0$: intercept
 - $\beta_1$: slope
 - **population** versus **sample**
-- **simple linear model**: $y = \beta_0 + \beta_1x + \epsilon$
+- **simple linear model**: $y = \beta_0 + \beta_1x + \epsilon$ **estimated by** $\hat{y} = \hat{\beta}_0+\hat{\beta}_1x + \epsilon$
 
 ---
 class: center, middle
@@ -392,7 +392,7 @@ lm(Weight ~ WingLength, data = Sparrows) #<<
 ---
 
 .question[
-What is $\beta_0$?
+What is $\hat{\beta}_0$?
 ]
 
 ```{r}
@@ -402,7 +402,7 @@ lm(Weight ~ WingLength, data = Sparrows)
 ---
 
 .question[
-What is $\beta_1$?
+What is $\hat{\beta}_1$?
 ]
 
 ```{r}
@@ -432,7 +432,7 @@ Sparrows %>%
 
 class: center, middle
 
-# Let's try to match these values using $\beta_0$ and $\beta_1$
+# Let's try to match these values using $\hat{\beta}_0$ and $\hat{\beta}_1$
 
 ---
 
@@ -638,7 +638,7 @@ ggplot(Sparrows, aes(x = WingLength, y = Weight)) +
 * **sum of squared residual (SSE)**: $\sum (y-\hat{y})^2$
 --
 
-* **standard deviation of the errors** $(\sigma_\epsilon)$: estimated by $\hat{\sigma}_\epsilon = \frac{\sqrt{SSE}}{n-2}$ (**regression standard error**)
+* **standard deviation of the errors** $(\sigma_\epsilon)$: estimated by $\hat{\sigma}_\epsilon = \frac{\sqrt{SSE}{n-2}}$ (**regression standard error**)
 --
 
 * **n**: sample size
