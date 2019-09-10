@@ -781,3 +781,5 @@ lm(Weight ~ WingLength, data = Sparrows) %>%
 ## <i class="fas fa-laptop"></i> `Porsche Price`
 
 - Go to RStudio Cloud and open `Porsche Price`
+- For each question you work on, set the `eval` chunk option to `TRUE` and knit
+
