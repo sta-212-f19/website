@@ -1,0 +1,150 @@
+---
+title: "Interpreting Results"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+## Interpreting Results
+
+There are 3 unknowns in a simple linear regression that we are **estimating**:
+
+* $\Large\hat{\beta}_0$
+* $\Large\hat{\beta}_1$
+* $\Large\hat{\sigma}_\epsilon$
+
+Let's talk about what they mean in _words_
+
+---
+
+## Interpreting Results
+
+$\Large \hat{\textrm{Weight}} = \hat{\beta_0}+ \hat{\beta_1}\textrm{Wing Length} + \epsilon$
+
+```{r}
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
+---
+
+## Interpreting Results
+
+$\Large \hat{\textrm{Weight}} = \hat{\beta_0}+ \hat{\beta_1}\textrm{Wing Length} + \epsilon$
+
+```{r}
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
+.question[
+How can we end up with just $\hat{\beta}_0$ on one side of the equation?
+]
+
+---
+
+class: center, middle
+
+## $\hat{\beta}_0$ is the expected mean value of $y$ when $x$ is 0
+
+---
+
+## Interpreting Results
+
+$\Large \hat{\textrm{Weight}} = \hat{\beta_0}+ \hat{\beta_1}\textrm{Wing Length} + \epsilon$
+
+```{r}
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
+.question[
+What does $\hat{\beta}_0$ mean here?
+]
+
+---
+
+## Interpreting Results
+
+$\Large \hat{\textrm{Weight}} = \hat{\beta_0}+ \hat{\beta_1}\textrm{Wing Length} + \epsilon$
+
+```{r}
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
+.question[
+How do we interpret $\hat{\beta}_1$?
+]
+
+---
+
+class: center, middle
+
+## For every one unit change in $x$ the expected mean value of $y$ changes by $\hat{\beta}_1$.
+
+---
+
+## Interpreting Results
+
+$\Large \hat{\textrm{Weight}} = \hat{\beta_0}+ \hat{\beta_1}\textrm{Wing Length} + \epsilon$
+
+```{r}
+lm(Weight ~ WingLength, data = Sparrows)
+```
+
+.question[
+What does $\hat{\beta}_1$ mean here?
+]
+
+---
+
+## Interpreting Results
+
+```{r}
+Sparrows %>%
+  mutate(y_hat = lm(Weight ~ WingLength, data = Sparrows) %>% predict(),
+         residuals_2 = (Weight - y_hat)^2) %>%
+  summarise(rse = sqrt(sum(residuals_2) / (n() - 2)))
+```
+
+.question[
+What is the interpretation of the regression (residual) standard error?
+]
+---
+
+class: center, middle
+
+## $\hat{\sigma}_\epsilon$ is the "typical error"
+
+---
+
+## Interpreting Results
+
+```{r, echo = FALSE}
+Sparrows %>%
+  mutate(y_hat = lm(Weight ~ WingLength, data = Sparrows) %>% predict(),
+         residuals_2 = (Weight - y_hat)^2) %>%
+  summarise(rse = sqrt(sum(residuals_2) / (n() - 2)))
+```
+
+```{r}
+Sparrows %>%
+  mutate(y_hat = lm(Weight ~ WingLength, data = Sparrows) %>% predict()) %>%
+  select(Weight, y_hat) %>%
+  slice(1:5)
+```
+---

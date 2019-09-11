@@ -81,7 +81,7 @@ single_candy_rankings  <- candy_rankings %>%
 
 4. Using the `single_candy_rankings`, create a visualization to describe the relationship between `sugarpercent` and `winpercent` (where `winpercent` is on the y-axis). Describe the relationship that you see.
 
-5. We are interested in fitting a simple linear model of the form:
+5. We are interested in fitting a simple linear regression of the form:
 
 $y = \beta_0 + \beta_1x + \epsilon$
 
