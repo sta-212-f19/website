@@ -22,7 +22,7 @@ Dr. Lucy D'Agostino McGowan
 </div> 
 
 ---
-```{r, echo = FALSE, message = FALSE, warnings = FALSE}
+```{r, echo = FALSE, include = FALSE}
 library(tidyverse)
 library(Stat2Data)
 data("Sparrows")
@@ -148,9 +148,12 @@ Sparrows %>%
 ```
 
 ```{r}
+y_hat <- lm(Weight ~ WingLength, data = Sparrows) %>% 
+  predict()
+
 Sparrows %>%
-  mutate(y_hat = lm(Weight ~ WingLength, data = Sparrows) %>% predict()) %>%
-  select(Weight, y_hat) %>%
+  mutate(residual = Weight - y_hat) %>%
+  select(Weight, residual) %>%
   slice(1:5)
 ```
 ---

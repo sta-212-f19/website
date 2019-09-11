@@ -29,29 +29,6 @@ Dr. Lucy D'Agostino McGowan
 
 ---
 
-```
-## Warning: package 'tibble' was built under R version 3.5.2
-```
-
-```
-## Warning: package 'tidyr' was built under R version 3.5.2
-```
-
-```
-## Warning: package 'purrr' was built under R version 3.5.2
-```
-
-```
-## Warning: package 'dplyr' was built under R version 3.5.2
-```
-
-```
-## Warning: package 'stringr' was built under R version 3.5.2
-```
-
-```
-## Warning: package 'Stat2Data' was built under R version 3.5.2
-```
 
 ## Interpreting Results
 
@@ -234,19 +211,22 @@ class: center, middle
 
 
 ```r
+y_hat &lt;- lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  predict()
+
 Sparrows %&gt;%
-  mutate(y_hat = lm(Weight ~ WingLength, data = Sparrows) %&gt;% predict()) %&gt;%
-  select(Weight, y_hat) %&gt;%
+  mutate(residual = Weight - y_hat) %&gt;%
+  select(Weight, residual) %&gt;%
   slice(1:5)
 ```
 
 ```
-##   Weight    y_hat
-## 1   14.9 14.92020
-## 2   15.0 15.85501
-## 3   14.3 13.05059
-## 4   17.0 14.92020
-## 5   16.0 15.38761
+##   Weight    residual
+## 1   14.9 -0.02020496
+## 2   15.0 -0.85501292
+## 3   14.3  1.24941095
+## 4   17.0  2.07979504
+## 5   16.0  0.61239106
 ```
 ---
     </textarea>
