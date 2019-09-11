@@ -22,6 +22,12 @@ Dr. Lucy D'Agostino McGowan
 </div> 
 
 ---
+```{r, echo = FALSE, message = FALSE, warnings = FALSE}
+library(tidyverse)
+library(Stat2Data)
+data("Sparrows")
+```
+
 ## Interpreting Results
 
 There are 3 unknowns in a simple linear regression that we are **estimating**:
