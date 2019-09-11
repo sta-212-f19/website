@@ -22,6 +22,12 @@ Dr. Lucy D'Agostino McGowan
 </div> 
 
 ---
+
+class: center, middle
+
+# [bit.ly/sta-212-f19-quiz1](https://bit.ly/sta-212-f19-quiz1)
+
+---
 ```{r, echo = FALSE, include = FALSE}
 library(tidyverse)
 library(Stat2Data)
