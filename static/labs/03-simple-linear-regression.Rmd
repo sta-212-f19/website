@@ -1,0 +1,132 @@
+---
+title: "Lab 03 - Candy Power Ranking"
+subtitle: "Simple linear regression"
+output: 
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
+    highlight: pygments
+    css: lab.css
+link-citations: yes
+---
+
+
+**Due:** 2019-09-19 at noon
+**Turn in the .html file on Sakai**
+
+```{r include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+For this lab we are going to work with the Candy Power Ranking data. This is the data behind the FiveThirtyEight story ["The Ultimate Halloween Candy Power Ranking"](https://fivethirtyeight.com/features/the-ultimate-halloween-candy-power-ranking/).
+
+# Packages
+
+In this lab we will work with the `tidyverse`, `fivethirtyeight` and `broom` packages. We start by loading the packages.
+
+```{r}
+library(tidyverse)
+library(fivethirtyeight)
+library(broom)
+```
+
+```{marginfigure}
+**Note:** Make sure you knit your HTML document frequently - this will also save your .Rmd file! This is good practice to make sure you are catching any bugs early (and saving your output regularly).
+```
+Note that these packages are also loaded in your R Markdown document.
+
+# Load the data
+
+The data we will be working with today is called `candy_rankings` and it's in the `fivethirtyeight` package.
+
+To find out more about the dataset, type the following in your Console: `?candy_rankings` A question mark before the name of an object will always bring up its help file. This command must be ran in the Console.
+
+`candy_rankings` is a tidy data frame, with each row representing an observation and each column representing a variable.
+
+To view the data, run `data(candy_rankings)` and click on the name of the data frame in the Environment tab.
+
+You can also take a quick peek at your data frame and view its dimensions with the glimpse function.
+
+`glimpse(candy_rankings)`
+
+The description of the variables, i.e. the codebook, is given below.
+
+ Header                        |  Description
+----------------|--------------------------------
+`chocolate` | Does it contain chocolate?
+`fruity` | Is it fruit flavored?
+`caramel` | Is there caramel in the candy?
+`peanutalmondy` | Does it contain peanuts, peanut butter or almonds?
+`nougat` | Does it contain nougat?
+`crispedricewafer` | Does it contain crisped rice, wafers, or a cookie component?
+`hard` | Is it a hard candy?
+`bar` | Is it a candy bar?
+`pluribus` | Is it one of many candies in a bag or box?
+`sugarpercent` | The percentile of sugar it falls under within the data set.
+`pricepercent` | The unit price percentile compared to the rest of the set.
+`winpercent` | The overall win percentage according to 269,000 matchups.
+
+# Exercises
+
+1. How many observations are in this dataset? What does each observation represent?
+
+2. How many variables are in this dataset? Describe the variable types - are they numeric / continuous / quantitative or are they categorical? If they are categorical, what are the categories? Are they a special type of categorical variable known as a _binary_ variable, that is a categorical variable with just two levels? 
+
+3. Create a new dataset called `single_candy_rankings` that only contains observations where `pluribus == 0`. This new dataset contains only candies that come with **one** candy (instead of many in a bag or box).
+
+```{r, eval = FALSE}
+single_candy_rankings  <- candy_rankings %>%
+  filter(---)
+```
+
+
+4. Using the `single_candy_rankings`, create a visualization to describe the relationship between `sugarpercent` and `winpercent` (where `winpercent` is on the y-axis). Describe the relationship that you see.
+
+5. We are interested in fitting a simple linear model of the form:
+
+$y = \beta_0 + \beta_1x + \epsilon$
+
+where $y$ is `winpercent` and $x$ is `sugarpercent`. Use the `lm()` function to fit this model. Then use the `tidy()` function from the `broom` package to output a tidy table of the model output.
+
+```{r, eval = FALSE}
+lm(---, data = single_candy_rankings) %>%
+  ---()
+```
+
+6. What is $\hat{\beta}_0$? What is $\hat{\beta}_1$? Interpret these results in _words_. 
+
+7. Calculate the residuals for the model fit in Exercise 5. Create a scatterplot of the residuals by $\hat{y}$, the predicted outcome, `winpercent`. Do the conditions of linearity and constant variance seem to hold?
+
+```{r, eval = FALSE}
+y_hat <- lm(---, data = single_candy_rankings) %>%
+  ---()
+
+single_candy_rankings <- single_candy_rankings %>%
+  mutate(---)
+```
+
+8. Plot the residuals using a histogram with `binwidth = 9` to observe whether they follow a bell-shaped distribution. Comment on what you see.
+
+9. Calculate the regression standard error for the model created in Exercise 5. How do you interpret this result?
+
+## Principles of Data Analysis
+
+10. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
+
+- **data matching**: 
+- **exhaustive**: 
+- **skeptical**:
+- **second order**:
+- **transparency**:
+- **reproducible**:
+
+
+
+# Grading
+
+Total                          | 100 pts
+-------------------------------|--------
+Changed `author` in YAML       | 5 pts
+All plots include title, labels | 10 pts
+Exercises 1-2                   | 10 pts
+Exercises 3-9                   | 70 pts
+Exercise 10                   | 5 pts

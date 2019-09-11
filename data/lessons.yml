@@ -34,7 +34,7 @@ lessons:
     appex: "https://rstudio.cloud/spaces/22368/project/501793"
   - date: "Thur, Sep 12"
     title: "Lab 03: Simple linear regression"
-    lab: "coming-soon.html"
+    lab: "03-simple-linear-regression.html"
   - title: "Week 04"
   - date: "Tues, Sep 17"
     title: "Evaluating models"
