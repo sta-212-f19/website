@@ -31,7 +31,7 @@ class: center, middle
 
 class: center, middle
 
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Added an <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> pep talk to my syllabus to assuage fears <a href="https://t.co/EciFlMuUza">pic.twitter.com/EciFlMuUza</a></p>&mdash; Andrew Heiss, PhD (@andrewheiss) <a href="https://twitter.com/andrewheiss/status/1165310391750189063?ref_src=twsrc%5Etfw">August 24, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+![](img/03/pep-tweet.png)
 
 ---
 
