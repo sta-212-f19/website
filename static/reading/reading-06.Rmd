@@ -17,4 +17,3 @@ Tuesday, Sept 24
 
 - Stat2:
     + Section 1.4: Transformations
-    + Section 1.5: Outliers and Influential Points
