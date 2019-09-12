@@ -1,0 +1,11 @@
+---
+title: "Extra Credit: Guest Lecutre"
+date: "Friday, September 13 4pm"
+output: html_document
+---
+
+### Due: September 17th at noon
+
+Take a selfie with the presenters in the background to receive extra credit. Upload your photo to Sakai by noon on Tuesday, September 17th.
+
+![](../slides/lec-slides/img/03/stats-lecture-poster.jpg)

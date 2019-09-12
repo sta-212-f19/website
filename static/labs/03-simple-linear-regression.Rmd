@@ -69,19 +69,55 @@ The description of the variables, i.e. the codebook, is given below.
 
 1. How many observations are in this dataset? What does each observation represent?
 
-2. How many variables are in this dataset? Describe the variable types - are they numeric / continuous / quantitative or are they categorical? If they are categorical, what are the categories? Are they a special type of categorical variable known as a _binary_ variable, that is a categorical variable with just two levels? 
+2. How many variables are in this dataset? Describe the variable types - are they numeric / continuous / quantitative or are they categorical? If they are categorical, what are the categories? Are they a special type of categorical variable known as a _binary_ variable, a categorical variable with just two levels? 
 
-3. Create a new dataset called `single_candy_rankings` that only contains observations where `pluribus == 0`. This new dataset contains only candies that come with **one** candy (instead of many in a bag or box).
+3. Create a new dataset called `single_candy_rankings` that only contains observations where `pluribus == 0`. This new dataset contains only candies that come with **one** candy (instead of many in a bag or box). The rest of this lab will use this new dataset.
 
 ```{r, eval = FALSE}
 single_candy_rankings  <- candy_rankings %>%
   filter(---)
 ```
 
+4. Let's take a closer look at two variables, `sugarpercent` and `winpercent`. Summarize the center and spread of these two variables by calculating the mean and standard deviation using the code below and describe what you see. Create two histograms using the `single_candy_rankings` dataset, one of `sugarpercent` and one of `winpercent`. Be sure to select an appropriate `binwidth`.
 
-4. Using the `single_candy_rankings`, create a visualization to describe the relationship between `sugarpercent` and `winpercent` (where `winpercent` is on the y-axis). Describe the relationship that you see.
+```{r, eval = FALSE}
+single_candy_rankings %>%
+  summarise(mean_sugarpct = mean(sugarpercent),
+            mean_winpct = mean(winpercent),
+            sd_sugarpct = sd(sugarpercent),
+            sd_winpct = sd(winpercent))
+```
 
-5. We are interested in fitting a simple linear regression of the form:
+5. Using the `single_candy_rankings`, create a visualization to describe the relationship between `sugarpercent` and `winpercent` (where `winpercent` is on the y-axis). Describe the relationship that you see.
+
+6. Examine the correlation between `sugarpercent` and `winpercent` using the `cor()` function by modifying the code below. Comment on the correlation coefficient - how does it compare to what you saw in Exercise 4. 
+
+```{r, eval = FALSE}
+single_candy_rankings %>%
+  summarise(r = cor(---))
+```
+
+7. In the special case of a simple linear regression, you can calculate $\hat{\beta}_1$ without having to use any calculus! It turns out the following equation works:
+
+$$\hat{\beta}_1 = \hat{r} \frac{\hat{\sigma}_y}{\hat{\sigma}_x}$$
+
+Where $\hat{r}$ is the estimated correlation between $x$ and $y$, $\hat{\sigma}_x$ is the standard deviation of $x$, and $\hat{\sigma}_y$ is the standard deviation of $y$. Let's see if we can calculate this. Edit the code below to calculate:
+
+* `sd_x`: the standard deviation of `sugarpercent`  
+* `sd_y`: the standard deviation of `winpercent`  
+* `r`: the correlation between `sugarpercent` and `winpercent`
+* `beta1`: The slope of the simple linear regression between `winpercent` ~ `sugarpercent` (I have written the equation for `beta` for you, you do not have to edit this final part).
+
+
+```{r, eval = FALSE}
+single_candy_rankings %>%
+  summarise(sd_x = ---,
+            sd_y = ---,
+            r = ---,
+            beta1 = r * (sd_y / sd_x))
+```
+
+8. We are interested in fitting a simple linear regression of the form:
 
 $y = \beta_0 + \beta_1x + \epsilon$
 
@@ -92,9 +128,10 @@ lm(---, data = single_candy_rankings) %>%
   ---()
 ```
 
-6. What is $\hat{\beta}_0$? What is $\hat{\beta}_1$? Interpret these results in _words_. 
+9. What is $\hat{\beta}_0$? What is $\hat{\beta}_1$? Interpret these results in _words_. How does this $\hat{\beta}_1$ compare to the one you calculated in Exercise 7?
 
-7. Calculate the residuals for the model fit in Exercise 5. Create a scatterplot of the residuals by $\hat{y}$, the predicted outcome, `winpercent`. Do the conditions of linearity and constant variance seem to hold?
+
+10. Calculate the residuals for the model fit in Exercise 5. Create a scatterplot of the residuals by $\hat{y}$, the predicted outcome, `winpercent`. Do the conditions of linearity and constant variance seem to hold?
 
 ```{r, eval = FALSE}
 y_hat <- lm(---, data = single_candy_rankings) %>%
@@ -104,13 +141,13 @@ single_candy_rankings <- single_candy_rankings %>%
   mutate(---)
 ```
 
-8. Plot the residuals using a histogram with `binwidth = 9` to observe whether they follow a bell-shaped distribution. Comment on what you see.
+11. Plot the residuals using a histogram with `binwidth = 9` to observe whether they follow a bell-shaped distribution. Comment on what you see.
 
-9. Calculate the regression standard error for the model created in Exercise 5. How do you interpret this result?
+12. Calculate the regression standard error for the model created in Exercise 5. How do you interpret this result?
 
 ## Principles of Data Analysis
 
-10. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
+13. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
 
 - **data matching**: 
 - **exhaustive**: 
@@ -125,8 +162,9 @@ single_candy_rankings <- single_candy_rankings %>%
 
 Total                          | 100 pts
 -------------------------------|--------
-Changed `author` in YAML       | 5 pts
+Changed `author` in YAML       | 3 pts
 All plots include title, labels | 10 pts
-Exercises 1-2                   | 10 pts
-Exercises 3-9                   | 70 pts
-Exercise 10                   | 5 pts
+Exercises 1-3                   | 9 pts
+Exercises 4-6                    | 15 pts
+Exercises 7-12                  | 60 pts
+Exercise 13                   | 3 pts

@@ -558,35 +558,66 @@ color: #333333;
 <h1>Exercises</h1>
 <ol style="list-style-type: decimal">
 <li><p>How many observations are in this dataset? What does each observation represent?</p></li>
-<li><p>How many variables are in this dataset? Describe the variable types - are they numeric / continuous / quantitative or are they categorical? If they are categorical, what are the categories? Are they a special type of categorical variable known as a <em>binary</em> variable, that is a categorical variable with just two levels?</p></li>
-<li><p>Create a new dataset called <code>single_candy_rankings</code> that only contains observations where <code>pluribus == 0</code>. This new dataset contains only candies that come with <strong>one</strong> candy (instead of many in a bag or box).</p></li>
+<li><p>How many variables are in this dataset? Describe the variable types - are they numeric / continuous / quantitative or are they categorical? If they are categorical, what are the categories? Are they a special type of categorical variable known as a <em>binary</em> variable, a categorical variable with just two levels?</p></li>
+<li><p>Create a new dataset called <code>single_candy_rankings</code> that only contains observations where <code>pluribus == 0</code>. This new dataset contains only candies that come with <strong>one</strong> candy (instead of many in a bag or box). The rest of this lab will use this new dataset.</p></li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">single_candy_rankings  &lt;-<span class="st"> </span>candy_rankings <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">---</span>)</a></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
+<li>Let’s take a closer look at two variables, <code>sugarpercent</code> and <code>winpercent</code>. Summarize the center and spread of these two variables by calculating the mean and standard deviation using the code below and describe what you see. Create two histograms using the <code>single_candy_rankings</code> dataset, one of <code>sugarpercent</code> and one of <code>winpercent</code>. Be sure to select an appropriate <code>binwidth</code>.</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">single_candy_rankings <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_sugarpct =</span> <span class="kw">mean</span>(sugarpercent),</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">            <span class="dt">mean_winpct =</span> <span class="kw">mean</span>(winpercent),</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">            <span class="dt">sd_sugarpct =</span> <span class="kw">sd</span>(sugarpercent),</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">            <span class="dt">sd_winpct =</span> <span class="kw">sd</span>(winpercent))</a></code></pre></div>
+<ol start="5" style="list-style-type: decimal">
 <li><p>Using the <code>single_candy_rankings</code>, create a visualization to describe the relationship between <code>sugarpercent</code> and <code>winpercent</code> (where <code>winpercent</code> is on the y-axis). Describe the relationship that you see.</p></li>
-<li><p>We are interested in fitting a simple linear regression of the form:</p></li>
+<li><p>Examine the correlation between <code>sugarpercent</code> and <code>winpercent</code> using the <code>cor()</code> function by modifying the code below. Comment on the correlation coefficient - how does it compare to what you saw in Exercise 4.</p></li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">single_candy_rankings <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">r =</span> <span class="kw">cor</span>(<span class="op">---</span>))</a></code></pre></div>
+<ol start="7" style="list-style-type: decimal">
+<li>In the special case of a simple linear regression, you can calculate <span class="math inline">\(\hat{\beta}_1\)</span> without having to use any calculus! It turns out the following equation works:</li>
+</ol>
+<p><span class="math display">\[\hat{\beta}_1 = \hat{r} \frac{\hat{\sigma}_y}{\hat{\sigma}_x}\]</span></p>
+<p>Where <span class="math inline">\(\hat{r}\)</span> is the estimated correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, <span class="math inline">\(\hat{\sigma}_x\)</span> is the standard deviation of <span class="math inline">\(x\)</span>, and <span class="math inline">\(\hat{\sigma}_y\)</span> is the standard deviation of <span class="math inline">\(y\)</span>. Let’s see if we can calculate this. Edit the code below to calculate:</p>
+<ul>
+<li><code>sd_x</code>: the standard deviation of <code>sugarpercent</code><br />
+</li>
+<li><code>sd_y</code>: the standard deviation of <code>winpercent</code><br />
+</li>
+<li><code>r</code>: the correlation between <code>sugarpercent</code> and <code>winpercent</code></li>
+<li><code>beta1</code>: The slope of the simple linear regression between <code>winpercent</code> ~ <code>sugarpercent</code> (I have written the equation for <code>beta</code> for you, you do not have to edit this final part).</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">single_candy_rankings <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sd_x =</span> <span class="op">---</span>,</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">            <span class="dt">sd_y =</span> <span class="op">---</span>,</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">            <span class="dt">r =</span> <span class="op">---</span>,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">            <span class="dt">beta1 =</span> r <span class="op">*</span><span class="st"> </span>(sd_y <span class="op">/</span><span class="st"> </span>sd_x))</a></code></pre></div>
+<ol start="8" style="list-style-type: decimal">
+<li>We are interested in fitting a simple linear regression of the form:</li>
 </ol>
 <p><span class="math inline">\(y = \beta_0 + \beta_1x + \epsilon\)</span></p>
 <p>where <span class="math inline">\(y\)</span> is <code>winpercent</code> and <span class="math inline">\(x\)</span> is <code>sugarpercent</code>. Use the <code>lm()</code> function to fit this model. Then use the <code>tidy()</code> function from the <code>broom</code> package to output a tidy table of the model output.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">lm</span>(<span class="op">---</span>, <span class="dt">data =</span> single_candy_rankings) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="op">---</span>()</a></code></pre></div>
-<ol start="6" style="list-style-type: decimal">
-<li><p>What is <span class="math inline">\(\hat{\beta}_0\)</span>? What is <span class="math inline">\(\hat{\beta}_1\)</span>? Interpret these results in <em>words</em>.</p></li>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">lm</span>(<span class="op">---</span>, <span class="dt">data =</span> single_candy_rankings) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="op">---</span>()</a></code></pre></div>
+<ol start="9" style="list-style-type: decimal">
+<li><p>What is <span class="math inline">\(\hat{\beta}_0\)</span>? What is <span class="math inline">\(\hat{\beta}_1\)</span>? Interpret these results in <em>words</em>. How does this <span class="math inline">\(\hat{\beta}_1\)</span> compare to the one you calculated in Exercise 7?</p></li>
 <li><p>Calculate the residuals for the model fit in Exercise 5. Create a scatterplot of the residuals by <span class="math inline">\(\hat{y}\)</span>, the predicted outcome, <code>winpercent</code>. Do the conditions of linearity and constant variance seem to hold?</p></li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">y_hat &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="op">---</span>, <span class="dt">data =</span> single_candy_rankings) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="op">---</span>()</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">single_candy_rankings &lt;-<span class="st"> </span>single_candy_rankings <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="op">---</span>)</a></code></pre></div>
-<ol start="8" style="list-style-type: decimal">
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">y_hat &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="op">---</span>, <span class="dt">data =</span> single_candy_rankings) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="op">---</span>()</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">single_candy_rankings &lt;-<span class="st"> </span>single_candy_rankings <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="op">---</span>)</a></code></pre></div>
+<ol start="11" style="list-style-type: decimal">
 <li><p>Plot the residuals using a histogram with <code>binwidth = 9</code> to observe whether they follow a bell-shaped distribution. Comment on what you see.</p></li>
 <li><p>Calculate the regression standard error for the model created in Exercise 5. How do you interpret this result?</p></li>
 </ol>
 <div id="principles-of-data-analysis" class="section level2">
 <h2>Principles of Data Analysis</h2>
-<ol start="10" style="list-style-type: decimal">
+<ol start="13" style="list-style-type: decimal">
 <li>Rank each of the following principles from the <a href="https://arxiv.org/pdf/1903.07639.pdf">Elements and Principles of Data Analysis</a> article for this data analysis from 1 to 10 along with a one sentence summary:</li>
 </ol>
 <ul>
@@ -611,23 +642,27 @@ color: #333333;
 <tbody>
 <tr class="odd">
 <td>Changed <code>author</code> in YAML</td>
-<td>5 pts</td>
+<td>3 pts</td>
 </tr>
 <tr class="even">
 <td>All plots include title, labels</td>
 <td>10 pts</td>
 </tr>
 <tr class="odd">
-<td>Exercises 1-2</td>
-<td>10 pts</td>
+<td>Exercises 1-3</td>
+<td>9 pts</td>
 </tr>
 <tr class="even">
-<td>Exercises 3-9</td>
-<td>70 pts</td>
+<td>Exercises 4-6</td>
+<td>15 pts</td>
 </tr>
 <tr class="odd">
-<td>Exercise 10</td>
-<td>5 pts</td>
+<td>Exercises 7-12</td>
+<td>60 pts</td>
+</tr>
+<tr class="even">
+<td>Exercise 13</td>
+<td>3 pts</td>
 </tr>
 </tbody>
 </table>
