@@ -90,7 +90,7 @@ single_candy_rankings %>%
 
 5. Using the `single_candy_rankings`, create a visualization to describe the relationship between `sugarpercent` and `winpercent` (where `winpercent` is on the y-axis). Describe the relationship that you see.
 
-6. Examine the correlation between `sugarpercent` and `winpercent` using the `cor()` function by modifying the code below. Comment on the correlation coefficient - how does it compare to what you saw in Exercise 4. 
+6. Examine the correlation between `sugarpercent` and `winpercent` using the `cor()` function by modifying the code below. Comment on the correlation coefficient - how does it compare to what you saw in Exercise 5. 
 
 ```{r, eval = FALSE}
 single_candy_rankings %>%
@@ -131,7 +131,7 @@ lm(---, data = single_candy_rankings) %>%
 9. What is $\hat{\beta}_0$? What is $\hat{\beta}_1$? Interpret these results in _words_. How does this $\hat{\beta}_1$ compare to the one you calculated in Exercise 7?
 
 
-10. Calculate the residuals for the model fit in Exercise 5. Create a scatterplot of the residuals by $\hat{y}$, the predicted outcome, `winpercent`. Do the conditions of linearity and constant variance seem to hold?
+10. Calculate the residuals for the model fit in Exercise 8. Create a scatterplot of the residuals by $\hat{y}$, the predicted outcome, `winpercent`. Do the conditions of linearity and constant variance seem to hold?
 
 ```{r, eval = FALSE}
 y_hat <- lm(---, data = single_candy_rankings) %>%
@@ -143,7 +143,7 @@ single_candy_rankings <- single_candy_rankings %>%
 
 11. Plot the residuals using a histogram with `binwidth = 9` to observe whether they follow a bell-shaped distribution. Comment on what you see.
 
-12. Calculate the regression standard error for the model created in Exercise 5. How do you interpret this result?
+12. Calculate the regression standard error for the model created in Exercise 8. How do you interpret this result?
 
 ## Principles of Data Analysis
 

@@ -573,7 +573,7 @@ color: #333333;
 <a class="sourceLine" id="cb3-5" data-line-number="5">            <span class="dt">sd_winpct =</span> <span class="kw">sd</span>(winpercent))</a></code></pre></div>
 <ol start="5" style="list-style-type: decimal">
 <li><p>Using the <code>single_candy_rankings</code>, create a visualization to describe the relationship between <code>sugarpercent</code> and <code>winpercent</code> (where <code>winpercent</code> is on the y-axis). Describe the relationship that you see.</p></li>
-<li><p>Examine the correlation between <code>sugarpercent</code> and <code>winpercent</code> using the <code>cor()</code> function by modifying the code below. Comment on the correlation coefficient - how does it compare to what you saw in Exercise 4.</p></li>
+<li><p>Examine the correlation between <code>sugarpercent</code> and <code>winpercent</code> using the <code>cor()</code> function by modifying the code below. Comment on the correlation coefficient - how does it compare to what you saw in Exercise 5.</p></li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">single_candy_rankings <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">r =</span> <span class="kw">cor</span>(<span class="op">---</span>))</a></code></pre></div>
@@ -604,7 +604,7 @@ color: #333333;
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="op">---</span>()</a></code></pre></div>
 <ol start="9" style="list-style-type: decimal">
 <li><p>What is <span class="math inline">\(\hat{\beta}_0\)</span>? What is <span class="math inline">\(\hat{\beta}_1\)</span>? Interpret these results in <em>words</em>. How does this <span class="math inline">\(\hat{\beta}_1\)</span> compare to the one you calculated in Exercise 7?</p></li>
-<li><p>Calculate the residuals for the model fit in Exercise 5. Create a scatterplot of the residuals by <span class="math inline">\(\hat{y}\)</span>, the predicted outcome, <code>winpercent</code>. Do the conditions of linearity and constant variance seem to hold?</p></li>
+<li><p>Calculate the residuals for the model fit in Exercise 8. Create a scatterplot of the residuals by <span class="math inline">\(\hat{y}\)</span>, the predicted outcome, <code>winpercent</code>. Do the conditions of linearity and constant variance seem to hold?</p></li>
 </ol>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">y_hat &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="op">---</span>, <span class="dt">data =</span> single_candy_rankings) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="op">---</span>()</a>
@@ -613,7 +613,7 @@ color: #333333;
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="op">---</span>)</a></code></pre></div>
 <ol start="11" style="list-style-type: decimal">
 <li><p>Plot the residuals using a histogram with <code>binwidth = 9</code> to observe whether they follow a bell-shaped distribution. Comment on what you see.</p></li>
-<li><p>Calculate the regression standard error for the model created in Exercise 5. How do you interpret this result?</p></li>
+<li><p>Calculate the regression standard error for the model created in Exercise 8. How do you interpret this result?</p></li>
 </ol>
 <div id="principles-of-data-analysis" class="section level2">
 <h2>Principles of Data Analysis</h2>
