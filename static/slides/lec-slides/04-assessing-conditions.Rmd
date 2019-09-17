@@ -22,6 +22,11 @@ Dr. Lucy D'Agostino McGowan
 </div> 
 
 ---
+class: center, middle
+
+## Revisit late policy
+
+---
 
 ## <i class="fas fa-laptop"></i> `Porsche Price (2)`
 
