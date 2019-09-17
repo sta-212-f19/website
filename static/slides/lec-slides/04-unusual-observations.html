@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Unusual Observations</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Unusual Observations
+
+---
+
+
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+Dr. Lucy D'Agostino McGowan
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Starwars (2)`
+
+- Go to RStudio Cloud and open `Starwars (2)`
+---
+
+
+
+
+## Definitions
+
+.question[
+How does your book define an "outlier"?
+]
+
+---
+
+## Definitions
+
+.question[
+How does your book define an "influential point"?
+]
+
+---
+
+&lt;img src="img/02/jabbaplot.png" width="768" /&gt;
+
+---
+
+## Example
+
+
+```r
+lm(mass ~ height, data = starwars)
+```
+
+```
+## 
+## Call:
+## lm(formula = mass ~ height, data = starwars)
+## 
+## Coefficients:
+## (Intercept)       height  
+##    -13.8103       0.6386
+```
+
+---
+
+## Example
+
+.small[
+
+```r
+y_hat &lt;- lm(mass ~ height, data = starwars) %&gt;%
+  predict()
+
+starwars %&gt;%
+  filter(!is.na(height) &amp; !is.na(mass)) %&gt;%
+  mutate(residual = mass - y_hat) %&gt;%
+  ggplot(aes(y_hat, residual)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0)
+```
+
+![](04-unusual-observations_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Example
+
+.question[
+What does this line of code do?
+]
+
+
+```r
+y_hat &lt;- lm(mass ~ height, data = starwars) %&gt;%
+  predict()
+
+starwars %&gt;%
+* filter(!is.na(height) &amp; !is.na(mass)) %&gt;%
+  mutate(residual = mass - y_hat) %&gt;%
+  ggplot(aes(y_hat, residual)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0)
+```
+
+---
+
+## Example
+
+.question[
+What does this line of code do?
+]
+
+
+```r
+y_hat &lt;- lm(mass ~ height, data = starwars) %&gt;%
+  predict()
+
+starwars %&gt;%
+  filter(!is.na(height) &amp; !is.na(mass)) %&gt;% 
+  mutate(residual = mass - y_hat) %&gt;%
+  ggplot(aes(y_hat, residual)) + 
+  geom_point() + 
+* geom_hline(yintercept = 0)
+```
+
+---
+
+
+## Example
+
+.question[
+Is this an outlier?
+]
+
+![](04-unusual-observations_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+
+## Example
+
+Gold-medal-winning distances (m) for the men's Olympic long jump, 1900–2008
+
+![](04-unusual-observations_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+
+## Example
+
+Gold-medal-winning distances (m) for the men's Olympic long jump, 1900–2008
+
+![](04-unusual-observations_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+## Example
+
+Gold-medal-winning distances (m) for the men's Olympic long jump, 1900–2008
+
+![](04-unusual-observations_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+---
+
+class: center, middle
+
+## How can we tell if a residual is "unusually" large?
+
+---
+
+class: center, middle
+
+## How can we tell if a residual is "unusually" large?
+### Do we have a "typical" error we can standardize by?
+
+---
+
+## Standardize residuals
+
+* `\(\hat{\sigma}_\epsilon\)`: reflects the typical error
+--
+
+* `\(\Large\frac{\textrm{residual}}{\hat{\sigma}_\epsilon}\)`
+--
+
+* `\(\Large{\frac{y - \hat{y}}{\hat{\sigma}_\epsilon}}\)`
+---
+
+## Studentized residuals
+
+* Another option is to estimate the standard deviation of the regression error using a model that is fit **after omitting the point in question**
+
+--
+* In R: `rstudent()`
+
+---
+
+## Example
+
+.question[
+What is `model`?
+]
+
+
+```r
+model &lt;- lm(Gold ~ Year, data = LongJumpOlympics) 
+```
+
+---
+
+## Example
+
+
+```r
+model &lt;- lm(Gold ~ Year, data = LongJumpOlympics) 
+y_hat &lt;- model %&gt;%
+  predict()
+```
+
+--
+
+
+```r
+y_hat &lt;- lm(Gold ~ Year, data = LongJumpOlympics) %&gt;%
+  predict()
+```
+
+--
+
+
+```r
+LongJumpOlympics %&gt;%
+  mutate(y_hat = model %&gt;% predict())
+```
+
+---
+
+## Example
+
+
+```r
+model &lt;- lm(Gold ~ Year, data = LongJumpOlympics)
+
+LongJumpOlympics %&gt;%
+  mutate(y_hat = model %&gt;% predict(),
+*        stud_resid = model %&gt;% rstudent())
+```
+
+```
+##    Year  Gold    y_hat  stud_resid
+## 1  1900 7.185 7.241150 -0.24969110
+## 2  1904 7.340 7.297413  0.18773767
+## 3  1906 7.200 7.325544 -0.55459469
+## 4  1908 7.480 7.353675  0.55605557
+## 5  1912 7.600 7.409938  0.83801927
+## 6  1920 7.150 7.522463 -1.69661296
+## 7  1924 7.445 7.578726 -0.57565964
+## 8  1928 7.730 7.634988  0.40587196
+## 9  1932 7.640 7.691251 -0.21761617
+## 10 1936 8.060 7.747514  1.37486325
+## 11 1948 7.825 7.916301 -0.38535068
+## 12 1952 7.570 7.972564 -1.80894501
+## 13 1956 7.830 8.028827 -0.84888005
+## 14 1960 8.120 8.085089  0.14690763
+## 15 1964 8.070 8.141352 -0.30102045
+## 16 1968 8.900 8.197615  3.76651449
+## 17 1972 8.240 8.253877 -0.05865636
+## 18 1976 8.350 8.310140  0.16903844
+## 19 1980 8.540 8.366402  0.74709891
+## 20 1984 8.540 8.422665  0.50367210
+## 21 1988 8.720 8.478928  1.05875652
+## 22 1992 8.670 8.535190  0.58546175
+## 23 1996 8.500 8.591453 -0.39790914
+## 24 2000 8.550 8.647716 -0.42816057
+## 25 2004 8.590 8.703978 -0.50378890
+## 26 2008 8.370 8.760241 -1.85376067
+```
+
+---
+
+## Example 
+
+.small[
+
+```r
+model &lt;- lm(Gold ~ Year, data = LongJumpOlympics)
+
+LongJumpOlympics %&gt;%
+  mutate(y_hat = model %&gt;% predict(),
+         stud_resid = model %&gt;% rstudent()) %&gt;%
+  ggplot(aes(Year, stud_resid)) + 
+  geom_point() + 
+  geom_hline(yintercept = c(2, 4, -2, -4), lty = 2) + 
+  labs(y = "studentized residual")
+```
+
+![](04-unusual-observations_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Influential points
+
+.question[
+Would removing the observation from the dataset change the regression equation by much?
+]
+
+---
+
+## Example
+
+.small[
+
+```r
+lm(mass ~ height, data = starwars)
+```
+
+```
+## 
+## Call:
+## lm(formula = mass ~ height, data = starwars)
+## 
+## Coefficients:
+## (Intercept)       height  
+##    -13.8103       0.6386
+```
+]
+.small[
+
+```r
+starwars %&gt;%
+* filter(name != "Jabba Desilijic Tiure") %&gt;%
+  lm(mass ~ height, data = .)
+```
+
+```
+## 
+## Call:
+## lm(formula = mass ~ height, data = .)
+## 
+## Coefficients:
+## (Intercept)       height  
+##    -32.5408       0.6214
+```
+
+]
+---
+
+## Example
+
+![](04-unusual-observations_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+
+---
+
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Starwars (2)`
+
+- Go to RStudio Cloud and open `Starwars (2)`
+- For each question you work on, set the `eval` chunk option to `TRUE` and knit
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

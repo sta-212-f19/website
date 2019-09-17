@@ -1,0 +1,469 @@
+---
+title: "Assessing Conditions"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+## <i class="fas fa-laptop"></i> `Porsche Price (2)`
+
+- Go to RStudio Cloud and open `Porsche Price (2)`
+---
+
+```{r, include = FALSE, echo = FALSE}
+library(Stat2Data)
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Steps for modeling
+
+![](img/03/flowchart.png)
+
+---
+
+# Steps for modeling
+
+![](img/03/flowchart-arrow.png)
+
+---
+
+# Conditions for simple linear regression
+
+* Linearity
+* Zero Mean
+* Constant Variance
+* Independence
+* Random
+* Normality
+
+---
+
+
+# Conditions for simple linear regression
+
+* Linearity
+* ~~Zero Mean~~
+* Constant Variance
+* Independence
+* Random
+* Normality
+
+---
+
+
+# Conditions for simple linear regression
+
+* **Linearity**
+* ~~Zero Mean~~
+* **Constant Variance**
+* Independence
+* Random
+* Normality
+
+---
+
+# Linearity & Constant Variance
+
+```{r, echo = FALSE}
+
+data(Sparrows)
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length")
+```
+
+---
+
+# Linearity & Constant Variance
+
+### Residuals versus fits plot
+
+.question[
+What do you think would be on the x-axis and y-axis on a "residuals versus fits" plot?
+]
+---
+
+# Linearity & Constant Variance
+
+```{r, echo = FALSE}
+Sparrows <- Sparrows %>%
+  mutate(y_hat = lm(Weight ~ WingLength, data = Sparrows) %>% predict(),
+         residuals = Weight - y_hat) 
+  
+ggplot(Sparrows, aes(x = y_hat, y = residuals)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0) +
+  labs(title = "Residuals versus fits", 
+       subtitle = "The relationship between WingLength and Weight for Sparrows",
+       x = "y hat")
+```
+
+---
+
+# Linearity & Constant Variance
+
+### Residuals versus fits plot: What are we looking for?
+
+* random variation above and below 0
+* no apparent "patterns"
+* the width of the "band" of points is relatively constant
+
+---
+
+# Linearity & Constant Variance
+
+.question[
+What do you think of this plot?
+]
+```{r, echo = FALSE}
+set.seed(1)
+good <- tibble(
+  x = runif(1000, min = 0, max = 10),
+  y = 1 + 2 * x + rnorm(1000),
+  y_hat = 1 + 2 * x,
+  residual = y - y_hat
+)
+ggplot(good, aes(y_hat, residual)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0) + 
+   labs(title = "Residuals versus fits", 
+    #   subtitle = "Good example",
+       x = "y hat")
+```
+
+---
+
+# Linearity & Constant Variance
+
+.question[
+What do you think of this plot?
+]
+
+```{r, echo = FALSE}
+set.seed(1)
+bad_variance <- tibble(
+  x = runif(1000, min = 0, max = 10),
+  y = 1 + 2 * x + (x / 2) * rnorm(1000, sd = 3),
+  y_hat = 1 + 2 * x,
+  residual = y - y_hat
+)
+
+ggplot(bad_variance, aes(y_hat, residual)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0) + 
+   labs(title = "Residuals versus fits", 
+      # subtitle = "Bad example (non-constant variance)",
+       x = "y hat")
+```
+
+---
+
+# Linearity & Constant Variance
+
+.question[
+What do you think of this plot?
+]
+
+```{r, echo = FALSE}
+set.seed(1)
+bad_linear <- tibble(
+  x = runif(1000, min = 0, max = 10),
+  y = 1 + 2 * x + x^2 + rnorm(1000, sd = 10),
+  y_hat = 1 + 2 * x,
+  residual = y - y_hat
+)
+
+ggplot(bad_linear, aes(y_hat, residual)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0) + 
+   labs(title = "Residuals versus fits", 
+      # subtitle = "Bad example (non-linearity)",
+       x = "y hat")
+```
+
+---
+
+# Linearity & Constant Variance
+
+.question[
+What do you think of this plot?
+]
+
+```{r, echo = FALSE}
+set.seed(1)
+bad_linear_variance <- tibble(
+  x = runif(1000, min = 0, max = 10),
+  y = 1 + 2 * x + x^2 + (x / 2) * rnorm(100, sd = 10),
+  y_hat = 1 + 2 * x,
+  residual = y - y_hat
+)
+
+ggplot(bad_linear_variance, aes(y_hat, residual)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0) + 
+   labs(title = "Residuals versus fits", 
+      # subtitle = "Bad example (non-linearity and non-constant variance)",
+       x = "y hat")
+```
+
+---
+
+# Conditions for simple linear regression
+
+* Linearity
+* Zero Mean
+* Constant Variance
+* Independence
+* Random
+* Normality
+
+---
+
+# Conditions for simple linear regression
+
+* Linearity
+* Zero Mean
+* Constant Variance
+* **Independence**
+* **Random**
+* Normality
+
+---
+
+# Conditions for simple linear regression
+
+* Linearity
+* Zero Mean
+* Constant Variance
+* Independence
+* Random
+* **Normality**
+
+---
+
+# Normality
+
+* Histogram
+* Normal quantile plot
+
+---
+
+# Normality
+### Histogram
+
+```{r}
+ggplot(good, aes(residual)) + 
+  geom_histogram(bins = 9)
+```
+
+---
+
+# Normality
+### Histogram
+
+.question[
+What do you think of this plot?
+]
+
+```{r}
+ggplot(good, aes(residual)) + 
+  geom_histogram(bins = 9)
+```
+
+---
+
+# Normality
+### Histogram
+
+.question[
+What do you think of this plot?
+]
+
+```{r}
+ggplot(bad_linear_variance, aes(residual)) + 
+  geom_histogram(bins = 9)
+```
+
+---
+
+# Normality
+### Normal quantile plot
+
+```{r}
+ggplot(good, aes(sample = residual)) + 
+  geom_qq() +
+  geom_qq_line()
+```
+
+---
+
+# Normality
+### Normal quantile plot
+
+.question[
+What do you think of this plot?
+]
+```{r}
+ggplot(good, aes(sample = residual)) + 
+  geom_qq() +
+  geom_qq_line()
+```
+
+---
+
+# Normality
+### Normal quantile plot
+
+.question[
+What do you think of this plot?
+]
+```{r}
+ggplot(bad_linear_variance, aes(sample = residual)) + 
+  geom_qq() +
+  geom_qq_line()
+```
+
+---
+
+class: center, middle
+
+# Let's do it in R!
+
+---
+
+## Plot the data with a line
+
+```{r}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") #<<
+```
+
+---
+
+## Plot the data with a line
+
+```{r, echo = TRUE}
+y_hat <- lm(Weight ~ WingLength, data = Sparrows) %>% 
+  predict()
+
+Sparrows <- Sparrows %>%
+  mutate(y_hat = y_hat,
+         residuals = Weight - y_hat) 
+```
+
+---
+
+## Plot the data with a line
+
+```{r}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  geom_line(aes(x = WingLength, y = y_hat)) #<<
+```
+
+---
+
+## Residuals vs Fits plot
+
+.small[
+```{r, echo = TRUE}
+ggplot(Sparrows, aes(x = y_hat, y = residuals)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0) +
+  labs(title = "Residuals versus fits", 
+       subtitle = "The relationship between WingLength and Weight for Sparrows",
+       x = "y hat")
+```
+]
+
+---
+
+## Residuals vs Fits plot
+
+.small[
+```{r, echo = TRUE}
+ggplot(Sparrows, aes(x = y_hat, y = residuals)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0) + #<<
+  labs(title = "Residuals versus fits", 
+       subtitle = "The relationship between WingLength and Weight for Sparrows",
+       x = "y hat")
+```
+]
+
+---
+
+## Histogram of the residuals
+
+```{r, echo = TRUE}
+ggplot(Sparrows, aes(residuals)) +
+  geom_histogram(binwidth = 0.5)
+```
+
+---
+
+## Normal quantile plot
+
+```{r, echo = TRUE}
+ggplot(Sparrows, aes(sample = residuals)) + 
+  geom_qq() +
+  geom_qq_line()
+```
+---
+
+## Normal quantile plot
+
+```{r, echo = TRUE}
+ggplot(Sparrows, aes(sample = residuals)) + #<<
+  geom_qq() +
+  geom_qq_line()
+```
+
+---
+
+## Normal quantile plot
+
+```{r, echo = TRUE}
+ggplot(Sparrows, aes(sample = residuals)) + 
+  geom_qq()  #<<
+```
+
+---
+
+## Normal quantile plot
+
+```{r, echo = TRUE}
+ggplot(Sparrows, aes(sample = residuals)) + 
+  geom_qq() +
+  geom_qq_line() #<<
+```
+
+---
+
+## <i class="fas fa-laptop"></i> `Porsche Price (2)`
+
+- Go to RStudio Cloud and open `Porsche Price (2)`
+- For each question you work on, set the `eval` chunk option to `TRUE` and knit
