@@ -1,0 +1,204 @@
+---
+title: "Recap"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+---
+
+## Simple linear regression
+
+$\Huge y = \beta_0 + \beta_1 x + \epsilon$
+
+---
+
+## Simple linear regression
+
+$\Huge \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$
+
+---
+
+## Simple linear regression
+
+.question[
+What is the method used to estimate $\hat{\beta}_0$ and $\hat{\beta}_1$?
+]
+
+$\Huge \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x$
+
+
+---
+
+## Simple linear regression
+
+.question[
+What is the method used to estimate $\hat{\beta}_0$ and $\hat{\beta}_1$?
+]
+
+.center[
+![](img/03/least-squares-vis.gif)
+]
+
+---
+
+## Simple linear regression
+
+.question[
+What is least squares minimizing?
+]
+
+.center[
+![](img/03/least-squares-vis.gif)
+]
+
+---
+
+## Simple linear regression
+.question[
+What is least squares minimizing?
+]
+
+* Sum of square errors (SSE)
+ 
+.center[
+![](img/03/least-squares-vis.gif)
+]
+---
+
+## Simple linear regression
+.question[
+How do we calculate the SSE?
+]
+
+* SSE: $\sum (y-\hat{y})^2$
+ 
+.center[
+![](img/03/least-squares-vis.gif)
+]
+
+---
+## Simple linear regression
+.question[
+How do we calculate the SSE?
+]
+
+* SSE: $\sum (y-\hat{y})^2$
+ 
+.center[
+![](img/03/least-squares-vis.gif)
+]
+---
+
+## Simple linear regression
+.question[
+How do we calculate the a residual?
+]
+
+---
+
+## Simple linear regression
+.question[
+How do we calculate the a residual?
+]
+
+* residual: $y - \hat{y}$
+---
+
+## Simple linear regression
+
+.question[
+How do we calcualte the regression standard error (residual standard error)?
+]
+ 
+---
+
+## Simple linear regression
+
+.question[
+How do we calcualte the regression standard error (residual standard error)?
+]
+
+* $\hat{\sigma}_\epsilon = \sqrt{\frac{SSE}{n-2}}$
+
+---
+
+## Simple linear regression
+
+.question[
+How do we interpret the regression standard error?
+]
+
+* $\hat{\sigma}_\epsilon = \sqrt{\frac{SSE}{n-2}}$
+
+---
+
+## Simple linear regression
+
+.question[
+What are the (six) assumptions for simple linear regression?
+]
+
+---
+## Simple linear regression
+
+.question[
+What are the (six) assumptions for simple linear regression?
+]
+
+* Linearity
+* Zero Mean
+* Constant Variance
+* Independence
+* Random
+* Normality
+---
+## Simple linear regression
+
+$\Huge\epsilon \sim N(0, \sigma_\epsilon)$
+
+* Linearity
+* Zero Mean
+* Constant Variance
+* Independence
+* Random
+* Normality
+---
+
+## Simple linear regression
+
+.question[
+What are the three parameters we estimate with simple linear regression?
+]
+
+---
+
+## Simple linear regression
+
+.question[
+What are the three parameters we estimate with simple linear regression?
+]
+
+- $\Huge\hat{\beta}_0$
+- $\Huge\hat{\beta}_1$
+- $\Huge\hat{\sigma}_\epsilon$

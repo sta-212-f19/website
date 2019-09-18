@@ -1,0 +1,61 @@
+---
+title: "Homework 1"
+output: html_document
+---
+
+**Due: September 26 at noon**
+**turn in the .html file on Sakai**
+
+Open RStudio cloud and click on `Homework 1`. 
+
+## Methods
+
+The dataset Pines contains data from an experiment conducted by the Department of Biology at Kenyon College at a site near the campus in Gambier, Ohio.13 In April 1990, student and faculty volunteers planted 1000 white pine (Pinus strobes) seedlings at the Brown Family Environmental Center. These seedlings were planted in two grids, distinguished by 10- and 15-foot spacings between the seedlings. Several variables, described below, were measured and recorded for each seedling over time.
+
+Variable | Description
+---------|-----------------
+Row | Row number in pine plantation
+Col | Column number in pine plantation
+Hgt90 | Tree height at time of planting (cm)
+Hgt96 | Tree height in September 1996 (cm)
+Diam96  | Tree trunk diameter in September 1996 (cm)
+Grow96 |  Leader growth during 1996 (cm)
+Hgt97  | Tree height in September 1997 (cm)
+Diam97  | Tree trunk diameter in September 1997 (cm)
+Spread97  | Widest lateral spread in September 1997 (cm)
+Needles97 |  Needle length in September 1997 (mm)
+Deer95  | Type of deer damage in September 1995: 0 = none, 1 = browsed
+Deer97  | Type of deer damage in September 1997: 0 = none, 1 = browsed
+Cover95 |  Thorny cover in September 1995: 0 = none; 1 = some; 2 = moderate; 3 = lots
+Fert  | Indicator for fertilizer: 0 = no, 1 = yes
+Spacing |  Distance (in feet) between trees (10 or 15)
+
+1. We are interested in predicting the tree height in 1997 from an earlier measurement of tree height. Do you think that the height in 1996 will be a better predictor than the initial seedling height in 1990? Explain your answer.
+
+2. We want to fit a line to predict the tree height in 1997 from the tree height in 1996. Write out the equation we will be estimating.
+
+3. When fitting a simple linear regression, there are four common steps:
+
+- choose
+- fit
+- assess
+- use
+
+Describe what is done in each of these steps.
+
+4. Describe the conditions for simple linear regression and how they can be tested.
+
+## Results
+
+5. Construct a scatterplot examining the relationship between the initial height in 1990 and the height in 1997. Comment on any relationship seen.
+
+6. Construct a scatterplot examining the relationship between the tree height in 1996 and the height in 1997. Comment on what you see. How does this compare to the results seen in 5?
+
+7. Fit a simple linear regression for predicting height in 1997 from height in 1990. Use visualizations to assess the fit. Are you satisfied with the fit of this simple linear model? Explain.
+
+8. Fit a simple linear regression for predicting height in 1997 from height in 1996. Use visualizations to assess the fit. Are you satisfied with the fit of this simple linear model? Explain.
+
+## Conclusions
+
+9. Choose a model (between the two fit in 7 and 8) that best predicts the tree height in 1997. Explain in words what this model shows us.
+
