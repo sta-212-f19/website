@@ -1,6 +1,11 @@
 ---
 title: "Homework 1"
-output: html_document
+output: 
+  tufte::tufte_html:
+    css: "../labs/lab.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
 ---
 
 **Due: September 26 at noon**
@@ -49,7 +54,7 @@ Describe what is done in each of these steps.
 
 5. Construct a scatterplot examining the relationship between the initial height in 1990 and the height in 1997. Comment on any relationship seen.
 
-6. Construct a scatterplot examining the relationship between the tree height in 1996 and the height in 1997. Comment on what you see. How does this compare to the results seen in 5?
+6. Construct a scatterplot examining the relationship between the tree height in 1996 and the height in 1997. Comment on what you see. How does this compare to the results seen in Exercise 5?
 
 7. Fit a simple linear regression for predicting height in 1997 from height in 1990. Use visualizations to assess the fit. Are you satisfied with the fit of this simple linear model? Explain.
 
@@ -57,5 +62,13 @@ Describe what is done in each of these steps.
 
 ## Conclusions
 
-9. Choose a model (between the two fit in 7 and 8) that best predicts the tree height in 1997. Explain in words what this model shows us.
+9. Choose a model (between the two fit in Exercise 7 and Exercise 8) that best predicts the tree height in 1997. Explain in words what this model shows us.
 
+10. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
+
+- **data matching**: 
+- **exhaustive**: 
+- **skeptical**:
+- **second order**:
+- **transparency**:
+- **reproducible**:
