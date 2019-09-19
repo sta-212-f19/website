@@ -1,0 +1,342 @@
+---
+title: "Drawing inference <br> `r emo::ji('thinking')`"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+```
+
+## <i class="fas fa-laptop"></i> `NC bike crashes`
+
+- Go to RStudio Cloud and open `NC bike crashes`
+
+---
+class: middle
+
+# in·fer·ence
+a conclusion reached on the basis of evidence and reasoning.
+
+---
+# Inference
+
+* so far we've only been able to make claims about our sample
+--
+
+* for example, we've just been describing $\hat{\beta}_1$, the _estimated_ slope of the relationship between $x$ and $y$.
+--
+
+* what if we want to extend these claims to the population?
+
+---
+
+# Sparrow data
+
+_So far, we've been looking at a sample of 116 sparrows from Kent Island._ 
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(Stat2Data)
+data("Sparrows")
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length")
+```
+
+---
+
+## Sparrows
+
+.question[
+What if this were the true population, and the sample that we saw was just related _by chance_?
+]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+set.seed(1)
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+    geom_point(data = data.frame(x = rnorm(600, 27, 4),
+                               y = rnorm(600, 14, 3)),
+             aes(x = x, y = y), pch = 1) +
+  geom_point(color = "red") +
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length")
+```
+
+---
+
+## Sparrows
+
+.question[
+Ultimately What do we want to know?
+]
+
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.height = 2}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length")
+```
+
+---
+
+## Sparrows
+
+.question[
+Ultimately What do we want to know?
+]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.height = 2}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length")
+```
+
+* Does the slope in the **population** differ from 0?
+
+---
+
+## Sparrows
+
+.question[
+Ultimately What do we want to know?
+]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.height = 2}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length")
+```
+
+* Does $\beta_1$ differ from 0?
+--
+
+* _notice the lack of a hat!_
+---
+
+## Sparrows
+
+.question[
+Ultimately What do we want to know?
+]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.height = 2}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length")
+```
+
+* **null hypothesis** $H_0: \beta_1 = 0$ 
+* **alternative hypothesis** $H_A: \beta_1 \ne 0$
+
+---
+
+## Sparrows
+
+.question[
+How can we quantify how much we'd expect the slope to differ from one random sample to another?
+]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.height = 2}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length") +
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+---
+
+## Sparrows
+
+.question[
+How can we quantify how much we'd expect the slope to differ from one random sample to another?
+]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.height = 2}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length") + 
+  geom_smooth(method = "lm", fill = "blue")
+```
+
+* We need a measure of **uncertainty**
+
+---
+
+## Sparrows
+
+.question[
+How can we quantify how much we'd expect the slope to differ from one random sample to another?
+]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.height = 2}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length") + 
+  geom_smooth(method = "lm", fill = "blue")
+```
+
+* How about the **standard error** of $\hat{\beta}_1$?
+
+---
+
+## Sparrows
+
+.question[
+How can we quantify how much we'd expect the slope to differ from one random sample to another?
+]
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.height = 2}
+ggplot(Sparrows, aes(x = WingLength, y = Weight)) + 
+  geom_point() + 
+  labs(title = "The relationship between weight and wing length", 
+       subtitle = "Savannah Sparrows on Kent Island",
+       x = "Wing length") + 
+  geom_smooth(method = "lm", fill = "blue")
+```
+
+* the **standard error** of $\hat{\beta_1}$ ( $SE_{\hat{\beta}_1}$ ) is how much we expect the sample slope to vary from one random sample to another.
+
+---
+
+## Sparrows
+
+.question[
+How can we quantify how much we'd expect the slope to differ from one random sample to another?
+]
+
+.small[
+```{r, highlight.output = 5}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  tidy()
+```
+]
+
+---
+
+## Sparrows
+
+.question[
+We need a **test statistic** that incorporates $\hat{\beta}_1$ and the standard error $SE_{\hat\beta_1}$
+]
+
+.small[
+```{r, highlight.output = 5}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  tidy()
+```
+]
+
+---
+
+## Sparrows
+
+.question[
+We need a **test statistic** that incorporates $\hat{\beta}_1$ and the standard error $SE_{\hat\beta_1}$
+]
+
+.small[
+```{r, highlight.output = 5}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  tidy()
+```
+]
+
+# $t = \frac{\hat\beta_1}{SE_{\hat\beta_1}}$
+
+---
+
+## Sparrows
+
+.question[
+We need a **test statistic** that incorporates $\hat{\beta}_1$ and the standard error $SE_{\hat\beta_1}$
+]
+
+.small[
+```{r, highlight.output = 5}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  tidy()
+```
+]
+
+```{r}
+0.467 / 0.0347
+```
+
+---
+
+## Sparrows
+
+.question[
+How do we interpret this?
+]
+
+.small[
+```{r, highlight.output = 5}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  tidy()
+```
+]
+
+```{r}
+0.467 / 0.0347
+```
+
+---
+
+## Sparrows
+
+.question[
+How do we interpret this?
+]
+
+.small[
+```{r, highlight.output = 5}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  tidy()
+```
+]
+
+* "the sample slope is more than 13 standard errors above a slope of zero"
+---
+## <i class="fas fa-laptop"></i> `NC bike crashes`
+
+- Go to RStudio Cloud and open `NC bike crashes`
+- For each question you work on, set the `eval` chunk option to `TRUE` and knit
+
