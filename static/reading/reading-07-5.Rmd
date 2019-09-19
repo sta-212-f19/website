@@ -1,0 +1,20 @@
+---
+title: "Reading 07.5"
+output: 
+  html_document: 
+    theme: yeti
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Due
+
+Thursday, Sept 26
+
+## Required:
+
+- Stat2:
+    + Section 2.3: Regression and Correlation
+    + Section 2.4: Intervals for Prediction
