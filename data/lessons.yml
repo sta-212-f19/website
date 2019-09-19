@@ -42,7 +42,7 @@ lessons:
     title: "Evaluating models"
     reading: "reading-04.html"
     slides: "lec-slides/04-assessing-conditions.html"
-    appex: "05-porsche-price.html"
+    appex: "04-porsche-price.html"
   - title: "Influential points"
     slides: "lec-slides/04-unusual-observations.html"
     appex: "04-starwars.html"
