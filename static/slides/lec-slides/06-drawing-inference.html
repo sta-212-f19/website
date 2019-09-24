@@ -31,9 +31,9 @@ by Dr. Lucy D'Agostino McGowan
 
 
 
-## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `NC bike crashes`
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Porsche Price (3)`
 
-- Go to RStudio Cloud and open `NC bike crashes`
+- Go to RStudio Cloud and open `Porsche Price (3)`
 
 ---
 class: middle
@@ -331,11 +331,715 @@ lm(Weight ~ WingLength, data = Sparrows) %&gt;%
 ]
 
 * "the sample slope is more than 13 standard errors above a slope of zero"
----
-## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `NC bike crashes`
 
-- Go to RStudio Cloud and open `NC bike crashes`
-- For each question you work on, set the `eval` chunk option to `TRUE` and knit
+---
+
+## Sparrows
+
+.question[
+How do we know what values of this statistic are worth paying attention to?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25
+```
+]
+
+---
+
+## Sparrows
+
+.question[
+How do we know what values of this statistic are worth paying attention to?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25
+```
+]
+
+* confidence intervals
+* p-values
+
+---
+## Sparrows
+
+.question[
+How do we know what values of this statistic are worth paying attention to?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 2 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1   -0.531     3.26 
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25    0.399     0.536
+```
+]
+
+* confidence intervals
+* p-values
+
+---
+
+## Sparrows
+
+.question[
+Where do these come from?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 2 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1   -0.531     3.26 
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25    0.399     0.536
+```
+]
+
+* confidence intervals
+* p-values
+
+---
+
+## Sparrows
+
+.question[
+What if we knew what the distribution of the "statistic" would be under the null hypothesis?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25
+```
+]
+
+---
+
+## Sparrows
+
+
+```r
+null_sparrow_data &lt;- data.frame(
+  WingLength = rnorm(10, 27, 4),
+  Weight = rnorm(10, 14, 3)
+)
+lm(Weight ~ WingLength, data = null_sparrow_data) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)    6.17      3.55       1.74  0.121 
+## 2 WingLength     0.334     0.129      2.58  0.0326
+```
+
+---
+
+## Sparrows
+
+
+```r
+null_sparrow_data &lt;- data.frame(
+* WingLength = rnorm(10, 27, 4),
+  Weight = rnorm(10, 14, 3)
+)
+lm(Weight ~ WingLength, data = null_sparrow_data) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)  11.2        5.96      1.88   0.0968
+## 2 WingLength    0.0840     0.206     0.407  0.695
+```
+
+---
+
+## Sparrows
+
+
+```r
+null_sparrow_data &lt;- data.frame(
+  WingLength = rnorm(10, 27, 4),
+* Weight = rnorm(10, 14, 3)
+)
+lm(Weight ~ WingLength, data = null_sparrow_data) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)   11.7       5.94      1.97   0.0846
+## 2 WingLength     0.121     0.223     0.543  0.602
+```
+
+---
+
+## Sparrows
+
+.small[
+
+```r
+*gen_null_stat &lt;- function() {
+  null_sparrow_data &lt;- data.frame(
+    WingLength = rnorm(10, 27, 4),
+    Weight = rnorm(10, 14, 3)
+  )
+  lm(Weight ~ WingLength, data = null_sparrow_data) %&gt;%
+    tidy() %&gt;%
+    filter(term == "WingLength") %&gt;%
+    select("statistic")
+*} 
+```
+]
+
+
+```r
+gen_null_stat()
+```
+
+```
+## # A tibble: 1 x 1
+##   statistic
+##       &lt;dbl&gt;
+## 1    -0.661
+```
+
+---
+
+## Sparrows
+
+.small[
+
+```r
+gen_null_stat()
+```
+
+```
+## # A tibble: 1 x 1
+##   statistic
+##       &lt;dbl&gt;
+## 1    -0.422
+```
+
+```r
+gen_null_stat()
+```
+
+```
+## # A tibble: 1 x 1
+##   statistic
+##       &lt;dbl&gt;
+## 1     0.536
+```
+
+```r
+gen_null_stat()
+```
+
+```
+## # A tibble: 1 x 1
+##   statistic
+##       &lt;dbl&gt;
+## 1     -2.19
+```
+]
+
+---
+
+## Sparrows
+
+
+```r
+null_stats &lt;- map_df(1:10000, ~ gen_null_stat())
+```
+
+---
+
+## Sparrows
+
+
+```r
+null_stats &lt;- map_df(1:10000, ~ gen_null_stat())
+```
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+
+---
+
+## Sparrows
+
+.question[
+What distribution does this look like?
+]
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+
+---
+
+## Sparrows
+
+.question[
+What distribution does this look like?
+]
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
+
+* Normal?
+--
+
+* What distribution is similar to the normal but with fatter tails?
+
+---
+
+## Sparrows
+
+.question[
+What distribution does this look like?
+]
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
+
+* the *t-distribution!*
+--
+
+* this is a **t-distribution** with **n-2** degrees of freedom.
+
+---
+
+## Sparrows
+
+The distribution of test statistics we would expect given the **null hypothesis is true**, `\(\beta_1 = 0\)`, is **t-distribution** with **n-2** degrees of freedom.
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
+
+---
+
+## Sparrows
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25
+```
+]
+
+---
+
+## Sparrows
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
+
+---
+
+## Sparrows
+
+.question[
+How can we compare this line to the distribution under the null?
+]
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-41-1.png)&lt;!-- --&gt;
+
+--
+
+* p-value
+
+---
+
+class: middle
+
+# p-value
+
+The probability of getting a statistic as extreme or more extreme than the observed test statistic **given the null hypothesis is true**
+
+---
+
+## Sparrows
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25
+```
+]
+
+---
+
+## Sparrows
+
+
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-45-1.png)&lt;!-- --&gt;
+
+* Statistic 1.5
+---
+
+## Let's do it in R!
+
+The proportion of area less than 1.5
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-46-1.png)&lt;!-- --&gt;
+
+
+
+```r
+pt(1.5, df = 18)
+```
+
+```
+## [1] 0.9245248
+```
+
+---
+
+## Let's do it in R!
+
+The proportion of area **greater** than 1.5
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-48-1.png)&lt;!-- --&gt;
+
+
+
+```r
+pt(1.5, df = 18, lower.tail = FALSE)
+```
+
+```
+## [1] 0.07547523
+```
+---
+
+## Let's do it in R!
+
+The proportion of area **greater** than 1.5 **or** **less** than -1.5.
+
+![](06-drawing-inference_files/figure-html/unnamed-chunk-50-1.png)&lt;!-- --&gt;
+
+--
+
+
+```r
+pt(1.5, df = 18, lower.tail = FALSE) * 2
+```
+
+```
+## [1] 0.1509505
+```
+
+---
+
+class: middle
+
+# p-value
+
+The probability of getting a statistic as extreme or more extreme than the observed test statistic **given the null hypothesis is true**
+
+---
+
+## Hypothesis test
+
+* **null hypothesis** `\(H_0: \beta_1 = 0\)` 
+* **alternative hypothesis** `\(H_A: \beta_1 \ne 0\)`
+--
+
+* **p-value**: 0.15
+--
+
+* Often, we have an `\(\alpha\)`-level cutoff to compare this to, for example **0.05**. Since this is greater than **0.05**, we **fail to reject the null hypothesis**
+
+---
+
+class: middle
+
+# confidence intervals
+
+If we use the same sampling method to select different samples and computed an interval estimate for each sample, we would expect the true population parameter ( `\(\beta_1\)` ) to fall within the interval estimates 95% of the time.
+
+---
+
+# Confidence interval
+
+.center[
+
+
+`\(\Huge \hat\beta_1 \pm t^∗ \times SE_{\hat\beta_1}\)`
+
+]
+
+--
+
+* `\(t^*\)` is the critical value for the `\(t_n−2\)` density curve to obtain the desired confidence level
+--
+
+* Often we want a **95% confidence level**.  
+
+---
+
+## Let's do it in R!
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 2 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1   -0.531     3.26 
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25    0.399     0.536
+```
+]
+
+
+```r
+qt(0.025, df = nrow(Sparrows) - 2, lower.tail = FALSE)
+```
+
+```
+## [1] 1.980992
+```
+---
+
+## Let's do it in R!
+
+.question[
+Why 0.025?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 2 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1   -0.531     3.26 
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25    0.399     0.536
+```
+]
+
+
+```r
+qt(0.025, df = nrow(Sparrows) - 2, lower.tail = FALSE)
+```
+
+```
+## [1] 1.980992
+```
+
+---
+
+## Let's do it in R!
+
+.question[
+Why `lower.tail = FALSE`?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 2 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1   -0.531     3.26 
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25    0.399     0.536
+```
+]
+
+
+```r
+qt(0.025, df = nrow(Sparrows) - 2, lower.tail = FALSE)
+```
+
+```
+## [1] 1.980992
+```
+
+---
+
+## Let's do it in R!
+
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 2 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1   -0.531     3.26 
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25    0.399     0.536
+```
+]
+
+
+
+
+```r
+c &lt;- qt(0.025, df = nrow(Sparrows) - 2, lower.tail = FALSE)
+0.467 + c * 0.0347
+```
+
+```
+## [1] 0.536
+```
+
+```r
+0.467 - c * 0.0347
+```
+
+```
+## [1] 0.398
+```
+
+---
+
+class: middle
+
+# confidence intervals
+
+If we use the same sampling method to select different samples and computed an interval estimate for each sample, we would expect the true population parameter ( `\(\beta_1\)` ) to fall within the interval estimates 95% of the time.
+
+---
+
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Porsche Price (3)`
+
+- Go to RStudio Cloud and open `Porsche Price (3)`
+
+---
+
+# Partitioning variability
+
+![](img/06/partitioning.png)
+
+---
+
+# Why?
+
+* `\(\Huge y − \hat{y} = (\hat{y} − \bar{y}) + (y − \hat{y})\)`
+--
+
+* `\(\Large \sum(y − \hat{y})^2 = \sum(\hat{y} − \bar{y})^2 + \sum(y − \hat{y})^2\)`
+--
+
+* ## SSTotal = SSModel + SSE
+
+---
+
+# Degrees of freedom
+
+* ## SSTotal: `\(n-1\)`
+--
+
+* ## SSE: `\(n-2\)`
+--
+
+* ## SSModel: `\(n-1 = 1 + (n-2)\)` - so 1!
+---
+
+# Mean Squares
+
+* `\(\Huge MSModel = \frac{SSModel}{1}\)`
+--
+
+* `\(\Huge MSE = \frac{SSE}{n-2}\)`
+
+---
+
+class: middle, center
+
+`\(\Huge F = \frac{MSModel}MSE}\)`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
