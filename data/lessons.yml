@@ -58,6 +58,7 @@ lessons:
   - date: "Tues, Sep 24"
     title: "Drawing inference"
     reading: "reading-07.html"
+    slides: "lec-slides/06-drawing-inference.html"
   - date: "Thur, Sep 26"
     title: "Lab 05: Interpreting results"
     lab: "coming-soon.html"
