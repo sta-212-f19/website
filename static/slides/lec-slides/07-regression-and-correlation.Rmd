@@ -1,0 +1,72 @@
+---
+title: "Regression and correlation"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(Stat2Data)
+data("Sparrows")
+```
+
+# Partitioning variability
+
+![](img/06/partitioning.png)
+
+---
+
+# Why?
+
+* $\Huge y − \hat{y} = (\hat{y} − \bar{y}) + (y − \hat{y})$
+
+--
+
+* $\Large \sum(y − \hat{y})^2 = \sum(\hat{y} − \bar{y})^2 + \sum(y − \hat{y})^2$  
+--
+
+* ## SSTotal = SSModel + SSE
+
+---
+
+## Coefficient of determination
+
+* $\Large r^2 = \frac{\textrm{Variability explained by the model}}{\textrm{Total variability in } y}$
+
+--
+* $\Large r^2 = \frac{\textrm{SSModel}}{\textrm{SSTotal}}$
+
+--
+* $\Large r^2 = \frac{\sum(\hat{y} - \bar{y})^2}{\sum(y-\bar{y})^2}$
+
+--
+* $\Large r^2 = \frac{\textrm{SSTotal − SSE}}{\textrm{SSTotal}}$
+
+--
+* $\Large r^2 = 1 - \frac{\textrm{SSE}}{\textrm{SSTotal}}$
+
+---
+
+## T-test for correlation
+
+* **null hypothesis**: $H_0: 

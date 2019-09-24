@@ -369,6 +369,7 @@ lm(Weight ~ WingLength, data = Sparrows) %>%
 * p-values
 
 ---
+
 ## Sparrows
 
 .question[
@@ -378,7 +379,7 @@ How do we know what values of this statistic are worth paying attention to?
 .small[
 ```{r, highlight.output = 5}
 lm(Weight ~ WingLength, data = Sparrows) %>%
-  tidy(conf.int = TRUE)
+  tidy(conf.int = TRUE) #<<
 ```
 ]
 
@@ -592,11 +593,13 @@ ggplot(null_stats) +
 ## Sparrows
 
 ```{r, echo = FALSE, fig.height = 2}
-ggplot(null_stats) +
+null_stats_bigger <- data.frame(
+  statistic = rt(10000, df = 114)
+)
+ggplot(null_stats_bigger) +
   geom_histogram(aes(x = statistic, y = ..density..), bins = 70) + 
-  geom_line(data = normal_data, aes(x = statistic, y = y_t), color = "green") + 
     labs(title = "Histogram of statistics under the null",
-       subtitle = "Overlaid with a t-distribution")
+         subtitle = "t-distribution with 114 degrees of freedom")
 ```
 
 .small[
@@ -611,12 +614,11 @@ lm(Weight ~ WingLength, data = Sparrows) %>%
 ## Sparrows
 
 ```{r, echo = FALSE, fig.height = 2}
-ggplot(null_stats) +
+ggplot(null_stats_bigger) +
   geom_histogram(aes(x = statistic, y = ..density..), bins = 70) + 
-  geom_line(data = normal_data, aes(x = statistic, y = y_t), color = "green") +
   geom_vline(xintercept = 13.463, lwd = 1.5) + 
     labs(title = "Histogram of statistics under the null",
-       subtitle = "Overlaid with a t-distribution")
+         subtitle = "t-distribution with 114 degrees of freedom")
 ```
 
 ---
@@ -628,12 +630,11 @@ How can we compare this line to the distribution under the null?
 ]
 
 ```{r, echo = FALSE, fig.height = 2}
-ggplot(null_stats) +
+ggplot(null_stats_bigger) +
   geom_histogram(aes(x = statistic, y = ..density..), bins = 70) + 
-  geom_line(data = normal_data, aes(x = statistic, y = y_t), color = "green") +
   geom_vline(xintercept = 13.463, lwd = 1.5) + 
     labs(title = "Histogram of statistics under the null",
-       subtitle = "Overlaid with a t-distribution")
+         subtitle = "t-distribution with 114 degrees of freedom")
 ```
 
 --
@@ -653,13 +654,12 @@ The probability of getting a statistic as extreme or more extreme than the obser
 ## Sparrows
 
 ```{r, echo = FALSE, fig.height = 2}
-ggplot(null_stats) +
+ggplot(null_stats_bigger) +
   geom_histogram(aes(x = statistic, y = ..density..), bins = 70) + 
-  geom_line(data = normal_data, aes(x = statistic, y = y_t), color = "green") +
   geom_vline(xintercept = 13.463, lwd = 1.5) + 
   geom_vline(xintercept = -13.463, lwd = 1.5) +
     labs(title = "Histogram of statistics under the null",
-       subtitle = "Overlaid with a t-distribution")
+         subtitle = "t-distribution with 114 degrees of freedom")
 ```
 
 .small[
@@ -671,7 +671,7 @@ lm(Weight ~ WingLength, data = Sparrows) %>%
 
 ---
 
-## Sparrows
+## Return to generated data, n = 20
 
 ```{r, echo = FALSE}
 null_stats$shade <- ifelse(null_stats$statistic > 1.5 | null_stats$statistic < -1.5, TRUE, FALSE)
@@ -686,7 +686,7 @@ ggplot(null_stats) +
   theme(legend.position = "none")
 ```
 
-* Statistic 1.5
+* Let's say we get a statistic of **1.5** in a sample
 ---
 
 ## Let's do it in R!
@@ -882,47 +882,3 @@ If we use the same sampling method to select different samples and computed an i
 ## <i class="fas fa-laptop"></i> `Porsche Price (3)`
 
 - Go to RStudio Cloud and open `Porsche Price (3)`
-
----
-
-# Partitioning variability
-
-![](img/06/partitioning.png)
-
----
-
-# Why?
-
-* $\Huge y − \hat{y} = (\hat{y} − \bar{y}) + (y − \hat{y})$
---
-
-* $\Large \sum(y − \hat{y})^2 = \sum(\hat{y} − \bar{y})^2 + \sum(y − \hat{y})^2$
---
-
-* ## SSTotal = SSModel + SSE
-
----
-
-# Degrees of freedom
-
-* ## SSTotal: $n-1$
---
-
-* ## SSE: $n-2$
---
-
-* ## SSModel: $n-1 = 1 + (n-2)$ - so 1!
----
-
-# Mean Squares
-
-* $\Huge MSModel = \frac{SSModel}{1}$
---
-
-* $\Huge MSE = \frac{SSE}{n-2}$
-
----
-
-class: middle, center
-
-$\Huge F = \frac{MSModel}MSE}$

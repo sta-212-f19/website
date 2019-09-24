@@ -384,6 +384,7 @@ lm(Weight ~ WingLength, data = Sparrows) %&gt;%
 * p-values
 
 ---
+
 ## Sparrows
 
 .question[
@@ -394,7 +395,7 @@ How do we know what values of this statistic are worth paying attention to?
 
 ```r
 lm(Weight ~ WingLength, data = Sparrows) %&gt;%
-  tidy(conf.int = TRUE)
+* tidy(conf.int = TRUE)
 ```
 
 ```
@@ -740,13 +741,13 @@ lm(Weight ~ WingLength, data = Sparrows) %&gt;%
 
 ---
 
-## Sparrows
+## Return to generated data, n = 20
 
 
 
 ![](06-drawing-inference_files/figure-html/unnamed-chunk-45-1.png)&lt;!-- --&gt;
 
-* Statistic 1.5
+* Let's say we get a statistic of **1.5** in a sample
 ---
 
 ## Let's do it in R!
@@ -996,50 +997,6 @@ If we use the same sampling method to select different samples and computed an i
 ## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `Porsche Price (3)`
 
 - Go to RStudio Cloud and open `Porsche Price (3)`
-
----
-
-# Partitioning variability
-
-![](img/06/partitioning.png)
-
----
-
-# Why?
-
-* `\(\Huge y − \hat{y} = (\hat{y} − \bar{y}) + (y − \hat{y})\)`
---
-
-* `\(\Large \sum(y − \hat{y})^2 = \sum(\hat{y} − \bar{y})^2 + \sum(y − \hat{y})^2\)`
---
-
-* ## SSTotal = SSModel + SSE
-
----
-
-# Degrees of freedom
-
-* ## SSTotal: `\(n-1\)`
---
-
-* ## SSE: `\(n-2\)`
---
-
-* ## SSModel: `\(n-1 = 1 + (n-2)\)` - so 1!
----
-
-# Mean Squares
-
-* `\(\Huge MSModel = \frac{SSModel}{1}\)`
---
-
-* `\(\Huge MSE = \frac{SSE}{n-2}\)`
-
----
-
-class: middle, center
-
-`\(\Huge F = \frac{MSModel}MSE}\)`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

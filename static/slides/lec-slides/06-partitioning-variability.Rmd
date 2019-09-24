@@ -1,0 +1,392 @@
+---
+title: "Partitioning variability"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(Stat2Data)
+data("Sparrows")
+```
+
+# Partitioning variability
+
+![](img/06/partitioning.png)
+
+---
+
+# Why?
+
+* $\Huge y − \hat{y} = (\hat{y} − \bar{y}) + (y − \hat{y})$
+
+--
+
+* $\Large \sum(y − \hat{y})^2 = \sum(\hat{y} − \bar{y})^2 + \sum(y − \hat{y})^2$  
+--
+
+* ## SSTotal = SSModel + SSE
+
+---
+
+# Degrees of freedom
+
+* ### SSTotal: $n-1$
+--
+
+* ### SSE: $n-2$
+--
+
+* ### SSModel: $n-1 = 1 + (n-2)$ - so 1!
+---
+
+# Mean Squares
+
+* $\Huge MSModel = \frac{SSModel}{1}$
+--
+
+* $\Huge MSE = \frac{SSE}{n-2}$
+
+---
+
+class: middle, center
+
+$\Huge F = \frac{MSModel}{MSE}$
+
+---
+
+## F-distribution
+
+Under the **null hypothesis**
+
+```{r, echo = FALSE}
+f <- data.frame(
+  stat = rf(n = 10000, df1 = 1, df2 = 114)
+)
+
+ggplot(f) + 
+  geom_histogram(aes(stat), bins = 40) + 
+  labs(x = "F Statistic")
+```
+
+
+---
+
+
+## Sparrows 
+
+We can see all of these pieces using the `anova()` function
+
+```{r}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  anova()
+```
+
+---
+
+## Sparrows
+
+.small[
+```{r}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  glance()
+```
+]
+
+--
+
+* F-statistic: 181.25
+--
+
+* p-value: 2.62e-25 
+--
+
+* Where did this p-value come from?
+
+---
+
+class: middle
+
+# p-value
+
+The probability of getting a statistic as extreme or more extreme than the observed test statistic **given the null hypothesis is true**
+---
+
+## F-distribution
+
+Under the **null hypothesis**
+
+```{r, echo = FALSE}
+f <- data.frame(
+  stat = rf(n = 10000, df1 = 1, df2 = 114)
+)
+
+ggplot(f) + 
+  geom_histogram(aes(stat), bins = 40) + 
+  labs(x = "F Statistic")
+```
+
+---
+
+## Sparrows: Degrees of freedom
+
+* SSTotal: $n-1$ = 115
+--
+
+* SSE: ?
+--
+
+* SSModel: ?
+
+---
+
+## Sparrows: Degrees of freedom
+
+* SSTotal: $n-1$ = 115
+--
+
+* SSE: $n-2$ = 114
+--
+
+* SSModel: 115 - 114 = 1
+
+---
+
+## Sparrows
+
+.question[
+To calculate the p-value under the **t-distribution** we used `pt()`. What do you think we use to calculate the p-value under the **F-distribution**?
+]
+
+.small[
+```{r}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  glance()
+```
+]
+
+---
+
+## Sparrows
+
+.question[
+To calculate the p-value under the **t-distribution** we used `pt()`. What do you think we use to calculate the p-value under the **F-distribution**?
+]
+
+.small[
+```{r}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  glance()
+```
+]
+
+* `pf()`
+--
+
+* it takes 3 arguments: `q`, `df1`, and `df2`. What do you think `df1` and `df2` are?
+
+---
+
+## Sparrows
+
+.question[
+To calculate the p-value under the **t-distribution** we used `pt()`. What do you think we use to calculate the p-value under the **F-distribution**?
+]
+
+.small[
+```{r}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  glance()
+```
+]
+
+```{r}
+pf(181.2535, 1, 114, lower.tail = FALSE) 
+```
+
+---
+
+
+## Sparrows
+
+.question[
+Why don't we multiple this p-value by 2 when we use `pf()`?
+]
+
+.small[
+```{r}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  glance()
+```
+]
+
+```{r}
+pf(181.2535, 1, 114, lower.tail = FALSE) 
+```
+
+---
+
+## F-Distribution
+
+Under the **null hypothesis**
+
+```{r, echo = FALSE}
+ggplot(f) + 
+  geom_histogram(aes(stat), bins = 40) + 
+  labs(x = "F Statistic")
+```
+
+* We observed an F-statistic of 181.25, but for demonstration purposes, let's assume we saw one of 2.
+---
+
+## F-Distribution
+
+Under the **null hypothesis**
+
+```{r, echo = FALSE}
+f$shaded <- ifelse(f$stat > 2, TRUE, FALSE)
+
+ggplot(f) + 
+  geom_histogram(aes(stat, fill = shaded), bins = 40) + 
+  geom_vline(xintercept = 2, lwd = 1.5) +
+  labs(x = "F Statistic") +
+  theme(legend.position = "none")
+```
+
+* We observed an F-statistic of 181.25, but for demonstration purposes, let's assume we saw one of 2.
+---
+
+## F-Distribution
+
+Under the **null hypothesis**
+
+```{r, echo = FALSE}
+f$shaded <- ifelse(f$stat > 2, TRUE, FALSE)
+
+ggplot(f) + 
+  geom_histogram(aes(stat, fill = shaded), bins = 40) + 
+  geom_vline(xintercept = 2, lwd = 1.5) +
+  labs(x = "F Statistic") +
+  theme(legend.position = "none")
+```
+
+* Are there any negative values in an F-distribution? 
+---
+
+## F-Distribution
+
+Under the **null hypothesis**
+
+```{r, echo = FALSE}
+f$shaded <- ifelse(f$stat > 2, TRUE, FALSE)
+
+ggplot(f) + 
+  geom_histogram(aes(stat, fill = shaded), bins = 40) + 
+  geom_vline(xintercept = 2, lwd = 1.5) +
+  labs(x = "F Statistic") +
+  theme(legend.position = "none")
+```
+
+* The p-value calculates values "as extreme or more extreme", in the **t-distribution** "more extreme values", defined as farther from 0, can be positive **or** negative. Not so for the F!
+
+---
+
+## Sparrows
+
+### Notice the p-value for the F-test is the same as the p-value for the t-test for $\beta_1$!
+
+.small[
+```{r, highlight.output = 4}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  glance()
+```
+]
+
+.small[
+```{r, highlight.output = 5}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  tidy()
+```
+]
+
+---
+
+## Sparrows
+
+.question[
+What is the F-test testing?
+]
+
+.small[
+```{r}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  glance()
+```
+]
+
+--
+
+* **null hypothesis**: the fit of the **intercept only model** (with $\hat\beta_0$ only) and your model (in this case, $\hat\beta_0 + \hat\beta_1x$ ) are equivalent
+
+--
+* **alternative hypothesis**: The fit of the intercept only model is significantly worse compared to your model
+
+--
+* When we only have one variable in our model, $x$, the p-values from the F and t are going to be equivalent
+
+---
+
+## Sparrows
+
+.small[
+.question[
+How are the test statistics related between the F and the t?
+]
+]
+
+.small[
+```{r, highlight.output = 4}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  glance()
+```
+]
+
+.small[
+```{r, highlight.output = 5}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  tidy()
+```
+]
+
+--
+.pull-left[
+```{r}
+13.5^2
+```
+]
+
+.pull-right[
+```{r, echo = FALSE}
+13.5^2
+```
+]

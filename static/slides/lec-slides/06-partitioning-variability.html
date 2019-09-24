@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Partitioning variability</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Partitioning variability
+
+---
+
+
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+by Dr. Lucy D'Agostino McGowan
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+# Partitioning variability
+
+![](img/06/partitioning.png)
+
+---
+
+# Why?
+
+* `\(\Huge y − \hat{y} = (\hat{y} − \bar{y}) + (y − \hat{y})\)`
+
+--
+
+* `\(\Large \sum(y − \hat{y})^2 = \sum(\hat{y} − \bar{y})^2 + \sum(y − \hat{y})^2\)`  
+--
+
+* ## SSTotal = SSModel + SSE
+
+---
+
+# Degrees of freedom
+
+* ### SSTotal: `\(n-1\)`
+--
+
+* ### SSE: `\(n-2\)`
+--
+
+* ### SSModel: `\(n-1 = 1 + (n-2)\)` - so 1!
+---
+
+# Mean Squares
+
+* `\(\Huge MSModel = \frac{SSModel}{1}\)`
+--
+
+* `\(\Huge MSE = \frac{SSE}{n-2}\)`
+
+---
+
+class: middle, center
+
+`\(\Huge F = \frac{MSModel}{MSE}\)`
+
+---
+
+## F-distribution
+
+Under the **null hypothesis**
+
+![](06-partitioning-variability_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+
+---
+
+
+## Sparrows 
+
+We can see all of these pieces using the `anova()` function
+
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  anova()
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: Weight
+##             Df Sum Sq Mean Sq F value    Pr(&gt;F)
+## WingLength   1 355.05  355.05  181.25 &lt; 2.2e-16
+## Residuals  114 223.31    1.96
+```
+
+---
+
+## Sparrows
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  glance()
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.614         0.611  1.40      181. 2.62e-25     2  -203.  411.  419.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+]
+
+--
+
+* F-statistic: 181.25
+--
+
+* p-value: 2.62e-25 
+--
+
+* Where did this p-value come from?
+
+---
+
+class: middle
+
+# p-value
+
+The probability of getting a statistic as extreme or more extreme than the observed test statistic **given the null hypothesis is true**
+---
+
+## F-distribution
+
+Under the **null hypothesis**
+
+![](06-partitioning-variability_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+---
+
+## Sparrows: Degrees of freedom
+
+* SSTotal: `\(n-1\)` = 115
+--
+
+* SSE: ?
+--
+
+* SSModel: ?
+
+---
+
+## Sparrows: Degrees of freedom
+
+* SSTotal: `\(n-1\)` = 115
+--
+
+* SSE: `\(n-2\)` = 114
+--
+
+* SSModel: 115 - 114 = 1
+
+---
+
+## Sparrows
+
+.question[
+To calculate the p-value under the **t-distribution** we used `pt()`. What do you think we use to calculate the p-value under the **F-distribution**?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  glance()
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.614         0.611  1.40      181. 2.62e-25     2  -203.  411.  419.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+]
+
+---
+
+## Sparrows
+
+.question[
+To calculate the p-value under the **t-distribution** we used `pt()`. What do you think we use to calculate the p-value under the **F-distribution**?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  glance()
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.614         0.611  1.40      181. 2.62e-25     2  -203.  411.  419.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+]
+
+* `pf()`
+--
+
+* it takes 3 arguments: `q`, `df1`, and `df2`. What do you think `df1` and `df2` are?
+
+---
+
+## Sparrows
+
+.question[
+To calculate the p-value under the **t-distribution** we used `pt()`. What do you think we use to calculate the p-value under the **F-distribution**?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  glance()
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.614         0.611  1.40      181. 2.62e-25     2  -203.  411.  419.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+]
+
+
+```r
+pf(181.2535, 1, 114, lower.tail = FALSE) 
+```
+
+```
+## [1] 2.621946e-25
+```
+
+---
+
+
+## Sparrows
+
+.question[
+Why don't we multiple this p-value by 2 when we use `pf()`?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  glance()
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.614         0.611  1.40      181. 2.62e-25     2  -203.  411.  419.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+]
+
+
+```r
+pf(181.2535, 1, 114, lower.tail = FALSE) 
+```
+
+```
+## [1] 2.621946e-25
+```
+
+---
+
+## F-Distribution
+
+Under the **null hypothesis**
+
+![](06-partitioning-variability_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+* We observed an F-statistic of 181.25, but for demonstration purposes, let's assume we saw one of 2.
+---
+
+## F-Distribution
+
+Under the **null hypothesis**
+
+![](06-partitioning-variability_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+* We observed an F-statistic of 181.25, but for demonstration purposes, let's assume we saw one of 2.
+---
+
+## F-Distribution
+
+Under the **null hypothesis**
+
+![](06-partitioning-variability_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+* Are there any negative values in an F-distribution? 
+---
+
+## F-Distribution
+
+Under the **null hypothesis**
+
+![](06-partitioning-variability_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+* The p-value calculates values "as extreme or more extreme", in the **t-distribution** "more extreme values", defined as farther from 0, can be positive **or** negative. Not so for the F!
+
+---
+
+## Sparrows
+
+### Notice the p-value for the F-test is the same as the p-value for the t-test for `\(\beta_1\)`!
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  glance()
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+*## 1     0.614         0.611  1.40      181. 2.62e-25     2  -203.  411.  419.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25
+```
+]
+
+---
+
+## Sparrows
+
+.question[
+What is the F-test testing?
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  glance()
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.614         0.611  1.40      181. 2.62e-25     2  -203.  411.  419.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+]
+
+--
+
+* **null hypothesis**: the fit of the **intercept only model** (with `\(\hat\beta_0\)` only) and your model (in this case, `\(\hat\beta_0 + \hat\beta_1x\)` ) are equivalent
+
+--
+* **alternative hypothesis**: The fit of the intercept only model is significantly worse compared to your model
+
+--
+* When we only have one variable in our model, `\(x\)`, the p-values from the F and t are going to be equivalent
+
+---
+
+## Sparrows
+
+.small[
+.question[
+How are the test statistics related between the F and the t?
+]
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  glance()
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+*## 1     0.614         0.611  1.40      181. 2.62e-25     2  -203.  411.  419.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+]
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25
+```
+]
+
+--
+.pull-left[
+
+```r
+13.5^2
+```
+
+```
+## [1] 182.25
+```
+]
+
+.pull-right[
+
+```
+## [1] 182.25
+```
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
