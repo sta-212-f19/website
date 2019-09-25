@@ -50,6 +50,14 @@ by Dr. Lucy D'Agostino McGowan
 
 ---
 
+class: middle
+
+# coefficient of determination
+
+Often referred to as `\(\color{blue}r^2\)`, it is the fraction of the response variability that is explained by the model.
+
+---
+
 ## Coefficient of determination
 
 * `\(\Large r^2 = \frac{\textrm{Variability explained by the model}}{\textrm{Total variability in } y}\)`
@@ -68,9 +76,26 @@ by Dr. Lucy D'Agostino McGowan
 
 ---
 
-## T-test for correlation
+## Let's do it in R!
 
-* **null hypothesis**: $H_0:
+
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  glance()
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+*## 1     0.614         0.611  1.40      181. 2.62e-25     2  -203.  411.  419.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+
+61% of the variation in "Weight" is explained by "Wing Length".
+
+---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

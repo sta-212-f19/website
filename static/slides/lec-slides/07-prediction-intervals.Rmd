@@ -1,0 +1,237 @@
+---
+title: "Prediction intervals"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(Stat2Data)
+data("Sparrows")
+```
+
+class: middle
+
+# confidence intervals
+
+If we use the same sampling method to select different samples and computed an interval estimate for each sample, we would expect the true population parameter ( $\beta_1$ ) to fall within the interval estimates 95% of the time.
+
+---
+
+# Confidence interval for $\beta_1$
+
+.question[
+How do we calculate the confidence interval for the slope?
+]
+
+--
+
+.center[
+
+
+$\Huge\hat\beta_1\pm t^*SE_{\hat\beta_1}$
+
+]
+---
+
+## How do we calculate it in R?
+
+* using the **broom** package
+
+.small[
+```{r, highlight.output = 5}
+lm(Weight ~ WingLength, Sparrows) %>%
+  tidy(conf.int = TRUE)
+```
+]
+
+--
+
+* "by hand"
+
+.small[
+```{r}
+t_star <- qt(0.025, df = 116 - 2, lower.tail = FALSE)
+# or
+t_star <- qt(0.975, df = 116 - 2)
+```
+
+.pull-left[
+```{r}
+0.467 - t_star * 0.0347
+```
+]
+.pull-right[
+```{r}
+0.467 + t_star * 0.0347
+```
+]
+]
+
+---
+
+## Confidence intervals
+
+There are `r emo::ji("v")` other types of confidence intervals we may want to calculate
+
+--
+* The confidence interval for the **mean response** in $y$ for a given $x^*$ value
+
+--
+* The confidence interval for an **individual response** $y$ for a given $x^*$ value
+
+---
+
+## Confidence intervals
+
+There are `r emo::ji("v")` other types of confidence intervals we may want to calculate
+
+
+* The confidence interval for the **mean response** in $y$ for a given $x^*$ value: **confidence interval for** $\mu_y$
+* The confidence interval for an **individual response** $y$ for a given $x^*$ value: **prediction interval**
+
+--
+* Why are these different? Which do you think is easier to estimate?
+
+--
+* It is **harder** to predict one response than to predict a mean response. What does this mean in terms of the standard error?
+
+--
+* The SE of the prediction interval is going to be **larger**
+
+---
+
+## Confidence intervals
+
+**confidence interval for** $\mu_y$ and **prediction interval**
+
+.center[
+
+$\Huge \hat{y}\pm t^* SE$
+
+]
+
+* $\hat{y}$ is the predicted $y$ for a given $x^*$
+* $t^*$ is the critical value for the $t_{n-2}$ density curve
+* $SE$ takes `r emo::ji("v")` different values depending on which interval you're interested in
+
+--
+* $SE_{\hat\mu}$
+
+--
+* $SE_{\hat{y}}$
+
+--
+* Which will be larger?
+
+---
+
+## Confidence intervals
+
+**confidence interval for** $\mu_y$ and **prediction interval**
+
+.center[
+
+$\Huge \hat{y}\pm t^* SE$
+
+]
+
+* $\hat{y}$ is the predicted $y$ for a given $x^*$
+* $t^*$ is the critical value for the $t_{n-2}$ density curve
+* $SE$ takes `r emo::ji("v")` different values depending on which interval you're interested in
+* $SE_{\hat\mu} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n}+\frac{(x^*-\bar{x})^2}{\Sigma(x-\bar{x})^2}}$
+* $SE_{\hat{y}}=\hat{\sigma}_\epsilon\sqrt{1 + \frac{1}{n}+\frac{(x^*-\bar{x})^2}{\Sigma(x-\bar{x})^2}}$
+* Which will be larger?
+
+--
+* What is the difference between these two equations?
+
+---
+
+## Confidence intervals
+
+**confidence interval for** $\mu_y$ and **prediction interval**
+
+.center[
+
+$\Huge \hat{y}\pm t^* SE$
+
+]
+
+* $\hat{y}$ is the predicted $y$ for a given $x^*$
+* $t^*$ is the critical value for the $t_{n-2}$ density curve
+* $SE$ takes `r emo::ji("v")` different values depending on which interval you're interested in
+* $SE_{\hat\mu} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n}+\frac{(x^*-\bar{x})^2}{\Sigma(x-\bar{x})^2}}$
+* $SE_{\hat{y}}=\hat{\sigma}_\epsilon\sqrt{\color{red}1 + \frac{1}{n}+\frac{(x^*-\bar{x})^2}{\Sigma(x-\bar{x})^2}}$
+
+--
+* an individual response will vary from the mean response $\mu_y$ with a standard deviation of $\sigma_\epsilon$
+---
+
+## Let's do it in R!
+
+.small[
+```{r, eval = FALSE}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  predict() 
+```
+
+```{r, echo = FALSE}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  predict() %>% 
+  head(3)
+```
+]
+
+--
+
+.small[
+```{r, eval = FALSE}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  predict(interval = "confidence")  #<<
+```
+
+```{r, echo = FALSE}
+lm(Weight ~ WingLength, data = Sparrows) %>% 
+  predict(interval = "confidence") %>% 
+  head(3)
+```
+]
+
+--
+
+.small[
+```{r, eval = FALSE}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  predict(interval = "prediction") #<<
+```
+
+`## WARNING predictions on current data refer to _future_ responses`
+```{r, echo = FALSE, warning = FALSE}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  predict(interval = "prediction") %>% 
+  head(3)
+```
+]
+
+

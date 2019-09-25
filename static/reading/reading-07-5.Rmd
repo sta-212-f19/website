@@ -17,3 +17,4 @@ Thursday, Sept 26
 
 - Stat2:
     + Section 2.3: Regression and Correlation
+    + Section 2.4: Intervals for Predictions

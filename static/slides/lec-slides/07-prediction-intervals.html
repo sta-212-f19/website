@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Prediction intervals</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Prediction intervals
+
+---
+
+
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+by Dr. Lucy D'Agostino McGowan
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+class: middle
+
+# confidence intervals
+
+If we use the same sampling method to select different samples and computed an interval estimate for each sample, we would expect the true population parameter ( `\(\beta_1\)` ) to fall within the interval estimates 95% of the time.
+
+---
+
+# Confidence interval for `\(\beta_1\)`
+
+.question[
+How do we calculate the confidence interval for the slope?
+]
+
+--
+
+.center[
+
+
+`\(\Huge\hat\beta_1\pm t^*SE_{\hat\beta_1}\)`
+
+]
+---
+
+## How do we calculate it in R?
+
+* using the **broom** package
+
+.small[
+
+```r
+lm(Weight ~ WingLength, Sparrows) %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 2 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    1.37     0.957       1.43 1.56e- 1   -0.531     3.26 
+*## 2 WingLength     0.467    0.0347     13.5  2.62e-25    0.399     0.536
+```
+]
+
+--
+
+* "by hand"
+
+.small[
+
+```r
+t_star &lt;- qt(0.025, df = 116 - 2, lower.tail = FALSE)
+# or
+t_star &lt;- qt(0.975, df = 116 - 2)
+```
+
+.pull-left[
+
+```r
+0.467 - t_star * 0.0347
+```
+
+```
+## [1] 0.3982596
+```
+]
+.pull-right[
+
+```r
+0.467 + t_star * 0.0347
+```
+
+```
+## [1] 0.5357404
+```
+]
+]
+
+---
+
+## Confidence intervals
+
+There are ✌️ other types of confidence intervals we may want to calculate
+
+--
+* The confidence interval for the **mean response** in `\(y\)` for a given `\(x^*\)` value
+
+--
+* The confidence interval for an **individual response** `\(y\)` for a given `\(x^*\)` value
+
+---
+
+## Confidence intervals
+
+There are ✌️ other types of confidence intervals we may want to calculate
+
+
+* The confidence interval for the **mean response** in `\(y\)` for a given `\(x^*\)` value: **confidence interval for** `\(\mu_y\)`
+* The confidence interval for an **individual response** `\(y\)` for a given `\(x^*\)` value: **prediction interval**
+
+--
+* Why are these different? Which do you think is easier to estimate?
+
+--
+* It is **harder** to predict one response than to predict a mean response. What does this mean in terms of the standard error?
+
+--
+* The SE of the prediction interval is going to be **larger**
+
+---
+
+## Confidence intervals
+
+**confidence interval for** `\(\mu_y\)` and **prediction interval**
+
+.center[
+
+`\(\Huge \hat{y}\pm t^* SE\)`
+
+]
+
+* `\(\hat{y}\)` is the predicted `\(y\)` for a given `\(x^*\)`
+* `\(t^*\)` is the critical value for the `\(t_{n-2}\)` density curve
+* `\(SE\)` takes ✌️ different values depending on which interval you're interested in
+
+--
+* `\(SE_{\hat\mu}\)`
+
+--
+* `\(SE_{\hat{y}}\)`
+
+--
+* Which will be larger?
+
+---
+
+## Confidence intervals
+
+**confidence interval for** `\(\mu_y\)` and **prediction interval**
+
+.center[
+
+`\(\Huge \hat{y}\pm t^* SE\)`
+
+]
+
+* `\(\hat{y}\)` is the predicted `\(y\)` for a given `\(x^*\)`
+* `\(t^*\)` is the critical value for the `\(t_{n-2}\)` density curve
+* `\(SE\)` takes ✌️ different values depending on which interval you're interested in
+* `\(SE_{\hat\mu} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n}+\frac{(x^*-\bar{x})^2}{\Sigma(x-\bar{x})^2}}\)`
+* `\(SE_{\hat{y}}=\hat{\sigma}_\epsilon\sqrt{1 + \frac{1}{n}+\frac{(x^*-\bar{x})^2}{\Sigma(x-\bar{x})^2}}\)`
+* Which will be larger?
+
+--
+* What is the difference between these two equations?
+
+---
+
+## Confidence intervals
+
+**confidence interval for** `\(\mu_y\)` and **prediction interval**
+
+.center[
+
+`\(\Huge \hat{y}\pm t^* SE\)`
+
+]
+
+* `\(\hat{y}\)` is the predicted `\(y\)` for a given `\(x^*\)`
+* `\(t^*\)` is the critical value for the `\(t_{n-2}\)` density curve
+* `\(SE\)` takes ✌️ different values depending on which interval you're interested in
+* `\(SE_{\hat\mu} = \hat{\sigma}_\epsilon\sqrt{\frac{1}{n}+\frac{(x^*-\bar{x})^2}{\Sigma(x-\bar{x})^2}}\)`
+* `\(SE_{\hat{y}}=\hat{\sigma}_\epsilon\sqrt{\color{red}1 + \frac{1}{n}+\frac{(x^*-\bar{x})^2}{\Sigma(x-\bar{x})^2}}\)`
+
+--
+* an individual response will vary from the mean response `\(\mu_y\)` with a standard deviation of `\(\sigma_\epsilon\)`
+---
+
+## Let's do it in R!
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+  predict() 
+```
+
+
+```
+##        1        2        3 
+## 14.92020 15.85501 13.05059
+```
+]
+
+--
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;% 
+* predict(interval = "confidence")
+```
+
+
+```
+##        fit      lwr      upr
+## 1 14.92020 14.63801 15.20240
+## 2 15.85501 15.49396 16.21607
+## 3 13.05059 12.74776 13.35342
+```
+]
+
+--
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+* predict(interval = "prediction")
+```
+
+`## WARNING predictions on current data refer to _future_ responses`
+
+```
+##        fit      lwr      upr
+## 1 14.92020 12.13329 17.70712
+## 2 15.85501 13.05902 18.65101
+## 3 13.05059 10.26151 15.83966
+```
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

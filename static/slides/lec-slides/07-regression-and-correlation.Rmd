@@ -49,6 +49,14 @@ data("Sparrows")
 
 ---
 
+class: middle
+
+# coefficient of determination
+
+Often referred to as $\color{blue}r^2$, it is the fraction of the response variability that is explained by the model.
+
+---
+
 ## Coefficient of determination
 
 * $\Large r^2 = \frac{\textrm{Variability explained by the model}}{\textrm{Total variability in } y}$
@@ -67,6 +75,14 @@ data("Sparrows")
 
 ---
 
-## T-test for correlation
+## Let's do it in R!
 
-* **null hypothesis**: $H_0: 
+
+```{r, highlight.output = 4}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  glance()
+```
+
+61% of the variation in "Weight" is explained by "Wing Length".
+
+---

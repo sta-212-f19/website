@@ -844,7 +844,7 @@ If we use the same sampling method to select different samples and computed an i
 
 --
 
-* `\(t^*\)` is the critical value for the `\(t_n−2\)` density curve to obtain the desired confidence level
+* `\(t^*\)` is the critical value for the `\(t_{n−2}\)` density curve to obtain the desired confidence level
 --
 
 * Often we want a **95% confidence level**.  
@@ -968,8 +968,8 @@ lm(Weight ~ WingLength, data = Sparrows) %&gt;%
 
 
 ```r
-c &lt;- qt(0.025, df = nrow(Sparrows) - 2, lower.tail = FALSE)
-0.467 + c * 0.0347
+t_star &lt;- qt(0.025, df = nrow(Sparrows) - 2, lower.tail = FALSE)
+0.467 + t_star * 0.0347
 ```
 
 ```
@@ -977,7 +977,7 @@ c &lt;- qt(0.025, df = nrow(Sparrows) - 2, lower.tail = FALSE)
 ```
 
 ```r
-0.467 - c * 0.0347
+0.467 - t_star * 0.0347
 ```
 
 ```

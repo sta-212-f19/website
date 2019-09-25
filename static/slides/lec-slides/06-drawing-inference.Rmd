@@ -790,7 +790,7 @@ $\Huge \hat\beta_1 \pm t^∗ \times SE_{\hat\beta_1}$
 
 --
 
-* $t^*$ is the critical value for the $t_n−2$ density curve to obtain the desired confidence level
+* $t^*$ is the critical value for the $t_{n−2}$ density curve to obtain the desired confidence level
 --
 
 * Often we want a **95% confidence level**.  
@@ -864,9 +864,9 @@ options(digits = 3)
 ```
 
 ```{r}
-c <- qt(0.025, df = nrow(Sparrows) - 2, lower.tail = FALSE)
-0.467 + c * 0.0347
-0.467 - c * 0.0347
+t_star <- qt(0.025, df = nrow(Sparrows) - 2, lower.tail = FALSE)
+0.467 + t_star * 0.0347
+0.467 - t_star * 0.0347
 ```
 
 ---
