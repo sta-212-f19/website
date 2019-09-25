@@ -261,6 +261,46 @@ lm(Weight ~ WingLength, data = Sparrows) %&gt;%
 ## 3 13.05059 10.26151 15.83966
 ```
 ]
+
+---
+
+## Let's do it in R!
+
+What if we have new data?
+.small[
+
+```r
+new_sparrows &lt;- data.frame(
+  WingLength = c(30, 28, 25)
+)
+new_sparrows
+```
+
+```
+##   WingLength
+## 1         30
+## 2         28
+## 3         25
+```
+]
+
+--
+
+.small[
+
+```r
+lm(Weight ~ WingLength, data = Sparrows) %&gt;%
+  predict(newdata = new_sparrows, interval = "prediction")
+```
+
+```
+##        fit      lwr      upr
+## 1 15.38761 12.59700 18.17822
+## 2 14.45280 11.66790 17.23771
+## 3 13.05059 10.26151 15.83966
+```
+
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

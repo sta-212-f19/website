@@ -1,0 +1,63 @@
+---
+title: "Lab 04 - Math Enrollment"
+subtitle: "Interpreting Results"
+output: 
+  tufte::tufte_html:
+    tufte_variant: "envisioned"
+    highlight: pygments
+    css: lab.css
+link-citations: yes
+---
+
+
+**Due:** 2019-10-03 at noon
+**Turn in the .html file on Sakai**
+
+Total enrollments in mathematics courses at a small liberal arts college were obtained for each semester from Fall 2001 to Spring 2012. The academic year at this school consists of two semesters, with enrollment counts for `Fall` and `Spring` each year. The variable `AYear` indicates the year at the beginning of the academic year. The data is in the **Stat2Data** package. The dataset is called `MathEnrollment`. 
+
+Be sure to load the proper packages and the dataset before you begin. 
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(Stat2Data)
+library(broom)
+data("MathEnrollment")
+```
+
+1. Fit a simple linear regression predicting `Spring` enrollment from `Fall` in the `MathEnrollment` data set. Using the `tidy()` function, report the intercept and slope of this model. Interpret these results.
+
+2. Using the `glance()` function, find the **F-statistic** and it's associated **p-value** as well as the **coefficient of determination** for the model fit in Exercise 1. Interpret these results.
+
+3. There is some discussion in the department that the data point for 2003 is an "influential" point. Create a new dataset filtering out when `AYear` is 2003. Refit a simple linear regression model predicting `Spring` enrollment from `Fall` in this filtered dataset. Do you think 2003 is influential?
+
+4. Use the `glance()` function to summarize the model statistics from Exercise 3.  What percent of the variability in spring enrollment is explained by using a simple linear model with fall enrollment as the predictor?
+
+5. Provide a 95% confidence interval for the slope of the model fit in Exercise 3. Does this interval include 0? Interpret this result.
+
+6. Using the model fit in Exercise 3, what would you predict the spring enrollment to be when the fall enrollment is 290?
+
+7. Provide a 95% confidence interval for mean spring enrollment when the fall enrollment is 290.
+
+8. Provide a 95% prediction interval for spring enrollment when the fall enrollment is 290.
+
+9. A new administrator at the college wants to know what interval she should use to predict the enrollment next spring when the enrollment next fall is 290. Would you recommend that she use your interval from Exercise 7 or the interval from Exercise 8? Explain.
+
+## Principles of Data Analysis
+
+10. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
+
+- **data matching**: 
+- **exhaustive**: 
+- **skeptical**:
+- **second order**:
+- **transparency**:
+- **reproducible**:
+
+# Grading
+
+Total                          | 100 pts
+-------------------------------|--------
+Changed `author` in YAML       | 3 pts
+All plots include title, labels | 10 pts
+Exercises 1-9                   | 9 pts
+Exercise 10                   | 5 pts

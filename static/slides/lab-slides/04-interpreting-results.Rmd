@@ -1,0 +1,96 @@
+---
+title: "Lab 04: Interpreting Results"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "lab-slides.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+
+layout: true
+  
+<div class="my-footer">
+<span>
+Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(Stat2Data)
+data("PorschePrice")
+```
+
+# Agenda
+
+* **Creating a data.frame**
+* **Tips:** Review some common mistakes
+* **Lab 04:** on your own
+
+---
+## Creating a data frame
+
+* We have been working with a lot of data frames in R, for example `PorschePrice`, `Sparrows`, `Pines`. 
+
+--
+* To use the `predict()` function to predict values for a _new_ observation, we need to create a data frame.
+
+--
+* We can use the `data.frame()` function for this. 
+
+--
+* For example, if we fit a simple linear regression model predicting Porsche prices from mileage and we wanted to predict the price of a car with 50,000 miles, we could do this:
+
+```{r}
+new_porscheprice <- data.frame(
+  Mileage = 50
+)
+```
+
+---
+
+## Predict new values 
+
+* If we fit a simple linear regression model predicting Porsche prices from mileage and we wanted to predict the price of a car with 50,000 miles, we could do this:
+
+```{r}
+new_porscheprice <- data.frame(
+  Mileage = 50
+)
+```
+
+* Then we can use this in the `predict()` function:
+
+
+```{r}
+lm(Price ~ Mileage, PorschePrice) %>%
+  predict(newdata = new_porscheprice, interval = "prediction")
+```
+
+---
+## Lab introduction
+
+- Lab instructions posted on the course website under `</>`
+    + Let's go find today's lab!
+    + [bit.ly/sta-212-f19](https://bit.ly/sta-212-f19)
+
+---
+
+## Tips
+
+- Don't forget to change your name in the `yaml`
+- Be ready to troubleshoot your document, since it will likely fail to knit on multiple occasions throughout the process. Read the error message carefully and take note of which line is preventing a successful knit.
+- Make sure to keep track of your various chunks and to keep text and code in the right place.
+- Remember that your R Markdown file is not aware of your project's global environment and can only make use of variables, functions, etc. that you have loaded or defined in the document.
+- Remind yourself how the pipe operator (`%>%`) works.
+- If you're unsure how a function works or what its arguments are, simply type `?` in front of it and hit enter (`?read_csv` for instance). The "Help" tab will open and provide a summary of the function as well as some examples.
+- Make sure to label your plots!
+    

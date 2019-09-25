@@ -234,4 +234,26 @@ lm(Weight ~ WingLength, data = Sparrows) %>%
 ```
 ]
 
+---
 
+## Let's do it in R!
+
+What if we have new data?
+.small[
+```{r}
+new_sparrows <- data.frame(
+  WingLength = c(30, 28, 25)
+)
+new_sparrows
+```
+]
+
+--
+
+.small[
+```{r}
+lm(Weight ~ WingLength, data = Sparrows) %>%
+  predict(newdata = new_sparrows, interval = "prediction")
+```
+
+]

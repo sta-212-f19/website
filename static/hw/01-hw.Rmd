@@ -15,7 +15,7 @@ Open RStudio cloud and click on `Homework 1`.
 
 ## Methods
 
-The dataset Pines contains data from an experiment conducted by the Department of Biology at Kenyon College at a site near the campus in Gambier, Ohio.13 In April 1990, student and faculty volunteers planted 1000 white pine (Pinus strobes) seedlings at the Brown Family Environmental Center. These seedlings were planted in two grids, distinguished by 10- and 15-foot spacings between the seedlings. Several variables, described below, were measured and recorded for each seedling over time.
+The dataset Pines contains data from an experiment conducted by the Department of Biology at Kenyon College at a site near the campus in Gambier, Ohio. In April 1990, student and faculty volunteers planted 1000 white pine (Pinus strobes) seedlings at the Brown Family Environmental Center. These seedlings were planted in two grids, distinguished by 10- and 15-foot spacings between the seedlings. Several variables, described below, were measured and recorded for each seedling over time.
 
 Variable | Description
 ---------|-----------------
