@@ -88,6 +88,43 @@ lm(Price ~ Mileage, PorschePrice) %&gt;%
 ```
 
 ---
+
+## R output
+
+
+```r
+lm(Price ~ Mileage, PorschePrice) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   71.1      2.37        30.0 7.87e-23
+## 2 Mileage       -0.589    0.0566     -10.4 3.98e-11
+```
+
+---
+
+## R Output
+
+
+```r
+lm(Price ~ Mileage, PorschePrice) %&gt;%
+  anova()
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: Price
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)
+## Mileage    1 5565.7  5565.7  108.25 3.982e-11
+## Residuals 28 1439.6    51.4
+```
+
+---
 ## Exam expectations
 
 * 3 or 4 questions with multiple parts

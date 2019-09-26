@@ -26,6 +26,7 @@ Dr. Lucy D'Agostino McGowan
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 library(tidyverse)
 library(Stat2Data)
+library(broom)
 data("PorschePrice")
 ```
 
@@ -75,6 +76,24 @@ new_porscheprice <- data.frame(
 ```{r}
 lm(Price ~ Mileage, PorschePrice) %>%
   predict(newdata = new_porscheprice, interval = "prediction")
+```
+
+---
+
+## R output
+
+```{r}
+lm(Price ~ Mileage, PorschePrice) %>%
+  tidy()
+```
+
+---
+
+## R Output
+
+```{r}
+lm(Price ~ Mileage, PorschePrice) %>%
+  anova()
 ```
 
 ---

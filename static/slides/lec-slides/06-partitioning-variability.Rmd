@@ -38,11 +38,11 @@ data("Sparrows")
 
 # Why?
 
-* $\Huge y − \hat{y} = (\hat{y} − \bar{y}) + (y − \hat{y})$
+* $\Huge y − \bar{y} = (\hat{y} − \bar{y}) + (y − \hat{y})$
 
 --
 
-* $\Large \sum(y − \hat{y})^2 = \sum(\hat{y} − \bar{y})^2 + \sum(y − \hat{y})^2$  
+* $\Large \sum(y − \bar{y})^2 = \sum(\hat{y} − \bar{y})^2 + \sum(y − \hat{y})^2$  
 --
 
 * ## SSTotal = SSModel + SSE
