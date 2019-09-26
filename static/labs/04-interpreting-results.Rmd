@@ -32,19 +32,21 @@ data("MathEnrollment")
 
 4. Use the `glance()` function to summarize the model statistics from Exercise 3.  What percent of the variability in spring enrollment is explained by using a simple linear model with fall enrollment as the predictor?
 
-5. Provide a 95% confidence interval for the slope of the model fit in Exercise 3. Does this interval include 0? Interpret this result.
+5. Provide the ANOVA table for partitioning the total variability in spring enrollment based on this model using the `anova()` function. Using the components of this table, calculate the Total Sum of Squares.
 
-6. Using the model fit in Exercise 3, what would you predict the spring enrollment to be when the fall enrollment is 290?
+6. Provide a 95% confidence interval for the slope of the model fit in Exercise 3. Does this interval include 0? Interpret this result.
 
-7. Provide a 95% confidence interval for mean spring enrollment when the fall enrollment is 290.
+7. Using the model fit in Exercise 3, what would you predict the spring enrollment to be when the fall enrollment is 290?
 
-8. Provide a 95% prediction interval for spring enrollment when the fall enrollment is 290.
+8. Provide a 95% confidence interval for mean spring enrollment when the fall enrollment is 290.
 
-9. A new administrator at the college wants to know what interval she should use to predict the enrollment next spring when the enrollment next fall is 290. Would you recommend that she use your interval from Exercise 7 or the interval from Exercise 8? Explain.
+9. Provide a 95% prediction interval for spring enrollment when the fall enrollment is 290.
+
+10. A new administrator at the college wants to know what interval she should use to predict the enrollment next spring when the enrollment next fall is 290. Would you recommend that she use your interval from Exercise 8 or the interval from Exercise 9? Explain.
 
 ## Principles of Data Analysis
 
-10. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
+11. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
 
 - **data matching**: 
 - **exhaustive**: 
@@ -57,7 +59,7 @@ data("MathEnrollment")
 
 Total                          | 100 pts
 -------------------------------|--------
-Changed `author` in YAML       | 3 pts
-All plots include title, labels | 10 pts
-Exercises 1-9                   | 9 pts
-Exercise 10                   | 5 pts
+Changed `author` in YAML       | 2 pts
+All plots include title, labels | 5 pts
+Exercises 1-10                   | 9 pts
+Exercise 11                   | 3 pts
