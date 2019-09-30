@@ -328,7 +328,7 @@ If we had the **whole population** of sparrows we could quantify the exact relat
 
 # Reality
 
-$\Huge \hat{y} = \hat{\beta_0} + \hat{\beta_1}x + \epsilon$
+$\Huge \hat{y} = \hat{\beta_0} + \hat{\beta_1}x $
 
 ![](https://media.giphy.com/media/3o6nURrfzsAC9zZaG4/giphy.gif)
 
@@ -336,7 +336,7 @@ $\Huge \hat{y} = \hat{\beta_0} + \hat{\beta_1}x + \epsilon$
 
 # Reality
 
-$\Huge \hat{y} = \hat{\beta_0} + \hat{\beta_1}x + \epsilon$
+$\Huge \hat{y} = \hat{\beta_0} + \hat{\beta_1}x$
 
 .definition[
 In reality, we have a **sample** of sparrows to **estimate** the relationship between $x$ and $y$. The "hats" represent that these are estimated (fitted) values
@@ -373,7 +373,7 @@ class: center, middle
 - $\beta_0$: intercept
 - $\beta_1$: slope
 - **population** versus **sample**
-- **simple linear model**: $y = \beta_0 + \beta_1x + \epsilon$ **estimated by** $\hat{y} = \hat{\beta}_0+\hat{\beta}_1x + \epsilon$
+- **simple linear model**: $y = \beta_0 + \beta_1x + \epsilon$ **estimated by** $\hat{y} = \hat{\beta}_0+\hat{\beta}_1x$
 
 ---
 class: center, middle
