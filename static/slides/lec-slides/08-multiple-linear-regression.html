@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Multiple linear regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Multiple linear regression
+
+---
+
+
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+by Dr. Lucy D'Agostino McGowan
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+## Simple linear regression
+&lt;br&gt;&lt;br&gt;
+
+.center[
+
+`\(\Huge y = \beta_0 + \beta_1X + \epsilon\)`
+&lt;br&gt;&lt;br&gt;
+
+`\(\Huge \epsilon\sim N(0,\sigma_\epsilon)\)`
+]
+
+---
+
+## Multiple linear regression
+&lt;br&gt;&lt;br&gt;
+
+.center[
+`\(\Large y = \beta_0 + \beta_1X_1 + \beta_2X_2+\dots+\beta_kX_k+ \epsilon\)` 
+&lt;br&gt;&lt;br&gt;
+`\(\Huge \epsilon\sim N(0,\sigma_\epsilon)\)`
+
+]
+
+---
+
+## Multiple linear regression
+
+.question[
+How are these coefficients estimated?
+]
+
+.center[
+`\(\Large \hat{y} = \hat\beta_0 + \hat\beta_1X_1 + \hat\beta_2X_2+\dots+\hat\beta_kX_k\)`
+]
+
+--
+
+* estimate coefficents that minimize the sum or squared residuals
+
+---
+
+## Let's do it in R!
+
+* Data: Porsche Price
+* Price, Mileage, Age
+
+---
+
+## Let's do it in R!
+
+.question[
+What is my response variable? What are my explantory variables?
+]
+* Data: Porsche Price
+* Price, Mileage, Age
+
+---
+
+## Let's do it in R!
+
+.small[
+
+```r
+data("PorschePrice")
+lm(Price ~ Mileage + Age, data = PorschePrice)
+```
+
+```
+## 
+## Call:
+## lm(formula = Price ~ Mileage + Age, data = PorschePrice)
+## 
+## Coefficients:
+## (Intercept)      Mileage          Age  
+##     70.9192      -0.5613      -0.1302
+```
+]
+
+---
+
+## Let's do it in R!
+
+.question[
+What is different between this and the `lm()` functions we have been previously running?
+]
+
+.small[
+
+```r
+data("PorschePrice")
+lm(Price ~ Mileage + Age, data = PorschePrice)
+```
+
+```
+## 
+## Call:
+## lm(formula = Price ~ Mileage + Age, data = PorschePrice)
+## 
+## Coefficients:
+## (Intercept)      Mileage          Age  
+##     70.9192      -0.5613      -0.1302
+```
+]
+
+---
+
+
+## Let's do it in R!
+
+.question[
+What is different between this and the `lm()` functions we have been previously running?
+]
+
+.small[
+
+```r
+lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   70.9       2.48     28.6   1.04e-21
+## 2 Mileage       -0.561     0.114    -4.92  3.76e- 5
+*## 3 Age           -0.130     0.457    -0.285 7.78e- 1
+```
+]
+
+---
+
+## Let's do it in R!
+
+.question[
+How would we get the predicted values for `\(\hat{y}\)`?
+]
+
+.small[
+
+```r
+lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   70.9       2.48     28.6   1.04e-21
+## 2 Mileage       -0.561     0.114    -4.92  3.76e- 5
+*## 3 Age           -0.130     0.457    -0.285 7.78e- 1
+```
+]
+
+---
+
+## Let's do it in R!
+
+.question[
+How would we get the predicted values for `\(\hat{y}\)`?
+]
+
+.small[
+
+```r
+lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;%
+  predict()
+```
+
+```
+##        1        2        3        4        5        6        7        8 
+## 58.45976 46.39104 59.48812 50.19016 45.69948 42.18328 70.18942 70.54307 
+##        9       10       11       12       13       14       15       16 
+## 63.13681 65.47420 62.07027 65.32602 59.67674 63.28725 50.58761 54.89194 
+##       17       18       19       20       21       22       23       24 
+## 58.94700 54.96152 40.59583 52.34120 45.64334 41.27170 50.49105 58.63042 
+##       25       26       27       28       29       30 
+## 35.07453 41.71625 18.01894 21.23878 20.03975 49.53452
+```
+]
+
+---
+
+## Let's do it in R!
+
+.question[
+The sample size is `\(n = 30\)`, what would the degrees of freedom for the SSE be now?
+]
+
+.center[
+`\(\Large \sqrt{\frac{SSE}{??}}\)`
+]
+
+---
+
+## Let's do it in R!
+
+.question[
+The sample size is `\(n = 30\)`, what would the degrees of freedom for the SSE be now?
+]
+
+.center[
+`\(\Large \sqrt\frac{SSE}{n - k - 1}\)`
+]
+
+---
+
+## Let's do it in R!
+
+.question[
+The sample size is `\(n = 30\)`, what would the degrees of freedom for the SSE be now?
+]
+
+.center[
+`\(\Large\sqrt{ \frac{SSE}{30 - 2 - 1}}\)`
+]
+
+---
+
+## Let's do it in R!
+
+.small[
+
+```r
+lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;% 
+  anova()
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: Price
+##           Df Sum Sq Mean Sq  F value    Pr(&gt;F)
+## Mileage    1 5565.7  5565.7 104.7023 8.653e-11
+## Age        1    4.3     4.3   0.0813    0.7778
+*## Residuals 27 1435.2    53.2
+```
+]
+
+---
+class: center, middle
+
+## Why might we want to do this?
+
+---
+
+&lt;img src = "img/08/flowchart.jpg" height=500&gt;
+
+http://science.sciencemag.org/content/347/6228/1314
+
+---
+
+class: center, middle
+
+## Multiple linear regression for inference
+
+---
+
+## Multiple linear regression for inference
+
+&lt;br&gt;&lt;br&gt;
+**Goal:** Discover the relationship between a response (outcome, `\(y\)`), and an explanatory variable ( `\(x\)` )
+
+---
+
+## Multiple linear regression for inference
+
+&lt;br&gt;&lt;br&gt;
+**Goal:** Discover the relationship between a response (outcome, `\(y\)`), and an explanatory variable ( `\(x\)` ) **adjusting for all known confounders**
+
+---
+
+## Multiple linear regression for inference
+
+.question[What is a confounder?]
+
+&lt;br&gt;&lt;br&gt;
+**Goal:** Discover the relationship between a response (outcome, `\(y\)`), and an explanatory variable ( `\(x\)` ) **adjusting for all known confounders**
+
+---
+class: middle
+
+## confounder
+
+A confounder is a variable that is associated with both the response variable ( `\(y\)` ) and the explanatory variable ( `\(x\)` ). If not accounted for, it can result in seeing a spurious relationship between `\(x\)` and `\(y\)`.
+
+---
+
+## Confounder example
+
+![](08-multiple-linear-regression_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+
+## Confounder example
+
+![](08-multiple-linear-regression_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+
+## Confounder example
+
+![](08-multiple-linear-regression_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+## Confounder example 
+
+![](08-multiple-linear-regression_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+
+---
+
+## Confounder example 
+
+![](08-multiple-linear-regression_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+
+## Confounding example
+
+&lt;img src = "img/08/meta-analysis-confounding.png" height = 400&gt;
+
+Armstrong, K.A. (2012). Methods in comparative effectiveness research. _Journal of clinical oncology: official journal of the American Society of Clinical Oncology_, 30 34, 4208-14.
+---
+
+## A quick R aside
+
+* So far, the data we've been using has been included in an **R package**
+* To access this data we just run `data("data set")`
+* What if we want to read in other data, for example from a `.csv` file?
+--
+
+* enter: `read_csv()`
+--
+
+* `read_csv()` is a function from the **readr** package, which is included when you load the **tidyverse**
+--
+
+* it works like this:
+
+
+```r
+df &lt;- read_csv("the-path-to-your-file.csv")
+```
+
+Where `df` can be whatever you'd like to call your new dataset
+---
+
+## Berkley administration data
+
+* Study carried out by the graduate Division of the University of California, Berkeley in the early 70’s to evaluate whether there was a sex bias in graduate admissions
+--
+
+* The data come from six departments. For confidentiality we'll call them A-F.
+--
+
+* We have information on whether the applicant was male or female and whether they were admitted or rejected.
+--
+
+* First, we will evaluate whether the percentage of males admitted is indeed higher than females, overall. Next, we will calculate the same percentage for each department.
+
+.my-footer[
+&lt;span&gt;
+&lt;img src = "img/dsbox-logo.png" width = "30"&gt; &lt;/img&gt; Slides adapted from &lt;a href="https://datasciencebox.org" target="_blank"&gt;datasciencebox.org&lt;/a&gt; by Dr. Lucy D'Agostino McGowan
+&lt;/span&gt;
+]
+---
+
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `UCB admits`
+
+- Go to RStudio Cloud and open `UCB admits`
+
+---
+
+## Berkley admin data
+
+* What was our response variable?
+--
+
+* What was our explanatory variable of interest?
+--
+
+* What was our confounder?
+--
+
+* What was our equation?
+
+---
+
+## Simpson's paradox
+
+![](08-multiple-linear-regression_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+---
+
+## Simpson's paradox
+
+![](08-multiple-linear-regression_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+---
+
+## Porsche data
+
+.small[
+
+```r
+lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   70.9       2.48     28.6   1.04e-21
+## 2 Mileage       -0.561     0.114    -4.92  3.76e- 5
+## 3 Age           -0.130     0.457    -0.285 7.78e- 1
+```
+]
+
+---
+
+## Porsche data
+
+.question[
+How do you calculate a t statistic for `\(\hat{\beta}_2\)`?
+]
+
+.small[
+
+```r
+lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   70.9       2.48     28.6   1.04e-21
+## 2 Mileage       -0.561     0.114    -4.92  3.76e- 5
+## 3 Age           -0.130     0.457    -0.285 7.78e- 1
+```
+]
+
+---
+
+## Porsche data
+
+.question[
+How do you calculate a t statistic for `\(\hat{\beta}_2\)`?
+]
+
+.small[
+
+```r
+lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   70.9       2.48     28.6   1.04e-21
+## 2 Mileage       -0.561     0.114    -4.92  3.76e- 5
+## 3 Age           -0.130     0.457    -0.285 7.78e- 1
+```
+]
+
+* `\(\Large t = \frac{\hat\beta_2}{SE_{\hat\beta_2}}\)`
+--
+
+* `\(\Large t = \frac{\hat\beta_i}{SE_{\hat\beta_i}}\)`
+---
+
+## Porsche data
+
+.question[
+What is the null and alternative hypothesis?
+]
+
+.small[
+
+```r
+lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   70.9       2.48     28.6   1.04e-21
+## 2 Mileage       -0.561     0.114    -4.92  3.76e- 5
+## 3 Age           -0.130     0.457    -0.285 7.78e- 1
+```
+]
+
+--
+
+* `\(\Large H_0: \beta_i = 0\)`
+* `\(\Large H_A: \beta_i \neq 0\)`
+
+---
+
+## Porsche data
+
+.question[
+What would the degrees of freedom be for the t-distribution used to calcualte a p-value?
+]
+
+.small[
+
+```r
+lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;%
+  tidy()
+```
+
+```
+## # A tibble: 3 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   70.9       2.48     28.6   1.04e-21
+## 2 Mileage       -0.561     0.114    -4.92  3.76e- 5
+## 3 Age           -0.130     0.457    -0.285 7.78e- 1
+```
+]
+
+--
+
+* `\(n - k - 1\)` = 27 
+
+---
+
+class: center, middle
+
+## What is that definition of a p-value again?
+
+---
+
+class: center, middle
+
+## What about the definition of a confidence interval?
+
+---
+
+## Porche data
+
+.question[
+How would you calculate a confidence interval for `\(\beta_i\)`?
+]
+
+.small[
+
+```r
+lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 3 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)   70.9       2.48     28.6   1.04e-21   65.8      76.0  
+## 2 Mileage       -0.561     0.114    -4.92  3.76e- 5   -0.795    -0.327
+## 3 Age           -0.130     0.457    -0.285 7.78e- 1   -1.07      0.807
+```
+]
+
+--
+
+* `\(\Large\hat\beta_i\pm t^*SE_{\hat\beta_i}\)`
+--
+
+* `\(t^*\)` is the critical value from a `\(t\)` density with degrees of freedom equal to the error df in the model ($n-k-1$, where `\(k\)` is the number of predictors
+
+---
+
+&lt;img src = "img/08/flowchart.jpg" height=500&gt;
+
+http://science.sciencemag.org/content/347/6228/1314
+
+---
+
+class: center, middle
+
+## Multiple linear regression for prediction
+
+---
+
+## Multiple linear regression for prediction
+&lt;br&gt;&lt;br&gt;
+
+* **Goal:** Discover the best model for predicting a response variable (an outcome variable, `\(y\)`) using predictors, `\(\mathbf{X}\)`
+--
+
+* Ultimately, we are often _comparing_ models
+
+---
+
+## 🛠 toolkit for comparing models
+
+--
+### 👉  F-test
+--
+
+### 👉 `\(\Large R^2\)`
+---
+
+## 🛠 F-test for Multiple Linear Regression
+
+* Comparing the full model to the intercept only model
+--
+
+* `\(\Large H_0: \beta_1 = \beta_2 = \dots = \beta_k = 0\)`
+--
+
+* `\(\Large H_0: \textrm{at least one } \beta_i \neq 0\)`
+--
+
+* _We will soon learn a more general version of comparing nested models_
+
+---
+
+## 🛠 F-test for Multiple Linear Regression
+
+* `\(\Large F = \frac{MSModel}{MSE}\)`
+--
+
+* df for the Model?
+--
+
+  * k
+--
+
+* df for the errors?
+--
+
+  * n - k - 1
+
+---
+## 🛠 `\(R^2\)` for Multiple Linear Regression
+
+--
+
+* `\(\Large R^2= \frac{SSModel}{SSTotal}\)`
+--
+
+* `\(\Large R^2= 1 - \frac{SSE}{SSTotal}\)`
+--
+
+* As is, if you add a predictor this will _always_ increase. Therefore, we have `\(R^2_{adj}\)` that has a small "penalty" for adding more predictors
+--
+
+* `\(\Large R^2_{adj} = 1 - \frac{SSE/(n-k-1)}{SSTotal / (n-1)}\)`
+--
+
+* `\(\Large \frac{SSTotal}{n-1} = \frac{\sum(y - \bar{y})^2}{n-1}\)` What is this?
+--
+
+  * Sample variance! `\(S_Y^2\)`
+--
+
+* `\(\Large R^2_{adj} = 1 - \frac{\hat\sigma_\epsilon}{S_Y^2}\)`
+
+---
+
+## 🛠 `\(R^2_{adj}\)` for Multiple Linear Regression
+
+* `\(\Large R^2_{adj} = 1 - \frac{SSE/(n-k-1)}{SSTotal / (n-1)}\)`
+* The denominator stays the same for all models fit to the same response variable and data
+* the numerator actually increase when a new predictor is added to a model if the decrease in the SSE is not sufficient to offset the decrease in the error degrees of freedom. 
+* So `\(R^2_{adj}\)` can 👇 when a weak predictor is added to a model
+---
+
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `NFL wins`
+
+- Go to RStudio Cloud and open `NFL wins`
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
