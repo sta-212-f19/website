@@ -86,6 +86,8 @@ lessons:
     title: "Multiple Regression"
   - title: "Week 08"
   - date: "Tues, Oct 15"
+    appex: "08-ucb-admits.html"
+    appex: "08-nfl-wins.html"
     title: "Multiple linear regression"
     reading: "reading-08.html"
     slides: "lec-slides/08-multiple-linear-regression.html"
