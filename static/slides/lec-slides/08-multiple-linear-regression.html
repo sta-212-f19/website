@@ -68,7 +68,7 @@ How are these coefficients estimated?
 
 --
 
-* estimate coefficents that minimize the sum or squared residuals
+* estimate coefficents that minimize the sum of squared residuals
 
 ---
 
@@ -608,7 +608,7 @@ lm(Price ~ Mileage + Age, data = PorschePrice) %&gt;%
 * `\(\Large\hat\beta_i\pm t^*SE_{\hat\beta_i}\)`
 --
 
-* `\(t^*\)` is the critical value from a `\(t\)` density with degrees of freedom equal to the error df in the model ($n-k-1$, where `\(k\)` is the number of predictors
+* `\(t^*\)` is the critical value from a `\(t\)` density with degrees of freedom equal to the error df in the model ( `\(n-k-1\)`, where `\(k\)` is the number of predictors
 
 ---
 
@@ -651,7 +651,7 @@ class: center, middle
 * `\(\Large H_0: \beta_1 = \beta_2 = \dots = \beta_k = 0\)`
 --
 
-* `\(\Large H_0: \textrm{at least one } \beta_i \neq 0\)`
+* `\(\Large H_A: \textrm{at least one } \beta_i \neq 0\)`
 --
 
 * _We will soon learn a more general version of comparing nested models_
@@ -697,7 +697,7 @@ class: center, middle
   * Sample variance! `\(S_Y^2\)`
 --
 
-* `\(\Large R^2_{adj} = 1 - \frac{\hat\sigma_\epsilon}{S_Y^2}\)`
+* `\(\Large R^2_{adj} = 1 - \frac{\hat\sigma^2_\epsilon}{S_Y^2}\)`
 
 ---
 
