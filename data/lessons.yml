@@ -105,6 +105,7 @@ lessons:
   - date: "Tues, Oct 29"
     title: "What are the odds?"
     reading: "reading-11.html"
+    ec: "02-ec.html"
   - date: "Thur, Oct 31"
     title: "Logistic regression models"
     reading: "reading-12.html"

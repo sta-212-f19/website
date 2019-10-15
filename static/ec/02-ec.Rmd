@@ -1,0 +1,23 @@
+---
+title: "Extra Credit: 2019 Electronic Undergraduate Statistics Research Conference"
+output: html_document
+---
+
+## Due: November 5th at noon
+
+The Consortium for the Advancement of Undergraduate Statistics Education (CAUSE) and the American Statistical Association host the Electronic Undergraduate Statistics Research Conference (eUSR) each fall. This is a FREE online conference where undergraduate statistics and data science students get to present their work, learn more about careers in statistics, data science, & related fields, and acquire valuable information about applying to & succeeding in graduate school. This year the conference takes place on **November 1st**. 
+
+There are three steps that need to be completed to receive extra credit:
+
+## 1. Register for the 2019 Electronic Undergraduate Statistics Research Conference
+
+Sign up to (virtually attend) [eUSR](https://www.causeweb.org/usproc/eusrc/2019). 
+
+
+## 2. Watch _at least_ the keynote address. 
+
+You are welcome to watch more of the conference, but at least attend the keynote by Jennifer Thompson: _Finding Your Balance: Foundations vs Evolution in Data Science_ at 2:00pm Eastern on November 1.
+
+## 3. Write a one paragraph summary of what you learned
+
+### Submit proof of registration and your summary to Sakai by noon on November 5th
