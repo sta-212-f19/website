@@ -1,0 +1,43 @@
+---
+title: "Multiple linear regression"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(Stat2Data)
+library(ggdag)
+library(datasauRus)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+## <i class="fas fa-laptop"></i> `NFL wins`
+
+- Go to RStudio Cloud and open `NFL wins`
+
+---
+
+
