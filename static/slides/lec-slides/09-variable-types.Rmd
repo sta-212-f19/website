@@ -1,0 +1,413 @@
+---
+title: "Types of variables"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(Stat2Data)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## <i class="fas fa-laptop"></i> `Diamonds`
+
+- Go to RStudio Cloud and open `Diamonds`
+
+---
+## Variable types
+
+* There are two major classes of variables
+  * numeric (quantitative) 
+  * categorical
+
+---
+
+## Variable types
+
+* Recall from the first week of class, you can use the `glimpse()` function to see all of your variables and their types
+
+--
+
+.small[
+```{r, echo = TRUE}
+data("PorschePrice")
+glimpse(PorschePrice)
+```
+]
+
+--
+
+* What are the variables here?
+
+---
+
+## Variable types
+
+* Recall from the first week of class, you can use the `glimpse()` function to see all of your variables and their types
+
+.small[
+```{r, echo = TRUE}
+data("Diamonds")
+glimpse(Diamonds)
+```
+]
+
+--
+
+* What are the variables here?
+
+--
+* `fct`: "factor" this is a type of categorical variable
+
+---
+
+## Variable types
+
+* Recall from the first week of class, you can use the `glimpse()` function to see all of your variables and their types
+
+.small[
+```{r, echo = TRUE, eval = FALSE}
+glimpse(starwars)
+```
+]
+
+.small[
+```{r}
+glimpse(starwars[, 1:5])
+```
+]
+
+--
+
+* `chr`: "character" this is a type of categorical variable
+
+---
+
+## Variable types
+
+* So far, our models have only included _numeric_ (_quantitative_) variables
+--
+
+  * What would the equation be for predicting $y$ from $x$ when $x$ is numeric?
+--
+
+* What would happen if $x$ is categorical?
+--
+
+  * What would the equation be for predicting $y$ from $x$ if $x$ is categorical with 2 levels?
+--
+
+  * What would the equation be for predicting $y$ from $x$ if $x$ is categorical with 3 levels?
+  
+---
+
+class: middle
+
+## indicator variable
+
+An **indicator variable** uses two values, usually 0 and 1, to indicate whether a data case does (1) or does not (0) belong to a specific category
+
+---
+
+```{r, echo = TRUE}
+data("Diamonds")
+```
+
+.small[
+```{r}
+Diamonds %>% 
+  select(TotalPrice, Color, Carat) %>%
+  DT::datatable()
+```
+]
+
+---
+
+## Indicator variables
+
+.question[
+What does this line of code do?
+]
+```{r, echo = TRUE}
+Diamonds <- Diamonds %>%
+  mutate(
+    ColorD = ifelse(Color == "D", 1, 0), #<<
+    ColorE = ifelse(Color == "E", 1, 0),
+    ColorF = ifelse(Color == "F", 1, 0),
+    ColorG = ifelse(Color == "G", 1, 0),
+    ColorH = ifelse(Color == "H", 1, 0),
+    ColorI = ifelse(Color == "I", 1, 0),
+    ColorJ = ifelse(Color == "J", 1, 0)
+  )
+```
+
+---
+
+
+## Indicator variables
+
+.question[
+What does this line of code do?
+]
+```{r, echo = TRUE}
+Diamonds <- Diamonds %>%
+  mutate(
+    ColorD = ifelse(Color == "D", 1, 0), 
+    ColorE = ifelse(Color == "E", 1, 0), #<<
+    ColorF = ifelse(Color == "F", 1, 0),
+    ColorG = ifelse(Color == "G", 1, 0),
+    ColorH = ifelse(Color == "H", 1, 0),
+    ColorI = ifelse(Color == "I", 1, 0),
+    ColorJ = ifelse(Color == "J", 1, 0)
+  )
+```
+
+---
+
+## Indicator variables
+
+.small[
+```{r}
+Diamonds %>%
+  select(TotalPrice, Carat, Color, ColorD, ColorE, ColorF, ColorG, ColorH, ColorI) %>%
+  DT::datatable()
+```
+]
+
+---
+
+## Indicator variables
+
+.question[
+What if I wanted to model the relationship between `TotalPrice` and `Color`?
+]
+
+.small[
+```{r}
+Diamonds %>%
+  select(TotalPrice, Carat, Color, ColorD, ColorE, ColorF, ColorG, ColorH, ColorI) %>%
+  DT::datatable(options = list(pageLength = 5))
+```
+]
+
+---
+
+## Indicator variables
+
+.question[
+Why is `ColorJ` `NA`?
+]
+
+.small[
+```{r, echo = TRUE, highlight.output = c(9, 10)}
+lm(TotalPrice ~ ColorD + ColorE + ColorF + ColorG + ColorH + ColorI + ColorJ,
+   data = Diamonds)
+```
+]
+
+--
+
+* When including indicator variables in a model for `k` categories, always include `k-1` 
+--
+
+* The one that is left out is the "reference" category
+
+---
+
+## Indicator variables
+
+.question[
+What is the reference category?
+]
+
+.small[
+```{r, echo = TRUE}
+lm(TotalPrice ~ ColorD + ColorE + ColorF + ColorG + ColorH + ColorI,
+   data = Diamonds)
+```
+]
+
+--
+
+* **Interpretation:** A diamond with Color `D` compared to color `J` increases the expected total price by 3632.
+--
+
+* **Interpretation:** A diamond with Color `E` compared to color `J` increases the expected total price by 2423
+
+---
+
+## Indicator variables
+
+.question[
+What is the reference category?
+]
+
+.small[
+```{r, echo = TRUE}
+lm(TotalPrice ~ ColorD + ColorE + ColorF + ColorG + ColorH + ColorI,
+   data = Diamonds)
+```
+]
+
+
+* **Interpretation:** A diamond with Color `D` compared to color `J` increases the expected total price by 3632.
+* What is the interpretation for a diamond with Color `F`?
+
+---
+
+## R is smart
+
+.small[
+```{r, echo = TRUE}
+lm(TotalPrice ~ Color, data = Diamonds)
+```
+]
+
+---
+
+## R is smart
+
+.question[
+What is the reference category?
+]
+.small[
+```{r, echo = TRUE}
+lm(TotalPrice ~ Color, data = Diamonds)
+```
+]
+
+--
+
+* What is the interpretation for Color `E` now?
+
+--
+* What if we wanted a different referent category?
+
+--
+  * We could code the indicators ourselves
+  
+--
+  * We could use the **forcats**
+
+---
+
+## forcats
+
+.pull-right[
+![](img/09/forcats-logo.png)
+]
+
+* R uses factors to handle categorical variables, variables that have a fixed and known set of possible values. 
+* The **forcats** package is loaded with the **tidyverse**, it helps you do things like order your factors
+
+Source: [forcats.tidyverse.org](forcats.tidyverse.org)
+
+---
+
+## forcats
+
+```{r, echo = TRUE}
+levels(Diamonds$Color)
+```
+
+--
+
+```{r, echo = TRUE}
+new_levels <- c("J", "D", "E", "F", "G", "H", "I")
+Diamonds <- Diamonds %>%
+  mutate(Color = fct_relevel(Color, new_levels))
+```
+
+```{r, echo = TRUE}
+levels(Diamonds$Color)
+```
+
+---
+
+## R is smart
+
+.small[
+```{r, echo = TRUE}
+lm(TotalPrice ~ Color, data = Diamonds)
+```
+]
+
+---
+
+## R is smart
+
+.question[
+What is the reference category?
+]
+.small[
+```{r, echo = TRUE}
+lm(TotalPrice ~ Color, data = Diamonds)
+```
+]
+
+---
+
+## What if the variable is **binary**
+
+* A **binary** variable is a special type of categorical variable with **two levels**
+
+---
+
+## ICU example
+
+* A sample of 200 patients in an ICU unit
+* Want to see if the patient's heart rate is related to whether they were admitted via the emergency room 
+--
+
+  * y: Heart rate (beats per minute)
+  * x: indicator for emergency room admission
+--
+
+* Aside: Is this inference or prediction?
+
+---
+
+## Binary x variable
+
+```{r, echo = TRUE}
+data("ICU")
+lm(Pulse ~ Emergency, data = ICU)
+```
+
+--
+
+* How can we interpret $\hat{\beta}_0$ now?
+--
+
+* How can we interpret $\hat{\beta}_1$?
+
+---
+
+## <i class="fas fa-laptop"></i> `Diamonds`
+
+- Go to RStudio Cloud and open `Diamonds`
+
+---
+
+

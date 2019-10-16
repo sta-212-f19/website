@@ -1,0 +1,330 @@
+---
+title: "Adjusting and Interactions"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(broom)
+library(Stat2Data)
+library(mosaicData)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## <i class="fas fa-laptop"></i> `Diamonds`
+
+- Go to RStudio Cloud and open `Diamonds`
+
+---
+
+## Adjusting for confounders
+
+* What is the relationship between average SAT scores and average teacher salaries?
+
+.small[
+```{r}
+data("SAT")
+DT::datatable(SAT, options = list(pageLength = 5))
+```
+]
+
+--
+* Are we doing inference or prediction?
+
+---
+
+## Adjusting for confounders
+
+* I fit a linear model for $\hat{sat} = \hat\beta_0 + \hat\beta_1 salary$
+
+```{r}
+lm(sat ~ salary, SAT) %>%
+  tidy()
+```
+
+
+--
+
+* How do we interpret this result?
+
+---
+
+## Adjusting for confounders
+
+* There is a **third variable**, the fraction of students that took the SAT in that state. It is grouped as "Low", "Medium", and, "High".
+
+```{r}
+SAT <- SAT %>%
+  mutate(frac_group = case_when(
+    frac < 22 ~ "LOW",
+    frac < 49 ~ "MED",
+    TRUE ~ "HIGH"
+  ))
+lm(sat ~ salary + frac_group, SAT) %>%
+  tidy()
+```
+
+--
+
+* What is the referent category?
+--
+
+* How do you interpret the $\hat{\beta}$ for `frac_groupLOW`?
+--
+
+* How do you interpret the $\hat{\beta}$ for `salary` now?
+
+---
+
+class: middle
+
+## $\hat\beta$ interpretation in multiple linear regression
+
+A one-unit increase in $x$ yields an expected increase in y of $\hat\beta$, **holding all other variables constant**.
+
+---
+
+class: middle
+
+## $\hat\beta$ interpretation in multiple linear regression
+
+A one-unit increase in average salary yields an expected increase in average SAT score of 1.09, **holding the fraction of students that took the SAT constant**.
+
+---
+
+## Adjusting for confounders
+
+```{r}
+ggplot(SAT, aes(salary, sat)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+---
+
+## Adjusting for confoundrs
+
+```{r}
+ggplot(SAT, aes(salary, sat, color = frac_group, group = frac_group)) + 
+  geom_point() + 
+  geom_line(aes(y = predict(lm(sat ~ salary + frac_group, data = SAT)))) +
+  labs(color = "Fraction took SAT")
+```
+
+--
+
+* What is this called? Where the direction reverses?
+--
+
+* Notice here the lines are **parallel** so holding the group constant, this is the effect we see.
+--
+
+* `r emo::ji("scream")` what if the lines aren't parallel?
+---
+
+## Interactions
+
+* Data looking at the growth rate for kids
+
+.small[
+```{r}
+data("Kids198")
+DT::datatable(Kids198)
+```
+]
+
+---
+
+## Interactions
+
+```{r}
+ggplot(Kids198, aes(Age, Weight)) +
+  geom_point()
+```
+
+--
+
+* Will $\hat\beta_{age}$ be positive or negative?
+
+---
+
+## Interactions
+
+* Let's look at this relationship split by `sex` (blue: Girl, black: Boy)
+
+```{r}
+ggplot(Kids198, aes(Age, Weight, color = Sex)) +
+  geom_point() +
+  theme(legend.position = "none")
+```
+
+---
+
+## Interactions
+
+* Let's look at this relationship split by `sex` (blue: Girl, black: Boy)
+
+```{r}
+ggplot(Kids198, aes(Age, Weight, color = Sex, group = Sex)) +
+  geom_point() +
+  theme(legend.position = "none") + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+--
+
+* `r emo::ji("scream")` the lines cross! That means there is an **interaction**, that is the slopes differ based on the group
+
+---
+
+## Interactions
+
+* Let's look at this relationship split by `sex` (blue: Girl, black: Boy)
+
+```{r}
+ggplot(Kids198, aes(Age, Weight, color = Sex, group = Sex)) +
+  geom_point() +
+  theme(legend.position = "none") + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+--
+
+* What is the equation for this relationship?
+
+---
+
+## Interactions
+
+$Weight = \beta_0 + \beta_1 Age + \beta_2 Girl + \beta_3 Age \times Girl + \epsilon$
+
+.small[
+```{r, echo = TRUE}
+lm(Weight ~ Age + Sex + Age * Sex, data = Kids198)
+```
+]
+
+--
+
+* What does this model become for **boys** (When `Sex = 0`)
+
+--
+  * $Weight = \beta_0 + \beta_1 Age + \epsilon$
+
+--
+* What does this model become for **girls** (When `Sex = 1`)
+
+--
+  * $Weight = \beta_0 + \beta_1 Age + \beta_2 1 + \beta_3 Age \times 1 + \epsilon$
+
+--
+  * $Weight = (\beta_0 + \beta_2) + (\beta_1 + \beta_3) Age  + \epsilon$
+
+--
+* How do you interpret $\hat\beta_0$ now?
+
+---
+
+## Interactions
+
+.small[
+```{r, echo = TRUE}
+lm(Weight ~ Age + Sex + Age * Sex, data = Kids198)
+```
+]
+
+
+* What does this model become for **boys** (When `Sex = 0`)
+  * $Weight = \beta_0 + \beta_1 Age + \epsilon$
+* What does this model become for **girls** (When `Sex = 1`)
+  * $Weight = \beta_0 + \beta_1 Age + \beta_2 1 + \beta_3 Age \times 1 + \epsilon$
+  * $Weight = (\beta_0 + \beta_2) + (\beta_1 + \beta_3) Age  + \epsilon$
+* How do you interpret $\hat\beta_{2}$ now?
+
+--
+  * The difference in intercepts between boys and girls
+
+---
+
+## Interactions
+
+.small[
+```{r, echo = TRUE}
+lm(Weight ~ Age + Sex + Age * Sex, data = Kids198)
+```
+]
+
+
+* What does this model become for **boys** (When `Sex = 0`)
+  * $Weight = \beta_0 + \beta_1 Age + \epsilon$
+* What does this model become for **girls** (When `Sex = 1`)
+  * $Weight = \beta_0 + \beta_1 Age + \beta_2 1 + \beta_3 Age \times 1 + \epsilon$
+  * $Weight = (\beta_0 + \beta_2) + (\beta_1 + \beta_3) Age  + \epsilon$
+* How do you interpret $\hat\beta_{3}$ now?
+
+--
+  * How much the slope changes as we move from the regression line for boys to that for girls
+
+---
+
+## Interactions
+
+$Weight = \beta_0 + \beta_1 Age + \beta_2 Girl + \beta_3 Age \times Girl + \epsilon$
+
+* Hypothesis testing: What if you want to test whether the slope is different between groups?
+* Is the growth rate different for boys and girls?
+* What is $H_0$?
+
+--
+  * $H_0: \beta_3 = 0$
+
+--
+* What is $H_A$?
+
+--
+  * $H_A:\beta_3 \neq 0$
+  
+---
+
+## Interactions
+
+.small[
+```{r, echo = TRUE, highlight.output = 7}
+lm(Weight ~ Age + Sex + Age * Sex, data = Kids198) %>%
+  tidy()
+```
+]
+
+--
+
+* What is the result of our hypothesis test?
+
+---
+
+## <i class="fas fa-laptop"></i> `Diamonds`
+
+- Go to RStudio Cloud and open `Diamonds`
+
+---
+
+

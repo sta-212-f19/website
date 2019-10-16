@@ -1,5 +1,5 @@
 ---
-title: "Multiple linear regression"
+title: "Model Comparisons"
 author: ""
 output:
   xaringan::moon_reader:
