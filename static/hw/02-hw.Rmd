@@ -33,7 +33,7 @@ The `Diamonds` data set can be used to examine the relationship between a diamon
 
 ---
 
-For this analysis, rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
+4. For the analysis in Exercise 3, rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
 
 - **data matching**: 
 - **exhaustive**: 
