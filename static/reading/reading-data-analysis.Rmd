@@ -1,0 +1,45 @@
+---
+title: "Data Analysis"
+output: html_document
+---
+
+## Methods
+
+###  Describe your data. 
+
+* How many observations are there?
+* What are the observations? 
+* What are the variables?
+* Is there any missing data?
+
+### Describe your methods.
+
+* (If missing data exists) How are you going to deal with missing data?
+* What models are you going to fit? 
+* How are you going to evaluate whether the models meet their assumptions? 
+* **If doing inference**: What hypothesis tests are you going?
+* **If doing prediction**: How will you determine which model is best?
+
+## Results
+
+* Which model did you decide on?
+* Demonstrate that this model fit the assumptions
+* **If doing inference**
+  * What are the $\beta$ coefficients of that model? What are their confidence intervals?
+  * How do you interpret these $\beta$ coefficients in the context of this model?
+  * What is the result of your hypothesis test?
+* **If doing prediction**
+  * What were the results of your "best" prediction model?
+  * What is the equation for your prediction model?
+
+## Conclusions
+
+* Why does this matter?
+
+## Abstract
+
+* A short paragraph summary of the results above.
+
+## Appendix
+
+* Include any additional plots / results that were used 

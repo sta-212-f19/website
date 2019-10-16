@@ -1,0 +1,43 @@
+---
+title: "Homework 2"
+output: 
+  tufte::tufte_html:
+    css: "../labs/lab.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+**Due: October 24 at noon**
+**turn in the .html file on Sakai**
+
+Create a project called `Homework 2` on Rstudio.cloud
+
+Using the `Diamonds` data set in the `Stat2Data` package, fit the following models:
+
+(#1) `TotalPrice` = $\beta_0 + \beta_1$`Depth` + $\beta_2$`Depth`$^2 + \epsilon$
+
+(#2) `TotalPrice` = $\beta_0 + \beta_1$`Carat` + $\beta_2$`Depth`$+ \epsilon$
+
+(#3) `TotalPrice` = $\beta_0 + \beta_1$`Carat` + $\beta_2$`Depth` + $\beta_3$`Depth`$\times$`Carat`$+ \epsilon$
+
+## Inference
+
+* For each model (1, 2, and 3), interpret all $\hat\beta$ coefficients. 
+* Report the confidence intervals for each $\hat\beta$
+
+## Prediction
+
+* Calculate $R^2$ and adjusted $R^2$ for each model (1, 2, and 3). 
+* Among these three models, which would you recommend using to predict `TotalPrice` of diamonds.
+
+---
+
+For this analysis, rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
+
+- **data matching**: 
+- **exhaustive**: 
+- **skeptical**:
+- **second order**:
+- **transparency**:
+- **reproducible**:

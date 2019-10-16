@@ -84,6 +84,7 @@ lessons:
     title: "No Class: Fall Break"
   - date: "PART 3:"
     title: "Multiple Regression"
+    reading: "reading-data-analysis.html"
   - title: "Week 08"
   - date: "Tues, Oct 15"
     appex: "08-ucb-admits.html"
