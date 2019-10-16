@@ -1,5 +1,5 @@
 ---
-title: "Adjusting and Interactions"
+title: "Confounding and Variable Transformations"
 author: ""
 output:
   xaringan::moon_reader:
@@ -30,12 +30,6 @@ library(Stat2Data)
 library(mosaicData)
 knitr::opts_chunk$set(echo = FALSE)
 ```
-
-## <i class="fas fa-laptop"></i> `Diamonds`
-
-- Go to RStudio Cloud and open `Diamonds`
-
----
 
 ## Adjusting for confounders
 
@@ -321,10 +315,74 @@ lm(Weight ~ Age + Sex + Age * Sex, data = Kids198) %>%
 
 ---
 
-## <i class="fas fa-laptop"></i> `Diamonds`
+## Non-linear relationships
 
-- Go to RStudio Cloud and open `Diamonds`
+* Sometimes the relationships between the outcome $y$ and $x$ variables are _nonlinear_. 
+* We can use _polynomials_ to address this!
+* Returning to the **Diamonds** data, let's say we are interested in predicting Total Price from the Carats.
+
+--
+  * Is this an example of inference or prediction?
 
 ---
+
+## Non-linear relationships
+
+```{r}
+data("Diamonds")
+ggplot(Diamonds, aes(Carat, TotalPrice)) +
+  geom_point()
+```
+
+---
+
+
+## Non-linear relationships
+
+```{r, echo = TRUE, eval = FALSE}
+lm(TotalPrice ~ Carat, data = Diamonds)
+```
+
+```{r}
+data("Diamonds")
+ggplot(Diamonds, aes(Carat, TotalPrice)) +
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+---
+
+## Non-linear relationships
+
+```{r, echo = TRUE, eval = FALSE}
+lm(TotalPrice ~ Carat + I(Carat^2), data = Diamonds)
+```
+
+```{r}
+data("Diamonds")
+ggplot(Diamonds, aes(Carat, TotalPrice)) +
+  geom_point() + 
+  geom_line(aes(y = predict(lm(TotalPrice ~ Carat + I(Carat^2), data = Diamonds))), lwd = 1.5, color = "blue")
+```
+
+--
+
+* What is the equation for this relationship?
+
+---
+
+## Take aways
+
+* The interpretation of $\hat\beta$ in multiple linear regression
+
+-- 
+  * A one-unit change in $x$ yields an expected change in $y$ of $\hat\beta$ **holding all other included variables constant**
+
+--
+* If the _slope differs_ between groups (the lines cross in a scatterplot), an **interaction** is present
+
+--
+* You can include polynomial terms to address **non-linear** relationships
+
 
 
