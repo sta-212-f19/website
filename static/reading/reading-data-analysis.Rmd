@@ -32,9 +32,9 @@ output: html_document
   * What were the results of your "best" prediction model?
   * What is the equation for your prediction model?
 
-## Conclusions
+## Discussion & Conclusion
 
-* Why does this matter?
+* Summarize what you've learned and why it matters
 
 ## Abstract
 
