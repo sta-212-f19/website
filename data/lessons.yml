@@ -101,7 +101,7 @@ lessons:
     hw: "02-hw.html"
   - title: "Week 09"
   - date: "Tues, Oct 22"
-  - title: "Model Comparison"
+    title: "Model Comparison"
     reading: "reading-09.html"
   - date: "Thur, Oct 24"
     title: "Lab 05: Multiple regression in practice"
