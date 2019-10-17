@@ -23,17 +23,16 @@ The `Diamonds` data set can be used to examine the relationship between a diamon
 
 ## Inference
 
-1. Fit the three models. For each model (1, 2, and 3), interpret all $\hat\beta$ coefficients.  
-2. Report the confidence intervals for each $\hat\beta$
+1. Fit the three models. For each model (1, 2, and 3), report the $\hat\beta$ values and confidence intervals. Interpret all $\hat\beta$ coefficients in the context of the model fit.  
 
 ## Prediction
 
-3. Following the steps outlined when we discussed how to conduct a [data analysis](https://sta-212-f19.lucymcgowan.com/reading/reading-data-analysis.html), create a report discussing the three models above. Use $R^2$ and adjusted $R^2$ to select your final prediction model. _Be sure to follow all of the steps outlined, including testing the assumptions of each model and including the proper plots to demonstrate that the assumptions have been met._
+2. Following the steps outlined when we discussed how to conduct a [data analysis](https://sta-212-f19.lucymcgowan.com/reading/reading-data-analysis.html), create a report discussing the three models above. Use $R^2$ and adjusted $R^2$ to select your final prediction model. _Be sure to follow all of the steps outlined, including testing the assumptions of each model and including the proper plots to demonstrate that the assumptions have been met._
 
 
 ---
 
-4. For the analysis in Exercise 3, rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
+3. For the analysis in Exercise 2, rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
 
 - **data matching**: 
 - **exhaustive**: 
