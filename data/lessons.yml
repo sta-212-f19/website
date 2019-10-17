@@ -95,6 +95,7 @@ lessons:
   - date: "Thur, Oct 17"
     title: "Variable types"
     slides: "lec-slides/09-variable-types.html"
+    appex: "09-diamonds.html"
   - title: "Variable transformations"
     slides: "lec-slides/09-variable-transformations.html"
     reading: "reading-10.html"
