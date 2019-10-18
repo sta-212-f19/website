@@ -319,7 +319,10 @@ class: middle
 
 ## $\hat\beta$ interpretation for interactions between $x$ and a binary indicator $I$
 
-The coefficient for the interaction between $x$ and $I$ is $\hat\beta$ (95% CI: $LB_\hat\beta, UB_\hat\beta$). This means that the effect of $x$ on $y$ differs by $\hat\beta$ when $I = 1$ compared to $I = 0$.
+The coefficient for the interaction between $x$ and $I$ is $\hat\beta$ (95% CI: $LB_\hat\beta, UB_\hat\beta$). This means that the effect of $x$ on $y$ differs by $\hat\beta$ when $I = 1$ compared to $I = 0$ **holding all other variables constant***.
+
+--
+* You must include this line if there are **additional variables in your model**.
 
 ---
 
