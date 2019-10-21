@@ -29,6 +29,11 @@ by Dr. Lucy D'Agostino McGowan
 
 ---
 
+# &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `First Year GPA`
+
+- Go to RStudio Cloud and open `First Year GPA`
+---
+
 
 
 
@@ -116,6 +121,41 @@ by Dr. Lucy D'Agostino McGowan
 
 ## 🛠 Nested F-test for Multiple Linear Regression
 
+* Which of these are nested models?
+
+(1) `\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon\)`  
+(2) `\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 * x_2 + \epsilon\)`  
+(3) `\(y = \beta_0 + \beta_1 x_3 + \epsilon\)`  
+(4) `\(y = \beta_0 + \beta_2 x_2 + \epsilon\)`  
+(5) `\(y = \beta_0 + \beta_1 x_4 + \epsilon\)`  
+  
+--
+* (4) in (1) in (2)
+
+
+---
+
+
+## 🛠 Nested F-test for Multiple Linear Regression
+
+* Comparing these two models, what is `\(p\)`?
+
+(1) `\(y = \beta_0 + \beta_2 x_2 + \epsilon\)`  
+(2) `\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 * x_2 + \epsilon\)`  
+
+--
+* `\(p = 2\)`
+
+--
+* What is `\(k\)`?
+
+--
+* `\(k = 3\)`
+
+---
+
+## 🛠 Nested F-test for Multiple Linear Regression
+
 * Goal: Trying to predict the weight of fish based on their length and width
 
 .small[
@@ -185,20 +225,6 @@ model2 &lt;- lm(
 .small[
 
 ```r
-data("Perch")
-model1 &lt;- lm(
-  Weight ~ Length + Width + Length * Width,
-  data = Perch
-  )
-model2 &lt;- lm(
-  Weight ~ Length + Width + I(Length ^ 2) + I(Width ^ 2) + Length * Width,
-  data = Perch
-  )
-```
-]
-
-
-```r
 anova(model1)
 ```
 
@@ -206,13 +232,49 @@ anova(model1)
 ## Analysis of Variance Table
 ## 
 ## Response: Weight
-##              Df  Sum Sq Mean Sq  F value    Pr(&gt;F)
-## Length        1 6118739 6118739 3126.571 &lt; 2.2e-16
-## Width         1  110593  110593   56.511 7.416e-10
-## Length:Width  1  314997  314997  160.958 &lt; 2.2e-16
+##              Df  Sum Sq Mean Sq F value  Pr(&gt;F)
+## Length        1 6118739 6118739  3126.6 &lt; 2e-16
+## Width         1  110593  110593    56.5 7.4e-10
+## Length:Width  1  314997  314997   161.0 &lt; 2e-16
 ## Residuals    52  101765    1957
 ```
+]
 
+.small[
+
+```r
+(SSModel1 &lt;- 6118739 + 110593 + 314997)
+```
+
+```
+## [1] 6544329
+```
+]
+---
+
+## 🛠 Nested F-test for Multiple Linear Regression
+
+.small[
+
+```r
+anova(model2)
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: Weight
+##              Df  Sum Sq Mean Sq F value  Pr(&gt;F)
+## Length        1 6118739 6118739 3289.64 &lt; 2e-16
+## Width         1  110593  110593   59.46 4.7e-10
+## I(Length^2)   1  314899  314899  169.30 &lt; 2e-16
+## I(Width^2)    1    5381    5381    2.89   0.095
+## Length:Width  1    3482    3482    1.87   0.177
+## Residuals    50   93000    1860
+```
+]
+
+.small[
 
 ```r
 (SSModel1 &lt;- 6118739 + 110593 + 314997)
@@ -222,7 +284,142 @@ anova(model1)
 ## [1] 6544329
 ```
 
+```r
+(SSModel2 &lt;- 6118739 + 110593 + 314899 + 5381 + 3482)
+```
+
+```
+## [1] 6553094
+```
+]
+
 ---
+
+## 🛠 Nested F-test for Multiple Linear Regression
+
+* `\(F = \frac{SSMODEL_{Full} - SSMODEL_{Reduced}/p}{SSE_{Full}/n-k-1}\)`
+
+--
+* `\(SSMODEL_{Full} - SSMODEL_{Reduced}\)`:
+
+
+```r
+SSModel2 - SSModel1
+```
+
+```
+## [1] 8765
+```
+
+--
+* What is `\(p\)`?
+
+
+---
+
+
+## 🛠 Nested F-test for Multiple Linear Regression
+
+* `\(F = \frac{SSMODEL_{Full} - SSMODEL_{Reduced}/p}{SSE_{Full}/n-k-1}\)`
+
+--
+* `\(SSMODEL_{Full} - SSMODEL_{Reduced}\)` / p:
+
+
+```r
+(SSModel2 - SSModel1) / 2
+```
+
+```
+## [1] 4382
+```
+
+---
+
+## 🛠 Nested F-test for Multiple Linear Regression
+
+* `\(F = \frac{SSMODEL_{Full} - SSMODEL_{Reduced}/p}{SSE_{Full}/n-k-1}\)`
+* `\(SSE_{Full}/n-k-1\)`
+
+.small[
+
+```r
+anova(model2)
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: Weight
+##              Df  Sum Sq Mean Sq F value  Pr(&gt;F)
+## Length        1 6118739 6118739 3289.64 &lt; 2e-16
+## Width         1  110593  110593   59.46 4.7e-10
+## I(Length^2)   1  314899  314899  169.30 &lt; 2e-16
+## I(Width^2)    1    5381    5381    2.89   0.095
+## Length:Width  1    3482    3482    1.87   0.177
+*## Residuals    50   93000    1860
+```
+]
+
+---
+
+## 🛠 Nested F-test for Multiple Linear Regression
+
+* `\(F = \frac{SSMODEL_{Full} - SSMODEL_{Reduced}/p}{SSE_{Full}/n-k-1}\)`
+
+
+```r
+((SSModel2 - SSModel1) / 2) /
+  1860
+```
+
+```
+## [1] 2.36
+```
+
+--
+* What are the degrees of freedom for this test?
+
+--
+  * 2, 50
+
+--
+
+
+```r
+pf(2.356183, 2, 50, lower.tail = FALSE)
+```
+
+```
+## [1] 0.105
+```
+
+---
+
+## 🛠 Nested F-test for Multiple Linear Regression
+
+_An easier way_
+
+.small[
+
+```r
+anova(model1, model2)
+```
+
+```
+## Analysis of Variance Table
+## 
+## Model 1: Weight ~ Length + Width + Length * Width
+## Model 2: Weight ~ Length + Width + I(Length^2) + I(Width^2) + Length * 
+##     Width
+##   Res.Df    RSS Df Sum of Sq    F Pr(&gt;F)
+## 1     52 101765                         
+*## 2     50  93000  2      8765 2.36   0.11
+```
+]
+
+---
+
 ## 🛠 `\(R^2\)` for Multiple Linear Regression
 
 --
@@ -258,9 +455,230 @@ anova(model1)
 
 ---
 
-# &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `NFL wins`
+## 🛠 `\(R^2_{adj}\)` for Multiple Linear Regression
 
-- Go to RStudio Cloud and open `NFL wins`
+.small[
+
+```r
+glance(model1)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.985         0.984  44.2     1115. 3.75e-47     4  -290.  589.  599.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+
+```r
+glance(model2)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.986         0.985  43.1      705. 4.41e-45     6  -287.  588.  602.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+]
+
+--
+
+* so far we know what the first 6 columns are
+
+---
+
+## Model Comparision criteria
+
+* We are looking for reasonable ways to assess "goodness of fit" (how well the model fits the data) with "parsimony" 
+
+--
+* `\(R^2_{adj}\)` gets at this by adding a **penalty** for adding variables
+
+--
+* AIC and BIC are two more methods that balance goodness of fit and parsimony
+
+---
+
+## Log Likelihood
+
+* Both AIC and BIC are calculated using the **log likelihood**
+
+`\(\Large\ln(\mathcal{L}) = -\frac{n}{2}[\ln(2\pi) + \ln(SSE/n) + 1]\)`
+
+--
+* `\(\ln = \log_e\)`, `log()` in `R`
+
+--
+
+.small[
+
+```r
+glance(model1)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.985         0.984  44.2     1115. 3.75e-47     4  -290.  589.  599.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+
+```r
+-56 / 2 * (log(2 * pi) + log(101765 / 56) + 1)
+```
+
+```
+## [1] -290
+```
+]
+
+--
+
+* "goodness of fit" measure
+* **higher** log likelihood is better
+
+---
+## Log Likelihood
+
+**What I want you to remember**
+
+* Both AIC and BIC are calculated using the **log likelihood**
+
+`\(\Large\ln(\mathcal{L}) = -\frac{n}{2}[\ln(SSE/n) ]+\textrm{some constant}\)` 
+
+* `\(\ln = \log_e\)`, `log()` in `R`
+* "goodness of fit" measure
+* **higher** log likelihood is better
+---
+
+## AIC
+
+* Akaike's Information Criterion
+* `\(AIC = 2k - 2\ln(\mathcal{L})\)`
+* `\(k\)` is the number of predictors in the model
+* **lower** AIC values are better
+
+--
+
+.small[
+
+```r
+glance(model1)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.985         0.984  44.2     1115. 3.75e-47     4  -290.  589.  599.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+
+```r
+glance(model2)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.986         0.985  43.1      705. 4.41e-45     6  -287.  588.  602.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+
+]
+---
+
+## BIC
+
+* Bayesian Information Criterion
+* `\(BIC = \ln(n)k - 2\ln(\mathcal{L})\)`
+* `\(k\)` is the number of predictors in the model
+* **lower** BIC values are better
+
+--
+
+.small[
+
+```r
+glance(model1)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.985         0.984  44.2     1115. 3.75e-47     4  -290.  589.  599.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+
+```r
+glance(model2)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.986         0.985  43.1      705. 4.41e-45     6  -287.  588.  602.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+
+]
+
+---
+
+## AIC and BIC can disagree!
+
+.small[
+
+```r
+glance(model1)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.985         0.984  44.2     1115. 3.75e-47     4  -290.  589.  599.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+
+```r
+glance(model2)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.986         0.985  43.1      705. 4.41e-45     6  -287.  588.  602.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+
+]
+
+* the penalty term is larger in BIC than in AIC
+
+--
+* What to do? Both are valid, **pre-specify** which you are going to use before running your models in the **methods** section of your analysis
+
+---
+## 🛠 toolkit for comparing models
+
+### 👉  F-test
+### 👉 `\(\Large R^2\)`
+### 👉 `\(AIC\)`
+### 👉 `\(BIC\)`
+
+---
+# &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `First Year GPA`
+
+- Go to RStudio Cloud and open `First Year GPA`
 
 ---
     </textarea>

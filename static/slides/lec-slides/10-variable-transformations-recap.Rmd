@@ -290,7 +290,7 @@ class: middle
 
 ## General $\hat\beta$ interpretation with quadratic terms
 
-The linear term in the model for $x$ has a coefficient of $\hat\beta_1$ (95% CI: $(LB_{\hat\beta_1}, UB_{\hat\beta_1})$). The quadratic term in the model for $x$ has a coefficient of $\hat\beta_2$ (95% CI: $(LB_{\hat\beta_2}, UB_{\hat\beta_2})$). A change in $x$ from $a$ to $b$ yeilds an expected change in $y$ of $\hat\beta_1 (b - a) + \hat\beta_2 (b^2 - a^2)$ **holding all other variables constant***.
+The linear term in the model for $x$ has a coefficient of $\hat\beta_1$ (95% CI: $(LB_{\hat\beta_1}, UB_{\hat\beta_1})$). The quadratic term in the model for $x$ has a coefficient of $\hat\beta_2$ (95% CI: $(LB_{\hat\beta_2}, UB_{\hat\beta_2})$). A change in $x$ from $a$ to $b$ yields an expected change in $y$ of $\hat\beta_1 (b - a) + \hat\beta_2 (b^2 - a^2)$ **holding all other variables constant***.
 
 --
 * You must include this line if there are **additional variables in your model**.
@@ -301,7 +301,7 @@ class: middle
 
 ## Specific $\hat\beta$ interpretation for $y = \beta_0 + \beta_1 Carat + \beta_2 Carat^2 + \epsilon$ model
 
-The linear term in the model for `Carat` has a coefficient of 2386 (95% CI: $(906, 3866)$). The quadratic term in the model for `Carat` has a coefficient of $4498$ (95% CI: $(3981, 5016)$). A change in `Carat` from $0.7$ to $1.24$ yeilds an expected change in `TotalPrice` of $6000.5$.
+The linear term in the model for `Carat` has a coefficient of 2386 (95% CI: $(906, 3866)$). The quadratic term in the model for `Carat` has a coefficient of $4498$ (95% CI: $(3981, 5016)$). A change in `Carat` from $0.7$ to $1.24$ yields an expected change in `TotalPrice` of $6000.5$.
 
 --
 * Where did I get 0.7 and 1.24?

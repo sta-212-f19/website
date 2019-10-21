@@ -23,12 +23,16 @@ by Dr. Lucy D'Agostino McGowan
 
 ---
 
+# <i class="fas fa-laptop"></i> `First Year GPA`
+
+- Go to RStudio Cloud and open `First Year GPA`
+---
+
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(broom)
 library(Stat2Data)
-library(ggdag)
-library(datasauRus)
+options(digits = 3)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -117,6 +121,41 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
 
+* Which of these are nested models?
+
+(1) $y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \epsilon$  
+(2) $y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 * x_2 + \epsilon$  
+(3) $y = \beta_0 + \beta_1 x_3 + \epsilon$  
+(4) $y = \beta_0 + \beta_2 x_2 + \epsilon$  
+(5) $y = \beta_0 + \beta_1 x_4 + \epsilon$  
+  
+--
+* (4) in (1) in (2)
+
+
+---
+
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+* Comparing these two models, what is $p$?
+
+(1) $y = \beta_0 + \beta_2 x_2 + \epsilon$  
+(2) $y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 * x_2 + \epsilon$  
+
+--
+* $p = 2$
+
+--
+* What is $k$?
+
+--
+* $k = 3$
+
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
 * Goal: Trying to predict the weight of fish based on their length and width
 
 .small[
@@ -183,27 +222,113 @@ model2 <- lm(
 
 .small[
 ```{r, echo = TRUE}
-data("Perch")
-model1 <- lm(
-  Weight ~ Length + Width + Length * Width,
-  data = Perch
-  )
-model2 <- lm(
-  Weight ~ Length + Width + I(Length ^ 2) + I(Width ^ 2) + Length * Width,
-  data = Perch
-  )
+anova(model1)
 ```
 ]
 
-```{r, echo = TRUE}
-anova(model1)
-```
-
+.small[
 ```{r, echo = TRUE}
 (SSModel1 <- 6118739 + 110593 + 314997)
 ```
+]
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+.small[
+```{r, echo = TRUE}
+anova(model2)
+```
+]
+
+.small[
+```{r, echo = TRUE}
+(SSModel1 <- 6118739 + 110593 + 314997)
+(SSModel2 <- 6118739 + 110593 + 314899 + 5381 + 3482)
+```
+]
 
 ---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+* $F = \frac{SSMODEL_{Full} - SSMODEL_{Reduced}/p}{SSE_{Full}/n-k-1}$
+
+--
+* $SSMODEL_{Full} - SSMODEL_{Reduced}$:
+
+```{r, echo = TRUE}
+SSModel2 - SSModel1
+```
+
+--
+* What is $p$?
+
+
+---
+
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+* $F = \frac{SSMODEL_{Full} - SSMODEL_{Reduced}/p}{SSE_{Full}/n-k-1}$
+
+--
+* $SSMODEL_{Full} - SSMODEL_{Reduced}$ / p:
+
+```{r, echo = TRUE}
+(SSModel2 - SSModel1) / 2
+```
+
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+* $F = \frac{SSMODEL_{Full} - SSMODEL_{Reduced}/p}{SSE_{Full}/n-k-1}$
+* $SSE_{Full}/n-k-1$
+
+.small[
+```{r, echo = TRUE, highlight.output = 10}
+anova(model2)
+```
+]
+
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+* $F = \frac{SSMODEL_{Full} - SSMODEL_{Reduced}/p}{SSE_{Full}/n-k-1}$
+
+```{r, echo = TRUE}
+((SSModel2 - SSModel1) / 2) /
+  1860
+```
+
+--
+* What are the degrees of freedom for this test?
+
+--
+  * 2, 50
+
+--
+
+```{r, echo = TRUE}
+pf(2.356183, 2, 50, lower.tail = FALSE)
+```
+
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+_An easier way_
+
+.small[
+```{r, echo = TRUE, highlight.output = 8}
+anova(model1, model2)
+```
+]
+
+---
+
 ## `r emo::ji("hammer_and_wrench")` $R^2$ for Multiple Linear Regression
 
 --
@@ -239,9 +364,134 @@ anova(model1)
 
 ---
 
-# <i class="fas fa-laptop"></i> `NFL wins`
+## `r emo::ji("hammer_and_wrench")` $R^2_{adj}$ for Multiple Linear Regression
 
-- Go to RStudio Cloud and open `NFL wins`
+.small[
+```{r, echo = TRUE}
+glance(model1)
+glance(model2)
+```
+]
+
+--
+
+* so far we know what the first 6 columns are
+
+---
+
+## Model Comparision criteria
+
+* We are looking for reasonable ways to assess "goodness of fit" (how well the model fits the data) with "parsimony" 
+
+--
+* $R^2_{adj}$ gets at this by adding a **penalty** for adding variables
+
+--
+* AIC and BIC are two more methods that balance goodness of fit and parsimony
+
+---
+
+## Log Likelihood
+
+* Both AIC and BIC are calculated using the **log likelihood**
+
+$\Large\ln(\mathcal{L}) = -\frac{n}{2}[\ln(2\pi) + \ln(SSE/n) + 1]$
+
+--
+* $\ln = \log_e$, `log()` in `R`
+
+--
+
+.small[
+```{r, echo = TRUE}
+glance(model1)
+-56 / 2 * (log(2 * pi) + log(101765 / 56) + 1)
+```
+]
+
+--
+
+* "goodness of fit" measure
+* **higher** log likelihood is better
+
+---
+## Log Likelihood
+
+**What I want you to remember**
+
+* Both AIC and BIC are calculated using the **log likelihood**
+
+$\Large\ln(\mathcal{L}) = -\frac{n}{2}[\ln(SSE/n) ]+\textrm{some constant}$ 
+
+* $\ln = \log_e$, `log()` in `R`
+* "goodness of fit" measure
+* **higher** log likelihood is better
+---
+
+## AIC
+
+* Akaike's Information Criterion
+* $AIC = 2k - 2\ln(\mathcal{L})$
+* $k$ is the number of predictors in the model
+* **lower** AIC values are better
+
+--
+
+.small[
+```{r, echo = TRUE}
+glance(model1)
+glance(model2)
+```
+
+]
+---
+
+## BIC
+
+* Bayesian Information Criterion
+* $BIC = \ln(n)k - 2\ln(\mathcal{L})$
+* $k$ is the number of predictors in the model
+* **lower** BIC values are better
+
+--
+
+.small[
+```{r, echo = TRUE}
+glance(model1)
+glance(model2)
+```
+
+]
+
+---
+
+## AIC and BIC can disagree!
+
+.small[
+```{r, echo = TRUE}
+glance(model1)
+glance(model2)
+```
+
+]
+
+* the penalty term is larger in BIC than in AIC
+
+--
+* What to do? Both are valid, **pre-specify** which you are going to use before running your models in the **methods** section of your analysis
+
+---
+## `r emo::ji("hammer_and_wrench")` toolkit for comparing models
+
+### `r emo::ji("point_right")`  F-test
+### `r emo::ji("point_right")` $\Large R^2$
+### `r emo::ji("point_right")` $AIC$
+### `r emo::ji("point_right")` $BIC$
+
+---
+# <i class="fas fa-laptop"></i> `First Year GPA`
+
+- Go to RStudio Cloud and open `First Year GPA`
 
 ---
 
