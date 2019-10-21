@@ -33,8 +33,213 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
+## `r emo::ji("hammer_and_wrench")` toolkit for comparing models
 
-## <i class="fas fa-laptop"></i> `NFL wins`
+--
+### `r emo::ji("point_right")`  F-test
+--
+
+### `r emo::ji("point_right")` $\Large R^2$
+---
+
+## `r emo::ji("hammer_and_wrench")` F-test for Multiple Linear Regression
+
+* Comparing the full model to the intercept only model
+--
+
+* $\Large H_0: \beta_1 = \beta_2 = \dots = \beta_k = 0$
+--
+
+* $\Large H_A: \textrm{at least one } \beta_i \neq 0$
+
+---
+
+## `r emo::ji("hammer_and_wrench")` F-test for Multiple Linear Regression
+
+* $\Large F = \frac{MSModel}{MSE}$
+--
+
+* df for the Model?
+--
+
+  * k
+--
+
+* df for the errors?
+--
+
+  * n - k - 1
+
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+* What does "nested" mean?
+  * You have a "small" model and a "large" model where the "small" model is completely contained in the "large" model
+
+--
+* The F-test we have learned so far is one example of this, comparing:
+  * $y = \beta_0 + \epsilon$ (**small**)
+  * $y = \beta_0 + \beta_1 + \beta_2 + \dots +\beta_k + \epsilon$ (**large**)
+
+--
+* The full (**large**) model has $k$ predictors, the reduced (**small**) model has $k - p$ predictors
+
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+* The full (**large**) model has $k$ predictors, the reduced (**small**) model has $k - p$ predictors
+
+--
+* What is $H_0$?
+
+--
+  * $H_0:$ $\beta_i=0$ for all $p$ predictors being dropped from the full model
+
+--
+* What is $H_A$?
+
+--
+  * $H_A:$ $\beta_i\neq 0$ for at least one of the $p$ predictors dropped from the full model
+
+--
+* Does the full model do a (statistically significant) better job of explaining the variability in the response than the reduced model?
+
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+* The full (**large**) model has $k$ predictors, the reduced (**small**) model has $k - p$ predictors
+* $F = \frac{SSMODEL_{Full} - SSMODEL_{Reduced}/p}{SSE_{Full}/n-k-1}$
+
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+* Goal: Trying to predict the weight of fish based on their length and width
+
+.small[
+```{r, echo = TRUE}
+data("Perch")
+model1 <- lm(
+  Weight ~ Length + Width + Length * Width,
+  data = Perch
+  )
+model2 <- lm(
+  Weight ~ Length + Width + I(Length ^ 2) + I(Width ^ 2) + Length * Width,
+  data = Perch
+  )
+```
+]
+
+--
+
+* What is the equation for `model1`?
+
+--
+* What is the equation for `model2`?
+
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+.small[
+```{r, echo = TRUE}
+data("Perch")
+model1 <- lm(
+  Weight ~ Length + Width + Length * Width,
+  data = Perch
+  )
+model2 <- lm(
+  Weight ~ Length + Width + I(Length ^ 2) + I(Width ^ 2) + Length * Width,
+  data = Perch
+  )
+```
+]
+
+--
+
+* If we want to do a _nested F-test_, what is $H_0$?
+
+--
+  * $H_0: \beta_3 = \beta_4 = 0$
+
+--
+* What is $H_A$?
+
+--
+  * $H_A: \beta_3\neq 0$ or $\beta_4\neq 0$
+
+--
+* What are the degrees of freedom of this test? (n = 56)
+
+--
+  * 2, 50
+
+---
+
+## `r emo::ji("hammer_and_wrench")` Nested F-test for Multiple Linear Regression
+
+.small[
+```{r, echo = TRUE}
+data("Perch")
+model1 <- lm(
+  Weight ~ Length + Width + Length * Width,
+  data = Perch
+  )
+model2 <- lm(
+  Weight ~ Length + Width + I(Length ^ 2) + I(Width ^ 2) + Length * Width,
+  data = Perch
+  )
+```
+]
+
+```{r, echo = TRUE}
+anova(model1)
+```
+
+```{r, echo = TRUE}
+(SSModel1 <- 6118739 + 110593 + 314997)
+```
+
+---
+## `r emo::ji("hammer_and_wrench")` $R^2$ for Multiple Linear Regression
+
+--
+
+* $\Large R^2= \frac{SSModel}{SSTotal}$
+--
+
+* $\Large R^2= 1 - \frac{SSE}{SSTotal}$
+--
+
+* As is, if you add a predictor this will _always_ increase. Therefore, we have $R^2_{adj}$ that has a small "penalty" for adding more predictors
+--
+
+* $\Large R^2_{adj} = 1 - \frac{SSE/(n-k-1)}{SSTotal / (n-1)}$
+--
+
+* $\Large \frac{SSTotal}{n-1} = \frac{\sum(y - \bar{y})^2}{n-1}$ What is this?
+--
+
+  * Sample variance! $S_Y^2$
+--
+
+* $\Large R^2_{adj} = 1 - \frac{\hat\sigma^2_\epsilon}{S_Y^2}$
+
+---
+
+## `r emo::ji("hammer_and_wrench")` $R^2_{adj}$ for Multiple Linear Regression
+
+* $\Large R^2_{adj} = 1 - \frac{SSE/(n-k-1)}{SSTotal / (n-1)}$
+* The denominator stays the same for all models fit to the same response variable and data
+* the numerator actually increase when a new predictor is added to a model if the decrease in the SSE is not sufficient to offset the decrease in the error degrees of freedom. 
+* So $R^2_{adj}$ can `r emo::ji("point_down")` when a weak predictor is added to a model
+
+---
+
+# <i class="fas fa-laptop"></i> `NFL wins`
 
 - Go to RStudio Cloud and open `NFL wins`
 
