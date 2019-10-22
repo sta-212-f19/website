@@ -107,6 +107,7 @@ lessons:
   - title: "Model Comparison"
     slides: "lec-slides/10-model-comparisons.html"
     reading: "reading-09.html"
+    appex: "10-diamonds.html"
   - date: "Thur, Oct 24"
     title: "Lab 05: Multiple regression in practice"
     lab: "coming-soon.html"
