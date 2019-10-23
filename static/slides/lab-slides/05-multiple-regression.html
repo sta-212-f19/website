@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Lab 05: Multiple regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="lab-slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Lab 05: Multiple regression
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+Dr. Lucy D'Agostino McGowan
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+# Agenda
+
+* **Loading a .csv file**
+* **(Re)coding factor variables**
+* **Lab 05:** on your own
+
+---
+
+## Reading in a .csv file
+
+* So far, the data we've been using has been included in an **R package**
+* To access this data we just run `data("data set")`
+* What if we want to read in other data, for example from a `.csv` file?
+--
+
+* enter: `read_csv()`
+--
+
+* `read_csv()` is a function from the **readr** package, which is included when you load the **tidyverse**
+--
+
+* it works like this:
+
+
+```r
+df &lt;- read_csv("the-path-to-your-file.csv")
+```
+
+Where `df` can be whatever you'd like to call your new dataset
+
+---
+
+## Recoding factor variables
+
+* Sometimes variables come in as _numeric_, but we want them to be factors
+
+![](img/05/bad-code.png)
+
+---
+
+## Recoding factor variables
+
+* This dataset contains data on a sample of 1450 birth records that statistician John Holcomb selected from the North Carolina State Center for Health and Environmental Statistics.
+
+
+```r
+glimpse(NCbirths)
+```
+
+```
+## Observations: 1,450
+## Variables: 15
+## $ ID            &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,…
+## $ Plural        &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+## $ Sex           &lt;int&gt; 1, 2, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 1,…
+## $ MomAge        &lt;int&gt; 32, 32, 27, 27, 25, 28, 25, 15, 21, 27, 26, 20, 19…
+## $ Weeks         &lt;int&gt; 40, 37, 39, 39, 39, 43, 39, 42, 39, 40, 41, 41, 40…
+## $ Marital       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 1,…
+*## $ RaceMom       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 5, 1,…
+## $ HispMom       &lt;fct&gt; N, N, N, N, N, N, N, N, N, N, N, N, N, P, N, M, N,…
+## $ Gained        &lt;int&gt; 38, 34, 12, 15, 32, 32, 75, 25, 28, 37, 45, 52, 26…
+## $ Smoke         &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1,…
+## $ BirthWeightOz &lt;int&gt; 111, 116, 138, 136, 121, 117, 143, 113, 120, 124, …
+## $ BirthWeightGm &lt;dbl&gt; 3146.85, 3288.60, 3912.30, 3855.60, 3430.35, 3316.…
+## $ Low           &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,…
+## $ Premie        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,…
+## $ MomRace       &lt;fct&gt; white, white, white, white, white, white, white, w…
+```
+
+---
+
+## Recoding factor variables
+
+
+```r
+lm(BirthWeightOz ~ RaceMom, data = NCbirths)
+```
+
+```
+## 
+## Call:
+## lm(formula = BirthWeightOz ~ RaceMom, data = NCbirths)
+## 
+## Coefficients:
+## (Intercept)      RaceMom  
+##   116.27732     -0.01624
+```
+
+---
+
+## Recoding factor variables
+
+
+
+```r
+NCbirths &lt;- NCbirths %&gt;%
+  mutate(
+    RaceMom = recode_factor(
+      RaceMom,
+      `1` = "white",
+      `2` = "black",
+      `3` = "American Indian",
+      `4` = "Chinese",
+      `5` = "Japanese",
+      `6` = "Hawaiian",
+      `7` = "Filipino",
+      `8` = "Other Asian or Pacific Islander"
+    )
+  )
+```
+
+---
+
+## Recoding factor variables
+
+
+```r
+lm(BirthWeightOz ~ RaceMom, data = NCbirths)
+```
+
+```
+## 
+## Call:
+## lm(formula = BirthWeightOz ~ RaceMom, data = NCbirths)
+## 
+## Coefficients:
+##                            (Intercept)  
+##                               117.8720  
+##                           RaceMomblack  
+##                                -7.3087  
+##                 RaceMomAmerican Indian  
+##                                -2.5538  
+##                         RaceMomChinese  
+##                                 8.1280  
+##                        RaceMomJapanese  
+##                                 0.6463  
+##                        RaceMomFilipino  
+##                               -20.8720  
+## RaceMomOther Asian or Pacific Islander  
+##                                 1.1280
+```
+
+--
+
+* What is the referent category?
+
+--
+* What if I wanted to change that?
+---
+
+## Recoding factor variables
+
+
+```r
+new_levels &lt;- c("American Indian", "white", "black",  "Chinese", "Japanese", "Filipino", "Other Asian or Pacific Islander")
+NCbirths &lt;- NCbirths %&gt;%
+  mutate(
+    RaceMom = fct_relevel(RaceMom, new_levels)
+  )
+```
+
+---
+
+## Recoding factor variables
+
+* Sometimes variables come in as _numeric_, but we want them to be factors
+
+![](img/05/bad-jama.png)
+
+---
+
+## Open `Lab 05: multiple regression` in RStudio
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+---
+title: "Lab 05: Multiple regression"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "lab-slides.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+
+layout: true
+  
+<div class="my-footer">
+<span>
+Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(Stat2Data)
+library(broom)
+data("NCbirths")
+```
+
+# Agenda
+
+* **Loading a .csv file**
+* **(Re)coding factor variables**
+* **Lab 05:** on your own
+
+---
+
+## Reading in a .csv file
+
+* So far, the data we've been using has been included in an **R package**
+* To access this data we just run `data("data set")`
+* What if we want to read in other data, for example from a `.csv` file?
+--
+
+* enter: `read_csv()`
+--
+
+* `read_csv()` is a function from the **readr** package, which is included when you load the **tidyverse**
+--
+
+* it works like this:
+
+```{r, eval = FALSE, echo = TRUE}
+df <- read_csv("the-path-to-your-file.csv")
+```
+
+Where `df` can be whatever you'd like to call your new dataset
+
+---
+
+## Recoding factor variables
+
+* Sometimes variables come in as _numeric_, but we want them to be factors
+
+![](img/05/bad-code.png)
+
+---
+
+## Recoding factor variables
+
+* This dataset contains data on a sample of 1450 birth records that statistician John Holcomb selected from the North Carolina State Center for Health and Environmental Statistics.
+
+```{r, highlight.output = 9}
+glimpse(NCbirths)
+```
+
+---
+
+## Recoding factor variables
+
+```{r}
+lm(BirthWeightOz ~ RaceMom, data = NCbirths)
+```
+
+---
+
+## Recoding factor variables
+
+
+```{r}
+NCbirths <- NCbirths %>%
+  mutate(
+    RaceMom = recode_factor(
+      RaceMom,
+      `1` = "white",
+      `2` = "black",
+      `3` = "American Indian",
+      `4` = "Chinese",
+      `5` = "Japanese",
+      `6` = "Hawaiian",
+      `7` = "Filipino",
+      `8` = "Other Asian or Pacific Islander"
+    )
+  )
+```
+
+---
+
+## Recoding factor variables
+
+```{r}
+lm(BirthWeightOz ~ RaceMom, data = NCbirths)
+```
+
+--
+
+* What is the referent category?
+
+--
+* What if I wanted to change that?
+---
+
+## Recoding factor variables
+
+```{r}
+new_levels <- c("American Indian", "white", "black",  "Chinese", "Japanese", "Filipino", "Other Asian or Pacific Islander")
+NCbirths <- NCbirths %>%
+  mutate(
+    RaceMom = fct_relevel(RaceMom, new_levels)
+  )
+```
+
+---
+
+## Recoding factor variables
+
+* Sometimes variables come in as _numeric_, but we want them to be factors
+
+![](img/05/bad-jama.png)
+
+---
+
+## Open `Lab 05: multiple regression` in RStudio
+
