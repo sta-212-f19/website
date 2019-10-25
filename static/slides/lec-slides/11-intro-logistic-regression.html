@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Introduction to Logistic Regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to Logistic Regression
+
+---
+
+
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+by Dr. Lucy D'Agostino McGowan
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+# &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `what are the odds`
+
+- Go to RStudio Cloud and open `what are the odds`
+---
+
+
+
+
+## Outcome variable
+
+* So far, we've only had **continuous** (numeric, quantitative) outcome variables ( `\(y\)` )
+
+--
+* We've just learned about **categorical** and **binary** explanatory variables ( `\(x\)` )
+
+--
+* What if we have a **binary** outcome variable?
+
+---
+
+## Outcome variable
+
+.question[
+What does it mean to be a **binary** variable?
+]
+
+* So far, we've only had **continuous** (numeric, quantitative) outcome variables ( `\(y\)` )
+* We've just learned about **categorical** and **binary** explanatory variables ( `\(x\)` )
+* What if we have a **binary** outcome variable?
+
+---
+
+## Let's look at an example
+
+* 446 teens were asked "On an average school night, do you get at least 7 hours of sleep"
+* Outcome is [1 = "Yes", 0 = "No"]
+* Is Age related to this outcome?
+
+--
+* What if I try to fit this as a _linear regression_ model?
+
+--
+
+![](11-intro-logistic-regression_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+## Let's look at an example
+
+* 446 teens were asked "On an average school night, do you get at least 7 hours of sleep"
+* Outcome is [1 = "Yes", 0 = "No"]
+* Is Age related to this outcome?
+* What if I try to fit this as a _linear regression_ model?
+
+![](11-intro-logistic-regression_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+---
+
+## Let's look at an example
+
+* 446 teens were asked "On an average school night, do you get at least 7 hours of sleep"
+* Outcome is [1 = "Yes", 0 = "No"]
+* Is Age related to this outcome?
+* What if I try to fit this as a _linear regression_ model?
+
+![](11-intro-logistic-regression_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+
+## Let's look at an example
+
+* Perhaps it would be sensible to find a function that would not extend beyond 0 and 1?
+
+![](11-intro-logistic-regression_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+---
+
+## Let's look at an example
+
+* Perhaps it would be sensible to find a function that would not extend beyond 0 and 1?
+
+![](11-intro-logistic-regression_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+---
+
+## Let's look at an example
+
+* Perhaps it would be sensible to find a function that would not extend beyond 0 and 1?
+
+![](11-intro-logistic-regression_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+* this line is fit using **logistic** regression model
+
+---
+
+## How does this compare to linear regression?
+
+Model | Outcome | Form
+---|---|---
+Ordinary linear Regression | Numeric | `\(y \approx \beta_0 + \beta_1 x\)`
+Number of Doctors example | Numeric | `\(\sqrt{\textrm{Number of doctors}}\approx \beta_0 +\beta_1x\)`
+Logistic regression | Binary| `\(\log\left(\frac{\pi}{1-\pi}\right) \approx \beta_0 + \beta_1x\)`
+
+--
+* `\(\pi\)` is the probability that `\(y = 1\)` ( `\(P(y = 1)\)` )
+
+---
+
+## Notation
+
+* `\(\log\left(\frac{\pi}{1-\pi}\right)\)`: the "log odds"
+
+--
+* `\(\pi\)` is the **probability** that `\(y = 1\)` - the probability that your outcome is 1.
+
+--
+* `\(\frac{\pi}{1-\pi}\)` is a ratio representing the **odds** that `\(y = 1\)` 
+
+--
+* `\(\log\left(\frac{\pi}{1-\pi}\right)\)` is the **log odds**
+
+--
+* The **transformation** from `\(\pi\)` to `\(\log\left(\frac{\pi}{1-\pi}\right)\)` is called the logistic or **logit** transformation
+---
+
+## A bit about "odds"
+
+* The "odds" tell you how likely an event is
+* 👛 if I flip a fair coin, what is the probability that I'd get **heads**?
+
+--
+  * `\(p = 0.5\)`
+
+--
+* What is the probability that I'd get **tails**?
+
+--
+  * `\(1 - p = 0.5\)`
+  
+--
+* The **odds** are 1:1, 0.5:0.5
+* the **odds ratio** can be written as `\(\frac{p}{1-p} =\frac{0.5}{0.5} = 1\)`
+
+---
+
+## A bit about "odds"
+
+* The "odds" tell you how likely an event is
+* ⛱ Let's say there is a 60% chance of rain today  
+* What is the probability that it will rain?
+
+--
+  * `\(p = 0.6\)`
+
+--
+* What is the probability that it **won't** rain?
+
+--
+  * `\(1-p = 0.4\)`
+
+--
+* What are the **odds** that it will rain? 
+
+--
+  * 3 to 2, 3:2, `\(\frac{0.6}{0.4} = 1.5\)`
+  
+---
+
+## Transforming logs
+
+* How do you "undo" a `\(\log\)` base `\(e\)`?
+
+--
+* Use `\(e\)`! For example:
+   * `\(e^{\log(10)} = 10\)` 
+
+--
+  * `\(e^{\log(1283)} = 1283\)`
+
+--
+  * `\(e^{\log(x)} = x\)`
+  
+---
+
+## Transforming logs
+
+.question[
+How would you get the **odds** from the **log(odds)**?
+]
+
+* How do you "undo" a `\(\log\)` base `\(e\)`?
+* Use `\(e\)`! For example:
+   * `\(e^{\log(10)} = 10\)` 
+  * `\(e^{\log(1283)} = 1283\)`
+  * `\(e^{\log(x)} = x\)`
+  
+--
+* `\(e^{\log(odds)}\)` = odds
+
+---
+
+## Transforming odds
+
+* odds = `\(\frac{\pi}{1-\pi}\)`
+* Solving for `\(\pi\)`
+  * `\(\pi = \frac{\textrm{odds}}{1+\textrm{odds}}\)`
+
+--
+* Plugging in `\(e^{\log(odds)}\)` = odds
+
+--
+  * `\(\pi = \frac{e^{\log(odds)}}{1+e^{\log(odds)}}\)`
+
+--
+* Plugging in `\(\log(odds) = \beta_0 + \beta_1x\)`
+
+--
+  * `\(\pi = \frac{e^{\beta_0 + \beta_1x}}{1+e^{\beta_0 + \beta_1x}}\)`
+
+---
+
+## The logistic model
+
+* ✌️ forms
+
+Form | Model
+-----|------
+Logit form | `\(\log\left(\frac{\pi}{1-\pi}\right) = \beta_0 + \beta_1x\)`
+Probability form | `\(\Large\pi = \frac{e^{\beta_0 + \beta_1x}}{1+e^{\beta_0 + \beta_1x}}\)`
+
+---
+
+## The logistic model
+
+probability | odds | log(odds)
+--|--|--
+`\(\pi\)` | `\(\frac{\pi}{1-\pi}\)` | `\(\log\left(\frac{\pi}{1-\pi}\right)=l\)`
+
+--
+
+.center[
+# ⬅️
+]
+
+log(odds) | odds | probability
+--|--|--
+`\(l\)` | `\(e^l\)` | `\(\frac{e^l}{1+e^l} = \pi\)`
+
+---
+
+## The logistic model
+
+* ✌️ forms
+
+--
+* **log(odds)**: `\(l \approx \beta_0 + \beta_1x\)`
+
+--
+* **P(Outcome = Yes)**: `\(\Large\pi \approx\frac{e^{\beta_0 + \beta_1x}}{1+e^{\beta_0 + \beta_1x}}\)`
+
+---
+
+# &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `what are the odds`
+
+- Go to RStudio Cloud and open `what are the odds`
+
+---
+
+## Example
+
+* We are interested in the probability of getting accepted to medical school given a college student's GPA
+
+.small[
+
+```r
+data("MedGPA")
+ggplot(MedGPA, aes(Accept, GPA)) + 
+  geom_boxplot() + 
+  geom_jitter()
+```
+
+![](11-intro-logistic-regression_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+]
+
+---
+
+
+## Example
+
+.question[
+What is the equation for the model we are going to fit?
+]
+
+* We are interested in the probability of getting accepted to medical school given a college student's GPA
+
+---
+
+## Example
+
+.question[
+What is the equation for the model we are going to fit?
+]
+
+* `\(\log(odds) = \beta_0 + \beta_1 GPA\)`
+* P(Accept) `\(\approx \frac{e^{\beta_0 + \beta_1GPA}}{1+e^{\beta_0 + \beta_1GPA}}\)`
+* We are interested in the probability of getting accepted to medical school given a college student's GPA
+
+---
+
+## Example
+
+* We are interested in the probability of getting accepted to medical school given a college student's GPA
+
+.small[
+
+```r
+glm(Accept ~ GPA, data = MedGPA,
+*   family = "binomial")
+```
+
+```
+## 
+## Call:  glm(formula = Accept ~ GPA, family = "binomial", data = MedGPA)
+## 
+## Coefficients:
+## (Intercept)          GPA  
+##       19.21        -5.45  
+## 
+## Degrees of Freedom: 54 Total (i.e. Null);  53 Residual
+## Null Deviance:	    75.8 
+## Residual Deviance: 56.8 	AIC: 60.8
+```
+]
+
+---
+
+## Example
+
+* We are interested in the probability of getting accepted to medical school given a college student's GPA
+
+.small[
+
+```r
+glm(Accept ~ GPA, data = MedGPA,
+    family = "binomial") %&gt;%
+* tidy()
+```
+
+```
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    19.2       5.63      3.41 0.000644
+## 2 GPA            -5.45      1.58     -3.45 0.000553
+```
+]
+
+---
+
+## Example
+
+* We are interested in the probability of getting accepted to medical school given a college student's GPA
+
+.small[
+
+```r
+glm(Accept ~ GPA, data = MedGPA,
+    family = "binomial") %&gt;%
+* predict()
+```
+
+```
+##      1      2      3      4      5      6      7      8      9     10 
+## -0.538 -1.737  1.590 -0.919  0.771 -1.083 -2.010  0.990 -1.028 -2.010 
+##     11     12     13     14     15     16     17     18     19     20 
+## -2.447  0.171 -1.356 -0.483  1.208 -0.101 -0.701 -0.101  1.480 -2.010 
+##     21     22     23     24     25     26     27     28     29     30 
+## -1.028 -1.356 -2.119 -1.956 -0.865 -0.210  0.444 -0.319  0.662 -1.628 
+##     31     32     33     34     35     36     37     38     39     40 
+## -0.538  2.353 -2.010 -0.974  1.535 -1.847 -0.101  0.662 -1.901  2.080 
+##     41     42     43     44     45     46     47     48     49     50 
+##  0.826  0.771 -0.538 -2.283  0.826  0.881 -2.447  2.626  1.262 -0.810 
+##     51     52     53     54     55 
+##  4.371 -0.210  0.226  3.935  0.444
+```
+]
+
+---
+
+## Example
+
+* We are interested in the probability of getting accepted to medical school given a college student's GPA
+
+.small[
+
+```r
+glm(Accept ~ GPA, data = MedGPA,
+    family = "binomial") %&gt;%
+* predict(type = "response")
+```
+
+```
+##      1      2      3      4      5      6      7      8      9     10 
+## 0.3688 0.1496 0.8306 0.2851 0.6838 0.2529 0.1181 0.7290 0.2634 0.1181 
+##     11     12     13     14     15     16     17     18     19     20 
+## 0.0797 0.5428 0.2049 0.3815 0.7699 0.4747 0.3315 0.4747 0.8146 0.1181 
+##     21     22     23     24     25     26     27     28     29     30 
+## 0.2634 0.2049 0.1072 0.1239 0.2963 0.4476 0.6093 0.4208 0.6598 0.1640 
+##     31     32     33     34     35     36     37     38     39     40 
+## 0.3688 0.9132 0.1181 0.2741 0.8227 0.1363 0.4747 0.6598 0.1300 0.8890 
+##     41     42     43     44     45     46     47     48     49     50 
+## 0.6955 0.6838 0.3688 0.0925 0.6955 0.7069 0.0797 0.9325 0.7794 0.3078 
+##     51     52     53     54     55 
+## 0.9875 0.4476 0.5563 0.9808 0.6093
+```
+]
+
+---
+
+# &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; `what are the odds`
+
+- Go to RStudio Cloud and open `what are the odds`
+- load the `Stat2Data`, `tidyverse`, and `broom` libraries
+- load `data("MedGPA")`
+- fit the appropriate model predicting `MCAT` from `GPA`
+- fit the appropriate model predicting `Accept` from `GPA`
+- How do you think you interpret the coefficient for `GPA` in the second model?
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
