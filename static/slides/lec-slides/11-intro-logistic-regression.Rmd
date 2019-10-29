@@ -473,3 +473,7 @@ glm(Accept ~ GPA, data = MedGPA,
 - fit the appropriate model predicting `Accept` from `GPA`
 - How do you think you interpret the coefficient for `GPA` in the second model?
 ---
+
+class: center, middle
+
+# [bit.ly/sta-212-f19-mid-eval](https://bit.ly/sta-212-f19-mid-eval)

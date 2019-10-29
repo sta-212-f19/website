@@ -1,0 +1,22 @@
+---
+title: "Homework 3: Final Project Data"
+output: html_document
+---
+
+For the final project, you will need to select an appropriate **dataset** to analyze. This dataset should meet the following criteria:
+
+* Has at least 6 variables
+* Has both numeric and categorical variables
+* Has a decent number of observations (at least $n = 75$)
+
+Some places you can find data:
+
+* Data included in the `Stat2Data` R package (that meet the above criteria)
+* Data from [FiveThirtyEight](https://data.fivethirtyeight.com)
+* Biomedical data from [Vanderbilt's Biostatistics Repository](http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets)
+* Data you've found elsewhere
+
+You will be exploring fitting at least **three** potential models with this data. Your outcome variable can be either **binary** or **numeric**.
+
+Fill out [this form](https://docs.google.com/forms/d/e/1FAIpQLSdUq1xDF64jhVxNrvDNFZnzWUuNFmu446sKDf_w9m4jbvHbLA/viewform?usp=sf_link) by **Tuesday November 5th at noon** with information about the data you have chosen.
+
