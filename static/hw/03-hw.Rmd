@@ -3,7 +3,9 @@ title: "Homework 3: Final Project Data"
 output: html_document
 ---
 
-For the final project, you will need to select an appropriate **dataset** to analyze. This dataset should meet the following criteria:
+**Due November 5th by noon**
+
+For the final project, you will need to select an appropriate **dataset** to analyze. **You may work with up to 2 other people (groups of 1, 2, or 3 are acceptable)**. This dataset should meet the following criteria:
 
 * Has at least 6 variables
 * Has both numeric and categorical variables
