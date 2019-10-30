@@ -192,7 +192,7 @@ _the odds for still being in pain for the placebo group are 2.27 times the odds 
 
 # Odds ratios
 
-* In general, it's more natural to interpret odds ratios > 1, you can flip the referrant to do so
+* In general, it's more natural to interpret odds ratios > 1, you can flip the referent to do so
 
 |TMS | Placebo| Total
 ---|---|----|---
@@ -211,3 +211,284 @@ _the odds for still being in pain for the placebo group are 2.27 times the odds 
 # <i class="fas fa-laptop"></i> `Odds ratios`
 
 - Go to RStudio Cloud and open `Odds ratios`
+
+---
+
+## Odds ratios
+
+* Let's look at some Titanic data. We are interested in whether the sex of the passenger is related to whether they survived.
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(Stat2Data)
+library(tidyverse)
+library(broom)
+data("Titanic")
+options(digits = 3)
+```
+
+|Female | Male | Total
+---------|-------|-----|-----
+Survived| 308 | 142 | 450
+Died | 154 | 709| 863
+Total | 462 | 851 | 1313
+
+---
+
+## Odds ratios
+
+.question[
+What are the odds of surviving for females versus males?
+]
+
+* Let's look at some Titanic data. We are interested in whether the sex of the passenger is related to whether they survived.
+
+|Female | Male | Total
+---------|-------|-----|-----
+Survived| 308 | 142 | 450
+Died | 154 | 709| 863
+Total | 462 | 851 | 1313
+
+--
+
+.center[
+$\Large OR = \frac{308/154}{142/709} = \frac{2}{0.2} = 9.99$
+]
+
+---
+
+## Odds ratios
+
+.question[
+How do you interpret this?
+]
+
+
+|Female | Male | Total
+---------|-------|-----|-----
+Survived| 308 | 142 | 450
+Died | 154 | 709| 863
+Total | 462 | 851 | 1313
+
+.center[
+$\Large OR = \frac{308/154}{142/709} = \frac{2}{0.2} = 9.99$
+]
+
+--
+
+_the odds of surviving for the female passengers was 9.99 times the odds of surviving for the male passengers_
+
+---
+
+## Odds ratios
+
+.question[
+What if we wanted to fit a **model**? What would the equation be?
+]
+
+
+|Female | Male | Total
+---------|-------|-----|-----
+Survived| 308 | 142 | 450
+Died | 154 | 709| 863
+Total | 462 | 851 | 1313
+
+--
+
+.center[
+$\Large \log(\textrm{odds of survival}) \approx \beta_0 + \beta_1 \textrm{Sex}$
+]
+
+---
+
+## Odds ratios
+
+.center[
+$\Large \log(\textrm{odds of survival}) \approx \beta_0 + \beta_1 \textrm{Sex}$
+]
+.small[
+```{r}
+glm(Survived ~ Sex, data = Titanic, family = binomial) %>%
+  tidy()
+```
+]
+
+---
+
+## Odds Ratios
+
+.question[
+What is my referent category?
+]
+
+.center[
+$\Large \log(\textrm{odds of survival}) \approx \beta_0 + \beta_1 \textrm{Sex}$
+]
+
+
+```{r}
+levels(Titanic$Sex)
+```
+
+---
+
+## Odds Ratios
+
+.question[
+How do I change that?
+]
+
+.center[
+$\Large \log(\textrm{odds of survival}) \approx \beta_0 + \beta_1 \textrm{Sex}$
+]
+
+```{r, eval = FALSE}
+Titanic <- Titanic %>%
+  ---(Sex = ---(Sex, c("male", "female"))) #<<
+```
+
+---
+
+## Odds Ratios
+
+.question[
+How do I change that?
+]
+
+.center[
+$\Large \log(\textrm{odds of survival}) \approx \beta_0 + \beta_1 \textrm{Sex}$
+]
+
+```{r}
+Titanic <- Titanic %>%
+  mutate(Sex = fct_relevel(Sex, c("male", "female"))) #<<
+```
+
+---
+
+
+## Odds Ratios
+
+.question[
+How do you interpret this result?
+]
+
+.small[
+```{r}
+glm(Survived ~ Sex, data = Titanic, family = binomial) %>%
+  tidy()
+```
+]
+
+---
+
+## Odds Ratios
+
+.question[
+How do you interpret this result?
+]
+
+.small[
+```{r}
+glm(Survived ~ Sex, data = Titanic, family = binomial) %>%
+  tidy(exponentiate = TRUE) #<<
+
+exp(2.301176)
+```
+]
+
+_the odds of surviving for the female passengers was 9.99 times the odds of surviving for the male passengers_
+
+---
+
+## Odds ratios
+
+* What if the explanatory variable is continuous?
+
+--
+* We did this already on Tuesday!
+
+--
+
+.small[
+```{r}
+data("MedGPA")
+glm(Acceptance ~ GPA, data = MedGPA, family = binomial) %>%
+  tidy()
+```
+]
+
+--
+
+_A one unit increase in GPA yields a 5.45 increase in the log odds of acceptance_
+
+---
+
+
+## Odds ratios
+
+* What if the explanatory variable is continuous?
+* We did this already on Tuesday!
+
+.small[
+```{r}
+data("MedGPA")
+glm(Acceptance ~ GPA, data = MedGPA, family = binomial) %>%
+  tidy(exponentiate = TRUE) #<<
+```
+]
+
+--
+
+_A one unit increase in GPA yields a 234-fold increase in the odds of acceptance_
+
+--
+
+* `r emo::ji("scream")` that seems huge! **Remember:** the interpretation of these coefficients depends on your units (the same as in ordinary linear regression).
+
+---
+
+## Odds ratios
+
+.question[
+How could we get the odds associated with increasing GPA by 0.1?
+]
+
+.small[
+```{r}
+glm(Acceptance ~ GPA, data = MedGPA, family = binomial) %>%
+  tidy()
+```
+]
+
+--
+
+.small[
+```{r}
+exp(5.454) ## a one unit increase in GPA
+exp(5.454 * 0.1) ## a 0.1 increase in GPA
+```
+]
+
+--
+
+_A one-tenth unit increase in GPA yields a 1.73-fold increase in the odds of acceptance_
+
+---
+
+## Odds ratios
+
+.question[
+How could we get the odds associated with increasing GPA by 0.1?
+]
+
+.small[
+```{r}
+MedGPA <- MedGPA %>%
+  mutate(GPA_10 = GPA * 10)
+
+glm(Acceptance ~ GPA_10, data = MedGPA, family = binomial) %>%
+  tidy(exponentiate = TRUE)
+```
+]
+
+_A one-tenth unit increase in GPA yields a 1.73-fold increase in the odds of acceptance_

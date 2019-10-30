@@ -13,3 +13,4 @@ Thursday, Nov 7
 
 - Stat2:
   + Section 9.2: Logistic Regression and Odds Ratios
+  + Section 9.3: Assessing the Logistic Regression Model
