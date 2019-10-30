@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Logistic Regression"
+title: "Odds Ratios"
 author: ""
 output:
   xaringan::moon_reader:
@@ -23,457 +23,191 @@ by Dr. Lucy D'Agostino McGowan
 
 ---
 
-# <i class="fas fa-laptop"></i> `what are the odds`
+# <i class="fas fa-laptop"></i> `Odds ratios`
 
-- Go to RStudio Cloud and open `what are the odds`
+- Go to RStudio Cloud and open `Odds ratios`
 ---
 
-```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(broom)
-library(Stat2Data)
-options(digits = 3)
-knitr::opts_chunk$set(echo = FALSE)
-```
+# Odds ratios
 
+A study investigated whether a handheld device that sends a magnetic pulse into a person’s head
+might be an effective treatment for migraine headaches.
 
-## Outcome variable
-
-* So far, we've only had **continuous** (numeric, quantitative) outcome variables ( $y$ )
-
---
-* We've just learned about **categorical** and **binary** explanatory variables ( $x$ )
-
---
-* What if we have a **binary** outcome variable?
+* Researchers recruited 200 subjects who suffered from migraines 
+* randomly assigned them to receive either the TMS (transcranial magnetic
+stimulation) treatment or a placebo treatment 
+* Subjects were instructed to apply the device at the onset of migraine symptoms and then assess how they felt two hours later. (either **Pain-free** or **Not pain-free**)
 
 ---
 
-## Outcome variable
+# Odds ratios
 
 .question[
-What does it mean to be a **binary** variable?
+What is the explanatory variable?
 ]
 
-* So far, we've only had **continuous** (numeric, quantitative) outcome variables ( $y$ )
-* We've just learned about **categorical** and **binary** explanatory variables ( $x$ )
-* What if we have a **binary** outcome variable?
+A study investigated whether a handheld device that sends a magnetic pulse into a person’s head might be an effective treatment for migraine headaches.
 
+* Researchers recruited 200 subjects who suffered from migraines 
+* randomly assigned them to receive either the TMS (transcranial magnetic
+stimulation) treatment or a placebo treatment 
+* Subjects were instructed to apply the device at the onset of migraine symptoms and then assess how they felt two hours later (either **Pain-free** or **Not pain-free**)
 ---
 
-## Let's look at an example
-
-* 446 teens were asked "On an average school night, do you get at least 7 hours of sleep"
-* Outcome is [1 = "Yes", 0 = "No"]
-* Is Age related to this outcome?
-
---
-* What if I try to fit this as a _linear regression_ model?
-
---
-
-```{r, fig.height = 2}
-data("LosingSleep")
-
-ggplot(LosingSleep, aes(Age, Outcome)) + 
-  geom_point() + 
-  geom_line(aes(x = Age, y = predict(lm(Outcome ~ Age, data = LosingSleep))))
-```
-
----
-## Let's look at an example
-
-* 446 teens were asked "On an average school night, do you get at least 7 hours of sleep"
-* Outcome is [1 = "Yes", 0 = "No"]
-* Is Age related to this outcome?
-* What if I try to fit this as a _linear regression_ model?
-
-```{r, fig.height = 2}
-LosingSleep %>%
-  group_by(Age) %>%
-  count(Age, Outcome) %>%
-  mutate(p = n / sum(n)) %>%
-  filter(Outcome == 1) %>%
-  ggplot(aes(Age, p)) + 
-  geom_point() + 
-  geom_line(data = LosingSleep, aes(x = Age, y = predict(lm(Outcome ~ Age, data = LosingSleep)))) + 
-  ylim(0, 1)
-```
----
-
-## Let's look at an example
-
-* 446 teens were asked "On an average school night, do you get at least 7 hours of sleep"
-* Outcome is [1 = "Yes", 0 = "No"]
-* Is Age related to this outcome?
-* What if I try to fit this as a _linear regression_ model?
-
-```{r, fig.height = 2}
-new_data <- data.frame(Age = 0:40)
-LosingSleep %>%
-  group_by(Age) %>%
-  count(Age, Outcome) %>%
-  mutate(p = n / sum(n)) %>%
-  filter(Outcome == 1) %>%
-  ggplot(aes(Age, p)) + 
-  geom_point() + 
-  geom_line(data = new_data, aes(x = Age, y = predict(lm(Outcome ~ Age, data = LosingSleep), newdata = new_data))) + 
-  ylim(-1, 2) + 
-  xlim(0, 40) +
-  geom_hline(yintercept = c(0, 1), lty = 2) 
-```
-
----
-
-## Let's look at an example
-
-* Perhaps it would be sensible to find a function that would not extend beyond 0 and 1?
-
-```{r, fig.height = 2}
-LosingSleep %>%
-  group_by(Age) %>%
-  count(Age, Outcome) %>%
-  mutate(p = n / sum(n)) %>%
-  filter(Outcome == 1) %>%
-  ggplot(aes(Age, p)) + 
-  geom_point() + 
-  geom_rect(aes(xmin = 0, xmax = 5, ymin = 1, ymax = 1.2), fill = "yellow", color = "black") +
-  geom_rect(aes(xmin = 35, xmax = 40, ymin = 0, ymax = -0.2), fill = "yellow", color = "black") +
-  geom_line(data = new_data, aes(x = Age, y = predict(lm(Outcome ~ Age, data = LosingSleep), newdata = new_data))) + 
-  ylim(-1, 2) + 
-  xlim(0, 40) +
-  geom_hline(yintercept = c(0, 1), lty = 2) 
-```
-
----
-
-## Let's look at an example
-
-* Perhaps it would be sensible to find a function that would not extend beyond 0 and 1?
-
-```{r, fig.height = 2}
-LosingSleep %>%
-  group_by(Age) %>%
-  count(Age, Outcome) %>%
-  mutate(p = n / sum(n)) %>%
-  filter(Outcome == 1) %>%
-  ggplot(aes(Age, p)) + 
-  geom_point() + 
-  geom_rect(aes(xmin = 0, xmax = 5, ymin = 1, ymax = 1.2), fill = "yellow", color = "black") +
-  geom_rect(aes(xmin = 35, xmax = 40, ymin = 0, ymax = -0.2), fill = "yellow", color = "black") +
-  geom_line(data = new_data,
-            aes(x = Age, y = predict(
-              glm(Outcome ~ Age, family = "binomial", data = LosingSleep),
-              newdata = new_data,
-              type = "response"))) + 
-  ylim(-1, 2) + 
-  xlim(0, 40) +
-  geom_hline(yintercept = c(0, 1), lty = 2) 
-```
-
----
-
-## Let's look at an example
-
-* Perhaps it would be sensible to find a function that would not extend beyond 0 and 1?
-
-```{r, fig.height = 2}
-LosingSleep %>%
-  group_by(Age) %>%
-  count(Age, Outcome) %>%
-  mutate(p = n / sum(n)) %>%
-  filter(Outcome == 1) %>%
-  ggplot(aes(Age, p)) + 
-  geom_point() + 
-  geom_line(data = new_data,
-            aes(x = Age, y = predict(
-              glm(Outcome ~ Age, family = "binomial", data = LosingSleep),
-              newdata = new_data,
-              type = "response"))) + 
-  xlim(0, 40) +
-  geom_hline(yintercept = c(0, 1), lty = 2) 
-```
-
-* this line is fit using **logistic** regression model
-
----
-
-## How does this compare to linear regression?
-
-Model | Outcome | Form
----|---|---
-Ordinary linear Regression | Numeric | $y \approx \beta_0 + \beta_1 x$
-Number of Doctors example | Numeric | $\sqrt{\textrm{Number of doctors}}\approx \beta_0 +\beta_1x$
-Logistic regression | Binary| $\log\left(\frac{\pi}{1-\pi}\right) \approx \beta_0 + \beta_1x$
-
---
-* $\pi$ is the probability that $y = 1$ ( $P(y = 1)$ )
-
----
-
-## Notation
-
-* $\log\left(\frac{\pi}{1-\pi}\right)$: the "log odds"
-
---
-* $\pi$ is the **probability** that $y = 1$ - the probability that your outcome is 1.
-
---
-* $\frac{\pi}{1-\pi}$ is a ratio representing the **odds** that $y = 1$ 
-
---
-* $\log\left(\frac{\pi}{1-\pi}\right)$ is the **log odds**
-
---
-* The **transformation** from $\pi$ to $\log\left(\frac{\pi}{1-\pi}\right)$ is called the logistic or **logit** transformation
----
-
-## A bit about "odds"
-
-* The "odds" tell you how likely an event is
-* `r emo::ji("coin")` if I flip a fair coin, what is the probability that I'd get **heads**?
-
---
-  * $p = 0.5$
-
---
-* What is the probability that I'd get **tails**?
-
---
-  * $1 - p = 0.5$
-  
---
-* The **odds** are 1:1, 0.5:0.5
-* the **odds** can be written as $\frac{p}{1-p} =\frac{0.5}{0.5} = 1$
-
----
-
-## A bit about "odds"
-
-* The "odds" tell you how likely an event is
-* `r emo::ji("rain")` Let's say there is a 60% chance of rain today  
-* What is the probability that it will rain?
-
---
-  * $p = 0.6$
-
---
-* What is the probability that it **won't** rain?
-
---
-  * $1-p = 0.4$
-
---
-* What are the **odds** that it will rain? 
-
---
-  * 3 to 2, 3:2, $\frac{0.6}{0.4} = 1.5$
-  
----
-
-## Transforming logs
-
-* How do you "undo" a $\log$ base $e$?
-
---
-* Use $e$! For example:
-   * $e^{\log(10)} = 10$ 
-
---
-  * $e^{\log(1283)} = 1283$
-
---
-  * $e^{\log(x)} = x$
-  
----
-
-## Transforming logs
+# Odds ratios
 
 .question[
-How would you get the **odds** from the **log(odds)**?
+What type of variable is this?
 ]
 
-* How do you "undo" a $\log$ base $e$?
-* Use $e$! For example:
-   * $e^{\log(10)} = 10$ 
-  * $e^{\log(1283)} = 1283$
-  * $e^{\log(x)} = x$
-  
---
-* $e^{\log(odds)}$ = odds
+A study investigated whether a handheld device that sends a magnetic pulse into a person’s head might be an effective treatment for migraine headaches.
 
+* Researchers recruited 200 subjects who suffered from migraines 
+* randomly assigned them to receive either the TMS (transcranial magnetic
+stimulation) treatment or a placebo treatment 
+* Subjects were instructed to apply the device at the onset of migraine symptoms and then assess how they felt two hours later (either **Pain-free** or **Not pain-free**)
 ---
 
-## Transforming odds
-
-* odds = $\frac{\pi}{1-\pi}$
-* Solving for $\pi$
-  * $\pi = \frac{\textrm{odds}}{1+\textrm{odds}}$
-
---
-* Plugging in $e^{\log(odds)}$ = odds
-
---
-  * $\pi = \frac{e^{\log(odds)}}{1+e^{\log(odds)}}$
-
---
-* Plugging in $\log(odds) = \beta_0 + \beta_1x$
-
---
-  * $\pi = \frac{e^{\beta_0 + \beta_1x}}{1+e^{\beta_0 + \beta_1x}}$
-
----
-
-## The logistic model
-
-* `r emo::ji("v")` forms
-
-Form | Model
------|------
-Logit form | $\log\left(\frac{\pi}{1-\pi}\right) = \beta_0 + \beta_1x$
-Probability form | $\Large\pi = \frac{e^{\beta_0 + \beta_1x}}{1+e^{\beta_0 + \beta_1x}}$
-
----
-
-## The logistic model
-
-probability | odds | log(odds)
---|--|--
-$\pi$ | $\frac{\pi}{1-\pi}$ | $\log\left(\frac{\pi}{1-\pi}\right)=l$
-
---
-
-.center[
-# `r emo::ji("left_arrow")`
-]
-
-log(odds) | odds | probability
---|--|--
-$l$ | $e^l$ | $\frac{e^l}{1+e^l} = \pi$
-
----
-
-## The logistic model
-
-* `r emo::ji("v")` forms
-
---
-* **log(odds)**: $l \approx \beta_0 + \beta_1x$
-
---
-* **P(Outcome = Yes)**: $\Large\pi \approx\frac{e^{\beta_0 + \beta_1x}}{1+e^{\beta_0 + \beta_1x}}$
-
----
-
-# <i class="fas fa-laptop"></i> `what are the odds`
-
-- Go to RStudio Cloud and open `what are the odds`
-
----
-
-## Example
-
-* We are interested in the probability of getting accepted to medical school given a college student's GPA
-
-.small[
-```{r, echo = TRUE, fig.height = 2}
-data("MedGPA")
-ggplot(MedGPA, aes(Accept, GPA)) + 
-  geom_boxplot() + 
-  geom_jitter()
-```
-]
-
----
-
-
-## Example
+# Odds ratios
 
 .question[
-What is the equation for the model we are going to fit?
+What is the outcome variable?
 ]
 
-* We are interested in the probability of getting accepted to medical school given a college student's GPA
+A study investigated whether a handheld device that sends a magnetic pulse into a person’s head might be an effective treatment for migraine headaches.
 
+* Researchers recruited 200 subjects who suffered from migraines 
+* randomly assigned them to receive either the TMS (transcranial magnetic
+stimulation) treatment or a placebo treatment 
+* Subjects were instructed to apply the device at the onset of migraine symptoms and then assess how they felt two hours later (either **Pain-free** or **Not pain-free**)
 ---
 
-## Example
+# Odds ratios
 
 .question[
-What is the equation for the model we are going to fit?
+What type of variable is this?
 ]
 
-* $\log(odds) = \beta_0 + \beta_1 GPA$
-* P(Accept) $\approx \frac{e^{\beta_0 + \beta_1GPA}}{1+e^{\beta_0 + \beta_1GPA}}$
-* We are interested in the probability of getting accepted to medical school given a college student's GPA
+A study investigated whether a handheld device that sends a magnetic pulse into a person’s head might be an effective treatment for migraine headaches.
+
+* Researchers recruited 200 subjects who suffered from migraines 
+* randomly assigned them to receive either the TMS (transcranial magnetic
+stimulation) treatment or a placebo treatment 
+* Subjects were instructed to apply the device at the onset of migraine symptoms and then assess how they felt two hours later (either **Pain-free** or **Not pain-free**)
+---
+
+# Odds ratios
+
+|TMS | Placebo| Total
+---|---|----|---
+Pain-free two hours later |39| 22 |61
+Not pain-free two hours later |61 |78| 139
+Total| 100| 100 |200
+
+--
+
+* We can compare the results using **odds**
+
+--
+* What are the odds of being pain-free for the placebo group?
+
+--
+  * $(22/100)/(78/100) = 22/78 = 0.282$
+
+--
+* What are the odds of being pain-free for the treatment group?
+
+--
+  * $39/61 = 0.639$
+
+--
+* Comparing the **odds** what can we conclude?
+
+--
+  * TMS increases the likelihood of success
+---
+
+# Odds ratios
+
+|TMS | Placebo| Total
+---|---|----|---
+Pain-free two hours later |39| 22 |61
+Not pain-free two hours later |61 |78| 139
+Total| 100| 100 |200
+
+* We can summarize this relationship with an **odds ratio**: the ratio of the two odds
+
+--
+ 
+$\Large OR = \frac{39/61}{22/78} = \frac{0.639}{0.282} = 2.27$
+
+--
+
+_"the odds of being pain free were 2.27 times higher with TMS than with the placebo"_
 
 ---
 
-## Example
+# Odds ratios
 
-* We are interested in the probability of getting accepted to medical school given a college student's GPA
-
-.small[
-```{r, echo=TRUE}
-glm(Accept ~ GPA, data = MedGPA,
-    family = "binomial") #<<
-```
+.question[
+What if we wanted to calculate this in terms of _Not pain-free_ (with _pain-free_) as the referent?
 ]
 
+|TMS | Placebo| Total
+---|---|----|---
+Pain-free two hours later |39| 22 |61
+Not pain-free two hours later |61 |78| 139
+Total| 100| 100 |200
+
+--
+
+$\Large OR = \frac{61/39}{78/22} = \frac{1.564}{3.545} = 0.441$
+
+--
+
+_the odds for still being in pain for the TMS group are 0.441 times the odds of being in pain for the placebo group_
+ 
 ---
 
-## Example
+# Odds ratios
 
-* We are interested in the probability of getting accepted to medical school given a college student's GPA
-
-.small[
-```{r, echo=TRUE}
-glm(Accept ~ GPA, data = MedGPA,
-    family = "binomial") %>%
-  tidy() #<<
-```
+.question[
+What changed here?
 ]
 
+|TMS | Placebo| Total
+---|---|----|---
+Pain-free two hours later |39| 22 |61
+Not pain-free two hours later |61 |78| 139
+Total| 100| 100 |200
+
+
+$\Large OR = \frac{78/22}{61/39} = \frac{3.545}{1.564} = 2.27$
+
+
+_the odds for still being in pain for the placebo group are 2.27 times the odds of being in pain for the TMS group_
+ 
 ---
 
-## Example
 
-* We are interested in the probability of getting accepted to medical school given a college student's GPA
+# Odds ratios
 
-.small[
-```{r, echo=TRUE}
-glm(Accept ~ GPA, data = MedGPA,
-    family = "binomial") %>%
-  predict() #<<
-```
-]
+* In general, it's more natural to interpret odds ratios > 1, you can flip the referrant to do so
 
----
+|TMS | Placebo| Total
+---|---|----|---
+Pain-free two hours later |39| 22 |61
+Not pain-free two hours later |61 |78| 139
+Total| 100| 100 |200
 
-## Example
 
-* We are interested in the probability of getting accepted to medical school given a college student's GPA
+$\Large OR = \frac{78/22}{61/39} = \frac{3.545}{1.564} = 2.27$
 
-.small[
-```{r, echo=TRUE}
-glm(Accept ~ GPA, data = MedGPA,
-    family = "binomial") %>%
-  predict(type = "response") #<<
-```
-]
+
+_the odds for still being in pain for the placebo group are 2.27 times the odds of being in pain for the TMS group_
 
 ---
 
-# <i class="fas fa-laptop"></i> `what are the odds`
+# <i class="fas fa-laptop"></i> `Odds ratios`
 
-- Go to RStudio Cloud and open `what are the odds`
-- load the `Stat2Data`, `tidyverse`, and `broom` libraries
-- load `data("MedGPA")`
-- fit the appropriate model predicting `MCAT` from `GPA`
-- fit the appropriate model predicting `Accept` from `GPA`
-- How do you think you interpret the coefficient for `GPA` in the second model?
----
-
-class: center, middle
-
-# [bit.ly/sta-212-f19-mid-eval](https://bit.ly/sta-212-f19-mid-eval)
+- Go to RStudio Cloud and open `Odds ratios`
