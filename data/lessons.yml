@@ -133,6 +133,7 @@ lessons:
   - date: "Thur, Nov 7"
     title: "Lab 06: Inference with logistic regression"
     lab: "coming-soon.html"
+    exam: "quiz.html"
     reading: "reading-14.html"
   - title: "Week 12"
   - date: "Tues, Nov 12"
