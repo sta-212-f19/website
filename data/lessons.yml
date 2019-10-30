@@ -124,6 +124,7 @@ lessons:
     appex: "11-odds.html"
   - date: "Thur, Oct 31"
     title: "Logistic regression models"
+    exam: "quiz.html"
     reading: "reading-12.html"
   - title: "Week 11"
   - date: "Tues, Nov 5"
