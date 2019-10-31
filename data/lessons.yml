@@ -129,6 +129,7 @@ lessons:
     slides: "lec-slides/12-odds-ratio.html"
   - title: "Assessing logistic conditions"
     slides: "lec-slides/12-assessing-logistic.html"
+    hw: "04-hw.html"
   - title: "Week 11"
   - date: "Tues, Nov 5"
     title: "Evaluating logistic regression models"

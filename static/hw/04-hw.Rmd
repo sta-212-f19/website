@@ -1,0 +1,72 @@
+---
+title: "Homework 4"
+output: 
+  tufte::tufte_html:
+    css: "../labs/lab.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+link-citations: yes
+---
+
+**Due: November 7 at noon**
+**turn in the .html file on Sakai**
+
+
+For this homework, use the `MedGPA` dataset in the `Stat2Data` package.
+
+```{marginfigure}
+You can find out more about this dataset by running `?MedGPA` in R after loading it.
+```
+
+1. Describe the data. What are the observations? What are the variables?
+
+2. Using the `quantile()` function, what are the 0.2, 0.4, 0.6, and 0.8 quantiles?
+
+```{marginfigure}
+You can find out more about the `case_when()` function by running `?case_when` in R. Make sure you have loaded the tidyverse package.
+```
+
+3. Using the `case_when()` and `mutate()` functions, create a new variable called `gpa_cat` that categorizes `GPA` into 5 categories. Use the quantiles above to define your categories. For example, if you had a variable `var` with the quantiles:
+
+* 0.2 quantile = 5
+* 0.4 quantile = 6
+* 0.6 quantile = 8
+* 0.8 quantile = 11
+
+You would create the categories like this:
+
+```
+new_cat = case_when(
+  var < 5 ~ "quantile 1"
+  var >= 5 & var < 6 ~ "quantile 2",
+  var >= 6 & var < 8 ~ "quantile 3",
+  var >= 8 & var < 11 ~ "quantile 4",
+  var >= 11 ~ "quantile 5"
+)
+```
+4. Calculate the average GPA in each category.
+
+5. Calculate the proportion where `Accept == "A"` for each of the categories created in Exercise 3.
+
+6. One of these categories has 100% Acceptance. This makes it hard to calculate the odds. Let's add a "fudge factor". Calculate "adjusted proportions" using the following equation.
+
+$p = \frac{(1/2 + \#Accept = A)}{(1 + \#Accept = A + \#Accept = D)}$
+
+7. Using the adjusted proportions in Exercise 6, calculate the odds of `Accept == "A"` for each of the categories created in Exercise 3. 
+
+8. Using the odds calculated in Exercise 7, calculate the log odds of `Accept = "A"` for each of the categories created in Exercise 3.
+
+9. Create a plot with mean GPA calculated in Exercise 4 on the x-axis and the log odds calculated in Exercise 8 on the y-axis. Does the linearity assumption of the log odds hold?
+
+10. Create a plot with mean GPA calculated in Exercise 4 on the x-axis and the adjusted proportion calculated in Exercise 6 on the y-axis. Describe the shape that you see. 
+
+11. Run a logistic regression model estimating `Accept == "A"` using GPA. Interpret the coefficient for GPA.
+
+12. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
+
+- **data matching**: 
+- **exhaustive**: 
+- **skeptical**:
+- **second order**:
+- **transparency**:
+- **reproducible**:
