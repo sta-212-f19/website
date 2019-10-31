@@ -127,6 +127,7 @@ lessons:
     exam: "quiz.html"
     reading: "reading-12.html"
     slides: "lec-slides/12-odds-ratio.html"
+    appex: "12-odds-ratio.html"
   - title: "Assessing logistic conditions"
     slides: "lec-slides/12-assessing-logistic.html"
     hw: "04-hw.html"
