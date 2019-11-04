@@ -13,3 +13,4 @@ Tuesday, Nov 12
 
 - Stat2:
   + Section 9.3: Assessing the Logistic Regression Model
+  + Section 9.4: Formal Inference: Tests and Intervals
