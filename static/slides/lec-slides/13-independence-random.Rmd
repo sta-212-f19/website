@@ -50,6 +50,73 @@ library(tidyverse)
 Assumption| What it means | How do you check? | How do you fix?
 ----|-----|-----------|-----
 Linearity |The relationship between the outcome and explanatory variable or predictor is linear **holding all other variables constant**| Residuals vs. fits plot | fit a better model (transformations, polynomial terms, more / different variables, etc.)
+Zero Mean | | |
+]
+---
+
+## Conditions for ordinary linear regression
+
+
+.small[
+Assumption| What it means | How do you check? | How do you fix?
+----|-----|-----------|-----
+Linearity |The relationship between the outcome and explanatory variable or predictor is linear **holding all other variables constant**| Residuals vs. fits plot | fit a better model (transformations, polynomial terms, more / different variables, etc.)
+Zero Mean | The error distribution is centered at zero | by default | --
+Constant Variance | | |
+]
+
+---
+
+## Conditions for ordinary linear regression
+
+.small[
+Assumption| What it means | How do you check? | How do you fix?
+----|-----|-----------|-----
+Linearity |The relationship between the outcome and explanatory variable or predictor is linear **holding all other variables constant**| Residuals vs. fits plot | fit a better model (transformations, polynomial terms, more / different variables, etc.)
+Zero Mean | The error distribution is centered at zero | by default | --
+Constant Variance | The variability in the errors is the same for all values of the predictor variable | Residuals vs fits plot | fit a better model
+Independence | | |
+]
+
+---
+
+## Conditions for ordinary linear regression
+
+
+.small[
+Assumption| What it means | How do you check? | How do you fix?
+----|-----|-----------|-----
+Linearity |The relationship between the outcome and explanatory variable or predictor is linear **holding all other variables constant**| Residuals vs. fits plot | fit a better model (transformations, polynomial terms, more / different variables, etc.)
+Zero Mean | The error distribution is centered at zero | by default | --
+Constant Variance | The variability in the errors is the same for all values of the predictor variable | Residuals vs fits plot | fit a better model
+Independence | The errors are assumed to be independent from one another | `r emo::ji("eyes")` data generation | Find better data or fit a fancier model
+Random | | |
+
+]
+
+---
+
+## Conditions for ordinary linear regression
+
+.small[
+Assumption| What it means | How do you check? | How do you fix?
+----|-----|-----------|-----
+Linearity |The relationship between the outcome and explanatory variable or predictor is linear **holding all other variables constant**| Residuals vs. fits plot | fit a better model (transformations, polynomial terms, more / different variables, etc.)
+Zero Mean | The error distribution is centered at zero | by default | --
+Constant Variance | The variability in the errors is the same for all values of the predictor variable | Residuals vs fits plot | fit a better model
+Independence | The errors are assumed to be independent from one another | `r emo::ji("eyes")` data generation | Find better data or fit a fancier model
+Random | The data are obtained using a random process | `r emo::ji("eyes")` data generation | Find better data or fit a fancier model
+Normality | | |
+]
+
+---
+
+## Conditions for ordinary linear regression
+
+.small[
+Assumption| What it means | How do you check? | How do you fix?
+----|-----|-----------|-----
+Linearity |The relationship between the outcome and explanatory variable or predictor is linear **holding all other variables constant**| Residuals vs. fits plot | fit a better model (transformations, polynomial terms, more / different variables, etc.)
 Zero Mean | The error distribution is centered at zero | by default | --
 Constant Variance | The variability in the errors is the same for all values of the predictor variable | Residuals vs fits plot | fit a better model
 Independence | The errors are assumed to be independent from one another | `r emo::ji("eyes")` data generation | Find better data or fit a fancier model
@@ -63,7 +130,7 @@ Normality | The random errors follow a normal distribution | QQ-plot / residual 
 
 * Linearity
 * Independence
-* Random
+* Randomness
 
 ---
 
@@ -74,7 +141,7 @@ How do we test linearity?
 ]
 * **Linearity**
 * Independence
-* Random
+* Randomness
 
 ---
 
@@ -85,7 +152,7 @@ How do we test linearity?
 ]
 * **Linearity** `r emo::ji("check")` _Plot the empirical logits_
 * Independence
-* Random
+* Randomness
 
 ---
 
@@ -126,7 +193,7 @@ ggplot(data, aes(length, emp_logit)) +
 
 * Linearity
 * **Independence**
-* **Random**
+* **Randomness**
 
 ---
 

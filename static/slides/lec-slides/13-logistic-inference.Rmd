@@ -164,9 +164,22 @@ How do you convert log(odds) to odds?
 * $\hat\beta_1$ measures the change in log(odds) for every unit change in the predictor. What if I wanted a confidence interval for the **odds ratio**?
 
 .center[
-$\Huge e^{\hat\beta_1 \pm [\color{red}z^*] SE_{\hat\beta_1}}$
+$\Huge \hat\beta_1 \pm [\color{red}z^*] SE_{\hat\beta_1}$
 ]
 
+---
+
+## Logistic regression confidence interval
+
+.question[
+How do you convert log(odds) to odds?
+]
+
+* $\hat\beta_1$ measures the change in log(odds) for every unit change in the predictor. What if I wanted a confidence interval for the **odds ratio**?
+
+.center[
+$\Huge e^{\hat\beta_1 \pm [\color{red}z^*] SE_{\hat\beta_1}}$
+]
 ---
 
 ## Let's try it in R!
