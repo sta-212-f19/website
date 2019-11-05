@@ -395,10 +395,10 @@ glance(model2)
 
 * Both AIC and BIC are calculated using the **log likelihood**
 
-$\Large\ln(\mathcal{L}) = -\frac{n}{2}[\ln(2\pi) + \ln(SSE/n) + 1]$
+$\Large\log(\mathcal{L}) = -\frac{n}{2}[\log(2\pi) + \log(SSE/n) + 1]$
 
 --
-* $\ln = \log_e$, `log()` in `R`
+* $\log = \log_e$, `log()` in `R`
 
 --
 
@@ -421,9 +421,9 @@ glance(model1)
 
 * Both AIC and BIC are calculated using the **log likelihood**
 
-$\Large\ln(\mathcal{L}) = -\frac{n}{2}[\ln(SSE/n) ]+\textrm{some constant}$ 
+$\Large\log(\mathcal{L}) = -\frac{n}{2}[\log(SSE/n) ]+\textrm{some constant}$ 
 
-* $\ln = \log_e$, `log()` in `R`
+* $\log = \log_e$, `log()` in `R`
 * "goodness of fit" measure
 * **higher** log likelihood is better
 ---
@@ -431,7 +431,7 @@ $\Large\ln(\mathcal{L}) = -\frac{n}{2}[\ln(SSE/n) ]+\textrm{some constant}$
 ## AIC
 
 * Akaike's Information Criterion
-* $AIC = 2(k+1) - 2\ln(\mathcal{L})$
+* $AIC = 2(k+1) - 2\log(\mathcal{L})$
 * $k$ is the number of predictors in the model
 * **lower** AIC values are better
 
@@ -449,7 +449,7 @@ glance(model2)
 ## BIC
 
 * Bayesian Information Criterion
-* $BIC = \ln(n)(k+1) - 2\ln(\mathcal{L})$
+* $BIC = \log(n)(k+1) - 2\log(\mathcal{L})$
 * $k$ is the number of predictors in the model
 * **lower** BIC values are better
 

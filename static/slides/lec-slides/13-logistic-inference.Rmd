@@ -1,0 +1,461 @@
+---
+title: "Logistic regression inference"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+library(tidyverse)
+library(Stat2Data)
+library(broom)
+options(digits = 3)
+```
+
+
+# <i class="fas fa-laptop"></i> `Putt Length`
+
+- Go to RStudio Cloud and open `Putt Length`
+
+---
+
+## Inference
+
+* Even if your check of conditions convinces you that the Bernoulli (_spinner_) model is not appropriate, you can still use logistic regression for **description**, _and sometimes for prediction_
+
+--
+* If the outcomes **are** random and independent, you can also do inference! 
+  * test hypotheses
+  * construct confidence intervals
+  
+---
+
+## Hypothesis test
+
+* **null hypothesis** $H_0: \beta_1 = 0$ 
+* **alternative hypothesis** $H_A: \beta_1 \ne 0$
+
+---
+
+## Logistic regression test statistic
+
+<br><br>
+
+.center[
+$\Huge z = \frac{\hat\beta_1}{SE_{\hat\beta_1}}$
+]
+---
+
+## Logistic regression test statistic
+
+.question[
+How is this different from the test statistic for _linear regression_?
+]
+.center[
+$\Huge z = \frac{\hat\beta_1}{SE_{\hat\beta_1}}$
+]
+---
+
+## Logistic regression test statistic
+
+.question[
+How is this different from the test statistic for _linear regression_?
+]
+.center[
+$\Huge \color{red}z = \frac{\hat\beta_1}{SE_{\hat\beta_1}}$
+]
+
+--
+
+* The $z$ denotes that this is a $z$-statistic
+
+--
+* What does this mean? **Instead of using a $t$ distribution, we use a normal distribution to calculate the confidence intervals and p-values**
+---
+
+## Logistic regression confidence interval
+
+.question[
+What do you think goes in this blank to calculate a confidence interval (instead of $t^*$ as it was for _linear regression_)?
+]
+.center[
+$\Huge \hat\beta_1 \pm [\_^*] SE_{\hat\beta_1}$
+]
+---
+
+## Logistic regression confidence interval
+
+.question[
+What do you think goes in this blank to calculate a confidence interval (instead of $t^*$ as it was for _linear regression_)?
+]
+.center[
+$\Huge \hat\beta_1 \pm [\color{red}z^*] SE_{\hat\beta_1}$
+]
+
+--
+
+* $z^∗$ is found using the normal distribution and the desired level of confidence
+
+--
+.small[
+```{r}
+qnorm(0.975)
+```
+]
+
+---
+
+## Logistic regression confidence interval
+
+.question[
+Where are my degrees of freedom when calculating $z^*$?
+]
+.center[
+$\Huge \hat\beta_1 \pm [\color{red}z^*] SE_{\hat\beta_1}$
+]
+
+
+* $z^∗$ is found using the normal distribution and the desired level of confidence
+.small[
+```{r}
+qnorm(0.975)
+```
+]
+
+--
+* The normal distribution doesn't need to know your sample size _but it does rely on reasonably large sample_
+
+---
+
+## Logistic regression confidence interval
+
+* $\hat\beta_1$ measures the change in log(odds) for every unit change in the predictor. What if I wanted a confidence interval for the **odds ratio**?
+
+.center[
+$\Huge \hat\beta_1 \pm [\color{red}z^*] SE_{\hat\beta_1}$
+]
+
+---
+
+## Logistic regression confidence interval
+
+.question[
+How do you convert log(odds) to odds?
+]
+
+* $\hat\beta_1$ measures the change in log(odds) for every unit change in the predictor. What if I wanted a confidence interval for the **odds ratio**?
+
+.center[
+$\Huge e^{\hat\beta_1 \pm [\color{red}z^*] SE_{\hat\beta_1}}$
+]
+
+---
+
+## Let's try it in R!
+
+.question[
+We are interested in the relationship between Backpack weight and Back problems.
+]
+.small[
+```{r}
+data("Backpack")
+glm(BackProblems ~ BackpackWeight, data = Backpack, family = "binomial") %>%
+  tidy(exponentiate = TRUE, conf.int = TRUE) #<<
+```
+]
+
+--
+
+* How do you interpret the Odds ratio?
+
+--
+  * A one unit increase in backpack weight yields a 1.04-fold increase in the odds of back problems
+
+---
+
+## Let's try it in R!
+
+.small[
+```{r}
+data("Backpack")
+glm(BackProblems ~ BackpackWeight, data = Backpack, family = "binomial") %>%
+  tidy(exponentiate = TRUE, conf.int = TRUE) #<<
+```
+]
+
+
+* How do you interpret the Odds ratio?
+  * A one unit increase in backpack weight yields a 1.04-fold increase in the odds of back problems
+* What is my null hypothesis?
+
+--
+  * $H_0:\beta_1 = 0$
+  * $H_A: \beta_1 \neq 0$
+
+--
+* What is the result of this hypothesis test at the $\alpha = 0.05$ level?
+
+---
+
+# <i class="fas fa-laptop"></i> `Putt Length`
+
+- Go to RStudio Cloud and open `Putt Length`
+
+---
+
+## Log Likelihood
+
+* "goodness of fit" measure
+* **higher** log likelihood is better
+* Both AIC and BIC are calculated using the **log likelihood**
+  * $\Large f(k) - 2 \log\mathcal{L}$
+
+---
+
+## Log Likelihood
+
+* "goodness of fit" measure
+* **higher** log likelihood is better
+* Both AIC and BIC are calculated using the **log likelihood**
+  * $\Large f(k) \color{red}{- 2 \log\mathcal{L}}$
+
+--
+* $\color{red}{- 2 \log\mathcal{L}}$ - this is called the **deviance**
+
+--
+* Similar to the _nested F-test_ in linear regression, in logistic regression we can compare $-2\log\mathcal{L}$ for models with and without certain predictors
+
+--
+* $-2\log\mathcal{L}$ follows a $\chi^2$ distribution with $n - k - 1$ degrees of freedom.
+
+---
+
+## Likelihood ratio test
+
+* For example, if we wanted to test the following hypothesis:
+  * $H_0: \beta_1 = 0$
+  * $H_A: \beta_1 \neq 0$
+
+--
+* We could compute the difference between the deviance for a model with $\beta_1$ and without $\beta_1$.
+  * Model 1: $log(odds) \approx \beta_0$
+  * Model 2: $log(odds) \approx \beta_0 + \beta_1x$
+  
+---
+
+## Likelihood ratio test
+
+.question[
+Are these models nested?
+]
+
+* For example, if we wanted to test the following hypothesis:
+  * $H_0: \beta_1 = 0$
+  * $H_A: \beta_1 \neq 0$
+* We could compute the difference between the deviance for a model with $\beta_1$ and without $\beta_1$.
+  * Model 1: $log(odds) \approx \beta_0$
+  * Model 2: $log(odds) \approx \beta_0 + \beta_1x$
+
+---
+
+## Likelihood ratio test
+
+.question[
+What are the degrees of freedom for the deviance for Model 1?
+]
+* For example, if we wanted to test the following hypothesis:
+  * $H_0: \beta_1 = 0$
+  * $H_A: \beta_1 \neq 0$
+* We could compute the difference between the deviance for a model with $\beta_1$ and without $\beta_1$.
+  * Model 1: $log(odds) \approx \beta_0$ `r emo::ji("right_arrow")` $-2\log\mathcal{L}_0$, df = $n-1$
+  * Model 2: $log(odds) \approx \beta_0 + \beta_1x$ 
+
+---
+
+## Likelihood ratio test
+
+.question[
+What are the degrees of freedom for the deviance for Model 2?
+]
+* For example, if we wanted to test the following hypothesis:
+  * $H_0: \beta_1 = 0$
+  * $H_A: \beta_1 \neq 0$
+* We could compute the difference between the deviance for a model with $\beta_1$ and without $\beta_1$.
+  * Model 1: $log(odds) \approx \beta_0$ `r emo::ji("right_arrow")` $-2\log\mathcal{L}_0$, df = $n-1$
+  * Model 2: $log(odds) \approx \beta_0 + \beta_1x$ `r emo::ji("right_arrow")` $-2\log\mathcal{L}$, df = $n-2$
+
+---
+
+## Likelihood ratio test
+
+* We are interested in the "drop in deviance", the deviance in Model 1 minus the deviance in Model 2
+
+--
+
+.center[
+$\Large(-2\log\mathcal{L}_0) - (-2\log\mathcal{L})$
+]
+
+---
+
+## Likelihood ratio test
+
+.question[
+What do you think the degrees of freedom are for this difference?
+]
+
+* We are interested in the "drop in deviance", the deviance in Model 1 minus the deviance in Model 2
+
+.center[
+$\Large(-2\log\mathcal{L}_0) - (-2\log\mathcal{L})$
+]
+
+--
+
+* df: $(n-1) - (n-2) = 1$
+
+---
+
+## Likelihood ratio test
+
+.question[
+What is the null hypothesis again?
+]
+
+* We are interested in the "drop in deviance", the deviance in Model 1 minus the deviance in Model 2
+
+.center[
+$\Large(-2\log\mathcal{L}_0) - (-2\log\mathcal{L})$ `r emo::ji("point_left")` test statistic
+]
+
+
+* df: $(n-1) - (n-2) = 1$
+
+---
+
+## Likelihood ratio test
+
+.question[
+How do you think we compute a p-value for this test?
+]
+
+* We are interested in the "drop in deviance", the deviance in Model 1 minus the deviance in Model 2
+
+.center[
+$\Large(-2\log\mathcal{L}_0) - (-2\log\mathcal{L})$ `r emo::ji("point_left")` test statistic
+]
+
+
+* df: $(n-1) - (n-2) = 1$
+
+--
+
+```{r, eval = FALSE}
+pchisq(L_0 - L, df = 1, lower.tail = FALSE)
+```
+
+---
+
+## Let's try it in R!
+
+.small[
+```{r}
+data(MedGPA)
+glm(Acceptance ~ GPA, data = MedGPA, family = "binomial") %>%
+  glance() #<<
+```
+]
+
+---
+
+## Let's try it in R!
+
+.question[
+What is the "drop in deviance"?
+]
+
+.small[
+```{r}
+data(MedGPA)
+glm(Acceptance ~ GPA, data = MedGPA, family = "binomial") %>%
+  glance()
+```
+]
+
+--
+*  75.8 - 56.8 = 19
+
+---
+
+## Let's try it in R!
+
+.question[
+What are the degrees of freedom for this difference?
+]
+
+.small[
+```{r}
+data(MedGPA)
+glm(Acceptance ~ GPA, data = MedGPA, family = "binomial") %>%
+  glance()
+```
+]
+
+
+*  75.8 - 56.8 = 19
+
+--
+* df: 1
+
+---
+
+## Let's try it in R!
+
+.question[
+What is the result of the hypothesis test? How do you interpret this?
+]
+
+.small[
+```{r}
+data(MedGPA)
+glm(Acceptance ~ GPA, data = MedGPA, family = "binomial") %>%
+  glance()
+```
+]
+
+
+*  75.8 - 56.8 = 19
+* df: 1
+
+```{r}
+pchisq(19, 1, lower.tail = FALSE)
+```
+
+
+---
+
+# <i class="fas fa-laptop"></i> `Putt Length`
+
+- Go to RStudio Cloud and open `Putt Length`
+- Fit a logistic regression predicting whether the shot was `Made` from the `Length` of the Putt
+- Calculate the "drop in deviance" for comparing the model with and without `Length`
+- Calculate the p-value for this Likelihood ratio test
+- Interpret this result
