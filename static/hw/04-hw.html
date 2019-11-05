@@ -402,7 +402,7 @@ color: #333333;
 </ul>
 <p>You would create the categories like this:</p>
 <pre><code>new_cat = case_when(
-  var &lt; 5 ~ &quot;quantile 1&quot;
+  var &lt; 5 ~ &quot;quantile 1&quot;,
   var &gt;= 5 &amp; var &lt; 6 ~ &quot;quantile 2&quot;,
   var &gt;= 6 &amp; var &lt; 8 ~ &quot;quantile 3&quot;,
   var &gt;= 8 &amp; var &lt; 11 ~ &quot;quantile 4&quot;,

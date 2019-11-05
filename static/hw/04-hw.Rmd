@@ -37,7 +37,7 @@ You would create the categories like this:
 
 ```
 new_cat = case_when(
-  var < 5 ~ "quantile 1"
+  var < 5 ~ "quantile 1",
   var >= 5 & var < 6 ~ "quantile 2",
   var >= 6 & var < 8 ~ "quantile 3",
   var >= 8 & var < 11 ~ "quantile 4",
