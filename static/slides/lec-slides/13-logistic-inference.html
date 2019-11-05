@@ -288,6 +288,9 @@ glm(BackProblems ~ BackpackWeight, data = Backpack, family = "binomial") %&gt;%
 --
 * `\(-2\log\mathcal{L}\)` follows a `\(\chi^2\)` distribution with `\(n - k - 1\)` degrees of freedom.
 
+--
+* The difference `\((-2\log\mathcal{L}_1)-(-2\log\mathcal{L}_2)\)` follows a `\(\chi^2\)` distribution with `\(p\)` degrees of freedom (where `\(p\)` is the difference in the number of predictors between Model 1 and Model 2)
+
 ---
 
 ## Likelihood ratio test
@@ -327,7 +330,20 @@ What are the degrees of freedom for the deviance for Model 1?
   * `\(H_0: \beta_1 = 0\)`
   * `\(H_A: \beta_1 \neq 0\)`
 * We could compute the difference between the deviance for a model with `\(\beta_1\)` and without `\(\beta_1\)`.
-  * Model 1: `\(log(odds) \approx \beta_0\)` ➡️ `\(-2\log\mathcal{L}_0\)`, df = `\(n-1\)`
+  * Model 1: `\(log(odds) \approx \beta_0\)` 
+  * Model 2: `\(log(odds) \approx \beta_0 + \beta_1x\)` 
+  
+---
+## Likelihood ratio test
+
+.question[
+What are the degrees of freedom for the deviance for Model 1?
+]
+* For example, if we wanted to test the following hypothesis:
+  * `\(H_0: \beta_1 = 0\)`
+  * `\(H_A: \beta_1 \neq 0\)`
+* We could compute the difference between the deviance for a model with `\(\beta_1\)` and without `\(\beta_1\)`.
+  * Model 1: `\(log(odds) \approx \beta_0\)` ➡️ `\(-2\log\mathcal{L}_1\)`, df = `\(n-1\)`
   * Model 2: `\(log(odds) \approx \beta_0 + \beta_1x\)` 
 
 ---
@@ -341,8 +357,21 @@ What are the degrees of freedom for the deviance for Model 2?
   * `\(H_0: \beta_1 = 0\)`
   * `\(H_A: \beta_1 \neq 0\)`
 * We could compute the difference between the deviance for a model with `\(\beta_1\)` and without `\(\beta_1\)`.
-  * Model 1: `\(log(odds) \approx \beta_0\)` ➡️ `\(-2\log\mathcal{L}_0\)`, df = `\(n-1\)`
-  * Model 2: `\(log(odds) \approx \beta_0 + \beta_1x\)` ➡️ `\(-2\log\mathcal{L}\)`, df = `\(n-2\)`
+  * Model 1: `\(log(odds) \approx \beta_0\)` ➡️ `\(-2\log\mathcal{L}_1\)`, df = `\(n-1\)`
+  * Model 2: `\(log(odds) \approx \beta_0 + \beta_1x\)` 
+  
+---
+## Likelihood ratio test
+
+.question[
+What are the degrees of freedom for the deviance for Model 2?
+]
+* For example, if we wanted to test the following hypothesis:
+  * `\(H_0: \beta_1 = 0\)`
+  * `\(H_A: \beta_1 \neq 0\)`
+* We could compute the difference between the deviance for a model with `\(\beta_1\)` and without `\(\beta_1\)`.
+  * Model 1: `\(log(odds) \approx \beta_0\)` ➡️ `\(-2\log\mathcal{L}_1\)`, df = `\(n-1\)`
+  * Model 2: `\(log(odds) \approx \beta_0 + \beta_1x\)` ➡️ `\(-2\log\mathcal{L}_2\)`, df = `\(n-2\)`
 
 ---
 
@@ -353,7 +382,7 @@ What are the degrees of freedom for the deviance for Model 2?
 --
 
 .center[
-`\(\Large(-2\log\mathcal{L}_0) - (-2\log\mathcal{L})\)`
+`\(\Large(-2\log\mathcal{L}_1) - (-2\log\mathcal{L}_2)\)`
 ]
 
 ---
@@ -367,7 +396,7 @@ What do you think the degrees of freedom are for this difference?
 * We are interested in the "drop in deviance", the deviance in Model 1 minus the deviance in Model 2
 
 .center[
-`\(\Large(-2\log\mathcal{L}_0) - (-2\log\mathcal{L})\)`
+`\(\Large(-2\log\mathcal{L}_1) - (-2\log\mathcal{L}_2)\)`
 ]
 
 --
@@ -385,7 +414,7 @@ What is the null hypothesis again?
 * We are interested in the "drop in deviance", the deviance in Model 1 minus the deviance in Model 2
 
 .center[
-`\(\Large(-2\log\mathcal{L}_0) - (-2\log\mathcal{L})\)` 👈 test statistic
+`\(\Large(-2\log\mathcal{L}_1) - (-2\log\mathcal{L}_2)\)` 👈 test statistic
 ]
 
 
@@ -402,7 +431,7 @@ How do you think we compute a p-value for this test?
 * We are interested in the "drop in deviance", the deviance in Model 1 minus the deviance in Model 2
 
 .center[
-`\(\Large(-2\log\mathcal{L}_0) - (-2\log\mathcal{L})\)` 👈 test statistic
+`\(\Large(-2\log\mathcal{L}_1) - (-2\log\mathcal{L}_2)\)` 👈 test statistic
 ]
 
 
