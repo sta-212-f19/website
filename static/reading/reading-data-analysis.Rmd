@@ -3,6 +3,14 @@ title: "Data Analysis"
 output: html_document
 ---
 
+## Abstract
+
+* A short paragraph summary of the introduction, methods, results, and conclusions.
+
+## Introduction
+
+* The introduction should introduce your general research question and your data
+
 ## Methods
 
 ###  Describe your data. 
@@ -36,10 +44,8 @@ output: html_document
 
 * Summarize what you've learned and why it matters
 
-## Abstract
-
-* A short paragraph summary of the results above.
 
 ## Appendix
 
+* Include any code
 * Include any additional plots / results that were used 
