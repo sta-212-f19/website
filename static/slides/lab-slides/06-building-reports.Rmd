@@ -1,0 +1,158 @@
+---
+title: "Lab 06: Building reports in R"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "lab-slides.css"
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+
+layout: true
+  
+<div class="my-footer">
+<span>
+Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(Stat2Data)
+library(broom)
+```
+
+# Agenda
+
+* **Knitting a pdf document**
+* **Creating tables in R**
+* **Lab 06:** on your own
+
+---
+
+## Knitting a pdf document
+
+* Currently your yaml at the top of your `.Rmd` files looks something like this:
+
+```yaml
+---
+title: "The title of your document"
+name: "Your name"
+output: html_document
+---
+```
+---
+
+## Knitting a pdf document
+
+.question[
+What do you think you would change to render this as a **pdf** document instead of **html**?
+]
+
+* Currently your yaml at the top of your `.Rmd` files looks something like this:
+
+```yaml
+---
+title: "The title of your document"
+name: "Your name"
+output: html_document
+---
+```
+---
+
+## Knitting a pdf document
+
+.question[
+What do you think you would change to render this as a **pdf** document instead of **html**?
+]
+
+* Currently your yaml at the top of your `.Rmd` files looks something like this:
+
+```{yaml}
+---
+title: "The title of your document"
+name: "Your name"
+output: pdf_document #<<
+---
+```
+
+--
+
+* For this lab and your final project I want you to create .pdf files.
+
+---
+
+## Making pretty tables
+
+* We've been using the `tidy()` and `glance()` functions to print tables of our model output.
+* These kind of look like "code" in our final reports
+* We can make these prettier with the **knitr** package
+
+```{r}
+lm(wt ~ am, data = mtcars) %>%
+  tidy()
+```
+
+---
+
+## Making pretty tables
+
+* We've been using the `tidy()` and `glance()` functions to print tables of our model output.
+* These kind of look like "code" in our final reports
+* We can make these prettier with the **knitr** package
+
+--
+* Load the **knitr** package with `library(knitr)`
+* Use the `kable()` function to output a pretty table
+
+```{r, eval = FALSE}
+library(knitr) #<<
+lm(wt ~ am, data = mtcars) %>%
+  tidy() %>%
+  kable() #<<
+```
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+library(knitr) 
+lm(wt ~ am, data = mtcars) %>%
+  tidy() %>%
+  kable(format = "html") 
+```
+---
+
+## Putting all the R code at the end
+
+* For these fancy reports, we want to see the R code, but we don't want it intersperced throughout the document. 
+* You can "hide" an R chunk by adding `echo = FALSE` to each of your chunks.
+
+````
+`r ''````{r, echo = FALSE}
+```
+````
+* You can "hide" all of your chunks by adding this to the top of your .Rmd file
+
+```{eval = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE)
+```
+
+--
+
+* **THEN** at the end of you document (in the Appendix) you can add
+
+````
+`r ''````{r ref.label=knitr::all_labels(), echo = TRUE, eval = FALSE}
+```
+````
+
+---
+
+## Open `Lab 06: Building Reports` in RStudio
+

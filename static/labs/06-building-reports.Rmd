@@ -1,0 +1,29 @@
+---
+title: "Lab 06: Building reports in R" 
+output: 
+  tufte::tufte_html:
+    css: "lab.css"
+    tufte_variant: "envisioned"
+    highlight: pygments
+---
+
+**Due Nov 12 at noon**
+Turn in the .pdf file on Sakai
+
+1. Change your document to create a `pdf` rather than an `html` document. Knit to make sure it worked.
+
+2. Hide all of your R chunks and have them print at the end of your document. Knit to make sure it worked.
+
+3. Follow the "steps for a data analysis". We are analyzing the `Leukemia` data from the `Stat2Data` package. Be sure to learn about the data and variables. We are doing **inference** on a model predicting whether the patient responded to treatment from Age. In the results section, use the `kable()` function to print the output from the `tidy()` function of the model you fit.
+
+4. Rank each of the following principles from the [Elements and Principles of Data Analysis](https://arxiv.org/pdf/1903.07639.pdf) article for this data analysis from 1 to 10 along with a one sentence summary:
+
+- **data matching**: 
+- **exhaustive**: 
+- **skeptical**:
+- **second order**:
+- **transparency**:
+- **reproducible**:
+
+<br><br><br>
+<img src = "img/dsbox-logo.png" width = "30"> </img> Lab adapted from <a href="https://datasciencebox.org" target="_blank">datasciencebox.org</a> by Dr. Lucy D'Agostino McGowan
