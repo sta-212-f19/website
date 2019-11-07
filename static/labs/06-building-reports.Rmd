@@ -24,6 +24,3 @@ Turn in the .pdf file on Sakai
 - **second order**:
 - **transparency**:
 - **reproducible**:
-
-<br><br><br>
-<img src = "img/dsbox-logo.png" width = "30"> </img> Lab adapted from <a href="https://datasciencebox.org" target="_blank">datasciencebox.org</a> by Dr. Lucy D'Agostino McGowan
