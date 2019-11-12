@@ -7,7 +7,7 @@ output:
     highlight: pygments
 ---
 
-**Due Nov 12 at noon**
+**Due Nov 14 at noon**
 Turn in the .pdf file on Sakai
 
 1. Change your document to create a `pdf` rather than an `html` document. Knit to make sure it worked.
