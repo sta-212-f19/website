@@ -207,6 +207,97 @@ If I have two nested models, how do you think I can determine if the full model 
 
 ---
 
+## Assess
+
+* We want to compare a model with GPA and MCAT to one with only GPA
+
+.small[
+```{r}
+glm(Acceptance ~ GPA, data = MedGPA) %>%
+  glance()
+```
+]
+
+.small[
+```{r}
+glm(Acceptance ~ GPA + MCAT, data = MedGPA) %>%
+  glance()
+```
+]
+
+.small[
+```{r}
+9.651883 - 9.378368	
+```
+]
+
+---
+
+## Assess
+
+* We want to compare a model with GPA and MCAT to one with only GPA
+
+.small[
+```{r}
+glm(Acceptance ~ GPA, data = MedGPA) %>%
+  glance()
+```
+]
+
+.small[
+```{r}
+glm(Acceptance ~ GPA + MCAT, data = MedGPA) %>%
+  glance()
+```
+]
+
+
+.small[
+```{r}
+pchisq(9.651883 - 9.378368, df = 1, lower.tail = FALSE)
+```
+]
+
+---
+
+## Assess
+
+* We want to compare a model with GPA and MCAT to one with only GPA
+
+
+.small[
+```{r}
+glm(Acceptance ~ GPA, data = MedGPA) %>%
+  glance()
+```
+]
+
+.small[
+```{r}
+glm(Acceptance ~ GPA + MCAT + Apps, data = MedGPA) %>%
+  glance()
+```
+]
+
+.small[
+```{r}
+pchisq(9.651883 - 9.369395, df = 2, lower.tail = FALSE)
+```
+]
+
+---
+
+## Assess
+
+* We want to compare a model with GPA, MCAT, and Apps to one with only GPA
+
+
+```{r}
+pchisq(9.651883 - 9.378368, df = 1, lower.tail = FALSE)
+```
+
+---
+
 ## Use
 
 * We can calculate confidence intervals for the $\beta$ coefficients: $\hat\beta\pm z^*\times SE_{\hat\beta}$

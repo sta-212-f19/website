@@ -275,6 +275,165 @@ If I have two nested models, how do you think I can determine if the full model 
 
 ---
 
+## Assess
+
+* We want to compare a model with GPA and MCAT to one with only GPA
+
+.small[
+
+```r
+glm(Acceptance ~ GPA, data = MedGPA) %&gt;%
+  glance()
+```
+
+```
+## # A tibble: 1 x 7
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual
+##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1          13.6      54  -30.2  66.4  72.4     9.65          53
+```
+]
+
+.small[
+
+```r
+glm(Acceptance ~ GPA + MCAT, data = MedGPA) %&gt;%
+  glance()
+```
+
+```
+## # A tibble: 1 x 7
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual
+##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1          13.6      54  -29.4  66.8  74.8     9.38          52
+```
+]
+
+.small[
+
+```r
+9.651883 - 9.378368	
+```
+
+```
+## [1] 0.274
+```
+]
+
+---
+
+## Assess
+
+* We want to compare a model with GPA and MCAT to one with only GPA
+
+.small[
+
+```r
+glm(Acceptance ~ GPA, data = MedGPA) %&gt;%
+  glance()
+```
+
+```
+## # A tibble: 1 x 7
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual
+##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1          13.6      54  -30.2  66.4  72.4     9.65          53
+```
+]
+
+.small[
+
+```r
+glm(Acceptance ~ GPA + MCAT, data = MedGPA) %&gt;%
+  glance()
+```
+
+```
+## # A tibble: 1 x 7
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual
+##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1          13.6      54  -29.4  66.8  74.8     9.38          52
+```
+]
+
+
+.small[
+
+```r
+pchisq(9.651883 - 9.378368, df = 1, lower.tail = FALSE)
+```
+
+```
+## [1] 0.601
+```
+]
+
+---
+
+## Assess
+
+* We want to compare a model with GPA and MCAT to one with only GPA
+
+
+.small[
+
+```r
+glm(Acceptance ~ GPA, data = MedGPA) %&gt;%
+  glance()
+```
+
+```
+## # A tibble: 1 x 7
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual
+##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1          13.6      54  -30.2  66.4  72.4     9.65          53
+```
+]
+
+.small[
+
+```r
+glm(Acceptance ~ GPA + MCAT + Apps, data = MedGPA) %&gt;%
+  glance()
+```
+
+```
+## # A tibble: 1 x 7
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual
+##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
+## 1          13.6      54  -29.4  68.7  78.8     9.37          51
+```
+]
+
+.small[
+
+```r
+pchisq(9.651883 - 9.369395, df = 2, lower.tail = FALSE)
+```
+
+```
+## [1] 0.868
+```
+]
+
+---
+
+## Assess
+
+* We want to compare a model with GPA, MCAT, and Apps to one with only GPA
+
+
+
+```r
+pchisq(9.651883 - 9.378368, df = 1, lower.tail = FALSE)
+```
+
+```
+## [1] 0.601
+```
+
+---
+
 ## Use
 
 * We can calculate confidence intervals for the `\(\beta\)` coefficients: `\(\hat\beta\pm z^*\times SE_{\hat\beta}\)`
