@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Multiple Logistic Regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Multiple Logistic Regression
+
+---
+
+
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+by Dr. Lucy D'Agostino McGowan
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+---
+
+## Types of statistical models
+
+response | predictor(s) | model
+---------|--------------|------
+quantitative | one quantitative | simple linear regression
+quantitative | two or more (of either kind) | multiple linear regression
+binary | one (of either kind) | simple logistic regression
+binary | two or more (of either kind) | multiple logistic regression
+
+---
+
+## Types of statistical models
+
+response | predictor(s) | model
+---------|--------------|------
+quantitative | one quantitative | simple linear regression
+quantitative | two or more (of either kind) | multiple linear regression
+binary | one (of either kind) | simple logistic regression
+**binary** | **two or more (of either kind)** | **multiple logistic regression**
+
+---
+
+## Types of statistical models
+
+variables | predictor | ordinary regression | logistic regression
+---|---|---|---
+one: `\(x\)` | `\(\beta_0 + \beta_1 x\)` | Response `\(y\)` | `\(\textrm{logit}(\pi)=\log\left(\frac{\pi}{1-\pi}\right)\)`
+several: `\(x_1,x_2,\dots,x_k\)`| `\(\beta_0 + \beta_1x_1 + \dots+\beta_kx_k\)`|Response `\(y\)` | `\(\textrm{logit}(\pi)=\log\left(\frac{\pi}{1-\pi}\right)\)`
+
+---
+
+## Multiple logistic regression
+
+* ✌️ forms
+
+Form | Model
+-----|------
+Logit form | `\(\log\left(\frac{\pi}{1-\pi}\right) = \beta_0 + \beta_1x_1 + \beta_2x_2 + \dots \beta_kx_k\)`
+Probability form | `\(\Large\pi = \frac{e^{\beta_0 + \beta_1x_1 + \beta_2x_2 + \dots \beta_kx_k}}{1+e^{\beta_0 + \beta_1x_1 + \beta_2x_2 + \dots \beta_kx_k}}\)`
+
+---
+
+# Steps for modeling
+
+![](img/03/flowchart-arrow.png)
+
+---
+
+## Fit
+
+.small[
+
+```r
+data(MedGPA)
+glm(Acceptance ~ MCAT + GPA, data = MedGPA, family = "binomial") %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 3 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)  -22.4       6.45      -3.47 0.000527 -36.9      -11.2  
+## 2 MCAT           0.165     0.103      1.59 0.111     -0.0260     0.383
+## 3 GPA            4.68      1.64       2.85 0.00439    1.74       8.27
+```
+]
+---
+
+## Fit
+
+.question[
+What does this do?
+]
+
+.small[
+
+```r
+*glm(Acceptance ~ MCAT + GPA, data = MedGPA, family = "binomial") %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 3 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)  -22.4       6.45      -3.47 0.000527 -36.9      -11.2  
+## 2 MCAT           0.165     0.103      1.59 0.111     -0.0260     0.383
+## 3 GPA            4.68      1.64       2.85 0.00439    1.74       8.27
+```
+]
+
+---
+
+## Fit
+
+.question[
+What does this do?
+]
+
+.small[
+
+```r
+glm(Acceptance ~ MCAT + GPA, data = MedGPA, family = "binomial") %&gt;%
+* tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 3 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)  -22.4       6.45      -3.47 0.000527 -36.9      -11.2  
+## 2 MCAT           0.165     0.103      1.59 0.111     -0.0260     0.383
+## 3 GPA            4.68      1.64       2.85 0.00439    1.74       8.27
+```
+]
+
+---
+
+## Fit
+
+.question[
+What does this do?
+]
+.small[
+
+```r
+glm(Acceptance ~ MCAT + GPA, data = MedGPA, family = "binomial") %&gt;%
+  tidy(conf.int = TRUE) %&gt;%
+* kable()
+```
+]
+
+.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.low &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; conf.high &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -22.373 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.454 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -3.47 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -36.894 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -11.235 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MCAT &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.165 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.103 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.111 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.026 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.383 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; GPA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.676 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.642 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.85 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.004 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.739 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.272 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+---
+
+## Assess
+
+.question[
+What are the assumptions of multiple logistic regression?
+]
+
+--
+
+* Linearity
+* Independence
+* Randomness
+---
+
+
+## Assess
+
+.question[
+How do you determine whether the conditions are met?
+]
+
+* Linearity
+* Independence
+* Randomness
+
+---
+
+## Assess
+
+.question[
+How do you determine whether the conditions are met?
+]
+
+* Linearity: empirical logit plots
+* Independence: look at the data generation process
+* Randomness: look at the data generation process (does the spinner model make sense?)
+
+---
+
+## Assess
+
+.question[
+If I have two nested models, how do you think I can determine if the full model is significantly better than the reduced?
+]
+
+--
+
+* We can compare values of `\(-2 \log(\mathcal{L})\)` (deviance) between the two models
+
+--
+* Calculate the "drop in deviance" the difference between  `\((-2 \log(\mathcal{L}_{reduced})) - ( -2 \log(\mathcal{L}_{full}))\)`
+
+--
+* This is a "likelihood ratio test"
+
+--
+* This is `\(\chi^2\)` distributed with `\(p\)` degrees of freedom
+
+--
+* `\(p\)` is the difference in number of predictors between the full and reduced models
+
+---
+
+## Use
+
+* We can calculate confidence intervals for the `\(\beta\)` coefficients: `\(\hat\beta\pm z^*\times SE_{\hat\beta}\)`
+* To determine whether individual explanatory variables are statistically significant, we can calculate p-values based on the `\(z\)`-statistic of the `\(\beta\)` coefficients (using the normal distribution)
+
+---
+
+## Use
+
+.question[
+How do you interpret these `\(\beta\)` coefficients?
+]
+
+.small[
+
+```r
+glm(Acceptance ~ MCAT + GPA, data = MedGPA, family = "binomial") %&gt;%
+  tidy(conf.int = TRUE)
+```
+
+```
+## # A tibble: 3 x 7
+##   term        estimate std.error statistic  p.value conf.low conf.high
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)  -22.4       6.45      -3.47 0.000527 -36.9      -11.2  
+## 2 MCAT           0.165     0.103      1.59 0.111     -0.0260     0.383
+## 3 GPA            4.68      1.64       2.85 0.00439    1.74       8.27
+```
+]
+
+---
+
+class: middle
+
+## `\(\hat\beta\)` interpretation in multiple logistic regression
+
+The coefficient for `\(x\)` is `\(\hat\beta\)` (95% CI: `\(LB_\hat\beta, UB_\hat\beta\)`). A one-unit increase in `\(x\)` yields a `\(\hat\beta\)` expected change in the log odds of y, **holding all other variables constant**.
+
+---
+
+class: middle
+
+## `\(e^{\hat\beta}\)` interpretation in multiple logistic regression
+
+The odds ratio for `\(x\)` is `\(e^{\hat\beta}\)` (95% CI: `\(e^{LB_\hat\beta}, e^{UB_\hat\beta}\)`). A one-unit increase in `\(x\)` yields a `\(e^{\hat\beta}\)`-fold expected change in the odds of y, **holding all other variables constant**.
+
+
+---
+
+## Summary 
+
+ | Ordinary regression | Logistic regression
+---|------|----
+test or interval for `\(\beta\)` | `\(t = \frac{\hat\beta}{SE_{\hat\beta}}\)` |  `\(z = \frac{\hat\beta}{SE_{\hat\beta}}\)` | 
+| t-distribution | z-distribution
+test for nested models | `\(F = \frac{\Delta SSModel / p}{SSE_{full} / (n - k - 1)}\)` | G = `\(\Delta(-2\log\mathcal{L})\)`|
+| F-distribution | `\(\chi^2\)`-distribution
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

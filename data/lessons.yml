@@ -148,6 +148,7 @@ lessons:
   - date: "Tues, Nov 12"
     title: "Multiple logistic regression"
     reading: "reading-15.html"
+    slides: "lec-slides/14-multiple-logistic-regression.html"
   - date: "Thur, Nov 14"
     title: "Midterm 02"
     exam: "coming-soon.html"
