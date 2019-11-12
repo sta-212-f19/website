@@ -282,7 +282,7 @@ If I have two nested models, how do you think I can determine if the full model 
 .small[
 
 ```r
-glm(Acceptance ~ GPA, data = MedGPA) %&gt;%
+glm(Acceptance ~ GPA, data = MedGPA, family = binomial) %&gt;%
   glance()
 ```
 
@@ -290,14 +290,14 @@ glm(Acceptance ~ GPA, data = MedGPA) %&gt;%
 ## # A tibble: 1 x 7
 ##   null.deviance df.null logLik   AIC   BIC deviance df.residual
 ##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
-## 1          13.6      54  -30.2  66.4  72.4     9.65          53
+## 1          75.8      54  -28.4  60.8  64.9     56.8          53
 ```
 ]
 
 .small[
 
 ```r
-glm(Acceptance ~ GPA + MCAT, data = MedGPA) %&gt;%
+glm(Acceptance ~ GPA + MCAT, data = MedGPA, family = binomial) %&gt;%
   glance()
 ```
 
@@ -305,18 +305,18 @@ glm(Acceptance ~ GPA + MCAT, data = MedGPA) %&gt;%
 ## # A tibble: 1 x 7
 ##   null.deviance df.null logLik   AIC   BIC deviance df.residual
 ##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
-## 1          13.6      54  -29.4  66.8  74.8     9.38          52
+## 1          75.8      54  -27.0  60.0  66.0     54.0          52
 ```
 ]
 
 .small[
 
 ```r
-9.651883 - 9.378368	
+56.83901 - 54.01419		
 ```
 
 ```
-## [1] 0.274
+## [1] 2.82
 ```
 ]
 
@@ -329,7 +329,7 @@ glm(Acceptance ~ GPA + MCAT, data = MedGPA) %&gt;%
 .small[
 
 ```r
-glm(Acceptance ~ GPA, data = MedGPA) %&gt;%
+glm(Acceptance ~ GPA, data = MedGPA, family = binomial) %&gt;%
   glance()
 ```
 
@@ -337,14 +337,14 @@ glm(Acceptance ~ GPA, data = MedGPA) %&gt;%
 ## # A tibble: 1 x 7
 ##   null.deviance df.null logLik   AIC   BIC deviance df.residual
 ##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
-## 1          13.6      54  -30.2  66.4  72.4     9.65          53
+## 1          75.8      54  -28.4  60.8  64.9     56.8          53
 ```
 ]
 
 .small[
 
 ```r
-glm(Acceptance ~ GPA + MCAT, data = MedGPA) %&gt;%
+glm(Acceptance ~ GPA + MCAT, data = MedGPA, family = binomial) %&gt;%
   glance()
 ```
 
@@ -352,7 +352,7 @@ glm(Acceptance ~ GPA + MCAT, data = MedGPA) %&gt;%
 ## # A tibble: 1 x 7
 ##   null.deviance df.null logLik   AIC   BIC deviance df.residual
 ##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
-## 1          13.6      54  -29.4  66.8  74.8     9.38          52
+## 1          75.8      54  -27.0  60.0  66.0     54.0          52
 ```
 ]
 
@@ -360,11 +360,11 @@ glm(Acceptance ~ GPA + MCAT, data = MedGPA) %&gt;%
 .small[
 
 ```r
-pchisq(9.651883 - 9.378368, df = 1, lower.tail = FALSE)
+pchisq(56.83901 - 54.01419	, df = 1, lower.tail = FALSE)
 ```
 
 ```
-## [1] 0.601
+## [1] 0.0928
 ```
 ]
 
@@ -372,13 +372,13 @@ pchisq(9.651883 - 9.378368, df = 1, lower.tail = FALSE)
 
 ## Assess
 
-* We want to compare a model with GPA and MCAT to one with only GPA
+* We want to compare a model with GPA, MCAT, and number of applications to one with only GPA
 
 
 .small[
 
 ```r
-glm(Acceptance ~ GPA, data = MedGPA) %&gt;%
+glm(Acceptance ~ GPA, data = MedGPA, family = "binomial") %&gt;%
   glance()
 ```
 
@@ -386,14 +386,14 @@ glm(Acceptance ~ GPA, data = MedGPA) %&gt;%
 ## # A tibble: 1 x 7
 ##   null.deviance df.null logLik   AIC   BIC deviance df.residual
 ##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
-## 1          13.6      54  -30.2  66.4  72.4     9.65          53
+## 1          75.8      54  -28.4  60.8  64.9     56.8          53
 ```
 ]
 
 .small[
 
 ```r
-glm(Acceptance ~ GPA + MCAT + Apps, data = MedGPA) %&gt;%
+glm(Acceptance ~ GPA + MCAT + Apps, data = MedGPA, family = "binomial") %&gt;%
   glance()
 ```
 
@@ -401,36 +401,20 @@ glm(Acceptance ~ GPA + MCAT + Apps, data = MedGPA) %&gt;%
 ## # A tibble: 1 x 7
 ##   null.deviance df.null logLik   AIC   BIC deviance df.residual
 ##           &lt;dbl&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
-## 1          13.6      54  -29.4  68.7  78.8     9.37          51
+## 1          75.8      54  -26.8  61.7  69.7     53.7          51
 ```
 ]
 
 .small[
 
 ```r
-pchisq(9.651883 - 9.369395, df = 2, lower.tail = FALSE)
+pchisq(56.83901 - 53.68239, df = 2, lower.tail = FALSE)
 ```
 
 ```
-## [1] 0.868
+## [1] 0.206
 ```
 ]
-
----
-
-## Assess
-
-* We want to compare a model with GPA, MCAT, and Apps to one with only GPA
-
-
-
-```r
-pchisq(9.651883 - 9.378368, df = 1, lower.tail = FALSE)
-```
-
-```
-## [1] 0.601
-```
 
 ---
 
