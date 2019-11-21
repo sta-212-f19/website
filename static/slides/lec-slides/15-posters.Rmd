@@ -1,0 +1,63 @@
+---
+title: "Communicating a data analysis: the poster"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+## Sign up for presentations
+
+.center[
+
+
+# [bit.ly/sta-212-f19-signup-a](https://bit.ly/sta-212-f19-signup-a)
+
+]
+
+---
+
+## Sign up for presentations
+
+.center[
+
+
+# [bit.ly/sta-212-f19-signup-b](https://bit.ly/sta-212-f19-signup-b)
+
+]
+
+---
+
+class: center, middle
+
+[The better poster](http://www.insidehighered.com/news/2019/06/24/theres-movement-better-scientific-posters-are-they-really-better)
+
+---
+
+## Better poster format
+
+* download the template:
+.center[
+## [bit.ly/sta-212-f19-poster](https://bit.ly/sta-212-f19-poster)
+]
+
+* Fill in with text and figures
+* Change the colors
+

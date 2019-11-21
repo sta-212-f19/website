@@ -160,6 +160,8 @@ lessons:
   - date: "Thur, Nov 21"
     title: "Communicating a data analysis"
     slides: "lec-slides/15-communicating-data-analysis.html"
+  - title: "Better poster"
+    slides: "lec-slides/15-posters.html"
   - title: "Week 14"
   - date: "Tues, Nov 26"
     title: "Interactive data visualization and reporting"
