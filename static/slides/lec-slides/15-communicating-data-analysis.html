@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Communicating a data analysis</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Communicating a data analysis
+
+---
+
+
+
+
+layout: true
+
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+by Dr. Lucy D'Agostino McGowan
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+## Agenda
+
+* Updating your `yaml` 
+* Putting all code in the appendix
+* Hiding messages and warnings from your package loadings
+* Hiding interactive output
+* Creating pretty tables
+* Creating figure and table caption
+* Putting intermediate figures at the end
+* Including citations
+
+---
+
+## Updating your `yaml`
+
+* For the final project I want you to create .pdf files.
+
+
+```yaml
+---
+title: "The title of your document"
+name: "Your name"
+*output: pdf_document
+---
+```
+
+---
+
+## Updating your `yaml`
+
+* For the final project I want you to create .pdf files.
+
+
+```yaml
+---
+title: "The title of your document"
+name: "Your name"
+output: pdf_document 
+*fontsize: 12pt
+---
+```
+
+* 12 pt font
+
+---
+
+## Updating your `yaml`
+
+* For the final project I want you to create .pdf files.
+
+
+```yaml
+---
+title: "The title of your document"
+name: "Your name"
+output: pdf_document 
+fontsize: 12pt
+*linestretch: 2
+---
+```
+
+* 12 pt font
+* Double spaced
+
+---
+
+## Putting all code in the Appendix
+
+* For these fancy reports, we want to see the R code, but we don't want it intersperced throughout the document. 
+* You can "hide" all of your chunks by adding this to the top of your .Rmd file
+
+.small[
+````
+```{r, echo = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE)
+```
+````
+]
+
+--
+
+* **THEN** at the end of you document (in the Appendix) you can add
+
+.small[
+````
+```{r ref.label=knitr::all_labels(), echo = TRUE, eval = FALSE}
+```
+````
+]
+
+---
+
+## Hiding messages and warnings from your package loadings
+
+* You can hide any messages or warnings by updating the chunk options
+
+.small[
+````
+```{r, echo = FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+````
+]
+
+---
+
+## Hiding interactive output
+
+* If you are running "interactive code", that is code that is not saved to an object in `R`, it will print in your output, even if you hide the _code_ with `echo = FALSE`. For example:
+
+.small[
+
+```r
+glimpse(iris)
+```
+
+```
+## Observations: 150
+## Variables: 5
+## $ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5…
+## $ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3…
+## $ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1…
+## $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0…
+## $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, set…
+```
+]
+
+--
+
+* Use the `results = "hide"` in the chunk options to _hide_ it.
+
+.small[
+````
+```{r, results = "hide"}
+glimpse(iris)
+```
+````
+]
+
+---
+
+## Creating pretty tables
+
+* We've been using the `tidy()` and `glance()` functions to print tables of our model output.
+* These kind of look like "code" in our final reports
+* We can make these prettier with the **knitr** package
+
+--
+* Load the **knitr** package with `library(knitr)`
+* Use the `kable()` function to output a pretty table
+
+.small[
+
+```r
+*library(knitr)
+lm(wt ~ am, data = mtcars) %&gt;%
+  tidy() %&gt;%
+* kable()
+```
+]
+.small[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.77 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.165 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; am &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.36 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.26 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+---
+
+## Creating table captions
+
+
+.small[
+
+```r
+library(knitr) 
+lm(wt ~ am, data = mtcars) %&gt;%
+  tidy() %&gt;%
+* kable(caption = "Predicting Car's weight from transmission type")
+```
+]
+.small[
+&lt;table&gt;
+&lt;caption&gt;Table 1. Predicting Car's weight from transmission type&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.77 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.165 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; am &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.36 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.26 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+---
+
+## Creating figure captions
+
+* If you have an `R` chunck that produces a Figure, you can caption it using the `fig.cap` chunk option. For example:
+
+.small[
+
+```r
+ggplot(mtcars, aes(x = mpg, y = disp)) +
+  geom_point()
+```
+
+![Scatterplot of Miles per gallon by Displacement](15-communicating-data-analysis_files/figure-html/unnamed-chunk-11-1.png)
+]
+.center[Figure 1. Scatterplot of Miles per gallon by Displacement]
+
+.small[
+````
+```{r, fig.cap = "Scatterplot of Miles per gallon by Displacement"}
+ggplot(mtcars, aes(x = mpg, y = disp)) +
+  geom_point()
+```
+````
+]
+
+---
+
+## Putting extra figures at the end of your document
+
+* Your prompt tells you to put all "intermediate" figures in the appendix
+  * This includes figures that you used to check the assumptions of the models that were _not_ the final model
+* To do this:
+  * Save your figures as `R` objects
+  * Create code chunks at the **beginning** of the Appendix that run these objects (with captions)
+
+---
+
+## Putting extra figures at the end of your document
+
+* Save the plot to an `R` object, `p`
+
+
+```r
+p &lt;- ggplot(mtcars, aes(mpg, disp)) +
+  geom_point()
+```
+
+--
+
+* Put this `R` object, `p` in a chunk at the beginning of your Appendix
+
+.small[
+````
+```{r, fig.cap = "Scatterplot of Miles per gallon by Displacement"}
+p
+```
+````
+]
+
+---
+
+## Citations
+
+* Your introduction should cite prior research in the area of your research question
+* You will need to create a `citations.bib` file with citations, and then reference them using `[@citation]`
+
+---
+
+## Citations 
+
+* Create a `citations.bib` file in your RStudio project
+  * Go to File &gt; New File &gt; Text File and click
+  
+.center[
+&lt;img width = 500 src = "img/15/create-text-file.png"&gt;
+]
+
+---
+
+## Citations
+
+* Create a `citations.bib` file in your RStudio project
+  * Go to File &gt; New File &gt; Text File and click
+  * Save the file as `citations.bib`
+
+.center[
+&lt;img width = 500 src = "img/15/save-citation-bib.png"&gt;
+]
+
+---
+
+## Citations
+
+* This bibliography is using `BibTex`, which is a certain way citations are saved in Latex
+* Your `citations.bib` is going to be a file with multiple `BibTex` entries
+* You can get `Bibtex` entries from Google Scholar
+  * Search for the article you'd like to cite
+  * Under the article there will be `"`, click that
+  
+.center[
+&lt;img width = 500 src = "img/15/get-citation.png"&gt;
+]
+
+---
+
+## Citations
+
+
+* This bibliography is using `BibTex`, which is a certain way citations are saved in Latex
+* Your `citations.bib` is going to be a file with multiple `BibTex` entries
+* You can get `Bibtex` entries from Google Scholar
+  * Search for the article you'd like to cite
+  * Under the article there will be `"`, click that
+  * A window will pop up with several citation styles, click `BibTex` on the bottom
+
+---
+
+## Citations
+
+&lt;img width = 500 src = "img/15/click-bibtex.png"&gt;&lt;/img&gt;
+
+---
+
+
+## Citations
+
+
+* This bibliography is using `BibTex`, which is a certain way citations are saved in Latex
+* Your `citations.bib` is going to be a file with multiple `BibTex` entries
+* You can get `Bibtex` entries from Google Scholar
+  * Search for the article you'd like to cite
+  * Under the article there will be `"`, click that
+  * A window will pop up with several citation styles, click `BibTex` on the bottom
+  * Copy the text in the window that pops up into your `citations.bib` file in RStudio
+
+---
+
+## Citations
+
+![](img/15/add-citation.png)
+
+---
+
+## Citations
+
+* The first argument of this citation is the reference **key** that you will use in your main document. Here it is `roumie2017comparative`
+
+```
+@article{roumie2017comparative,
+  title={Comparative safety of sulfonylurea and metformin monotherapy on the risk of heart failure: a cohort study},
+  author={Roumie, Christianne L and Min, Jea Young and D'Agostino McGowan, Lucy and Presley, Caroline and Grijalva, Carlos G and Hackstadt, Amber J and Hung, Adriana M and Greevy, Robert A and Elasy, Tom and Griffin, Marie R},
+  journal={Journal of the American Heart Association},
+  volume={6},
+  number={4},
+  pages={e005379},
+  year={2017},
+  publisher={Am Heart Assoc}
+}
+```
+ 
+---
+
+## Citations
+
+* Go back to your final report document
+* Add the `citations.bib` file to your `yaml`
+
+
+```yaml
+---
+title: "The title of your document"
+name: "Your name"
+output: pdf_document 
+fontsize: 12pt
+linestretch: 2 
+*bibliography: citations.bib
+---
+```
+
+---
+
+## Citations
+
+* Go back to your final report document
+* Add the `citations.bib` file to your `yaml`
+* When you want to cite this paper in the main text, use the **key** like this: `[@roumie2017comparative]`
+* At the **VERY** end of your document (after the Appendix, after your code chunks) add this header:
+
+```
+## References
+```
+---
+
+## Citations
+
+* What if the thing you want to cite isn't on Google Scholar?
+* Generate a `BibTex` object here:
+
+[http://www.citationmachine.net/bibtex/cite-a-website](http://www.citationmachine.net/bibtex/cite-a-website)
+
+---
+
+## &lt;i class="fas fa-laptop"&gt;&lt;/i&gt; Rstudio Cloud
+
+* Open your project for the final report
+* Update the `yaml` to include 12 pt font, double spacing, and a bibliography
+* Practice creating figure captions
+* Practice adding figures to the Appendix
+* Create a `citations.bib` file
+* Practice citing an article
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
