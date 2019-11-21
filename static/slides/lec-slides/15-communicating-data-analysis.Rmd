@@ -408,8 +408,10 @@ bibliography: citations.bib #<<
 
 * The first line of your results should say
 "All analysis is completed in R" and then cite the R packages you used.
-* Run `citation("tidyverse")` to get the `BibTex citation`
-* Make sure there is a reference **key**, if not add one.
+* Run this to get the citation:
+```
+print(citation("tidyverse"), bibtex = TRUE)
+```* Make sure there is a reference **key**, if not add one.
 
 .small[
 ```
@@ -431,7 +433,7 @@ bibliography: citations.bib #<<
 "All analysis is completed in R"`[@tidyverse]` and then cite the R packages you used.
 * Run this to get the citation:
 ```
-print(citation("knitr"), bibtex = TRUE)
+print(citation("tidyverse"), bibtex = TRUE)
 ```
 * Make sure there is a reference **key**, if not add one.
 
@@ -456,7 +458,7 @@ print(citation("knitr"), bibtex = TRUE)
 * For more than one, seperate with a `;`
 * Run this to get the citation:
 ```
-print(citation("knitr"), bibtex = TRUE)
+print(citation("broom"), bibtex = TRUE)
 ```
 * Make sure there is a reference **key**, if not add one.
 
