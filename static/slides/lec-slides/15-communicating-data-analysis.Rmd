@@ -404,6 +404,48 @@ bibliography: citations.bib #<<
 
 ---
 
+## Citations
+
+* The first line of your results should say
+"All analysis is completed in R" and then cite the R packages you used.
+* Run `citation("tidyverse")` to get the `BibTex citation`
+* Make sure there is a reference **key**, if not add one.
+
+.small[
+```
+@Manual{,
+    title = {tidyverse: Easily Install and Load the 'Tidyverse'},
+    author = {Hadley Wickham},
+    year = {2017},
+    note = {R package version 1.2.1},
+    url = {https://CRAN.R-project.org/package=tidyverse},
+  }
+```
+]
+
+---
+
+## Citations
+
+* The first line of your results should say
+"All analysis is completed in R"`[@tidyverse]` and then cite the R packages you used.
+* Run `citation("tidyverse")` to get the `BibTex citation`
+* Make sure there is a reference **key**, if not add one.
+
+.small[
+```
+@Manual{tidyverse,
+    title = {tidyverse: Easily Install and Load the 'Tidyverse'},
+    author = {Hadley Wickham},
+    year = {2017},
+    note = {R package version 1.2.1},
+    url = {https://CRAN.R-project.org/package=tidyverse},
+  }
+```
+]
+
+---
+
 ## <i class="fas fa-laptop"></i> Rstudio Cloud
 
 * Open your project for the final report
