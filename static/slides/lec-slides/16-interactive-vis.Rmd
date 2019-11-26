@@ -1,0 +1,289 @@
+---
+title: "Interactive graphics"
+author: ""
+output:
+  xaringan::moon_reader:
+    css: "slides.css"
+    lib_dir: libs
+    nature:
+      highlightLines: true
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+layout: true
+
+<div class="my-footer">
+<span>
+by Dr. Lucy D'Agostino McGowan
+</span>
+</div> 
+
+---
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+library(tidyverse)
+library(broom)
+library(knitr)
+options(digits = 3)
+```
+
+## When interactive?
+
+There are three main categories of tasks<sup>1</sup> that interactive graphics can be useful for:
+
+1. Exploratory data analysis
+2. Understanding models / algorithms
+3. When searching for information quickly without fully specified questions 
+
+.footnote[
+[1] Sievert, Carson. Interactive web-based data visualization with R, plotly, and shiny. https://plotly-r.com/introduction.html
+]
+
+---
+
+## How interactive?
+
+Enter **plotly**! 
+* The **plotly** package builds on what you already know using **ggplot**
+* All you need to do [mostly] is wrap your ggplot calls in a `ggplotly()` function.
+
+![](img/16/plotly.png)
+
+---
+
+## ggplot + plotly
+
+.small[
+```{r, message = FALSE, warning = FALSE}
+library(ggplot2)
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point()
+```
+]
+
+---
+
+## ggplot + plotly
+
+.question[
+How could we save this plot as an R object to print later?
+]
+
+.small[
+```{r, message = FALSE, warning = FALSE}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point()
+```
+]
+
+---
+
+## ggplot + plotly
+
+.question[
+How could we save this plot as an R object to print later?
+]
+
+.small[
+```{r, message = FALSE, warning = FALSE}
+p <- ggplot(mpg, aes(displ, hwy)) + 
+  geom_point()
+p #<<
+```
+]
+
+---
+
+## ggplot + plotly
+
+.small[
+```{r, message = FALSE, warning = FALSE, fig.width=2, fig.height=1.5}
+library(plotly) #<<
+p <- ggplot(mpg, aes(displ, hwy)) + 
+  geom_point()
+ggplotly(p) #<<
+```
+]
+
+---
+
+
+## ggplot + plotly
+
+This works for (almost) any ggplot!! 
+
+.small[
+```{r, message = FALSE, warning = FALSE, fig.width=2, fig.height=1.5}
+library(plotly) #<<
+p <- ggplot(mpg, aes(displ, hwy)) + 
+  geom_point()
+ggplotly(p) #<<
+```
+]
+
+---
+
+## <i class="fas fa-laptop"></i> Interactive Vis
+
+
+* Create a ggplot examining the relationship between `height` and `mass` using the **starwars** dataset
+* Make this plot interactive using the `ggplotly()` function
+
+---
+
+## More plotly magic
+
+* Often when doing exploratory data analysis, it can be helpful to examine data points more closely
+* the `highlight_key()` and `highlight()` functions in **plotly** can allow you to select certain points
+* We can then use the **crosstalk** and **DT** packages to look more closely at these points
+
+---
+
+## More plotly magic
+
+.question[
+Note: the `::` syntax means that I am calling a function from a specific package, for example `crosstalk::bscols` means I am calling the `bscols` function from the `crosstalk` package.
+]
+
+```{r, eval = FALSE, message = FALSE, warning = FALSE}
+m <- highlight_key(mpg)
+p <- ggplot(m, aes(displ, hwy)) + geom_point()
+gg <- highlight(ggplotly(p), "plotly_selected")
+crosstalk::bscols(gg, DT::datatable(m))
+```
+
+---
+
+## More plotly magic
+
+```{r, echo = FALSE}
+options(DT.options = list(pageLength = 5, 
+                          autoWidth = FALSE))
+```
+
+.small[
+```{r, message = FALSE, warning = FALSE}
+m <- highlight_key(mpg)
+p <- ggplot(m, aes(displ, hwy)) + geom_point()
+gg <- highlight(ggplotly(p), "plotly_selected")
+crosstalk::bscols(gg, DT::datatable(m))
+```
+]
+
+---
+
+## <i class="fas fa-laptop"></i> Interactive Vis
+
+* Create an interactive plot of `height` by `mass` using the **starwars** data
+* Add the ability to highlight specific points on this plot
+* Using `crosstalk::bscols()` and `DT::datatable()` link this plot to a data table 
+* Knit your .Rmd file and select the "outlier" to see details about this data point
+
+---
+
+## Interactive maps
+
+* Another fun package in R is the **leaflet** package - this allows you to create interactive maps
+
+---
+
+## leaflet
+
+* To get started, call the `leaflet()` function. Then `addTiles()`
+* By default, **leaflet** uses OpenStreetMap map tiles
+
+.small[
+```{r, fig.width = 2, fig.height = 1.5}
+library(leaflet)
+leaflet() %>%
+  addTiles()
+```
+]
+
+---
+
+## leaflet
+
+* To get started, call the `leaflet()` function. Then `addTiles()`
+* You can add markers using `addMarkers()` with latitude and longitude specified
+
+
+.small[
+```{r, fig.width = 2, fig.height = 1.5}
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%
+  addMarkers(lng = -80.2765, lat = 36.1334, popup = "Dr. D'Agostino McGowan's classroom")
+```
+]
+
+---
+
+## leaflet
+
+* You can pass a data frame to leaflet as well
+* Dataset of seismic events off Fiji since 1964
+
+.small[
+```{r, fig.width = 2, fig.height = 1}
+data(quakes)
+quakes %>%
+  slice(1:20) %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(~long, ~lat, 
+             popup = ~as.character(mag), 
+             label = ~as.character(mag))
+```
+]
+
+---
+
+## leaflet
+
+.question[
+What is different in the `addMarkers()` function?
+]
+.small[
+```{r, fig.width = 2, fig.height = 1}
+data(quakes)
+quakes %>%
+  slice(1:20) %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(~long, ~lat, 
+             popup = ~as.character(mag), 
+             label = ~as.character(mag))
+```
+]
+
+---
+
+## leaflet
+
+.small[
+```{r, fig.width = 2, fig.height = 1}
+data(quakes)
+quakes %>%
+  slice(1:20) %>%
+  mutate(color = ifelse(mag > 5, "red", "yellow")) %>% #<<
+  leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(~long, ~lat, #<<
+             color = ~color, #<<
+             label = ~as.character(mag)) #<<
+```
+]
+
+---
+
+## <i class="fas fa-laptop"></i> Interactive Vis
+
+* Load the **leaflet** package
+* Load the `starbucks.csv` data
+* Subset the starbucks data to only locations in North Carolina
+* Use the **leaflet** package to plot the starbucks locations
+* Label the locations by the `store_name` variable

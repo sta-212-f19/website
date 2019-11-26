@@ -165,6 +165,7 @@ lessons:
   - title: "Week 14"
   - date: "Tues, Nov 26"
     title: "Interactive data visualization and reporting"
+    slides: "lec-slides/16-interactive-vis.html"
   - date: "Thur, Nov 28"
     title: "No Class: Thanksgiving"
   - title: "Week 15"
